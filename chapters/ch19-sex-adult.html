@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第19章 · 男女之别 · 成年篇 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 19-1 系统差异地图（本章专用） ---- */
+#sysmap-fig .sys-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#sysmap-fig .sys-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#sysmap-fig .sys-btn:hover{border-color:var(--gold); color:var(--ink);}
+#sysmap-fig .sys-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#sysmap-fig .sys-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#sysmap-fig .sys-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#sysmap-fig .sp{display:none;}
+#sysmap-fig .sp.on{display:block;}
+#sysmap-fig .sp-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#sysmap-fig .sp p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+#sysmap .card{fill:var(--surface2); stroke:var(--line); stroke-width:1.5; cursor:pointer; transition:stroke .3s, fill-opacity .3s;}
+#sysmap .card.on{stroke:var(--gold); stroke-width:2.5;}
+#sysmap .glow{fill:var(--gold); fill-opacity:0; pointer-events:none; transition:fill-opacity .3s;}
+#sysmap .glow.on{fill-opacity:.13;}
+#sysmap .c-t{fill:var(--ink); font-size:15px; font-weight:700; pointer-events:none;}
+#sysmap .c-s{fill:var(--ink-dim); font-size:11.5px; pointer-events:none;}
+#sysmap .c-n{fill:var(--ink-faint); font-size:11px; pointer-events:none;}
+
+/* ---- 图 19-2 纠偏史时间轴（本章专用） ---- */
+#fixline .spine{stroke:var(--line); stroke-width:2;}
+#fixline .dot{fill:var(--gold);}
+#fixline .dot.late{fill:var(--deoxy);}
+#fixline .yr{fill:var(--ink-faint); font-size:12px;}
+#fixline .ttl{fill:var(--ink); font-size:14px; font-weight:700;}
+#fixline .nt{fill:var(--ink-dim); font-size:11.5px;}
+@media (prefers-reduced-motion: reduce){
+  #sysmap .card, #sysmap .glow{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第三幕 满负荷运行 · 第 19 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>男女之别 · 成年篇</h1>
+  <p class="subtitle">同一部生理学教科书，落在两具身体上，结果并不总是一样——这一章把有据可查的差异一件件摆出来，也把没有依据的那些放回原处。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>你四十九岁，从上周起就累得反常。</p>
+  <p>不是那种睡一觉能缓过来的累。这两天还添了新毛病：下巴一阵阵发酸，两片肩胛骨中间闷得慌，夜里睡到一半会莫名其妙地恶心，出一身汗。你没有影视剧里那种捂着左胸倒下去的剧痛——一次也没有。于是你在诊室坐下，把这些一样样说了，医生问你最近是不是压力有点大。</p>
+  <p>这一章不是要讲你被怠慢了。它要讲的是一件更麻烦、也更容易修正的事：教科书上"典型的心梗"那幅画像，当初是照着谁画的。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 两副面孔</div>
+  <h2>同一种病，两副面孔</h2>
+  <p>先看数字。一项覆盖美国一百一十余万例心肌梗死住院患者（其中女性约四十八万）的大型注册研究发现，入院时<strong>没有胸痛</strong>的比例，女性约 42%，男性约 31%。</p>
+  <p>十来个百分点，听着不算天翻地覆，可它足以改变一个分诊台的判断。更要紧的是命名：下颌酸、上背闷、恶心、气短、异常疲惫——这些在教科书里长期被归入心梗的"非典型症状"。问题是，非典型是相对谁而言的典型？那幅"压榨样胸痛向左臂放射"的经典画像，主要取材自以男性为主的早期病例系列。把四成女性最常见的表现叫作"非典型"，等于把一个参照系当成了自然事实。</p>
+  <p>后果是可以量的：女性心梗被识别得更晚，接受再灌注治疗的比例和及时性略低；多项研究显示，55 岁以下女性心梗后的住院死亡率高于同龄男性——在这个年龄段，男性发病更多，而女性一旦发病结局更差。</p>
+  <p>不只是表现不同。往下看一层，有一部分是<em>病本身走了不同的路</em>：女性冠状动脉平均更细；斑块更多以"侵蚀"而非"破裂"的方式引发血栓；冠脉造影看不到明显狭窄、却确实发生了心肌梗死的情形（缩写作 MINOCA）在女性中比例更高；以微血管功能障碍为主的心绞痛也是如此。这些人做完造影常被告知"血管是通的"，然后带着一个含糊的解释回家。</p>
+  <p>那幅画像是怎么画出来的？也不难追溯。心血管研究起步的年代，中年男性是心梗的高发人群，早期那些奠定诊断标准的病例系列和队列研究——包括几项至今仍被反复引用的经典研究——受试者以男性为主。画像画得没错，只是画的是那一群人。后来它被印进教科书、写进分诊流程、编成公众宣教里"捂着胸口"的那个动作，一步步从"一群人的典型"变成了"这病的样子"。</p>
+  <p>要就地拆掉一个可能的误读：这不意味着女性的心脏病是另一种病。冠心病还是冠心病，主要风险因素也大体相同——吸烟、高血压、血脂异常、糖尿病；只是糖尿病对女性心血管风险的相对提升幅度更大一些。差别在于<strong>表现的分布</strong>和<strong>机制的比重</strong>，不在于两套完全不同的疾病。</p>
+  <p>还有一段时间线值得先记下：绝经之前，女性的冠心病发病率明显低于同龄男性；绝经之后差距逐年收窄。这条曲线常被简单归功于雌激素的保护作用，但它同时也和血脂、血压、体成分随年龄的整体变化纠缠在一起，究竟各占多少，至今仍在争论——这正是第 22 章要处理的题目。此处只需记住结论的形状：本章列出的差异不是一组常数，它们随年龄改写。</p>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 守军</div>
+  <h2>更强悍的守军，和它的账单</h2>
+  <p>换一个系统，差异的方向反了过来。</p>
+  <p>接种同一支疫苗，女性产生的抗体滴度通常更高，局部红肿和发热、乏力这类全身反应也更明显——顺带解释了一个常被误读的现象：疫苗不良反应报告里女性占多数，很大一部分原因是<em>应答本身更强</em>，反应强是免疫在干活的表现。感染这一头也大体一致：不少病毒性感染中，男性的重症率与死亡率更高。</p>
+  <p>账单在另一边。<strong>自身免疫病患者中约八成是女性。</strong>系统性红斑狼疮的男女比约为 9 比 1，桥本甲状腺炎、干燥综合征也在这个量级。守军越警觉，认错人的机会也越多。</p>
+  <p>机制线索有两条，都不完整，但都指向具体的分子。</p>
+  <p>一条是 X 染色体。它上面带着一百多个与免疫有关的基因（TLR7、CD40L、FOXP3 等）。女性每个细胞里有两条 X，其中一条会在胚胎早期被大范围沉默——但沉默并不彻底：约 15% 到 23% 的基因逃过封印，在一部分细胞里以双份剂量表达。TLR7 恰是其中之一，而它的剂量与狼疮直接相关：2022 年有团队在一名患者身上找到一个 TLR7 功能增强突变，把它引入小鼠即可复制出狼疮样病变。</p>
+  <p>另一条是激素。雌激素总体上增强多种免疫应答，睾酮多数情况下起抑制作用。这与临床观察对得上：多种自身免疫病的男女发病率差距在青春期之后才明显拉开，妊娠期与绝经前后又常有起伏（第 12 章与第 22 章分别是这两段的主场）。</p>
+  <p>这里也要拆一句：不要把"女性免疫更强"读成等级评价。免疫系统里没有"更好"这一档，它更像一把调过松紧的弓——绷得紧，认得快，射得远，也更容易伤到自己人；松一些，则反过来。两性各自被调到了略有不同的松紧上，各有各的账要付。</p>
+
+  <figure id="sysmap-fig">
+    <div class="switch-row">
+      <span class="switch-hint">点系统看证据 →</span>
+      <div class="sys-tabs" role="group" aria-label="选择要查看的系统">
+        <button class="sys-btn" data-sys="1" aria-pressed="false">心血管</button>
+        <button class="sys-btn" data-sys="2" aria-pressed="false">免疫</button>
+        <button class="sys-btn" data-sys="3" aria-pressed="false">用药</button>
+        <button class="sys-btn" data-sys="4" aria-pressed="false">疼痛</button>
+        <button class="sys-btn" data-sys="5" aria-pressed="false">体成分</button>
+        <button class="sys-btn" data-sys="6" aria-pressed="false">寿命</button>
+      </div>
+    </div>
+    <svg id="sysmap" viewBox="0 0 760 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="成年期男女差异的六个系统概览：心血管、免疫、用药、疼痛、体成分、寿命">
+      <rect class="card" data-sys="1" x="40" y="20" width="220" height="96" rx="12"/>
+      <rect class="glow" data-sys="1" x="40" y="20" width="220" height="96" rx="12"/>
+      <text class="c-t" x="58" y="52">心血管</text>
+      <text class="c-s" x="58" y="74">症状谱不同，识别更晚</text>
+      <text class="c-n mono" x="58" y="96">无胸痛：女 ~42% / 男 ~31%</text>
+
+      <rect class="card" data-sys="2" x="280" y="20" width="220" height="96" rx="12"/>
+      <rect class="glow" data-sys="2" x="280" y="20" width="220" height="96" rx="12"/>
+      <text class="c-t" x="298" y="52">免疫</text>
+      <text class="c-s" x="298" y="74">应答更强，误伤也更多</text>
+      <text class="c-n mono" x="298" y="96">自身免疫病 ~80% 为女性</text>
+
+      <rect class="card" data-sys="3" x="520" y="20" width="220" height="96" rx="12"/>
+      <rect class="glow" data-sys="3" x="520" y="20" width="220" height="96" rx="12"/>
+      <text class="c-t" x="538" y="52">用药</text>
+      <text class="c-s" x="538" y="74">同剂量不等于同暴露</text>
+      <text class="c-n mono" x="538" y="96">唑吡坦 2013：10 → 5 mg</text>
+
+      <rect class="card" data-sys="4" x="40" y="134" width="220" height="96" rx="12"/>
+      <rect class="glow" data-sys="4" x="40" y="134" width="220" height="96" rx="12"/>
+      <text class="c-t" x="58" y="166">疼痛</text>
+      <text class="c-s" x="58" y="188">患病率更高，镇痛更少</text>
+      <text class="c-n mono" x="58" y="210">偏头痛：约为男性 2–3 倍</text>
+
+      <rect class="card" data-sys="5" x="280" y="134" width="220" height="96" rx="12"/>
+      <rect class="glow" data-sys="5" x="280" y="134" width="220" height="96" rx="12"/>
+      <text class="c-t" x="298" y="166">体成分与清除</text>
+      <text class="c-s" x="298" y="188">脂水比例、酶与肾清除</text>
+      <text class="c-n mono" x="298" y="210">体脂：女 ~25–32% / 男 ~15–22%</text>
+
+      <rect class="card" data-sys="6" x="520" y="134" width="220" height="96" rx="12"/>
+      <rect class="glow" data-sys="6" x="520" y="134" width="220" height="96" rx="12"/>
+      <text class="c-t" x="538" y="166">寿命</text>
+      <text class="c-s" x="538" y="188">活得更久，也病得更久</text>
+      <text class="c-n mono" x="538" y="210">预期寿命差：各国 3–10 年</text>
+    </svg>
+    <div class="sys-panel" id="sysPanel">
+      <div class="sp on" data-sp="0">
+        <div class="sp-t">六个系统 · 一张地图</div>
+        <p>点任意一块看这一处的证据。请把每一条都读成"两条分布之间的差异"，而不是"两类人之间的分界"——本章末尾会专门回到这一点。</p>
+      </div>
+      <div class="sp" data-sp="1">
+        <div class="sp-t">心血管</div>
+        <p>入院时无胸痛：女性约 42%，男性约 31%（美国大型注册研究）。女性冠脉更细，斑块侵蚀与微血管病变占比更高，造影"血管是通的"却确有梗死（MINOCA）更常见。55 岁以下女性心梗的住院死亡率高于同龄男性。</p>
+      </div>
+      <div class="sp" data-sp="2">
+        <div class="sp-t">免疫</div>
+        <p>疫苗抗体应答通常更强，接种反应也更明显；多种病毒感染的男性重症率更高。代价是自身免疫病患者约八成为女性，狼疮男女比约 9:1。线索：X 染色体带百余个免疫基因，约 15–23% 逃过 X 失活；雌激素总体增强应答，睾酮多为抑制。</p>
+      </div>
+      <div class="sp" data-sp="3">
+        <div class="sp-t">用药</div>
+        <p>2013 年 FDA 把唑吡坦对女性的即释起始剂量从 10 mg 降到 5 mg（缓释 12.5 → 6.25）。差异来自多条互不同向的路径：体脂比例、体液比例、胃排空、CYP3A4 偏高而 CYP1A2 偏低、绝对肾清除略低。所以只能一药一议，没有通则。</p>
+      </div>
+      <div class="sp" data-sp="4">
+        <div class="sp-t">疼痛</div>
+        <p>偏头痛、纤维肌痛、颞下颌关节紊乱、肠易激的患病率，女性普遍更高（偏头痛约 2–3 倍）。实验性痛阈平均略低，但两条分布高度重叠。急诊研究一致发现：同为急性腹痛，女性获得阿片类镇痛的比例更低、等待更久。</p>
+      </div>
+      <div class="sp" data-sp="5">
+        <div class="sp-t">体成分与清除</div>
+        <p>体脂占体重比例女性通常更高、体液比例更低，影响脂溶性与水溶性药物的分布容积；血红蛋白参考区间男女早就分开给。绝对肾小球滤过率女性平均略低，主要来自体型——按体表面积校正后两者接近。</p>
+      </div>
+      <div class="sp" data-sp="6">
+        <div class="sp-t">寿命</div>
+        <p>在几乎所有有可靠数据的地区，女性平均预期寿命都高于男性，全球平均相差约 5 年——<em>方向</em>普遍，<em>幅度</em>却差得很远：各国大致在 3 到 10 年之间，且同一个国家在几十年里也会明显变化。稳定的是方向，不是数值。更长的寿命也不等于更健康的晚年：女性带病生存的年数通常更多，骨质疏松、痴呆与失能的负担更重。这条线在第 25 章收束。</p>
+      </div>
+    </div>
+    <figcaption><b>图 19-1 · 六个系统的差异地图。</b>每一块给一条可核对的数字与它的来源类型。要提醒的是：所有条目都是群体层面的分布差异，重叠极大，不能反过来用于判断任何一个具体的人。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 同一片药</div>
+  <h2>同一片药，两种剂量</h2>
+  <p>2013 年 1 月，美国食品药品监督管理局做了一件它很少做的事：把一种已经上市二十年、开出过数亿张处方的安眠药，<strong>只对女性把剂量减半</strong>。</p>
+  <p>药是唑吡坦（商品名之一 Ambien）。即释剂型对女性的建议起始剂量从 10 毫克降到 5 毫克，缓释剂型从 12.5 降到 6.25。理由写得很直白：驾驶模拟试验与血药浓度数据显示，服药八小时之后，女性血中残留浓度高到足以损害驾驶的比例，明显大于男性。</p>
+  <p>这不是一个孤例，只是一次被明确写进说明书的例外。更常见的情形是：剂量按人群平均定，性别差异被吸收进"个体差异"这个筐里。</p>
+  <p>那能不能干脆按体重折算？不能，因为差异走的不是一条路，而是好几条方向不一致的路。女性体脂占体重的比例通常更高、体液比例更低，这会同时改变脂溶性药物和水溶性药物的分布容积，且两者反向；胃排空与肠道转运的速度不同；肝脏里的 CYP3A4 活性平均偏高（意味着经它代谢的药清得更快），而 CYP1A2 活性平均偏低（意味着另一批药清得更慢）——同一个肝，两个方向；绝对肾清除略低，但主要源自体型。这些路径叠在一起，结果因药而异。所以"女性该减量"不是一条通则，只能一药一议。</p>
+  <p>有一个人人都能验证的例子：酒精。同样的体重、同样的一杯酒，女性血中的酒精浓度平均更高。原因有两条——体液占体重的比例更低，同一份酒精被稀释进更小的一池水；而且胃黏膜里负责先行分解酒精的乙醇脱氢酶活性平均偏低，进入血液之前被"预处理"掉的那部分更少。这不是酒量或意志的问题，是分母和前置关卡都不一样。</p>
+  <p>下游的账是可见的：多项跨药物类别的分析发现，女性报告药物不良反应的比例约为男性的 1.5 到 2 倍。这个数字里既有药代动力学的成分，也有用药种类分布和报告行为的成分，三者纠缠在一起，目前很难拆干净——这一点值得如实说，而不是挑一个原因去解释全部。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>参考区间早就是分性别的。</strong>看一眼化验单：血红蛋白、红细胞压积、肌酐、尿酸，这些项目多年来一直分男女给参考范围。也就是说"按性别分层"在检验科早已是常识。奇怪的是同一套逻辑迟迟没有走进药物剂量和诊断阈值。</p>
+    <p>心肌肌钙蛋白是一个迟到的例子：过去用统一的诊断阈值时，一部分女性的心梗会落在线下而被判为阴性；改用性别特异性阈值后，被识别出来的女性心梗明显增多。同一份血，换一把尺，结论就不同。要补一句限定：识别得更多是确定的，但"识别更多之后结局是否随之改善"，现有试验尚未给出一致的答案——换尺子只是第一步，后面的处置跟不跟得上是另一回事。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 疼</div>
+  <h2>疼，以及疼被采信的程度</h2>
+  <p>慢性疼痛这一栏，差异相当一致：偏头痛、纤维肌痛、颞下颌关节紊乱、肠易激综合征——患病率女性普遍更高，偏头痛约为男性的两到三倍。实验室里测出来的痛阈和耐受，女性平均也略低一些。</p>
+  <p>但"平均略低"这四个字要小心使用：两条分布重叠得非常厉害，用群体均值去预测坐在你对面那个人的痛觉，几乎总会出错。这一栏的价值在别处——在于它逼出了一个此前没人问过的问题。</p>
+  <p>2015 年，一项<strong>小鼠</strong>研究报告了一个意外的结果：同样的神经损伤引起的痛觉过敏，雄鼠主要依赖脊髓里的小胶质细胞，而雌鼠主要依赖 T 细胞。把小胶质细胞的通路阻断，雄鼠的痛觉过敏消失，雌鼠照旧。两条不同的细胞通路，同一个结果。</p>
+  <p>请把"小鼠"这两个字记牢：这个结果不能直接搬到人身上，人的疼痛通路是否也如此分岔，尚未定论。它真正的分量在于提出的那个问题——如果连痛觉的细胞通路都<em>可能</em>不同，那么几十年来主要在雄性动物身上筛选出来的镇痛药，凭什么默认对女性一样有效？这个问题问出来之后，很难再假装没听见。</p>
+  <p>还有一层与生理无关，却同样被量过。多项急诊研究发现：同样以急性腹痛就诊，女性获得阿片类镇痛的比例更低，从就诊到用上药的等待时间也更长，差距在十几分钟的量级。这类观察性研究无法单独证明因果——病因构成、疼痛描述方式、既往用药史都可能掺在里面——但多个国家、多个年份的结果方向相当一致，一致到不宜再归因于偶然。</p>
+  <p>与之呼应的还有一类观察：同样一组说不清、查不出明确器质原因的症状，女性被归因于焦虑或压力的比例更高，确诊某些疾病所花的年数也更长——子宫内膜异位症是被研究得最多的例子，从首次就诊到确诊的中位时间在多国研究中都以年计。这里的因果同样复杂：疾病本身诊断困难、缺乏无创的确诊手段，都是实打实的原因。但"她可能是压力大"这句话一旦提前落地，后续的检查就不会再做了。</p>
+  <p>需要说清楚的边界：本节列的是群体层面的分布差异和流程差距，它们是研究与制度需要处理的问题，不构成任何个体的诊疗依据。真正能从这一节里带走的，反而是一句给自己用的话：症状描述得越具体（什么时候开始、持续多久、什么情况下加重），它越难被归进一个含糊的筐里。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>"性别差异"其实叠着两层。</strong>生物学层面的性——染色体、激素、解剖与代谢；社会层面的性别——就医时机、症状被采信的程度、职业与家务暴露、照护责任。临床数据里这两层同时起作用，而多数统计只填了一个格子。</p>
+    <p>急诊镇痛那道差距里，多少来自痛觉通路，多少来自沟通与判断？以现有数据拆不开。承认拆不开，比硬挑一个原因塞进去要诚实——也更容易设计出下一个能真正拆开它的研究。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 默认值</div>
+  <h2>默认值是怎么定下来的</h2>
+  <p>把上面这些放在一起，会浮出同一个问题：为什么"标准人体"长期默认是男性？</p>
+  <p>答案不是某个人的偏见，而是一连串各自都有道理的决定叠出来的。</p>
+  <p>起点在药害。沙利度胺事件之后，监管机构对孕期用药风险极度警惕。1977 年，FDA 的一份指南建议把"有生育潜力的女性"排除在药物早期临床试验之外。出发点是保护胎儿，无可指摘；代价是此后十几年里，大量药物的早期人体数据来自男性受试者，而这些数据后来被当成了全体成年人的默认值。</p>
+  <p>转向发生在 1980 年代末到 90 年代初。1985 年，美国公共卫生署的一份报告点明女性健康研究严重不足；1990 年，审计部门（GAO）的报告更难堪：NIH 连自己制定的纳入政策都没有落实。同年，NIH 内部设立了女性健康研究办公室（ORWH）。</p>
+  <p>1991 年，<strong>伯纳丁·希利（Bernadine Healy）</strong>成为 NIH 历史上首位女性院长。她推动扩大了 ORWH，并启动了那项后来影响深远的妇女健康倡议（WHI，它将是第 22 章的主角）。同年七月，她在《新英格兰医学杂志》写了一篇短社论，标题只有三个词：《耶恩特综合征》。</p>
+  <p>耶恩特是辛格短篇小说里的人物，后来由芭芭拉·史翠珊搬上银幕：一个想进经学院读书的犹太姑娘，只有女扮男装才被允许入学。希利用这个名字指一件非常具体的事——女性心脏病患者往往要在表现出"男性化"的经典症状之后，才会得到同等强度的检查与治疗。一个文学典故，点中的是分诊台上正在发生的现实。这篇社论只有两页，此后被引用了三十多年。</p>
+  <p>1993 年，NIH 振兴法案把"III 期临床试验须纳入女性与少数族裔"从政策抬升为法律要求；1998 年，FDA 的人口统计规则要求申报资料按性别等因素分层报告数据。</p>
+  <p>但纳入受试者只是第一步。实验室那一层仍然默认使用雄性动物，理由听起来很技术：雌性的激素周期会引入过多变异，"数据太吵"。2014 年，一项汇总了大量研究的分析检验了这条假设——在多数被检指标上，雌性小鼠数据的变异性并不高于雄性。理由不成立。</p>
+  <p>2016 年起，NIH 要求把<strong>性别作为一个生物变量</strong>写进研究设计、分析和报告，管辖范围从人体试验一直下探到动物与细胞实验。这一步的意义在于：它不再问"这项研究纳没纳入女性"，而是问"你有没有分开看"。这也不是一国之事——欧盟的科研资助框架此后陆续把"性别维度"写进了申请书的必答项，另有若干国家的资助机构跟进。</p>
+  <p>希利本人的故事有个不算圆满的尾声。值得一提的是时序：她在赴 NIH 之前就已是美国心脏协会主席（1988–1989 年任上），社论里那个问题，她在心脏病学界内部已经讲了好几年，并不是坐上院长位子才想起来的。1993 年离开 NIH 后，她又担任过美国红十字会会长，2011 年因脑瘤去世；她启动的 WHI 在 2002 年爆出激素替代疗法的争议结果，把整整一代女性的用药决定搅动了二十年——那件事本身也说明，把女性纳入大型试验之后，得到的答案未必令人舒服，但至少是有答案的。在此之前，那个问题连数据都没有。</p>
+
+  <figure>
+    <svg id="fixline" viewBox="0 0 620 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="医学研究纳入女性的纠偏史时间轴，从 1962 年沙利度胺事件到 2016 年 NIH 性别作为生物变量政策">
+      <line class="spine" x1="100" y1="28" x2="100" y2="372"/>
+
+      <circle class="dot" cx="100" cy="40" r="5.5"/>
+      <text class="yr mono" x="86" y="44" text-anchor="end">1962</text>
+      <text class="ttl" x="120" y="36">沙利度胺事件</text>
+      <text class="nt" x="120" y="54">药害推动孕期用药监管全面收紧</text>
+
+      <circle class="dot" cx="100" cy="96" r="5.5"/>
+      <text class="yr mono" x="86" y="100" text-anchor="end">1977</text>
+      <text class="ttl" x="120" y="92">FDA 指南</text>
+      <text class="nt" x="120" y="110">建议把有生育潜力的女性排除在早期试验外</text>
+
+      <circle class="dot" cx="100" cy="152" r="5.5"/>
+      <text class="yr mono" x="86" y="156" text-anchor="end">1985</text>
+      <text class="ttl" x="120" y="148">公共卫生署报告</text>
+      <text class="nt" x="120" y="166">点明女性健康研究严重不足</text>
+
+      <circle class="dot" cx="100" cy="208" r="5.5"/>
+      <text class="yr mono" x="86" y="212" text-anchor="end">1990</text>
+      <text class="ttl" x="120" y="204">GAO 报告 · ORWH 成立</text>
+      <text class="nt" x="120" y="222">审计发现 NIH 未落实自身的纳入政策</text>
+
+      <circle class="dot" cx="100" cy="264" r="5.5"/>
+      <text class="yr mono" x="86" y="268" text-anchor="end">1991</text>
+      <text class="ttl" x="120" y="260">《耶恩特综合征》</text>
+      <text class="nt" x="120" y="278">希利出任 NIH 院长，同年发表这篇社论</text>
+
+      <circle class="dot" cx="100" cy="304" r="5.5"/>
+      <text class="yr mono" x="86" y="308" text-anchor="end">1993</text>
+      <text class="ttl" x="120" y="300">NIH 振兴法案</text>
+      <text class="nt" x="120" y="318">III 期试验须纳入女性——从政策变成法律</text>
+
+      <circle class="dot late" cx="100" cy="344" r="5.5"/>
+      <text class="yr mono" x="86" y="348" text-anchor="end">2013</text>
+      <text class="ttl" x="120" y="340">唑吡坦剂量减半</text>
+      <text class="nt" x="120" y="358">首次按性别调整一种常用药的建议剂量</text>
+
+      <circle class="dot late" cx="100" cy="384" r="5.5"/>
+      <text class="yr mono" x="86" y="388" text-anchor="end">2016</text>
+      <text class="ttl" x="120" y="380">SABV 政策生效</text>
+      <text class="nt" x="120" y="398">性别须作为生物变量写进设计与分析</text>
+    </svg>
+    <figcaption><b>图 19-2 · 一条纠偏的时间线。</b>金色为制度层面的动作，蓝色为落到具体药物与研究方法上的动作。值得注意的是两段间隔：从"发现问题"到"立法"用了八年，从"立法纳入受试者"到"要求分开分析"又用了二十三年。</figcaption>
+  </figure>
+
+  <h3>把话说完整</h3>
+  <p>这一章列了不少"男女不同"。最后必须补上同样重要的另一半，否则它就会被读成它的反面。</p>
+  <p><strong>第一，这些都是分布之间的差异，不是两类人之间的分界。</strong>两条分布重叠得很厉害。说女性心梗时无胸痛的比例约四成、男性约三成，意思是这两群人里都有很多人没有胸痛，也都有很多人有。群体的均值可以用来设计流程、修订指南、决定研究该怎么做，但把它套到坐在你对面的那个具体的人身上，几乎总是错的。</p>
+  <p><strong>第二，差异不是等级。</strong>免疫应答更强不等于"更好"，痛阈略低不等于"更弱"。本章每一处差异都同时带着好处与代价：守得紧的军队误伤多，药清得快的肝对某些药是优势、对另一些是劣势。把差异排成高低，是在给数据强加一个它没有的方向。</p>
+  <p><strong>第三，在没有证据的地方不该硬造差异。</strong>这一条与前面同等重要。医学史上关于男女差异的错误主张，数量远超站得住的那些——从"女性血管娇弱不宜手术"到各种关于认知能力的断言，绝大多数经不起后来的检验，却曾经真实地限制过人的生活。默认相同和默认不同，需要的证据一样多。这一章之所以只列出有注册研究、有立法记录、有机制线索的条目，正因为这条线上的空话历来太多。</p>
+  <p>还有一件事值得记住：本章说的这些差异并不固定。它们会随年龄改写——雌激素的保护在绝经之后退场，女性心血管风险随之上抬，两条曲线开始靠拢。那正是下一幕的开场。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>写进设计之后，做到了多少。</strong>SABV 政策生效以来，越来越多期刊要求报告受试者的性别构成并按性别分析，一些领域出现了性别特异性的诊断阈值与风险评分（心肌肌钙蛋白走得最远）。但落实并不均匀：一项覆盖 574 篇论文的审计发现，纳入了两性的占 61%，而真正做了分性别分析的只有 44%——中间那近二十个百分点，等于数据收上来了，又把其中一半信息倒掉。政策改得比习惯快，这中间的差距还要花些年头填。</p>
+    <p><strong>机制这一头的新线索。</strong>2024 年有研究提出，让女性更易患自身免疫病的，也许不只是 X 染色体上的基因剂量，还有负责执行 X 失活的那条长链 RNA（Xist）本身：它与几十种蛋白结合形成的复合物具有相当强的免疫原性，在小鼠模型中足以诱发自身抗体。若这条线索站得住，"两条 X"带来的风险就不止是某些基因多了一份，还包括为了压住其中一条而必须常年贴在那里的封条本身。这项工作仍处在早期，尚待独立重复。至于这些差异如何随年龄改写，是第 22 章的题目。</p>
+  </div>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">成年期性别差异 · 关键数字</div>
+    <table>
+      <tr><td class="k">心梗入院时无胸痛比例</td><td class="v">女 ~42% / 男 ~31%</td><td class="n">美国一百一十余万例注册研究</td></tr>
+      <tr><td class="k">自身免疫病患者女性占比</td><td class="v">约 80%</td><td class="n">狼疮男女比约 9 : 1</td></tr>
+      <tr><td class="k">X 染色体上免疫相关基因</td><td class="v">100 个以上</td><td class="n">含 TLR7、CD40L、FOXP3 等</td></tr>
+      <tr><td class="k">逃过 X 失活的基因比例</td><td class="v">约 15–23%</td><td class="n">部分细胞中呈双份剂量</td></tr>
+      <tr><td class="k">唑吡坦女性起始剂量调整</td><td class="v">10 → 5 mg</td><td class="n">2013 年；缓释 12.5 → 6.25</td></tr>
+      <tr><td class="k">女性药物不良反应报告</td><td class="v">男性的 1.5–2 倍</td><td class="n">跨药物类别分析，成因多重</td></tr>
+      <tr><td class="k">体脂占体重比例</td><td class="v">女 ~25–32% / 男 ~15–22%</td><td class="n">改变药物分布容积</td></tr>
+      <tr><td class="k">偏头痛患病率</td><td class="v">约为男性 2–3 倍</td><td class="n">多种慢性疼痛方向一致</td></tr>
+      <tr><td class="k">急诊腹痛获阿片类镇痛</td><td class="v">女性偏低</td><td class="n">等待时间亦长十几分钟量级</td></tr>
+      <tr><td class="k">III 期试验纳入女性</td><td class="v">1993 年立法</td><td class="n">NIH 振兴法案</td></tr>
+      <tr><td class="k">性别作为生物变量（SABV）</td><td class="v">2016 年生效</td><td class="n">下探到动物与细胞实验</td></tr>
+      <tr><td class="k">预期寿命差</td><td class="v">各国 3–10 年</td><td class="n">各国不同；第 25 章再谈</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">把下颌痛、上背闷、恶心、异常疲惫称作心梗的"非典型症状"，问题出在哪里？</div>
+      <div class="opts">
+        <button>这些症状与心梗无关，不该写进教科书</button>
+        <button data-c="1">它们是女性相当常见的表现，"典型"这幅画像主要取材自以男性为主的病例</button>
+        <button>女性心梗与男性心梗是两种不同的疾病</button>
+        <button>这些症状只在老年女性中出现</button>
+      </div>
+      <div class="explain">大型注册研究里，入院无胸痛的比例女性约 42%、男性约 31%。往下一层，机制的比重也不同：女性冠脉更细，斑块侵蚀与微血管病变占比更高，造影"血管是通的"却确有梗死（MINOCA）更常见。但冠心病仍是同一种病，主要风险因素也大体相同。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">女性自身免疫病高发，目前最具体的分子线索是什么？</div>
+      <div class="opts">
+        <button>女性体脂比例更高，炎症因子分泌更多</button>
+        <button>Y 染色体上缺少抑制自身免疫的基因</button>
+        <button data-c="1">X 染色体携带百余个免疫基因，其中约 15–23% 逃过 X 失活，在部分细胞里双份表达</button>
+        <button>女性接触过敏原的机会更多</button>
+      </div>
+      <div class="explain">TLR7 就是逃逸基因之一，其剂量与狼疮直接相关——2022 年有团队在一名患者身上找到 TLR7 功能增强突变，引入小鼠即可复制狼疮样病变。激素是另一条线：雌激素总体增强应答，睾酮多为抑制，这与多种自身免疫病男女差距在青春期后才拉开相吻合。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">2013 年唑吡坦被单独下调女性剂量。为什么不能把这条推广成"女性一律减量"？</div>
+      <div class="opts">
+        <button>因为女性平均体重更低，按公斤折算即可</button>
+        <button data-c="1">影响药物暴露的多条路径方向并不一致，结果因药而异，只能一药一议</button>
+        <button>因为这次调整后来被撤销了</button>
+        <button>因为剂量差异只出现在安眠药这一类</button>
+      </div>
+      <div class="explain">体脂比例更高与体液比例更低对脂溶性、水溶性药物的影响方向相反；肝脏 CYP3A4 平均偏高（这类药清得更快）而 CYP1A2 偏低（那类药清得更慢）；绝对肾清除略低但主要源自体型。叠加之后没有统一方向。下游可见的是：女性报告药物不良反应的比例约为男性的 1.5–2 倍，成因至今难以拆干净。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">2015 年那项发现"雄鼠靠小胶质细胞、雌鼠靠 T 细胞"传递痛觉过敏的研究，应当怎样解读？</div>
+      <div class="opts">
+        <button>人类男女的疼痛通路已被证明不同</button>
+        <button>该结果说明女性对疼痛更敏感</button>
+        <button data-c="1">这是小鼠结果，不能直接外推到人；它的价值在于提出"镇痛药在雄性动物身上筛选"这个问题</button>
+        <button>该结果否定了疼痛存在任何性别差异</button>
+      </div>
+      <div class="explain">跨物种外推是这条线上最容易出错的一步。人类数据里，慢性疼痛患病率的差异相当一致（偏头痛约为男性 2–3 倍），但实验性痛阈的两条分布高度重叠，均值无法预测个体。另有一类差异与生理无关：多国研究一致发现，同为急性腹痛，女性获得阿片类镇痛的比例更低、等待更久。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">从 1993 年的 NIH 振兴法案到 2016 年的 SABV 政策，关键的推进是什么？</div>
+      <div class="opts">
+        <button>从鼓励纳入女性变成强制排除男性</button>
+        <button data-c="1">从"要求纳入女性受试者"推进到"要求把性别作为生物变量分开设计与分析"，并下探到动物与细胞实验</button>
+        <button>把所有临床试验的样本量翻倍</button>
+        <button>要求所有药物对女性减半剂量</button>
+      </div>
+      <div class="explain">纳入只是第一步：把两性混在一起统计，等于收了数据又倒掉一半信息。中间还清掉了一条障碍——实验室长期以"雌性激素周期数据太吵"为由只用雄性动物，2014 年的汇总分析显示雌鼠数据的变异性并不高于雄鼠。落实至今仍不均匀，多项审计发现相当比例的论文纳入了两性却未做分性别分析。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第三幕 满负荷运行</div>
+  <div class="title">第 20 章 · 繁殖：接力的下一棒</div>
+  <p>序章里，你是被递过来的那一棒。第三幕收尾时，轮到你把它递出去——一眼常年出水的泉，一座只融不增的冰川，一场每月上演一次的多声部合奏，还有一个 1978 年的夜晚：一个婴儿在英国出生，把"接力"这件事从此改写。下一章见。</p>
+  <nav class="footnav">
+    <a href="ch18-signals.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch20-reproduction.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 系统差异地图：点卡片高亮 + 切换说明
+  var tabs = document.querySelectorAll('#sysmap-fig .sys-btn');
+  var cards = document.querySelectorAll('#sysmap .card');
+  var glows = document.querySelectorAll('#sysmap .glow');
+  var panes = document.querySelectorAll('#sysmap-fig .sp');
+  function showSys(sys){
+    var i;
+    for (i = 0; i < tabs.length; i++) {
+      tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-sys') === sys ? 'true' : 'false');
+    }
+    for (i = 0; i < cards.length; i++) {
+      cards[i].classList.toggle('on', cards[i].getAttribute('data-sys') === sys);
+    }
+    for (i = 0; i < glows.length; i++) {
+      glows[i].classList.toggle('on', glows[i].getAttribute('data-sys') === sys);
+    }
+    for (i = 0; i < panes.length; i++) {
+      panes[i].classList.toggle('on', panes[i].getAttribute('data-sp') === sys);
+    }
+  }
+  for (var t = 0; t < tabs.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){ showSys(el.getAttribute('data-sys')); });
+    })(tabs[t]);
+  }
+  for (var c = 0; c < cards.length; c++) {
+    (function(el){
+      el.addEventListener('click', function(){ showSys(el.getAttribute('data-sys')); });
+    })(cards[c]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

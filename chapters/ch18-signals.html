@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第18章 · 两套指挥系统 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 18-1 两路信使赛跑（本章专用） ---- */
+#race-fig .t-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#race-fig .t-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#race-fig .t-btn:hover{border-color:var(--gold); color:var(--ink);}
+#race-fig .t-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#race-fig .t-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#race-fig .t-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#race-fig .tp{display:none;}
+#race-fig .tp.on{display:block;}
+#race-fig .tp-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#race-fig .tp p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+#race .lane{stroke:var(--line); stroke-width:2;}
+#race .col{stroke:var(--line); stroke-width:1; stroke-dasharray:4 6; transition:stroke .3s;}
+#race .col.on{stroke:var(--gold);}
+#race .col-t{fill:var(--ink-faint); font-size:12px; transition:fill .3s;}
+#race .col-t.on{fill:var(--gold); font-weight:700;}
+#race .lane-t{fill:var(--ink); font-size:13px; font-weight:700;}
+#race .lane-s{fill:var(--ink-faint); font-size:11px;}
+#race .ev{opacity:.26; transition:opacity .35s;}
+#race .ev.on{opacity:1;}
+#race .nd-n{fill:var(--gold);}
+#race .nd-h{fill:var(--deoxy);}
+#race .lb{fill:var(--ink); font-size:12.5px; font-weight:600;}
+#race .lb-s{fill:var(--ink-dim); font-size:11px;}
+
+/* ---- 图 18-2 反射弧五站（本章专用） ---- */
+#arc .box{fill:var(--surface2); stroke:var(--line); stroke-width:1.5;}
+#arc .box-brain{fill:var(--surface2); stroke:var(--deoxy); stroke-width:1.8;}
+#arc .box-t{fill:var(--ink); font-size:14px; font-weight:700;}
+#arc .box-s{fill:var(--ink-dim); font-size:11px;}
+#arc .fast{fill:none; stroke:var(--gold); stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round;}
+#arc .slow{fill:none; stroke:var(--deoxy); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:7 6;}
+#arc .head-f{fill:var(--gold);}
+#arc .head-s{fill:var(--deoxy);}
+#arc .path-t{fill:var(--gold); font-size:12px;}
+#arc .path-s{fill:var(--deoxy); font-size:12px;}
+#arc .note{fill:var(--ink-faint); font-size:12px;}
+@media (prefers-reduced-motion: reduce){
+  #race .ev, #race .col, #race .col-t{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第三幕 满负荷运行 · 第 18 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>两套指挥系统</h1>
+  <p class="subtitle">一路贴着耳朵说悄悄话，一路敲响全场都听得见的钟——同一件事，你的身体总是同时派出这两名信使。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>楼梯只剩最后三级，你踩空了。</p>
+  <p>接下来发生的事，顺序和你以为的完全不同。先是手已经抓住了扶手，另一条腿绷紧撑住——这一切发生在你意识到自己踩空<em>之前</em>。然后才是"啊"的一声，惊觉。再然后，心跳擂鼓，手心发凉，耳朵嗡地一响。等你站稳、扶着墙笑自己一句，那股说不出的虚软还要在身上赖上半个钟头。</p>
+  <p>同一件事，身体派出了两路信使。一路快得离谱，精确到某一块肌肉，说完就散；另一路慢得多，走的是全场通告，却余音悠长。这两名信使一辈子搭档得天衣无缝，你几乎从不觉察它们是两个人。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 两种口信</div>
+  <h2>耳语与钟声</h2>
+  <p>先想象一座正在演戏的剧场。</p>
+  <p>侧幕里站着提词人。某位演员忘了词，提词人压低嗓子说半句——只有那一个人听得见，快，准，说完就没了，观众席上谁也不知道刚才发生过什么。这是<strong>神经</strong>。</p>
+  <p>剧场另有一口钟。开场、中场、散场，钟一响，全场都听见。它不指名道姓，也不追着谁说；它一响，余音要在梁上绕好一阵。这是<strong>激素</strong>。</p>
+  <p>两者的参数差得很远。神经的口信沿着轴突走，粗的有髓纤维每秒能跑 70 到 120 米——从脚趾到大脑只要十几到二十几毫秒，比你眨一次眼快上一个数量级。说是"走"，其实并没有什么东西在跑：跑的是一次电位翻转。第 1 章清点家底时数过那层五纳米厚的油膜，它两侧常年隔着几十毫伏的电压差——摊到五纳米上，场强是每米上千万伏的量级。冲动经过时，膜上的通道让离子短暂涌过，这个电压差翻个个儿，随即复原，再把同样的动作交给紧邻的下一小段。那份家底，用的就是这里。它的收件人只有一个，就是轴突末梢正对着的那个细胞；话音一落，递质立刻被酶拆掉或被回收，现场清理得干干净净。所以神经擅长的是那种"此刻、这一块、这么多"的精细指令：让无名指屈半度，让某一小片血管收紧一点。</p>
+  <p>激素的口信则被倒进血液，跟着心跳周游全身。它没有收件人地址，靠的是遍撒；起效以分钟计，退场以小时甚至天计。它擅长的是另一类事：把成千上万个细胞的状态一起挪一挪——全身代谢率抬高一档，血糖收进仓库，骨头开始加速生长。这类事没有哪根神经管得过来，因为要下令的对象太多、太分散，而且要维持得太久。</p>
+  <p>钟声这个说法有个坑，得先填上：钟一响全场都听见，是不是意味着激素对所有细胞都起作用？不是。<strong>起身的，只有手里拿着对应戏票的人。</strong>细胞表面（或细胞内）有相应受体的才响应，没有的听而不闻。所以甲状腺激素几乎让全身细胞一起提速，而催产素主要对子宫平滑肌、乳腺和大脑里几条特定回路说话——同一口钟，票不同，起身的人就不同。这也解释了一个常被误解的现象：激素治疗的副作用之所以那么难避开，不是因为药"跑错了地方"，而是因为持票的人本来就不止一处。</p>
+  <p>还有一件反直觉的事：钟声其实极轻。血液里激素的浓度常在 10⁻⁹ 到 10⁻¹² 摩尔每升的量级，相当于往一池水里滴一滴染料。之所以听得见，是因为受体挑得极准，而且信号进了细胞还会被层层放大——一个分子敲一下门，屋里可能有上万个分子跟着改变状态。</p>
+  <p>钟与钟之间的余音长短也差得很远。胰岛素在血里几分钟就被清掉，所以它管的是"这一顿饭"；皮质醇的作用绵延几小时，管的是"今天下午"；甲状腺素的半衰期约七天，管的是"这个季度"。同一口钟，靠余音的长短，把不同时间尺度的事分了工。</p>
+  <h3>同一个词，两种说法</h3>
+  <p>把两套系统分得太干净，会漏掉一件要紧的事：它们常常用同一个词。</p>
+  <p>去甲肾上腺素从交感神经末梢释放出来时，是耳语——只作用于紧邻的那一小块组织，几毫秒内被回收。同样这个分子，由肾上腺倒进血液，就成了钟声——随血流走遍全身，作用持续几分钟。压低嗓子说给一个人听，和站在钟楼上喊出来，用的可以是同一句话。</p>
+  <p>两者之间还夹着第三种说法：只说给邻座听的一句话。上一章那些让伤口发红发肿的前列腺素和组胺就是这一类，它们扩散几十到几百微米就耗尽，管的是一小片街区的事。从耳语到街谈再到钟声，身体的通信手段是连成一片的光谱，不是两个阵营。</p>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 抢在前面</div>
+  <h2>手比你先知道</h2>
+  <p>回到楼梯上那一瞬间。手抓住扶手的时候，你其实还没"知道"自己踩空——那道命令根本没有上到大脑。</p>
+  <p>它走的是<strong>反射弧</strong>，一条把决定权下放到最近岗哨的近道：感受器察觉到变化，冲动沿传入神经进脊髓，在那里换一到几个突触，直接折回传出神经，命令肌肉动作。全程五站，脊髓就地办结，大脑事后才收到通报。</p>
+  <p>为什么要下放？算一笔账。从脚到大脑再回到脚，来回三米上下，即便全程都走最快的纤维，路上也不过三四十毫秒——真正贵的不是路程。贵的是大脑那一头：从信号抵达到形成一个有意识的判断，通常还要一百多毫秒，而且这段时间没法压缩。把岗哨设在脊髓，省掉的主要就是这一百多毫秒，代价是判断被换成一条死规矩：<strong>烫、扎、突然的拉扯，一律先撤。</strong>规矩笨，但它省下的正是最贵的那一段。</p>
+  <p>最短的一条是膝跳反射：医生的小锤敲在髌腱上，肌梭被突然拉长，信号进脊髓只换一个突触就折返，全程 20 到 40 毫秒。缩手反射要复杂得多：中间多几个中转，还要等足够多的伤害性纤维把信号叠够，通常在 0.1 到 0.5 秒之间完成。这个数字乍看并不比"经过大脑"快多少，但它胜在<em>不必等一个判断</em>——手碰到滚烫的锅，你还没决定要不要躲，手已经在退了。</p>
+  <p>真正精巧的是它并不只管缩手那一件事。你光脚踩到一颗图钉，那条腿收起来的同一瞬间，<em>另一条腿</em>会不由自主地伸直、绷紧——因为如果两条腿一起收，你就该摔了。这条叫交叉伸肌反射，同样在脊髓办完：一侧撤，另一侧就顶上。一个只有几个突触的岗哨，居然把"保持平衡"这件事也一并算了进去。</p>
+  <p>反射也不是铁板一块。它的灵敏度可以被大脑预先调节：明知道下一秒要去碰一样烫手的东西（比如从烤箱里端盘子），你的缩手反射会被压低一档，好让你把盘子放稳再撒手；反过来，紧张或疲惫的时候，同样的刺激会引出更大的反应。岗哨照旧自己拿主意，但上级可以事先关照它一句"这次松着点"——只是这句关照必须赶在事情发生<em>之前</em>说，事发之后再说就迟了。</p>
+  <p>疼为什么后到？因为它走的是另一条又慢又长的路。传递钝痛的 C 类纤维没有髓鞘，每秒只走半米到两米；从脚底到大脑一米多的距离，光是路上就得一秒左右，进了脑还要经过好几站加工，才变成你能说出口的那种"疼"。</p>
+  <p>这条时间差在日常里露过面：赤脚踢到桌角，最先来的是一记尖锐的、定位很准的痛（走的是有髓的 Aδ 纤维），紧接着是一段奇怪的空白，然后一股又钝又散、说不清具体在哪儿的疼才涌上来——那是慢车终于到站。空白有多长要看距离：撞的是脚，慢车得跑一米多，这段空白约一秒；换成手上就短些，脸上更短。同一次撞击，两班车，先后到达。</p>
+  <p>顺带说明一句：疼痛的感受强度和被表达、被采信的方式，在男女之间存在有据可查的差异，下一章会专门处理这件事。</p>
+
+  <figure>
+    <svg id="arc" viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="反射弧五站示意图：皮肤感受器、传入神经、脊髓、传出神经、肌肉，另有一条较慢的上行通路把消息报告给大脑">
+      <rect class="box-brain" x="300" y="26" width="160" height="60" rx="10"/>
+      <text class="box-t" x="380" y="52" text-anchor="middle">大脑</text>
+      <text class="box-s" x="380" y="72" text-anchor="middle">事后才收到通报</text>
+
+      <rect class="box" x="322" y="150" width="116" height="80" rx="10"/>
+      <text class="box-t" x="380" y="182" text-anchor="middle">③ 脊髓</text>
+      <text class="box-s" x="380" y="202" text-anchor="middle">就地办结</text>
+
+      <rect class="box" x="46" y="238" width="150" height="50" rx="10"/>
+      <text class="box-t" x="121" y="262" text-anchor="middle">① 皮肤感受器</text>
+      <text class="box-s" x="121" y="280" text-anchor="middle">痛、烫、突然的拉伸</text>
+
+      <rect class="box" x="564" y="238" width="150" height="50" rx="10"/>
+      <text class="box-t" x="639" y="262" text-anchor="middle">⑤ 屈肌收缩</text>
+      <text class="box-s" x="639" y="280" text-anchor="middle">手已经缩回来了</text>
+
+      <path class="fast" d="M196 258 H262 V196 H316"/>
+      <polygon class="head-f" points="316,190 328,196 316,202"/>
+      <text class="path-t" x="204" y="222">② 传入神经</text>
+
+      <path class="fast" d="M444 196 H498 V258 H558"/>
+      <polygon class="head-f" points="558,252 570,258 558,264"/>
+      <text class="path-t" x="452" y="222">④ 传出神经</text>
+
+      <path class="slow" d="M380 150 V98"/>
+      <polygon class="head-s" points="374,98 380,86 386,98"/>
+      <text class="path-s" x="392" y="126">上行报告 · 慢一步</text>
+
+      <text class="note mono" x="46" y="34">膝跳反射（单突触）　20–40 ms</text>
+      <text class="note mono" x="46" y="54">缩手反射（多突触）　0.1–0.5 s</text>
+      <text class="note mono" x="46" y="74">钝痛上行（C 纤维）　0.5–2 m/s</text>
+      <text class="note" x="714" y="180" text-anchor="end">反射先完成，大脑随后才知情——</text>
+      <text class="note" x="714" y="200" text-anchor="end">所以你先缩手，后觉得疼。</text>
+    </svg>
+    <figcaption><b>图 18-1 · 一条走捷径的命令。</b>金色是反射弧本身：感受器 → 传入 → 脊髓 → 传出 → 肌肉，五站全在脊髓就地办完。蓝色虚线是同时上行、却慢一拍的报告路线，痛的感觉从这条路来。示意图只画信息流向，不代表解剖位置。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 赛跑</div>
+  <h2>踩空之后的三十分钟</h2>
+  <p>反射把你从楼梯上救了回来，但这件事远没有完。惊吓的余波要在身上留很久，而它由两路信使分别送达——两路走的是同一件事的两个时间尺度。</p>
+  <p><strong>第一路：交感神经，秒。</strong>脊髓两侧那串交感神经节像一条纵贯全身的走廊，从这里发出的纤维直接搭在心脏、血管、瞳孔、汗腺上。踩空的一瞬间，指令沿着这条走廊铺开：心跳加快加力，瞳孔放大，皮肤和内脏的血管收缩、骨骼肌的血管舒张，汗腺出汗。一秒之内，全部到位。</p>
+  <p>这条走廊还有一处很特别的岔口：它有一支直接扎进肾上腺的髓质。别处的神经命令肌肉或腺体做事，这一支命令的是<em>往血里倒东西</em>——肾上腺素与去甲肾上腺素几秒钟内涌进血流。耳语在这里当场改口成了钟声。这也是为什么惊吓过后那种心慌手抖会持续好几分钟，而不是随着神经指令一起收摊：肾上腺素在血中的半衰期是 1 到 3 分钟，钟声总要绕梁一会儿。</p>
+  <p><strong>第二路：下丘脑那条链，分钟。</strong>几乎在同一时刻，大脑深处的下丘脑释放一种小分子，走一段极短的血管送到垂体；垂体因此分泌另一种激素进入全身血液；这一种再命令肾上腺的皮质（不是髓质了）分泌<strong>皮质醇</strong>。三级接力，每一级都是钟声。血中皮质醇通常在 15 到 30 分钟达到峰值，作用能持续几个小时。</p>
+  <p>皮质醇干的不是救急，是善后：把糖动员到血里备用，把当下不着急的开销压一压（消化、生殖、一部分免疫功能），并且——这一点很妙——参与把这件事写进记忆。你可能记不清昨天午饭吃了什么，却能清楚记得五年前那次踩空。</p>
+  <p>两路都要，是因为它们各有各的短板。快的那一路准、猛、说完就散，适合三秒钟内定生死的事；慢的那一路广、久、能改变整个身体往后几小时的收支安排，适合"接下来这一段日子恐怕不好过"的事。真正的问题出在钟一直响的时候：长期压力下皮质醇持续偏高，那些"暂时压一压"的开销就被长期压着，睡眠、免疫、代谢都要跟着付账。急性应激是本事，慢性应激是磨损——这条线到第四幕还会再遇上。</p>
+
+  <figure id="race-fig">
+    <div class="switch-row">
+      <span class="switch-hint">选时刻 →</span>
+      <div class="t-tabs" role="group" aria-label="选择踩空之后的时刻">
+        <button class="t-btn" data-t="1" aria-pressed="false">0.1 秒</button>
+        <button class="t-btn" data-t="2" aria-pressed="false">1 秒</button>
+        <button class="t-btn" data-t="3" aria-pressed="false">10 秒</button>
+        <button class="t-btn" data-t="4" aria-pressed="false">5 分钟</button>
+        <button class="t-btn" data-t="5" aria-pressed="false">30 分钟</button>
+      </div>
+    </div>
+    <svg id="race" viewBox="0 0 760 262" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="踩空之后神经通路与激素通路的进度对照表，横轴为 0.1 秒到 30 分钟五个时刻">
+      <line class="col" data-t="1" x1="150" y1="40" x2="150" y2="236"/>
+      <line class="col" data-t="2" x1="270" y1="40" x2="270" y2="236"/>
+      <line class="col" data-t="3" x1="390" y1="40" x2="390" y2="236"/>
+      <line class="col" data-t="4" x1="520" y1="40" x2="520" y2="236"/>
+      <line class="col" data-t="5" x1="655" y1="40" x2="655" y2="236"/>
+      <text class="col-t mono" data-t="1" x="150" y="28" text-anchor="middle">0.1 秒</text>
+      <text class="col-t mono" data-t="2" x="270" y="28" text-anchor="middle">1 秒</text>
+      <text class="col-t mono" data-t="3" x="390" y="28" text-anchor="middle">10 秒</text>
+      <text class="col-t mono" data-t="4" x="520" y="28" text-anchor="middle">5 分钟</text>
+      <text class="col-t mono" data-t="5" x="655" y="28" text-anchor="middle">30 分钟</text>
+
+      <text class="lane-t" x="20" y="86">神经 · 耳语</text>
+      <text class="lane-s" x="20" y="102">点对点 · 毫秒 · 说完就散</text>
+      <line class="lane" x1="20" y1="118" x2="740" y2="118"/>
+
+      <g class="ev" data-t="1">
+        <circle class="nd-n" cx="150" cy="118" r="6"/>
+        <text class="lb" x="150" y="146" text-anchor="middle">手已抓住扶手</text>
+        <text class="lb-s" x="150" y="162" text-anchor="middle">脊髓办结，未经大脑</text>
+      </g>
+      <g class="ev" data-t="2">
+        <circle class="nd-n" cx="270" cy="118" r="6"/>
+        <text class="lb" x="270" y="146" text-anchor="middle">心率、瞳孔</text>
+        <text class="lb-s" x="270" y="162" text-anchor="middle">交感走廊全线铺开</text>
+      </g>
+      <g class="ev" data-t="3">
+        <circle class="nd-n" cx="390" cy="118" r="6"/>
+        <text class="lb" x="390" y="146" text-anchor="middle">血流改道</text>
+        <text class="lb-s" x="390" y="162" text-anchor="middle">肌肉优先，消化让路</text>
+      </g>
+      <g class="ev" data-t="4">
+        <circle class="nd-n" cx="520" cy="118" r="6"/>
+        <text class="lb" x="520" y="146" text-anchor="middle">交感张力回落</text>
+        <text class="lb-s" x="520" y="162" text-anchor="middle">可你还在发抖</text>
+      </g>
+      <g class="ev" data-t="5">
+        <circle class="nd-n" cx="655" cy="118" r="6"/>
+        <text class="lb" x="655" y="146" text-anchor="middle">这一路已归位</text>
+        <text class="lb-s" x="655" y="162" text-anchor="middle">余下的事交给钟声</text>
+      </g>
+
+      <g class="ev" data-t="1">
+        <circle class="nd-h" cx="150" cy="196" r="6"/>
+        <text class="lb-s" x="150" y="222" text-anchor="middle">还在路上</text>
+      </g>
+      <g class="ev" data-t="2">
+        <circle class="nd-h" cx="270" cy="196" r="6"/>
+        <text class="lb" x="270" y="222" text-anchor="middle">肾上腺素入血</text>
+      </g>
+      <g class="ev" data-t="3">
+        <circle class="nd-h" cx="390" cy="196" r="6"/>
+        <text class="lb" x="390" y="222" text-anchor="middle">血糖上抬、气道张开</text>
+      </g>
+      <g class="ev" data-t="4">
+        <circle class="nd-h" cx="520" cy="196" r="6"/>
+        <text class="lb" x="520" y="222" text-anchor="middle">皮质醇正在上路</text>
+      </g>
+      <g class="ev" data-t="5">
+        <circle class="nd-h" cx="655" cy="196" r="6"/>
+        <text class="lb" x="655" y="222" text-anchor="middle">皮质醇达峰</text>
+      </g>
+
+      <line class="lane" x1="20" y1="196" x2="740" y2="196"/>
+      <text class="lane-t" x="20" y="184">激素 · 钟声</text>
+      <text class="lane-s" x="130" y="184">全场都听见 · 分钟到小时 · 余音悠长</text>
+    </svg>
+    <div class="t-panel" id="racePanel">
+      <div class="tp on" data-tp="0">
+        <div class="tp-t">两路信使 · 同一件事</div>
+        <p>点上方任一时刻，看这一瞬间两条通路各走到哪一步。要留意的不是谁赢——是它们干的根本不是同一件活儿：上面那条负责让你别摔下去，下面那条负责让你接下来几个小时都记着这件事。</p>
+      </div>
+      <div class="tp" data-tp="1">
+        <div class="tp-t">0.1 秒</div>
+        <p>神经这一路已经办完了最要紧的事：手抓住扶手，腿绷紧。全程在脊髓就地完成，大脑还没收到报告。激素那一路此刻连出发信号都还没送到腺体。</p>
+      </div>
+      <div class="tp" data-tp="2">
+        <div class="tp-t">1 秒</div>
+        <p>交感神经沿着脊柱两侧的走廊全线铺开：心率上冲，瞳孔放大，汗腺出汗。同一条走廊里那支扎进肾上腺髓质的分支把耳语改成了钟声——肾上腺素几秒内进入血流。你这时才刚"啊"出声。</p>
+      </div>
+      <div class="tp" data-tp="3">
+        <div class="tp-t">10 秒</div>
+        <p>血流重新分配：皮肤和内脏的血管收紧，骨骼肌那边放开。肝把糖放进血里，气道扩张。这些多半已经是血中肾上腺素的作用，而不再是神经末梢的直接命令。</p>
+      </div>
+      <div class="tp" data-tp="4">
+        <div class="tp-t">5 分钟</div>
+        <p>你已经站稳，交感神经的指令基本撤了，可手还在抖——因为血里的肾上腺素要几分钟才代谢干净。与此同时，下丘脑那条三级接力已经跑到第三棒，皮质醇正在往血里加。</p>
+      </div>
+      <div class="tp" data-tp="5">
+        <div class="tp-t">30 分钟</div>
+        <p>皮质醇达峰。神经这一路早已完全归位，你甚至已经忘了刚才的姿势有多难看，而钟声还在梁上绕：血糖被抬着，消化被压着，这件事正在被写进长期记忆。这就是为什么你能记住五年前的那次踩空。</p>
+      </div>
+    </div>
+    <figcaption><b>图 18-2 · 同一件事，两路信使。</b>上排金色为神经通路，下排蓝色为激素通路。点选时刻可逐档查看。注意两排的节奏差了两三个数量级——神经这一路收工时，激素那一路才刚刚到岗。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 梦中</div>
+  <h2>1920 年复活节的两个夜晚</h2>
+  <p>耳语究竟是怎么传出去的？二十世纪初，这是生理学界吵得最凶的一个问题。</p>
+  <p>一派认为神经末梢与下一个细胞之间是电的直接接续，冲动像火花一样跳过去；另一派认为中间隔着一道缝，神经其实是往缝里"分泌"了某种化学物质。两派后来被人半开玩笑地叫作"火花派"和"汤派"，这场争论前后拉锯了三十多年。汤派起初人少，因为拿不出决定性的证据——那点物质浓度低、消失快，当时的手段根本抓不住。1904 年，一位年轻的英国学生埃利奥特已经在论文里猜到交感神经也许是靠释放类似肾上腺素的东西起作用，可他自己都觉得证据太薄，很快就不再提了。</p>
+  <p>奥地利药理学家<strong>奥托·勒维（Otto Loewi）</strong>属于汤派。1903 年他就动过这个念头，却想不出该怎么验证，于是把它搁下——一搁十七年。</p>
+  <p>1920 年复活节前一夜，凌晨三点，他醒了。一个实验的设计清清楚楚地摆在脑子里。他摸黑抓过一张纸片写了几行，翻身又睡。早上六点起床，他知道自己夜里写下了极重要的东西，可对着那张纸怎么也认不出自己的字。后来他形容那一天是他一生中最难熬的一天：知道答案就在昨夜，够不着。</p>
+  <p>第二天夜里三点，念头又回来了。这一次他不敢再冒险，爬起来穿好衣服，直奔实验室。</p>
+  <p>实验简单得近乎朴素。两颗离体的青蛙心脏，都还在跳，泡在生理盐溶液里。第一颗心还连着迷走神经；他刺激这条神经，心跳慢了下来——这一点早已知道。真正的问题是接下来那一步：他把泡过第一颗心的那点溶液取出来，浇到第二颗心上——第二颗心并没有连接任何神经。</p>
+  <p>第二颗心也慢了下来。</p>
+  <p>能让它慢下来的，只可能是溶液里多出来的某种东西。迷走神经不是用电直接压住心脏的，它释放了一种物质，物质再去压住心脏。勒维把这种东西叫作 <strong>Vagusstoff</strong>，"迷走物质"，论文在 1921 年发表。</p>
+  <p>发表之后，事情并没有立刻结束。有几家实验室重复不出来——这个实验对温度、季节、蛙的种类都很挑剔，勒维自己在往后几年里又反复做了十几轮才把条件摸清楚。火花派也没那么容易认输：他们承认心脏这一处是化学的，却坚持骨骼肌那种快得多的接头一定还是电的（一次收缩只用几毫秒，"分泌"来得及吗）。这场拉锯又持续了十几年，直到实验手段追上来，才认定绝大多数接头都是化学的。后来英国的亨利·戴尔证明勒维那种物质就是<strong>乙酰胆碱</strong>；1936 年，两人分享了诺贝尔生理学或医学奖。</p>
+  <p>勒维后来自己说过一句很诚实的话：如果这个实验是他白天清醒时想出来的，他多半会否掉它——按当时的知识，那么低浓度的东西不该有可测的效果。夜里的他没有这层顾虑。（1938 年纳粹吞并奥地利后他被捕，交出诺奖奖金才获准离境，最终在纽约度过余生。）</p>
+  <p>这个实验的分量，不只在于它证明了化学传递。它顺手抹掉了本章开头那条清清楚楚的分界线：<strong>耳语，原来也是化学的。</strong>神经末梢同样在"分泌"，只不过分泌到一条 20 到 40 纳米宽的缝里，说完立刻清理现场。两套系统用的是同一门语言，差别只在音量和覆盖范围——这也是为什么同一个分子能在两边都上岗。</p>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 驿道</div>
+  <h2>一条贯穿全身的驿道</h2>
+  <p>勒维刺激的那条神经，值得单开一节。</p>
+  <p>迷走神经是第十对脑神经，从颅底钻出来，顺着颈部下行，一路分岔：咽喉、心脏、肺、食管、胃、肝、胰、小肠，还有大半个结肠。它的拉丁名 <em>vagus</em> 就是"漫游"的意思——古人给它起名时，看中的正是这条路线东游西荡、哪儿都去的样子。</p>
+  <p>把它想成一条大运河式的驿道比较贴切：不是一根拉直的线，而是一条沿途设了许多码头、来往都走的干线。</p>
+  <p>驿道上最出人意料的一件事，是<strong>货运的方向</strong>。人们习惯把迷走神经当成大脑发号施令的通道——放慢心跳、催促肠胃。可实际数出来的纤维构成正相反：其中约<strong>八成是传入的</strong>，也就是从内脏往大脑运消息，只有约两成是下行的指令。胃撑到什么程度、肺张开了多少、血压高低、肠子里有什么东西——这些消息昼夜不停地往上走。你的大脑对内脏的了解程度，远超内脏对大脑的服从程度。</p>
+  <p>这里得就地拆一句：驿道上跑的绝大部分消息，你这辈子都不会知道。它们进入脑干和下丘脑，参与调节，却几乎从不浮上意识层面——你能感到的只有饥饿、饱胀、恶心这几样粗线条的通报。所谓"身体在跟你说话"，说的其实是它在跟你的脑干说话，而你只被抄送了很小一部分。</p>
+  <h3>一直牵着的那根缰绳</h3>
+  <p>迷走神经对心脏的作用，藏着一个漂亮的细节。</p>
+  <p>心脏其实自带节律：把窦房结从神经的支配中解放出来，它会以每分钟约 100 次的频率自顾自地跳。可你安静坐着时心率只有 60 到 70。差出来的那三四十次去哪儿了？被迷走神经一直牵着——它像一根始终绷着的缰绳，把心的本性拉慢了三成。</p>
+  <p>于是运动刚开始的头几秒，心率上升靠的不是加鞭，而是<strong>松缰</strong>：迷走的张力先撤，心率立刻窜上去；交感那一路的加速要再晚几秒才跟上。这根缰绳的松紧还随呼吸一张一弛——吸气时略松，心跳快一点；呼气时略紧，心跳慢一点。你把手指搭在腕上深呼吸几次，就能摸到这个起伏。医学上用心率变异性来量它，本质上量的就是这根缰绳有多灵活。</p>
+  <p>更意外的一层是免疫。1990 年代末到 2000 年前后，凯文·特雷西的团队发现刺激迷走神经能压低脾脏里巨噬细胞释放的炎症因子，他们把这条通路叫作<strong>炎症反射</strong>：身体感知到炎症，通过这条驿道传回一条"降降火"的回令。上一章讲过，炎症的麻烦常常不在于点不着，而在于收不了场——这条驿道，恰好握着一个收场的把手。</p>
+  <p>说到这里，本章开头那对提词人和铜钟，可以换成一个更现代的说法了：一路是专线电话，一路是广播电台。这个比方不算错，只是它漏掉了最要紧的一点——在你身上，电话和电台用的是同一套化学，区别只在嗓门有多大、听众有多少、余音能留多久。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>肾上腺素笔为什么扎大腿外侧。</strong>严重过敏反应时，抢救用的肾上腺素要打进大腿前外侧的肌肉：那里肌肉厚、血流丰富、皮下脂肪相对薄，药物吸收比打在上臂或皮下快得多，而且隔着裤子就能扎，慌乱中不必先脱衣服。选这个位置，靠的正是本章那条道理——钟声要响得快，就得让它尽早进入血流。</p>
+  </div>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>余音有多长，决定了你多久才知道调没调对。</strong>甲状腺素（T4）在血中的半衰期约七天，所以调整甲状腺药物剂量后，医生通常要你等六周左右再复查——身体要花掉五六个半衰期才走到新的稳态，早抽血只会量到一个还在爬坡的数。这就是钟声型信使的代价：慢，而且改起来更慢。</p>
+  </div>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>电子药：用电流替代分子。</strong>既然一条神经能调节免疫，那么给它一点电，是不是就能当药用？迷走神经刺激（VNS）本身不新：植入式装置自 1990 年代末起用于难治性癫痫，之后又被批准用于难治性抑郁（争议主要在疗效评估与医保覆盖）。新的方向是把它对准炎症：2016 年前后，针对类风湿关节炎的小规模试验显示植入式迷走神经刺激能降低炎症指标并改善部分患者的病情。随后的关键试验 RESET-RA 纳入 242 名对甲氨蝶呤或生物制剂应答不足的类风湿关节炎患者，2025 年发表于《自然·医学》，报告刺激组的 ACR20 应答率为 35.2%，对照组 24.2%。<strong>2025 年 7 月 31 日，美国 FDA 批准了 SetPoint 的植入式迷走神经刺激系统用于这一适应症</strong>。支持者把这一路叫"电子药"——剂量是电流参数，副作用不经肝肾代谢；这是这条路上第一张针对炎症适应症的正式批文。</p>
+      <p><strong>该怎么看它。</strong>三件事需要分清。其一，植入式与贴在耳廓的经皮刺激（taVNS）不是一回事，后者无创、便宜，证据却参差得多。其二，迷走神经上行纤维占八成，刺激它到底改变了什么，很多环节仍不清楚。其三，市面上宣称"激活迷走神经"的按摩、冷水、呼吸法产品，多数把有限的生理学发现讲成了确定的疗效——真正进入临床的适应症目前还很窄。所以准确的说法要分成两半：在类风湿关节炎这个很窄的适应症上，它已经从"在试"走到了"已成"；而其余绝大多数用途——尤其是经皮刺激和货架上那些消费级产品——仍然是"在试"。这两件事必须分开讲，否则一张窄适应症的批文，会被拿去替一整个货架背书。</p>
+  </div>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">两套指挥系统 · 关键数字</div>
+    <table>
+      <tr><td class="k">有髓粗纤维传导速度</td><td class="v">70–120 m/s</td><td class="n">触觉、本体感觉、运动指令</td></tr>
+      <tr><td class="k">无髓 C 纤维传导速度</td><td class="v">0.5–2 m/s</td><td class="n">钝痛与内脏感觉走这条</td></tr>
+      <tr><td class="k">突触间隙宽度</td><td class="v">20–40 nm</td><td class="n">递质只需扩散这么远</td></tr>
+      <tr><td class="k">单个突触延搁</td><td class="v">0.3–1 ms</td><td class="n">每多换一站就多这一点</td></tr>
+      <tr><td class="k">膝跳反射全程</td><td class="v">20–40 ms</td><td class="n">单突触，最短的一条弧</td></tr>
+      <tr><td class="k">缩手反射全程</td><td class="v">0.1–0.5 s</td><td class="n">多突触，脊髓就地办结</td></tr>
+      <tr><td class="k">肾上腺素半衰期</td><td class="v">1–3 分钟</td><td class="n">起效以秒计，退场以分钟计</td></tr>
+      <tr><td class="k">皮质醇达峰</td><td class="v">15–30 分钟</td><td class="n">作用可持续数小时</td></tr>
+      <tr><td class="k">甲状腺素（T4）半衰期</td><td class="v">约 7 天</td><td class="n">调药后约六周才看得准</td></tr>
+      <tr><td class="k">激素血中浓度量级</td><td class="v">10⁻⁹–10⁻¹² mol/L</td><td class="n">相当于一池水里滴一滴染料</td></tr>
+      <tr><td class="k">迷走神经传入纤维占比</td><td class="v">约 80%</td><td class="n">主要在往回运消息</td></tr>
+      <tr><td class="k">窦房结内在频率 / 静息心率</td><td class="v">~100 / 60–70 次每分</td><td class="n">差额是迷走一直牵着的缰绳</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">神经与激素这两套系统，最根本的差别是什么？</div>
+      <div class="opts">
+        <button>神经用电信号，激素用化学信号</button>
+        <button data-c="1">覆盖范围与作用时长不同——一个点对点、毫秒级，一个传遍全场、分钟到小时级</button>
+        <button>神经归大脑管，激素不受神经影响</button>
+        <button>神经作用于肌肉，激素只作用于内脏</button>
+      </div>
+      <div class="explain">两边说的都是化学：神经末梢同样在"分泌"，只不过分泌进一条 20–40 纳米宽的缝，说完立刻清场。这正是勒维那个实验的深层含义。同一个分子还能两边上岗——去甲肾上腺素从神经末梢释放是耳语，由肾上腺倒进血液就成了钟声。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">手碰到滚烫的锅，为什么总是先缩回来、后觉得疼？</div>
+      <div class="opts">
+        <button>大脑先下达躲避指令，再处理痛觉</button>
+        <button data-c="1">缩手是脊髓就地完成的反射；痛觉要沿更慢的纤维上行并经大脑加工，晚一步才到</button>
+        <button>痛觉信号被身体主动延迟，以免干扰动作</button>
+        <button>手部神经比躯干神经慢</button>
+      </div>
+      <div class="explain">反射弧五站全在脊髓办结，0.1–0.5 秒；传递钝痛的无髓 C 纤维每秒只走 0.5–2 米。踢到桌角时能感到两班车：先是尖锐、定位准的第一痛（有髓 Aδ 纤维），半秒空白之后，又钝又散的第二痛才涌上来。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">受惊之后，为什么"心慌手抖"要持续好几分钟，而不是随神经指令一起收摊？</div>
+      <div class="opts">
+        <button>神经指令本身就会持续几分钟</button>
+        <button>肌肉在惊吓后进入了痉挛状态</button>
+        <button data-c="1">交感神经的一支直接命令肾上腺髓质向血中释放肾上腺素，它在血里的半衰期是 1–3 分钟</button>
+        <button>皮质醇在受惊后一秒内就达到了峰值</button>
+      </div>
+      <div class="explain">耳语在肾上腺髓质当场改口成了钟声，而钟声总要绕梁一会儿。皮质醇走的是另一条更慢的链：下丘脑→垂体→肾上腺皮质，15–30 分钟才达峰。它管的不是救急而是善后——动员血糖、压低不急的开销，并参与把这件事写进长期记忆。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">勒维那两颗蛙心的实验，关键的一步是什么？</div>
+      <div class="opts">
+        <button>同时刺激两颗心的迷走神经，观察它们是否同步</button>
+        <button>切断迷走神经后观察第一颗心是否停跳</button>
+        <button data-c="1">把浸泡过受刺激那颗心的溶液，浇到另一颗没有神经连接的心上，后者也慢了下来</button>
+        <button>在两颗心之间接一根导线传递电流</button>
+      </div>
+      <div class="explain">既然第二颗心没有任何神经连接却也慢了，让它慢下来的只可能是溶液里多出来的物质。勒维称之为 Vagusstoff，1921 年发表；戴尔后来证明它是乙酰胆碱，两人 1936 年共享诺奖。他自己承认：若在白天清醒时想到这个设计，按当时的知识他多半会因"浓度太低不可能有效"而放弃。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">关于迷走神经，下列哪一项正确？</div>
+      <div class="opts">
+        <button>它几乎全部是从大脑下行的指令纤维</button>
+        <button data-c="1">约八成纤维是上行传入的，主要把内脏的消息运回大脑</button>
+        <button>它只支配心脏，不涉及消化道</button>
+        <button>切断它之后心率会明显下降</button>
+      </div>
+      <div class="explain">这条驿道主要在往回运货，而绝大多数消息并不会浮上意识。它对心脏的作用则像一根始终绷着的缰绳：窦房结的内在频率约每分钟 100 次，静息心率却只有 60–70，差额正是被迷走拉住的——所以切断它心率会升，而运动开始时心率先升，靠的也是松缰而非加鞭。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第三幕 满负荷运行</div>
+  <div class="title">第 19 章 · 男女之别 · 成年篇</div>
+  <p>同样一套指挥系统，同样一部生理学教科书，落到不同的身体上，跑出来的结果并不总是一样。心梗的症状、疫苗的反应、同一片药的剂量、同一种疼痛被采信的程度——差异有据可查，而医学花了很久才愿意去看。下一章把这些证据一件件摆出来。</p>
+  <nav class="footnav">
+    <a href="ch17-injury.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch19-sex-adult.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 两路信使赛跑：选时刻，累计点亮
+  var tabs = document.querySelectorAll('#race-fig .t-btn');
+  var evs = document.querySelectorAll('#race .ev');
+  var cols = document.querySelectorAll('#race .col');
+  var colTs = document.querySelectorAll('#race .col-t');
+  var panes = document.querySelectorAll('#race-fig .tp');
+  function showTime(t){
+    var n = parseInt(t, 10), i;
+    for (i = 0; i < tabs.length; i++) {
+      tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-t') === t ? 'true' : 'false');
+    }
+    for (i = 0; i < evs.length; i++) {
+      evs[i].classList.toggle('on', parseInt(evs[i].getAttribute('data-t'), 10) <= n);
+    }
+    for (i = 0; i < cols.length; i++) {
+      cols[i].classList.toggle('on', cols[i].getAttribute('data-t') === t);
+    }
+    for (i = 0; i < colTs.length; i++) {
+      colTs[i].classList.toggle('on', colTs[i].getAttribute('data-t') === t);
+    }
+    for (i = 0; i < panes.length; i++) {
+      panes[i].classList.toggle('on', panes[i].getAttribute('data-tp') === t);
+    }
+  }
+  for (var k = 0; k < tabs.length; k++) {
+    (function(el){
+      el.addEventListener('click', function(){ showTime(el.getAttribute('data-t')); });
+    })(tabs[k]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

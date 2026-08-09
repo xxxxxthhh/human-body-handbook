@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第4章 · 器官发生：心脏第一跳 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 4-1 心管四步（本章专用） ---- */
+#heart .card{fill:var(--surface2); stroke:var(--line); stroke-width:1.5;}
+#heart .tube{fill:none; stroke:var(--oxy); stroke-width:5; stroke-linecap:round; stroke-linejoin:round;}
+#heart .cham{fill:none; stroke:var(--oxy); stroke-width:2.4; rx:7;}
+#heart .hole{fill:none; stroke:var(--gold); stroke-width:3; stroke-dasharray:5 4; stroke-linecap:round;}
+#heart .vessel{fill:none; stroke:var(--oxy); stroke-width:2.4; stroke-linecap:round;}
+#heart .cl{fill:var(--ink-dim); font-size:10.5px;}
+#heart .step-t{fill:var(--ink); font-size:13px; font-weight:700;}
+#heart .step-s{fill:var(--ink-dim); font-size:11.5px;}
+#heart .note{fill:var(--ink-dim); font-size:12.5px;}
+
+/* ---- 图 4-2 器官开工时间表（本章专用） ---- */
+#gantt-fig .wk-row{display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; margin:2px 0 16px;}
+#gantt-fig .wk-label{font-family:var(--mono); font-size:12px; color:var(--ink-faint); letter-spacing:.1em;}
+#gantt-fig .wk-step{
+  font-family:var(--mono); font-size:13px; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:6px 13px; cursor:pointer;
+}
+#gantt-fig .wk-step:hover{border-color:var(--gold); color:var(--ink);}
+#gantt-fig .wk-step:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#gantt-fig input[type="range"]{
+  -webkit-appearance:none; appearance:none; width:min(400px,70%); height:6px;
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px; cursor:pointer;
+}
+#gantt-fig input[type="range"]:focus-visible{outline:2px solid var(--gold); outline-offset:4px;}
+#gantt-fig input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none; appearance:none; width:20px; height:20px; border-radius:999px;
+  background:var(--gold); border:2px solid var(--bg); cursor:pointer;
+}
+#gantt-fig input[type="range"]::-moz-range-thumb{
+  width:18px; height:18px; border-radius:999px; background:var(--gold); border:2px solid var(--bg); cursor:pointer;
+}
+#gantt-fig .wk-status{
+  margin:16px 0 0; padding:14px 16px; font-size:14.5px; line-height:1.85; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold);
+  border-radius:0 10px 10px 0;
+}
+#gantt .axis{stroke:var(--line); stroke-width:1.4;}
+#gantt .tick{stroke:var(--line); stroke-width:1.2;}
+#gantt .tk-a{fill:var(--ink-dim); font-size:11.5px;}
+#gantt .tk-b{fill:var(--ink-faint); font-size:10.5px;}
+#gantt .org{fill:var(--ink-dim); font-size:12.5px;}
+#gantt .bar-hi{fill:var(--oxy); opacity:.72;}
+#gantt .bar-lo{fill:var(--ink-faint); opacity:.34;}
+#gantt .allnone{fill:var(--ink-faint); opacity:.09;}
+#gantt .allnone-t{fill:var(--ink-faint); font-size:11px;}
+#gantt .thal{fill:none; stroke:var(--gold); stroke-width:2; stroke-dasharray:5 4;}
+#gantt .mark{stroke:var(--gold); stroke-width:2;}
+#gantt .row.on .org{fill:var(--gold); font-weight:700;}
+#gantt .row.on .bar-hi{opacity:1;}
+#gantt .lg{fill:var(--ink-faint); font-size:11px;}
+
+/* ---- 图 4-3 手的四步（本章专用） ---- */
+#hand .card{fill:var(--surface2); stroke:var(--line); stroke-width:1.5;}
+#hand .limb{fill:none; stroke:var(--ink-dim); stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round;}
+#hand .ray{fill:none; stroke:var(--gold); stroke-width:2.6; stroke-linecap:round;}
+#hand .finger{fill:none; stroke:var(--ink-dim); stroke-width:7; stroke-linecap:round;}
+#hand .gone{fill:var(--green);}
+#hand .step-t{fill:var(--ink); font-size:13px; font-weight:700;}
+#hand .step-s{fill:var(--ink-dim); font-size:11.5px;}
+#hand .lg{fill:var(--ink-faint); font-size:11.5px;}
+
+@media (prefers-reduced-motion: reduce){
+  #gantt .mark,#gantt .row .org,#gantt .bar-hi{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第一幕 建造 · 第 4 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>器官发生：<br>心脏第一跳</h1>
+  <p class="subtitle">一根还没分腔、没有瓣膜、也没接上神经的直管子，先自己跳了起来——它得一边跳，一边把自己拧成一颗心。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 3 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>受精后第二十二天前后。</p>
+  <p>你不到三毫米长，弯成一只逗号。没有脸，没有四肢，背上那根神经管刚合拢一段，两端的口子还开着。上一章那张纸折出来的毛坯，眼下看不出是什么动物。</p>
+  <p>就在这一天，胸腹之间那根刚由两条管子并起来的细管——没有心房心室之分，没有一片瓣膜，也还没接上任何神经——自己抽动了一下。停了一会儿，又抽了一下。然后节律稳住了。<strong>从这一下起，它再没有停过。</strong>它甚至等不到自己造好：接下来的一个多月，它要一边跳，一边把自己拧成一颗四个腔的心。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 起搏</div>
+  <h2>为什么它等不及</h2>
+  <p>一个合理的疑问是：这么早跳给谁看？此刻的你只有三毫米，泡在液体里，母亲的血就在几层细胞之外。</p>
+  <p>答案是一条物理规律，下一章会专门讲它：<strong>靠分子自己乱走来送货，只在毫米量级内够用。</strong>一个细胞泡在营养液里活得很好，一团一毫米厚的细胞也还凑合，可再厚一点，中心的细胞就等不到氧气了——不是没有，是来不及。所以身体一旦准备突破这个尺寸，就必须先有人负责搬运。</p>
+  <p>心脏排在最前面，不是因为它比别的器官要紧，而是因为<em>别的器官要长大，得先有它送料</em>。这个先后顺序是被尺寸逼出来的。</p>
+  <h3>没有指挥的第一跳</h3>
+  <p>第 18 到 20 天，中胚层里有一片细胞聚成两条平行的细管，随着胚盘向腹面卷曲（第 3 章末尾那次折叠），两条管在中线并成一根。第 22 天前后，这根管子上的一些细胞开始有节奏地自发去极化——它们的膜电位不肯老实待着，会自己一点点漂到阈值，然后放电。一处放电，邻居跟上，整根管子就抽了一下。</p>
+  <p>这里有一件常被弄反的事：<strong>心跳不是大脑下的命令。</strong>此刻这根管子上还没有一根神经接进来，跳照样开始。把心肌细胞单独取出来养在培养皿里，它们也会自己跳，而且几个细胞贴在一起还会同步起来，跳成一片。神经系统要过一段时间才接上，接上之后干的活儿是调快调慢——踩油门和踩刹车，不是打火。第 18 章讲两套指挥系统时会看到，这种"自己有节律、上级只做增减"的安排在身体里很常见。</p>
+  <p>早期的心率并不快——下面几个周数沿用超声的惯例，按<strong>孕龄</strong>计（比本章其余各处的胚龄晚约两周）：孕龄 5 周前后大约每分钟 100 次，也正是心管刚跳起来的那几天（胚龄第 22 天 ≈ 孕龄 5 周）；此后一路上行，孕龄 9 到 10 周达到<strong>每分钟 170 到 180 次</strong>的峰值，之后回落，整个胎儿期大致维持在 140 到 160。这条先升后降的曲线在超声上看得很清楚，也是判断早期妊娠是否在正常轨道上的常用指标之一。</p>
+  <h3>向右一拧</h3>
+  <p>一根直管当不了泵。第 23 到 28 天，这根管开始弯：先向腹侧和右侧鼓出去，再折回来，最后拧成一个 S 形的襻。原本头尾串成一条线的几段，就此被折叠成上下相邻的两组——将来的心房挪到了上面，心室留在下面。</p>
+  <p>把它想象成拧毛巾是个不错的起点，但得补一句：<em>毛巾是被两只手拧的，心管没有手。</em>弯折的动力来自管子自身——两侧生长的速度不同，加上管壁内部的张力与细胞的重新排布，一根均匀的直管就自己歪了。这和上一章神经管的自我折叠是同一路数：没有外力，只有每个细胞改自己的形状。</p>
+  <p>可它为什么总是向<strong>右</strong>拧？</p>
+  <p>上一章那条原条定下了中线，也就定下了左右对称面——但没定"哪边是左"。定这件事的是一小片纤毛。在原结的凹陷里，一批细胞各自带着一根会顺时针旋转的纤毛，它们同向转动，把周围的液体持续推向一侧，于是某几种信号分子在左边攒得多、右边攒得少。这个微弱的偏侧信号被放大，最终决定了心管往哪边拧、胃往哪边偏、肝在哪一侧。<strong>你身体的左右，最初是由几百根纤毛搅出来的一股水流决定的。</strong></p>
+  <h3>故意留下的两个孔</h3>
+  <p>第 4 到 7 周，管壁上长出几道隔膜，把这根管子分成四个腔，瓣膜也在此期间成形。到第 7 到 8 周，四腔的格局基本定了。</p>
+  <p>但有两个洞是故意留着没堵的：心房之间留一道活页样的<strong>卵圆孔</strong>，肺动脉与主动脉之间留一条<strong>动脉导管</strong>。这不是偷工减料——胎儿的肺泡在液体里泡着不干活，全部血液绕开它才是对的。这两个洞是第 8 章那场"不落幕换景"里两处关键的道具，要等到你出生后的那十分钟才关上；其中一处，约四分之一的人一辈子没关严。</p>
+  <p>换句话说，这颗心是<strong>照着"出生"这个日子来的</strong>：它先按胎儿的需求长，把最后那几处改动留到出生当天现场完成。</p>
+
+  <figure>
+    <svg id="heart" viewBox="0 0 760 268" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="心管发育四步示意：两管并一、向右弯曲、扭成S形襻、分隔成四腔并留下两个孔">
+      <rect class="card" x="16" y="20" width="164" height="152" rx="10"/>
+      <path class="tube" d="M66 44 C66 76, 98 74, 98 100"/>
+      <path class="tube" d="M130 44 C130 76, 98 74, 98 100"/>
+      <path class="tube" d="M98 100 V150"/>
+      <text class="step-t" x="98" y="196" text-anchor="middle">约第 21 天</text>
+      <text class="step-s" x="98" y="214" text-anchor="middle">两根管并成一根直管</text>
+
+      <rect class="card" x="204" y="20" width="164" height="152" rx="10"/>
+      <path class="tube" d="M300 44 C258 62, 252 108, 292 124 C306 130, 306 142, 292 152"/>
+      <text class="step-t" x="286" y="196" text-anchor="middle">约第 23 天</text>
+      <text class="step-s" x="286" y="214" text-anchor="middle">开始向右鼓、向腹侧弯</text>
+
+      <rect class="card" x="392" y="20" width="164" height="152" rx="10"/>
+      <path class="tube" d="M492 42 C446 54, 438 92, 476 104 C516 116, 508 146, 462 152"/>
+      <text class="step-t" x="474" y="196" text-anchor="middle">约第 28 天</text>
+      <text class="step-s" x="474" y="214" text-anchor="middle">拧成 S 形襻，房上室下</text>
+
+      <rect class="card" x="580" y="20" width="164" height="152" rx="10"/>
+      <path class="vessel" d="M598 122 H588 V50"/>
+      <path class="vessel" d="M726 122 H736 V50"/>
+      <path class="hole" d="M588 50 C606 32, 718 32, 736 50"/>
+      <rect class="cham" x="598" y="64" width="52" height="40"/>
+      <rect class="cham" x="674" y="64" width="52" height="40"/>
+      <rect class="cham" x="598" y="112" width="52" height="46"/>
+      <rect class="cham" x="674" y="112" width="52" height="46"/>
+      <line class="hole" x1="662" y1="74" x2="662" y2="94"/>
+      <text class="cl" x="624" y="88" text-anchor="middle">右房</text>
+      <text class="cl" x="700" y="88" text-anchor="middle">左房</text>
+      <text class="cl" x="624" y="139" text-anchor="middle">右室</text>
+      <text class="cl" x="700" y="139" text-anchor="middle">左室</text>
+      <text class="step-t" x="662" y="196" text-anchor="middle">第 7–8 周</text>
+      <text class="step-s" x="662" y="214" text-anchor="middle">分成四腔，留两个孔</text>
+
+      <text class="note" x="16" y="238" text-anchor="start">天数自受精起算。两处金色虚线是故意留下的通道——</text>
+      <text class="note" x="16" y="256" text-anchor="start">心房之间的卵圆孔、两条大血管之间的动脉导管，要到出生后那十分钟才关（第 8 章）。</text>
+    </svg>
+    <figcaption><b>图 4-1 · 一根管子怎么变成一颗心。</b>示意图只画走向，不代表解剖形状与比例。第一步之后它就已经在跳了——后面三步是它一边工作一边完成的改造。左右按解剖学惯例：图上的左侧是身体的右半。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 同时</div>
+  <h2>五个星期，各条线同时开排</h2>
+  <p>心脏先动起来之后，其余器官陆续登场。<strong>受精后第 3 到 8 周</strong>这五个多星期，叫器官发生期：几乎每一个器官的雏形都在这段时间里搭起来。到第 8 周末，你顶臀长约 30 毫米、体重 3 克上下，四肢、手指、面孔、内脏一应俱全，只是极小极粗糙。从这一周起，教科书改称你为胎儿——此后的七个月主要是长大和成熟，不再添新的器官。</p>
+  <p>要留意的是，它们不是排着队一个接一个来的。更像一个剧组挤在同一间排练厅：布景、灯光、乐队、演员在同一段日子里各排各的，谁也不等谁。心脏在第 3 周就动了起来，眼睛第 4 周开始，上腭要到第 6 周才往中线合拢，而中枢神经系统从第 3 周起一直忙到出生之后。<strong>每个器官有自己登场的时间，也有自己的关键期</strong>——这张时间表是本章后半篇的全部要害。</p>
+
+  <figure id="gantt-fig">
+    <div class="wk-row">
+      <button class="wk-step" id="wkMinus" type="button" aria-label="往前一天">◀ 前一天</button>
+      <label class="wk-label" for="wkRange">拖动看当天正在成形的器官</label>
+      <input type="range" id="wkRange" min="15" max="70" step="1" value="22" aria-label="受精后天数（15 到 70 天）">
+      <button class="wk-step" id="wkPlus" type="button" aria-label="往后一天">后一天 ▶</button>
+    </div>
+    <svg id="gantt" viewBox="0 0 760 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="器官开工时间表：十个器官系统在受精后 0 至 10 周之间的敏感期与后续发育期，以及沙利度胺的敏感窗">
+      <text class="tk-a" x="16" y="26" text-anchor="start">受精后</text>
+      <text class="tk-b" x="16" y="46" text-anchor="start">孕龄</text>
+      <line class="axis" x1="160" y1="58" x2="748" y2="58"/>
+      <g>
+        <line class="tick" x1="160" y1="52" x2="160" y2="58"/><text class="tk-a" x="160" y="26" text-anchor="middle">0 周</text><text class="tk-b" x="160" y="46" text-anchor="middle">2 周</text>
+        <line class="tick" x1="277" y1="52" x2="277" y2="58"/><text class="tk-a" x="277" y="26" text-anchor="middle">2 周</text><text class="tk-b" x="277" y="46" text-anchor="middle">4 周</text>
+        <line class="tick" x1="394" y1="52" x2="394" y2="58"/><text class="tk-a" x="394" y="26" text-anchor="middle">4 周</text><text class="tk-b" x="394" y="46" text-anchor="middle">6 周</text>
+        <line class="tick" x1="511" y1="52" x2="511" y2="58"/><text class="tk-a" x="511" y="26" text-anchor="middle">6 周</text><text class="tk-b" x="511" y="46" text-anchor="middle">8 周</text>
+        <line class="tick" x1="628" y1="52" x2="628" y2="58"/><text class="tk-a" x="628" y="26" text-anchor="middle">8 周</text><text class="tk-b" x="628" y="46" text-anchor="middle">10 周</text>
+        <line class="tick" x1="744" y1="52" x2="744" y2="58"/><text class="tk-a" x="744" y="26" text-anchor="end">10 周</text><text class="tk-b" x="744" y="46" text-anchor="end">12 周</text>
+      </g>
+
+      <rect class="allnone" x="160" y="58" width="117" height="288"/>
+
+      <g class="row" data-lo="15" data-hi="42"><text class="org" x="150" y="84" text-anchor="end">中枢神经系统</text><rect class="bar-hi" x="285" y="74" width="225" height="12" rx="4"/><rect class="bar-lo" x="510" y="74" width="234" height="12" rx="4"/></g>
+      <g class="row" data-lo="20" data-hi="42"><text class="org" x="150" y="112" text-anchor="end">心脏</text><rect class="bar-hi" x="327" y="102" width="183" height="12" rx="4"/><rect class="bar-lo" x="510" y="102" width="117" height="12" rx="4"/></g>
+      <g class="row" data-lo="24" data-hi="49"><text class="org" x="150" y="140" text-anchor="end">上肢</text><rect class="bar-hi" x="360" y="130" width="209" height="12" rx="4"/><rect class="bar-lo" x="569" y="130" width="58" height="12" rx="4"/></g>
+      <g class="row" data-lo="26" data-hi="49"><text class="org" x="150" y="168" text-anchor="end">下肢</text><rect class="bar-hi" x="377" y="158" width="192" height="12" rx="4"/><rect class="bar-lo" x="569" y="158" width="58" height="12" rx="4"/></g>
+      <g class="row" data-lo="24" data-hi="56"><text class="org" x="150" y="196" text-anchor="end">眼</text><rect class="bar-hi" x="360" y="186" width="267" height="12" rx="4"/><rect class="bar-lo" x="627" y="186" width="117" height="12" rx="4"/></g>
+      <g class="row" data-lo="24" data-hi="63"><text class="org" x="150" y="224" text-anchor="end">耳</text><rect class="bar-hi" x="360" y="214" width="326" height="12" rx="4"/><rect class="bar-lo" x="686" y="214" width="58" height="12" rx="4"/></g>
+      <g class="row" data-lo="26" data-hi="56"><text class="org" x="150" y="252" text-anchor="end">消化道</text><rect class="bar-hi" x="377" y="242" width="250" height="12" rx="4"/><rect class="bar-lo" x="627" y="242" width="117" height="12" rx="4"/></g>
+      <g class="row" data-lo="42" data-hi="56"><text class="org" x="150" y="280" text-anchor="end">牙</text><rect class="bar-hi" x="510" y="270" width="117" height="12" rx="4"/><rect class="bar-lo" x="627" y="270" width="117" height="12" rx="4"/></g>
+      <g class="row" data-lo="42" data-hi="60"><text class="org" x="150" y="308" text-anchor="end">上腭</text><rect class="bar-hi" x="510" y="298" width="151" height="12" rx="4"/><rect class="bar-lo" x="661" y="298" width="83" height="12" rx="4"/></g>
+      <g class="row" data-lo="49" data-hi="63"><text class="org" x="150" y="336" text-anchor="end">外生殖器</text><rect class="bar-hi" x="569" y="326" width="117" height="12" rx="4"/><rect class="bar-lo" x="686" y="326" width="58" height="12" rx="4"/></g>
+
+      <text class="org" x="150" y="364" text-anchor="end">沙利度胺敏感窗</text>
+      <rect class="thal" x="327" y="354" width="133" height="13" rx="4"/>
+
+      <line class="mark" id="wkMark" x1="344" y1="58" x2="344" y2="368"/>
+      <text class="allnone-t" x="218" y="376" text-anchor="middle">全或无期</text>
+      <rect class="bar-hi" x="470" y="368" width="18" height="9" rx="3"/>
+      <text class="lg" x="494" y="376" text-anchor="start">敏感期</text>
+      <rect class="bar-lo" x="558" y="368" width="18" height="9" rx="3"/>
+      <text class="lg" x="582" y="376" text-anchor="start">此后的生长与成熟</text>
+    </svg>
+    <p class="wk-status" role="status">受精后第 22 天 · 孕龄 5 周 1 天。此刻在敏感期里的是：中枢神经系统、心脏。今天正是心管开始搏动的日子。</p>
+    <figcaption><b>图 4-2 · 器官的开工时间表。</b>拖动滑块（或用方向键、两侧按钮逐日步进），看每一天有哪些器官正在关键期上。上排刻度是<b>受精后</b>周数，下排是病历上用的<b>孕龄</b>周数，两者差约两周。红色段为该器官对外界干扰最敏感的时期，灰色段为此后的生长与功能成熟；这两段的边界是渐变的，图上画成实线只是为了看得清。时间窗为教科书量级的概数，个体差异不小。</figcaption>
+  </figure>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>同一个胚胎，两套日历。</strong>本书讲发育时，天数一律<strong>自受精起算</strong>（胚龄）。但你在医院听到的"孕几周"是另一套：它从<strong>末次月经的第一天</strong>算起，比受精早了大约两周。</p>
+    <p>为什么用一个明显不准的起点？因为它是可靠可查的：月经来潮有日期，排卵和受精没有。于是全世界的产科都接受了这笔两周的差价——预产期定在末次月经后 280 天，而受精那天其实是第 14 天前后。读任何一份胎儿发育资料，先确认它用的是哪一套；本章凡未注明处，都是受精后。这两周的差价在下一节会变得很要紧：受精后第 28 天写在病历上是孕 6 周，而那正是很多人刚刚察觉月经推迟的时候。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 雕刻</div>
+  <h2>手指是雕出来的</h2>
+  <p>第 26 到 28 天，胚胎身体两侧各鼓起一对小包，先上后下——上肢芽比下肢芽早那么一两天，这个先后差别会一直保持到出生（新生儿的上半身相对更成熟）。</p>
+  <p>肢芽先长成一根短棒，末端在第 33 天前后压扁成一片圆圆的板子，像一把小桨。到第 41 天前后，这块板上浮出五道放射状的加厚线——将来的五根指骨在这里排好了队。可这时候，五根"手指"还连成一整片，它是一只桨，不是一只手。</p>
+  <p>接下来发生的事，值得单独记一句：<strong>手指不是长出来的，是雕出来的。</strong></p>
+  <p>第 7 到 8 周，五道指线之间的那些细胞收到指令，一批一批地自杀。它们不是被撕开、也不是被挤开，而是按一套自带的次序收摊：细胞把自己的内容物有序拆解、打包成小囊，被邻居和清道夫细胞吞掉，不引起任何炎症。这叫<strong>细胞程序性死亡</strong>（凋亡）。指间的组织就这样一点点消失，桨变成了手。约在受精后 50 到 56 天，五根手指完全分开。</p>
+  <h3>米开朗基罗和鸭子</h3>
+  <p>米开朗基罗有一句流传很广的话，大意是雕像本来就在石头里，他只是把多余的部分去掉。这话用来形容手的形成非常贴切——加法造毛坯，减法出形状。</p>
+  <p>但顺着这个类比推，会推出一个错误的画面：雕刻家心里有一张蓝图，他知道要凿掉哪些。胚胎没有蓝图。<strong>更接近事实的说法是：死亡是默认，活下来才需要理由。</strong>发育中的许多细胞天生处在"随时会启动自杀程序"的状态，只有持续收到周围送来的存活信号，才把这套程序按住。指线附近的细胞收得到，指间的收不到——于是前者留下，后者退场。没有人在凿，只是有一片地方停了供给。</p>
+  <p>那么，鸭子呢？</p>
+  <p>鸭脚上有蹼，鸡脚上没有。很容易以为鸭子"漏做了删除这一步"。实情要更讲究一点：这套删除程序在鸭蹼那里并非缺席，而是被一类抑制信号压低了强度——同一段程序，调低了音量。所以蹼不是缺陷，是调节的结果。人身上偶尔也会出现指间没删干净的情况（并指），发生率大约在几千分之一的量级，常见于手指的中间两根之间。</p>
+
+  <figure>
+    <svg id="hand" viewBox="0 0 760 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="手的形成四步：肢芽、桨状手板、浮出五道指线、指间细胞死亡后五指分开">
+      <rect class="card" x="16" y="18" width="164" height="140" rx="10"/>
+      <path class="limb" d="M84 146 V120 C84 100, 112 100, 112 120 V146"/>
+      <path class="limb" d="M84 146 H112"/>
+      <text class="step-t" x="98" y="184" text-anchor="middle">约第 28 天</text>
+      <text class="step-s" x="98" y="202" text-anchor="middle">肢芽：身侧鼓起一个小包</text>
+
+      <rect class="card" x="204" y="18" width="164" height="140" rx="10"/>
+      <path class="limb" d="M274 146 V124"/>
+      <path class="limb" d="M298 146 V124"/>
+      <path class="limb" d="M274 124 C246 108, 252 62, 286 62 C320 62, 326 108, 298 124 Z"/>
+      <text class="step-t" x="286" y="184" text-anchor="middle">约第 33 天</text>
+      <text class="step-s" x="286" y="202" text-anchor="middle">手板：末端压扁成一把桨</text>
+
+      <rect class="card" x="392" y="18" width="164" height="140" rx="10"/>
+      <path class="limb" d="M462 146 V124"/>
+      <path class="limb" d="M486 146 V124"/>
+      <path class="limb" d="M462 124 C434 108, 440 60, 474 60 C508 60, 514 108, 486 124 Z"/>
+      <path class="ray" d="M474 120 L448 86"/>
+      <path class="ray" d="M474 120 L462 70"/>
+      <path class="ray" d="M474 120 L476 64"/>
+      <path class="ray" d="M474 120 L490 70"/>
+      <path class="ray" d="M474 120 L502 88"/>
+      <text class="step-t" x="474" y="184" text-anchor="middle">约第 41 天</text>
+      <text class="step-s" x="474" y="202" text-anchor="middle">板上浮出五道指线</text>
+
+      <rect class="card" x="580" y="18" width="164" height="140" rx="10"/>
+      <path class="limb" d="M650 146 V128"/>
+      <path class="limb" d="M674 146 V128"/>
+      <path class="limb" d="M646 128 H678 V108 H646 Z"/>
+      <path class="finger" d="M636 110 L620 122"/>
+      <path class="finger" d="M650 106 L642 76"/>
+      <path class="finger" d="M660 105 L657 66"/>
+      <path class="finger" d="M670 105 L676 66"/>
+      <path class="finger" d="M678 108 L692 82"/>
+      <circle class="gone" cx="638" cy="104" r="3.4"/>
+      <circle class="gone" cx="648" cy="86" r="3.4"/>
+      <circle class="gone" cx="660" cy="80" r="3.4"/>
+      <circle class="gone" cx="674" cy="82" r="3.4"/>
+      <circle class="gone" cx="686" cy="96" r="3.4"/>
+      <text class="step-t" x="662" y="184" text-anchor="middle">第 50–56 天</text>
+      <text class="step-s" x="662" y="202" text-anchor="middle">指间细胞退场，五指分开</text>
+
+      <circle class="gone" cx="24" cy="230" r="4"/>
+      <text class="lg" x="38" y="234" text-anchor="start">绿点 = 按程序退场的细胞。天数自受精起算；示意图不按真实比例。</text>
+    </svg>
+    <figcaption><b>图 4-3 · 从一把桨到一只手。</b>前三步是加法：鼓包、压扁、排好五道指线。第四步是减法：指间的细胞不再收到存活信号，一批批退场，手指于是"显影"出来。同一套减法在别处也常用——第 9 章会看到，大脑先铺出超过所需一倍的连接，再花十几年拆掉一半。</figcaption>
+  </figure>
+
+  <h3>脸是拼起来的</h3>
+  <p>同一段日子里，你的脸也在成形，用的却是另一种手法：拼接。</p>
+  <p>第 4 周前后，未来面部的位置上有五团隆起——中间上方一团（额鼻突），两侧各一对（上颌突与下颌突）。此后几周，它们朝中线靠拢、贴合、融合，像几块拼图对上缝。上唇由中间那团的下缘和两侧的上颌突合成，<strong>你人中两侧那两道浅浅的棱，就是当年的接缝</strong>；上腭要到第 6 周之后才开始从两侧向中线合拢，第 9 周前后完成，是面部合拢得最晚的几处之一。</p>
+  <p>合缝这件事和上一章的神经管一样，有拉不严的时候。唇裂与腭裂正是这两处接缝没有完全对上的结果，它们是最常见的出生缺陷之一，全球发生率大致在千分之一的量级（不同人群差异明显）。知道它是"接缝没合严"而不是"少长了一块"，也就明白了为什么修补手术的思路是把两侧的组织重新对位缝合。</p>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 窗口</div>
+  <h2>同一样东西，早两周和晚两周，后果完全不同</h2>
+  <p>现在把这张时间表和"正在成形"这件事合起来，本章真正的要点就出来了。</p>
+  <p>一个外来的干扰——某种药物、某种感染、酒精、电离辐射——落在胚胎身上会造成什么后果，很大程度上不取决于它是什么，而取决于<strong>它落在哪一天</strong>。因为它伤到的，是那一天正好在成形的那个器官。</p>
+  <p>整个孕期大致可以分成三段：</p>
+  <p><strong>受精后 0 到 2 周：全或无。</strong>此时细胞还都很"年轻"（第 2 章意义上的多能），彼此可以顶替。损伤若轻，缺的几个细胞被别的细胞补上，不留痕迹；损伤若重，胚胎整个停止发育，多数在人还不知道怀孕时就以一次晚来的月经的形式结束。<em>要么完全修复，要么全盘终止</em>——这一段几乎不产生畸形。</p>
+  <p><strong>受精后 3 到 8 周：器官发生期，最敏感的一段。</strong>按病历上的孕龄算，这大致对应<strong>孕 5 到 10 周</strong>。各个器官都在这五个星期里搭起骨架，此时被打断，缺的就是结构本身，而结构一旦错过窗口就补不回来了。经典的致畸事件几乎都发生在这一段。</p>
+  <p><strong>第 8 周之后到出生：主要是生长与功能成熟。</strong>大的结构畸形少了，但不是安全区——中枢神经系统整个孕期都在长（看图 4-2 那条一直延伸到右端的灰条），生殖系统、牙齿也还在成形。这一段的损害更多表现为功能上的，比如认知与行为方面的影响。酒精之所以在整个孕期都被建议避免，原因就在这里。</p>
+  <p>船工出海要赶潮汐窗口——错过那几个小时，同一条水道就走不了了。胚胎的每个器官也各有一段这样的窗口，只是它们的窗口是单程的：过了就不再打开。</p>
+  <h3>三件必须补上的限定</h3>
+  <p>把"敏感窗"这个概念交给读者，有三处很容易被顺着推错，这里一次说清。</p>
+  <p><strong>一、致畸不是"沾上就中"。</strong>剂量、暴露时长、母体代谢它的速度、胚胎自身的遗传背景，每一项都算数。同一种药，同一个孕周，不同的人结局可以完全不同。绝大多数常用药物并没有明确的致畸证据。</p>
+  <p><strong>二、"没有证据有害"不等于"有证据无害"。</strong>这两句话差得很远，而孕期用药的资料里到处是前者。</p>
+  <p><strong>三、这份不确定，有一段制度上的来由。</strong>长期以来，育龄女性——尤其是孕妇——被系统性地排除在药物临床试验之外，出发点是保护，结果却是：药照样开给孕妇，而安全数据只能靠事后的登记与观察慢慢攒。孕妇因此被称作"治疗孤儿"。这条线索会在第 19 章展开：把某一类人排除在研究之外，并不会让他们更安全，只会让针对他们的知识更少。</p>
+  <p>反过来也一样：不要因为读了这一节就自行停药——停药本身也是一种暴露，用药与否的账要和医生一起算。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>有些人的心在右边，一辈子不知道。</strong>决定左右的是原结上那批顺时针旋转的纤毛。如果纤毛因为基因缺陷不能正常摆动，左右信号就无从建立，胚胎只好抛硬币——结果约有一半的人内脏排布整个左右颠倒：心尖朝右，肝在左，胃在右。这叫<strong>内脏完全反位</strong>，发生率大致在万分之一的量级。</p>
+    <p>妙的是，只要颠倒得彻底，各器官的相对关系不变，功能就基本不受影响。不少人是因为别的原因拍了胸片才发现的。麻烦出在颠倒得不彻底的情形，那才容易伴随复杂的心脏畸形。顺带一提，同一批不摆动的纤毛还负责清扫呼吸道和推动精子，所以这类人常同时有慢性鼻窦炎、支气管扩张和生育困难——一个基因缺陷，在三处露面。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 一九六一</div>
+  <h2>一种助眠药，和一套监管制度的诞生</h2>
+  <p>1957 年 10 月，西德的一家药厂把一种新药投放市场，商品名叫 Contergan，通用名<strong>沙利度胺</strong>。它是一种镇静催眠药，很快被发现对孕早期的恶心呕吐也有效。它的卖点是安全：动物实验里几乎找不到致死剂量，广告词说它连儿童也能用。几年内，它在近五十个国家上市，其中不少地方无需处方。</p>
+  <p>1959 年起，德国的产科与儿科医生开始遇到一种此前极为罕见的畸形：<strong>海豹肢</strong>——上肢或下肢的长骨严重缩短甚至缺失，手或脚直接连在躯干上。这种畸形罕见到很多医生一辈子都没见过一例，而现在一年能见到几十例。还有一批孩子伴有耳、眼、心脏或内脏的畸形。</p>
+  <p>1961 年，两位医生分别指向了同一样东西。汉堡的儿科遗传学家<strong>威杜金德·伦茨</strong>在追踪病例史时发现，母亲们的共同点是孕早期服用过 Contergan；同一年，澳大利亚悉尼的产科医生<strong>威廉·麦克布赖德</strong>也向药厂报告了相似的怀疑。1961 年 11 月，该药在西德撤市，其余国家陆续跟进。</p>
+  <p>全球受影响的婴儿<strong>超过一万名</strong>，其中相当一部分在出生后不久去世。</p>
+  <h3>为什么早两天和晚两天不一样</h3>
+  <p>沙利度胺后来成了致畸窗口这件事上一次极其清楚的实证，代价也极其惨痛。回溯病例发现，它的致畸窗窄得惊人：<strong>受精后约第 20 到 36 天</strong>——只有半个多月。在这之前服用或在这之后服用，都不留下这类畸形。</p>
+  <p>更说明问题的是窗口内部的分工：服药日偏早的，损害集中在耳；稍晚的，主要伤上肢；再晚几天，轮到下肢。<em>同一种药，隔几天服用，伤的是不同的器官</em>——因为那几天里正在成形的器官换了。把这一条对照图 4-2 上那条金色虚线看，会看得更明白：那条虚线正好压在上肢和耳的敏感期上。</p>
+  <p>而受精后第 20 到 36 天，按病历上的孕龄算是<strong>孕 5 到 7 周</strong>。这正是很多人刚刚确认怀孕、并且开始被孕吐折磨的时候——而这种药恰好能止吐。整件事的残忍之处就在这个时间上的巧合。</p>
+  <h3>华盛顿的一份没批下来的申请</h3>
+  <p>美国基本上躲过了这一劫，原因是一个人在一张表格上反复写了"资料不足"。</p>
+  <p>1960 年，药理学家<strong>弗朗西丝·凯尔西</strong>刚到美国食品药品监督管理局任职一个月，手上分到的第一批申请里就有这种药。当时的法律规定，主管部门若在六十天内不表态，申请就自动生效。凯尔西对申报材料里慢性服用的安全数据不满意——她注意到有报告提到长期使用者出现周围神经炎，而申请方拿不出足够的解释。她要求补充资料，一次又一次，把时钟一轮轮重置。药厂多次施压，投诉她刁难。这样拖了一年多，欧洲的消息传来了。</p>
+  <p>1962 年，凯尔西获得总统颁发的联邦公务员杰出服务奖章。同年，美国国会通过了<strong>凯福弗－哈里斯修正案</strong>：新药上市从此不仅要证明安全，还必须证明<strong>有效</strong>；企业须报告不良反应；临床试验须获得受试者的知情同意；广告须列出风险。今天全世界药品审批的基本框架，很大程度上是在这场灾难之后的两年里定型的。</p>
+  <p>这里也需要一句平实的补充，因为故事没有停在 1962 年。1965 年，以色列医生雅各布·谢斯金在给一位重症麻风患者试用手边的镇静药时，意外发现它能迅速缓解一种叫麻风结节性红斑的并发症。此后它又被发现对多发性骨髓瘤有效，成为该病治疗的重要药物之一。今天它在严格的妊娠预防计划下使用——处方、避孕、定期妊娠检测三重把关。至于它当年为什么会致畸，要到 2010 年才有了机制上的抓手：一个日本团队发现它会结合一种叫 cereblon 的蛋白，改变细胞内一套蛋白降解装置的"选靶"，从而误伤了肢体发育所需的若干因子。这条线索后来还发展出了一整类新的药物设计思路。</p>
+  <p>一种药造成了历史上最严重的药害事件之一，又在半个世纪后回到药房；而它留下的最持久的东西，其实是那套要求你证明"它有效、并且我们知道它的风险"的制度。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>把胚胎的问题搬进培养皿。</strong>本章的每一个数字，来源都不太体面：人类早期胚胎发育的时间表，大半是从流产标本、动物实验和事后的流行病学统计里拼出来的——沙利度胺那张窗口图，是用一万个孩子换来的。近十几年出现了一条新路：<strong>类器官</strong>。把干细胞放进三维培养基里，它们会自组织成有层次的微型器官——肠、肝、肾、视网膜、脑，甚至能重现心管到腔室的早期步骤。用它做致畸与毒性筛查，等于把当年只能靠统计回答的问题，搬到了显微镜下。多国监管机构近年也在推动用这类体外模型部分替代动物试验。</p>
+    <p><strong>但它们目前还很像"没有血管的器官"。</strong>类器官普遍长不大，一两毫米之后中心就开始坏死——原因正是本章第 1 节那条规律：没有血管，扩散送不进去。让类器官血管化、把多个类器官连起来共用一套灌流（有人称之为"芯片上的身体"），是眼下的主攻方向。此外它们没有免疫细胞、缺少真实的空间定位信号，脑类器官还带来了独立的伦理讨论。它们是很好的模型，还不是器官。</p>
+    <p><strong>孕期用药那一栏也在改。</strong>过去很多国家用 A/B/C/D/X 这样的字母给孕期用药分级，读者容易把它当成整齐的风险刻度，实际上同一个字母底下的证据强度天差地别。美国自 2015 年起取消了字母分级，改为要求在说明书里叙述性地写清已有证据、风险与临床考量；与此同时，多国正在建立孕期与哺乳期用药登记，试图把"没有证据"一点点变成"有证据"。</p>
+  </div>
+
+  <p>第 8 周末，你三厘米长、三克重，有手指、有眼睑、有一颗跳着的四腔心。各个器官都已经到齐，接下来的七个月不再添新的，只是长大。</p>
+  <p>而"长大"这件事，本身就是一道难关。你现在能靠一颗管子泵血活着，是因为你只有三厘米；等你长到五十厘米，同一套办法会彻底失效。为什么？下一章是一堂物理课。</p>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">器官发生 · 关键数字（天数与周数均为胚龄，即受精后计；另有注明者从其注明）</div>
+    <table>
+      <tr><td class="k">心管开始搏动</td><td class="v">约第 22 天</td><td class="n">天数自受精起算（下同）；孕龄约 5 周</td></tr>
+      <tr><td class="k">心管扭襻</td><td class="v">第 23–28 天</td><td class="n">直管向右拧成 S 形，房上室下</td></tr>
+      <tr><td class="k">四腔分隔基本完成</td><td class="v">第 7–8 周</td><td class="n">故意留下卵圆孔与动脉导管（第 8 章）</td></tr>
+      <tr><td class="k">胚胎心率峰值</td><td class="v">170–180 次/分</td><td class="n">本行按<b>孕龄</b>计（超声惯例）：见于孕龄 9–10 周；孕龄 5 周时约 100，此后回落至 140–160</td></tr>
+      <tr><td class="k">上肢芽出现</td><td class="v">第 26–28 天</td><td class="n">下肢芽晚一两天，此后一直保持这个先后</td></tr>
+      <tr><td class="k">手板浮出五道指线</td><td class="v">第 41 天前后</td><td class="n">此时五指仍连成一片桨</td></tr>
+      <tr><td class="k">五指完全分开</td><td class="v">第 50–56 天</td><td class="n">靠指间细胞按程序退场，不是长出来的</td></tr>
+      <tr><td class="k">器官发生期</td><td class="v">第 3–8 周</td><td class="n">孕龄约 5–10 周，致畸最敏感的一段</td></tr>
+      <tr><td class="k">"全或无"期</td><td class="v">第 0–2 周</td><td class="n">要么完全修复，要么整个终止，几乎不留畸形</td></tr>
+      <tr><td class="k">第 8 周末的胚胎</td><td class="v">顶臀长约 30 mm · 约 3 g</td><td class="n">部门到齐，此后改称胎儿</td></tr>
+      <tr><td class="k">沙利度胺致畸窗</td><td class="v">受精后约 20–36 天</td><td class="n">孕龄约 5–7 周；窗内早晚不同，伤的器官也不同</td></tr>
+      <tr><td class="k">沙利度胺受影响婴儿</td><td class="v">逾 1 万名</td><td class="n">全球，1957–1962；直接促成 1962 年美国药事修正案</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">心脏为什么比别的器官都先动起来？</div>
+      <div class="opts">
+        <button>因为它是最复杂的器官，需要最长的建造时间</button>
+        <button data-c="1">因为扩散只在毫米量级内够用——胚胎要再长大，就必须先有人负责搬运</button>
+        <button>因为大脑需要它先送来指令信号</button>
+        <button>因为母体的激素在第 3 周达到峰值，正好触发它</button>
+      </div>
+      <div class="explain">这是一条物理约束，不是重要性排序：一团一毫米厚的细胞还能泡在液体里凑合，再厚一点中心就等不到氧气了。下一章会把这条规律展开——它还解释了肺泡、肠绒毛和毛细血管网的形状。有趣的是，本章前沿窗口里的类器官正卡在同一条规律上：没有血管，长到一两毫米就中心坏死。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">第 22 天那第一下心跳，是谁发起的？</div>
+      <div class="opts">
+        <button>大脑发出的第一道运动指令</button>
+        <button>母体血流的搏动带动的被动振荡</button>
+        <button data-c="1">心肌细胞自己——它们的膜电位会自发漂到阈值放电，此时还没有神经接进来</button>
+        <button>羊水压力周期性挤压心管造成的</button>
+      </div>
+      <div class="explain">把心肌细胞单独养在培养皿里，它们照样自己跳，贴在一起还会同步。神经系统要过一段时间才接上，接上后干的是调快调慢——踩油门和踩刹车，不是打火。这种"自己有节律、上级只做增减"的安排在身体里很常见（第 18 章）。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">五根手指是怎么做出来的？</div>
+      <div class="opts">
+        <button>五个独立的芽各自从手板边缘长出来</button>
+        <button data-c="1">先长成一片连着的桨，再让指间的细胞按程序退场，手指于是"显影"出来</button>
+        <button>羊水的流动把桨状的手板冲刷出缝隙</button>
+        <button>骨头先长成形，皮肤随后沿骨头裂开</button>
+      </div>
+      <div class="explain">加法造毛坯，减法出形状。更准确地说，死亡是默认、活着才需要理由：这些细胞随时准备启动自杀程序，只有持续收到周围的存活信号才把它按住——指线附近收得到，指间收不到。鸭蹼不是"漏做了这一步"，而是这套程序在那里被抑制信号调低了强度。同一套减法在大脑里也用（第 9 章）。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">受精后 0 到 2 周被称作"全或无"期，是什么意思？</div>
+      <div class="opts">
+        <button>这两周里任何暴露都必定造成畸形</button>
+        <button data-c="1">此时细胞还能彼此顶替：损伤轻则被完全补上不留痕迹，重则整个胚胎停止发育——很少产生畸形</button>
+        <button>这两周里胚胎对任何干扰都完全免疫</button>
+        <button>指的是要么怀上、要么怀不上</button>
+      </div>
+      <div class="explain">能顶替，是因为此时的细胞还停在第 2 章说的多能那一格，彼此可替换。畸形主要出在随后的第 3 到 8 周——各个器官都在搭骨架，缺的就是结构本身，而结构错过窗口补不回来。按病历上的孕龄算，那一段大致是孕 5 到 10 周。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">关于沙利度胺事件，下面哪一项是准确的？</div>
+      <div class="opts">
+        <button>它在任何孕周服用都会造成同样的肢体畸形</button>
+        <button>它上市前的动物试验已经查出了致畸性，只是被药厂隐瞒</button>
+        <button data-c="1">致畸窗只有受精后约 20–36 天，且窗内早晚不同、受损的器官也不同；美国因 FDA 审评员反复要求补充资料而基本未上市</button>
+        <button>事件之后它被全球永久禁用，至今不再生产</button>
+      </div>
+      <div class="explain">窗内的分工是这条证据最有说服力的地方：偏早服用伤耳，稍晚伤上肢，再晚伤下肢——因为那几天正在成形的器官换了。受精后 20–36 天按孕龄算是孕 5 到 7 周，正是孕吐最盛、而它恰好能止吐的时候。挡下它的是 1960 年刚上任的弗朗西丝·凯尔西。而它今天仍在使用：1965 年被发现能治麻风结节性红斑，后来又成为多发性骨髓瘤的重要药物，只是必须在严格的妊娠预防计划下开具。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第一幕 建造</div>
+  <div class="title">第 5 章 · 尺度的物理学：为什么需要肺和血管</div>
+  <p>本章开头那条"扩散只够一毫米"的规律，值得单独一章。它解释了为什么单细胞不需要心脏而你需要，为什么肺泡要展开成几十平方米，为什么婴儿比成人怕冷，也为什么蚂蚁从高处摔下来毫发无伤。一条比例关系，决定了你身体一半的形状。</p>
+  <nav class="footnav">
+    <a href="ch03-gastrulation.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch05-scaling.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 排期表：拖动受精后天数，高亮当天处在敏感期的器官
+  var range = document.getElementById('wkRange');
+  var mark = document.getElementById('wkMark');
+  var wstatus = document.querySelector('#gantt-fig .wk-status');
+  var rows = document.querySelectorAll('#gantt .row');
+  var NOTE = {
+    22: '今天正是心管开始搏动的日子。',
+    28: '上肢芽在这两天鼓起来，下肢芽晚一两天。',
+    33: '手板压扁成一把桨。',
+    41: '手板上浮出五道指线，五指还连成一片。',
+    56: '五指完全分开；再过几天，器官发生期就结束了。'
+  };
+  function xOf(day){ return 160 + day * 8.343; }
+  function paint(){
+    var day = parseInt(range.value, 10);
+    var i, hit = [];
+    mark.setAttribute('x1', xOf(day));
+    mark.setAttribute('x2', xOf(day));
+    for (i = 0; i < rows.length; i++) {
+      var lo = parseInt(rows[i].getAttribute('data-lo'), 10);
+      var hi = parseInt(rows[i].getAttribute('data-hi'), 10);
+      var on = (day >= lo && day <= hi);
+      rows[i].classList.toggle('on', on);
+      if (on) hit.push(rows[i].querySelector('.org').textContent);
+    }
+    var g = day + 14;                      // 孕龄 = 胚龄 + 约 14 天
+    var txt = '受精后第 ' + day + ' 天 · 孕龄 ' + Math.floor(g / 7) + ' 周 ' + (g % 7) + ' 天。';
+    txt += hit.length
+      ? '此刻在敏感期里的是：' + hit.join('、') + '。'
+      : '此刻没有器官处在图中所列的敏感期——但中枢神经系统仍在持续施工。';
+    if (day >= 20 && day <= 36) {
+      txt += ' <strong>这一天落在沙利度胺的致畸窗内。</strong>';
+    }
+    if (NOTE[day]) { txt += ' ' + NOTE[day]; }
+    wstatus.innerHTML = txt;
+  }
+  function nudge(d){
+    var v = parseInt(range.value, 10) + d;
+    if (v < 15) v = 15;
+    if (v > 70) v = 70;
+    range.value = v;
+    paint();
+  }
+  range.addEventListener('input', paint);
+  document.getElementById('wkMinus').addEventListener('click', function(){ nudge(-1); });
+  document.getElementById('wkPlus').addEventListener('click', function(){ nudge(1); });
+  paint();
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

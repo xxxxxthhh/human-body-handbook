@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第16章 · 一场感冒 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 16-1 战役双曲线（本章专用） ---- */
+#battle-fig .day-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#battle-fig .day-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#battle-fig .day-btn:hover{border-color:var(--gold); color:var(--ink);}
+#battle-fig .day-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#battle-fig .day-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#battle-fig .day-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#battle-fig .dp{display:none;}
+#battle-fig .dp.on{display:block;}
+#battle-fig .dp-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#battle-fig .dp p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+#battle .axis{stroke:var(--line); stroke-width:2;}
+#battle .grid{stroke:var(--line); stroke-width:1; stroke-dasharray:2 6;}
+#battle .tick-label{fill:var(--ink-faint); font-size:11.5px;}
+#battle .c-virus{fill:none; stroke:var(--deoxy); stroke-width:3; stroke-linejoin:round;}
+#battle .c-symp{fill:none; stroke:var(--oxy); stroke-width:3; stroke-linejoin:round;}
+#battle .lb{font-size:12.5px; font-weight:600;}
+#battle .cue{stroke:var(--gold); stroke-width:2; stroke-dasharray:4 4; opacity:0; transition:opacity .25s;}
+#battle.picked .cue{opacity:1;}
+#battle .dot-v{fill:var(--deoxy); opacity:0; transition:opacity .25s;}
+#battle .dot-s{fill:var(--oxy); opacity:0; transition:opacity .25s;}
+#battle.picked .dot-v,#battle.picked .dot-s{opacity:1;}
+#battle .peak-note{fill:var(--ink-faint); font-size:11px;}
+
+/* ---- 图 16-2 抗体建档（本章专用） ---- */
+#archive .axis{stroke:var(--line); stroke-width:2;}
+#archive .grid{stroke:var(--line); stroke-width:1; stroke-dasharray:2 6;}
+#archive .tick-label{fill:var(--ink-faint); font-size:11px;}
+#archive .c1{fill:none; stroke:var(--mixed-r); stroke-width:2.8;}
+#archive .c2{fill:none; stroke:var(--green); stroke-width:2.8;}
+#archive .gap{stroke:var(--line); stroke-width:1.5; stroke-dasharray:5 5;}
+#archive .lb{fill:var(--ink); font-size:12.5px; font-weight:600;}
+#archive .lb-s{fill:var(--ink-dim); font-size:11.5px;}
+#archive .cap{fill:var(--ink-faint); font-size:11.5px;}
+@media (prefers-reduced-motion: reduce){
+  #battle .cue,#battle .dot-v,#battle .dot-s{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第三幕 满负荷运行 · 第 16 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>一场感冒</h1>
+  <p class="subtitle">十天，一份完整的战报。最难受的那几天，敌人其实已经在撤退了——让你倒下的，是你自己的火力。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>周二早上七点。你醒来，觉得嗓子后面有点干，有点痒，像是昨晚空调开太久了。</p>
+  <p>你没在意，刷牙，出门。</p>
+  <p>但事情在两天前就已经开始了。上周日下午，你在电梯里按了那个按钮，一小时后揉了揉眼睛。此刻，你鼻腔后部一小块黏膜上，有几千个细胞正在被改造成生产车间。接下来的十天会有一份完整的战报——而其中最反直觉的一条是：等你最难受的时候，敌人的数量其实已经在下降了。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 登陆</div>
+  <h2>第 0 天：一粒种子，挑了一块正合适的地</h2>
+  <p>先认识一下这次的对手。</p>
+  <p>成人感冒里，<strong>鼻病毒</strong>占了三到五成，是最常见的一类。它小得离谱——直径约 30 纳米，比第 1 章那层 5 纳米的细胞膜厚不了几倍；它的全部家当只有一小段 RNA 和一层二十面体的蛋白外壳，连自己复制自己的能力都没有。它唯一会做的事，是找到一扇能开的门。</p>
+  <p>那扇门叫 <strong>ICAM-1</strong>，是你上呼吸道上皮细胞表面本来就有的一个蛋白（它的正经工作是帮免疫细胞粘附）。大多数鼻病毒株的外壳上有一处凹陷，形状恰好与它咬合。这是个耐人寻味的安排：病毒并没有自带钥匙，它只是长成了你家锁孔的形状。</p>
+  <p>接下来是选址。</p>
+
+  <h3>为什么是鼻子，不是肺</h3>
+  <p>你可能以为病毒会往深处走——肺更大，细胞更多。但鼻病毒几乎不去。</p>
+  <p>原因简单得近乎粗暴：<strong>它怕热。</strong>大多数鼻病毒株在 <strong>33 到 35℃</strong> 复制得最好，而这正是鼻腔和上呼吸道的温度——那里不断有室温空气流过，比核心体温低了两三度。再往下走，气道温度爬向 37℃，病毒的复制效率就明显下降；2015 年的研究还发现，较高的温度同时会让被感染细胞的抗病毒反应更强，等于双重不利。</p>
+  <p>所以它待在门口不进屋，不是因为客气，是因为屋里太热。</p>
+  <p>自然界里这类事随处可见：一粒种子落在向阳的岩缝里能发芽，落在背阴的湿泥里就烂掉——不是种子挑剔，是它只在某段条件里长得起来。鼻病毒就是一粒只在 33 到 35℃ 之间发芽的种子，而你的鼻腔恰好常年是那个温度。</p>
+  <p>顺便说一句，这也是"感冒"这个中文词与"着凉"绑在一起的原因之一：冷空气让鼻黏膜温度进一步下降。但这条线索能推到哪一步，第 5 节会有一段专门的公案。</p>
+
+  <h3>那道你一直没注意的防线</h3>
+  <p>登陆并不容易。你的呼吸道内壁铺着一层黏液，黏液下面是密密麻麻的纤毛——它们以每秒十几次的频率朝一个方向摆动，把整层黏液连同粘住的灰尘、花粉、细菌和病毒，以每分钟 <strong>5 到 6 毫米</strong>的速度往咽部推，最后被你毫无察觉地咽下去，交给第 13 章那池胃酸处理。</p>
+  <p>整条"黏液传送带"每十几二十分钟就整体更新一次。绝大多数吸进来的病毒，都是在还没找到门之前就被送走的。</p>
+  <p>要成功，病毒得赶在被扫走之前完成附着和入侵。多数时候它做不到——你一年里吸进去的鼻病毒远远多于你实际感冒的次数。这一次它成功了。</p>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 潜伏</div>
+  <h2>第 1–2 天：复制开始，警报拉响，而你毫无感觉</h2>
+  <p>进了细胞之后，鼻病毒做的第一件事是接管。它把自己那段 RNA 交给细胞的核糖体——就是第 1 章那批"照着分谱演奏的乐池"——让它们改为生产病毒的零件。一个被感染的细胞在几小时内就能产出成百上千个新病毒颗粒。</p>
+  <p>身体的第一反应快得多，也早得多。</p>
+  <p>细胞内部有一套专门识别"不该出现在这里的核酸"的感受器。它一旦发现异常的 RNA，被感染的细胞就会释放<strong>干扰素</strong>——名字来源于它"干扰"病毒复制的能力。干扰素做的事很有意思：它不攻击病毒，而是跑去通知<em>邻居</em>。收到通知的细胞会启动几百个基因，进入一种"抗病毒戒备"状态，让自己变得不适合被复制。</p>
+  <p>这一步是纯粹的先天免疫：不需要认识对方是谁，反应以小时计。你在第 10 章见过这支队伍，他们不做背景调查，只按可疑程度处置。</p>
+  <p>此时病毒载量正在指数式攀升（图 16-1 的蓝线），而你——毫无感觉。你在开会，在吃午饭，可能还在健身房。这段"敌人在扩张、你却不知道"的时间就是<strong>潜伏期</strong>，鼻病毒的潜伏期通常是 <strong>12 到 72 小时</strong>，比流感还短。</p>
+  <p>要命的是，你在这段时间里已经有传染性了。这是呼吸道病毒最有效的策略之一：<strong>在宿主还愿意出门社交的时候完成传播。</strong>一种让人立刻卧床不起的病毒，反而不容易传开。</p>
+  <p>周二早上那点嗓子干痒，是这段静默期的最后一刻。</p>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 火力</div>
+  <h2>第 3–4 天：难受的是你，挨打的是它</h2>
+  <p>周三、周四，你彻底垮了：鼻子堵得喘不上气，喉咙吞咽像吞刀片，头沉，浑身酸，还有点低烧。</p>
+  <p>现在请看图 16-1 里那个本章的题眼：<strong>此刻病毒载量已经过了峰值，正在往下走，而你的症状才刚爬到最高点。</strong></p>
+  <p>两条曲线的错位不是巧合。它说明了一件让很多人意外的事：<strong>让你难受的绝大部分症状，不是病毒造成的破坏，而是你自己的反应造成的。</strong></p>
+  <p>鼻病毒其实不怎么杀细胞——用它感染的鼻黏膜做活检，上皮结构大体完好。真正干活的是免疫系统释放的信号分子：</p>
+  <p><strong>鼻塞</strong>，不是鼻子里"堵满了鼻涕"，而是鼻甲的血管扩张、组织充血肿胀，把气道挤窄了。所以擤不出来也照样堵。<br>
+  <strong>流涕</strong>，来自腺体分泌被上调，血管通透性增加，血浆成分渗进气道。<br>
+  <strong>喉痛</strong>，主要与<strong>缓激肽</strong>这类介质有关——它直接刺激局部的痛觉神经末梢。有意思的是，把缓激肽滴进健康人的鼻腔，能复制出相当典型的感冒症状，而当事人身上并没有病毒。<br>
+  <strong>浑身酸痛与困倦</strong>，来自白细胞介素等细胞因子作用于中枢，属于所谓"病态行为"——一整套让你减少活动、退回床上的本能反应，动物身上同样看得到。</p>
+  <p>换句话说，症状是一份<strong>战报</strong>，不是伤情。</p>
+
+  <h3>沙漠里的一只蜥蜴，和一场被误解的发烧</h3>
+  <p>发烧尤其被误解。</p>
+  <p>体温上升不是失控，而是下丘脑主动把恒温器的设定点调高了——你觉得冷、打寒战、缩起来，正是身体在按新设定值往上烧。它是一道命令，不是一次故障。</p>
+  <p>发烧图什么？体温每升高 1℃，代谢率大约上升 <strong>10% 到 13%</strong>，这是一笔真金白银的开销。回报有几项：多数病原体在略高的温度下复制效率下降；免疫细胞的增殖、迁移与效应功能在发热范围内增强；身体同时把血里的游离铁藏进储备蛋白（很多细菌抢着要铁），等于顺手断了对方的补给。</p>
+  <p>最漂亮的证据来自一只不会说话的动物。1970 年代，Matthew Kluger 团队研究<strong>沙漠鬣蜥</strong>——一种自己不产热、只能靠晒太阳调温的变温动物。给它注入细菌后，它会主动爬到更热的地方，把自己的体温"晒"高几度。这叫行为性发热。关键在下一步：研究者把一部分被感染的蜥蜴关在无法升温的环境里，结果它们的死亡率显著更高；反过来，用退热药压住体温，同样恶化了结局。</p>
+  <p>一只连体温调节机制都和你完全不同的爬行动物，在被感染后<strong>不惜爬去晒太阳也要把自己弄热</strong>——这件事说明发热不是哺乳动物的某种副作用，而是一条古老得多的策略。</p>
+  <p>不过顺着这个结论往下推，会推出一个危险的版本："那发烧就不该退，越高越好"。这一步必须拆掉。上述证据说的是"发热是一种适应性反应"，不是"任何温度都有益"或"退烧药有害"。体温过高本身会带来不适、脱水与消耗，退热药让人睡得着、喝得下水，这些实实在在的好处不该被理论抹掉。<strong>合理的读法是：不必因为体温升高本身而恐慌，也不必为了追求"零度数"而硬扛。</strong></p>
+  <p>还有一条边界值得平实地写下来：普通感冒是自限性的，多数人一到两周自行痊愈。但如果出现呼吸困难、持续高热不退、剧烈头痛伴颈项强直、明显嗜睡或意识改变、症状好转后又突然加重，或本人属于婴幼儿、孕妇、高龄、有慢性病或免疫功能低下的情况——这些不是"扛一扛"的范畴，应当就医。本书不能代替医生，只能告诉你这条线大致在哪里。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>鼻涕变黄绿，不等于该吃抗生素。</strong>感冒过了头几天，清水样的鼻涕常常变稠、变黄甚至发绿，这几乎被当成"转成细菌感染"的信号。其实那颜色来自你自己：赶到现场的中性粒细胞体内含有一种叫髓过氧化物酶的绿色含铁酶，细胞完成任务后解体，酶被释放出来，把分泌物染上了颜色。<strong>颜色反映的是免疫细胞来了多少，不是来了什么敌人。</strong></p>
+    <p>切开的苹果会变褐，也不是因为沾了脏东西，而是自家的酶接触空气后氧化——同样是"变色源于自身"。多项研究表明，仅凭鼻涕颜色无法区分病毒性与细菌性上呼吸道感染；抗生素对病毒一点办法也没有。真正提示需要就医评估的，是病程与全身表现，不是颜色。</p>
+  </div>
+
+  <figure id="battle-fig">
+    <div class="switch-row">
+      <span class="switch-hint">点天数看战况 →</span>
+      <div class="day-tabs" role="group" aria-label="选择感染后的第几天">
+        <button class="day-btn" data-day="0" aria-pressed="false">第 0 天</button>
+        <button class="day-btn" data-day="1" aria-pressed="false">第 1 天</button>
+        <button class="day-btn" data-day="2" aria-pressed="false">第 2 天</button>
+        <button class="day-btn" data-day="3" aria-pressed="false">第 3 天</button>
+        <button class="day-btn" data-day="5" aria-pressed="false">第 5 天</button>
+        <button class="day-btn" data-day="7" aria-pressed="false">第 7 天</button>
+        <button class="day-btn" data-day="10" aria-pressed="false">第 10 天</button>
+      </div>
+    </div>
+    <svg id="battle" viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="感染后十天的病毒载量与症状强度双曲线，症状峰值滞后于病毒载量峰值">
+      <line class="axis" x1="90" y1="260" x2="700" y2="260"/>
+      <line class="axis" x1="90" y1="260" x2="90" y2="44"/>
+      <line class="grid" x1="90" y1="50" x2="700" y2="50"/>
+      <line class="grid" x1="90" y1="155" x2="700" y2="155"/>
+
+      <polyline class="c-virus" points="90,256 148,187 206,82 264,50 322,113 380,166 438,208 496,235 554,250 612,256 670,258"/>
+      <polyline class="c-symp" points="90,260 148,250 206,187 264,103 322,50 380,82 438,124 496,166 554,201 612,229 670,243"/>
+
+      <line class="cue" id="cueLine" x1="90" y1="44" x2="90" y2="260"/>
+      <circle class="dot-v" id="dotV" cx="90" cy="256" r="6"/>
+      <circle class="dot-s" id="dotS" cx="90" cy="260" r="6"/>
+
+      <text class="lb" x="278" y="38" text-anchor="middle" fill="var(--deoxy)">病毒载量</text>
+      <text class="lb" x="352" y="38" text-anchor="start" fill="var(--oxy)">症状强度</text>
+      <text class="peak-note" x="264" y="290" text-anchor="middle">载量峰 · 第 2–3 天</text>
+      <text class="peak-note" x="322" y="308" text-anchor="middle">症状峰 · 第 3–4 天（滞后）</text>
+
+      <text class="tick-label mono" x="90" y="278" text-anchor="middle">0</text>
+      <text class="tick-label mono" x="148" y="278" text-anchor="middle">1</text>
+      <text class="tick-label mono" x="206" y="278" text-anchor="middle">2</text>
+      <text class="tick-label mono" x="264" y="278" text-anchor="middle">3</text>
+      <text class="tick-label mono" x="322" y="278" text-anchor="middle">4</text>
+      <text class="tick-label mono" x="380" y="278" text-anchor="middle">5</text>
+      <text class="tick-label mono" x="438" y="278" text-anchor="middle">6</text>
+      <text class="tick-label mono" x="496" y="278" text-anchor="middle">7</text>
+      <text class="tick-label mono" x="554" y="278" text-anchor="middle">8</text>
+      <text class="tick-label mono" x="612" y="278" text-anchor="middle">9</text>
+      <text class="tick-label mono" x="670" y="278" text-anchor="middle">10</text>
+      <text class="tick-label" x="700" y="330" text-anchor="end">感染后天数 · 两条曲线各自归一化，纵轴不可互比</text>
+    </svg>
+    <div class="day-panel">
+      <div class="dp on" data-dp="init">
+        <div class="dp-t">十天战报</div>
+        <p>点上方任意一天，看那一天双方各自在做什么。整张图的题眼是两个峰的错位：病毒最多的时候你还没那么难受，你最难受的时候病毒已经在撤了。</p>
+      </div>
+      <div class="dp" data-dp="0">
+        <div class="dp-t">第 0 天 · 登陆</div>
+        <p>病毒经手接触或近距离气溶胶抵达鼻腔后部，与上皮细胞表面的 ICAM-1 咬合并进入。此刻载量极低，症状为零，你完全不知道发生了什么。</p>
+      </div>
+      <div class="dp" data-dp="1">
+        <div class="dp-t">第 1 天 · 潜伏中的指数增长</div>
+        <p>复制全面展开，载量陡升；被感染的细胞释放干扰素，通知邻居进入戒备。你可能已经具备传染性——而你今天还在正常上班。</p>
+      </div>
+      <div class="dp" data-dp="2">
+        <div class="dp-t">第 2 天 · 载量逼近峰值</div>
+        <p>病毒数量接近顶点。先天免疫全面动员，最早的症状开始冒头：嗓子干痒、轻微鼻塞。此时排毒量通常也最大，是传染性最强的一两天。</p>
+      </div>
+      <div class="dp" data-dp="3">
+        <div class="dp-t">第 3 天 · 交叉点</div>
+        <p>关键的一天：病毒载量开始下降，症状却在继续上升。缓激肽、细胞因子等介质大量释放——从这里往后，难受的主要来源已经从病毒换成了自家火力。</p>
+      </div>
+      <div class="dp" data-dp="5">
+        <div class="dp-t">第 5 天 · 适应性免疫接手</div>
+        <p>特异性抗体开始出现，T 细胞清理被感染的细胞。载量明显下滑，症状从峰顶回落。分泌物可能转稠转黄——那是中性粒细胞的颜色，不是细菌的信号。</p>
+      </div>
+      <div class="dp" data-dp="7">
+        <div class="dp-t">第 7 天 · 收尾</div>
+        <p>多数人此时病毒已基本清除，剩下的是修复期的残余症状。咳嗽往往最后走，因为气道感受器的敏感状态要更久才平复。</p>
+      </div>
+      <div class="dp" data-dp="10">
+        <div class="dp-t">第 10 天 · 归档</div>
+        <p>战事结束。针对这一株的记忆 B 细胞与长寿浆细胞已经建档，同一株再来会被迅速拦下。问题在于：它有一百多个兄弟，而档案只认这一个。</p>
+      </div>
+    </div>
+    <figcaption><b>图 16-1 · 两条曲线的错位。</b>蓝线是病毒载量，红线是症状强度；两条线各自归一化，纵轴之间不能互相比较。载量在第 2–3 天见顶，症状在第 3–4 天才见顶——你最难受的时候，敌人已经在撤退。曲线为典型病程示意，实际时程随病毒种类、剂量与个体免疫状态变化很大。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 建档</div>
+  <h2>第 5–10 天：给这一株立一份终身档案</h2>
+  <p>周五起，你开始好转。这时候接手的是第 10 章那支"上过学"的部队：<strong>适应性免疫</strong>。</p>
+  <p>它慢，第一次遭遇要花 <strong>5 到 10 天</strong>才形成有效应答——这也是感冒总要拖一周多的原因。但它精确：B 细胞产出专门针对这一株外壳的抗体，把病毒颗粒糊住、使其无法再与 ICAM-1 咬合；T 细胞则识别并清除那些已被病毒占用的细胞。载量迅速跌落。</p>
+  <p>战事结束后，真正的收获才开始：<strong>建档</strong>。</p>
+  <p>一部分参战的 B 细胞不会解散，而是转为记忆 B 细胞长期留守；另一部分变成长寿浆细胞，迁进骨髓，此后年复一年地少量分泌这种抗体。于是同一株鼻病毒再来时，图 16-2 右半边那条曲线就是它的下场：应答时间从 5–10 天缩短到 1–3 天，抗体水平高出一到两个数量级——它甚至来不及让你产生症状。</p>
+  <p>第 10 章说疫苗是一场模拟考。这一次是实战，但归档的方式完全一样：<strong>用一次代价换一份此后免试的资格。</strong></p>
+
+  <figure>
+    <svg id="archive" viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="首次遭遇与再次遭遇同一病毒株时的抗体应答对比曲线，纵轴为对数刻度">
+      <line class="axis" x1="80" y1="240" x2="700" y2="240"/>
+      <line class="axis" x1="80" y1="240" x2="80" y2="40"/>
+      <line class="grid" x1="80" y1="180" x2="700" y2="180"/>
+      <line class="grid" x1="80" y1="120" x2="700" y2="120"/>
+      <line class="grid" x1="80" y1="60" x2="700" y2="60"/>
+      <text class="tick-label mono" x="72" y="244" text-anchor="end">1</text>
+      <text class="tick-label mono" x="72" y="184" text-anchor="end">10</text>
+      <text class="tick-label mono" x="72" y="124" text-anchor="end">100</text>
+      <text class="tick-label mono" x="72" y="64" text-anchor="end">1000</text>
+      <text class="cap" x="80" y="26" text-anchor="start">血中特异性抗体水平（相对值 · 对数刻度）</text>
+
+      <path class="c1" d="M96 238 L150 236 L186 210 L220 160 L260 132 L300 128 L340 148 L370 168"/>
+      <text class="lb" x="96" y="278" text-anchor="start">首次遭遇</text>
+      <text class="lb-s" x="96" y="296" text-anchor="start">起效 5–10 天 · 水平低 · 病程一周以上</text>
+
+      <line class="gap" x1="392" y1="40" x2="392" y2="262"/>
+      <text class="cap" x="400" y="276" text-anchor="start">数月至数年后，同一株再来</text>
+
+      <path class="c2" d="M410 214 L432 208 L452 130 L478 70 L520 52 L570 58 L630 76 L700 96"/>
+      <text class="lb" x="700" y="278" text-anchor="end">再次遭遇</text>
+      <text class="lb-s" x="700" y="296" text-anchor="end">起效 1–3 天 · 高出 1–2 个数量级 · 常无症状</text>
+
+      <text class="cap" x="392" y="256" text-anchor="middle">↑ 时间轴在此中断</text>
+    </svg>
+    <figcaption><b>图 16-2 · 一份档案值多少。</b>左半边是第一次遭遇：起效慢、水平低，你得病一周多。右半边是同一株再次来袭：记忆 B 细胞与骨髓里的长寿浆细胞让应答提前数日、水平高出一到两个数量级——通常在你察觉之前就结束了。纵轴为对数刻度，两段之间时间轴中断；曲线为示意，不同病原的记忆持久度差异极大。</figcaption>
+  </figure>
+
+  <h3>那为什么感冒治不完</h3>
+  <p>既然免疫记忆这么管用，为什么你每年还要感冒两到四次（学龄前儿童约 6 到 8 次），一辈子加起来两百次上下？</p>
+  <p>答案不在你的免疫系统，在对手的数量上。</p>
+  <p><strong>鼻病毒不是一种病毒，是一百六十多种。</strong>它按基因组序列分为 RV-A、RV-B、RV-C <strong>三个种</strong>，共一百六十余个<strong>型别</strong>（其中用血清学方法分出的经典血清型约一百种）。你辛辛苦苦为其中一型建的档案，对其余一百多个型几乎没有用——就像你记住了一朵野花的模样，并不等于认得整片草地。</p>
+  <p>更何况，能引起"感冒"这组症状的远不止鼻病毒：季节性冠状病毒、副流感病毒、呼吸道合胞病毒、腺病毒、偏肺病毒……加起来两百多种。<strong>"感冒"从来不是一种病，而是一组症状的统称。</strong>这也就注定了它不可能有一支"感冒疫苗"——你没法给两百多个抗原型各做一针。</p>
+  <p>这一点值得记住：一种疾病能不能被疫苗解决，很大程度上取决于它的抗原有多稳定、有多少型。天花只有一种、且抗原稳定，所以被彻底消灭；流感每年漂移，所以每年重打；鼻病毒有一百六十多型，所以你只能一次次地重新经历它。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>同一场感冒，男女的反应强度未必相同。</strong>免疫应答存在稳定可查的两性差异：女性对多种疫苗产生的抗体滴度通常更高，接种后的局部与全身反应也更常见更明显；与此同时，自身免疫病患者中女性占绝对多数。一个已被具体定位的机制是，若干重要的免疫相关基因（例如识别病毒 RNA 的 TLR7）位于 X 染色体上，而第 1 章讲过的 X 染色体随机失活并不彻底——部分基因会"逃逸"失活，在女性细胞里形成双份剂量。性激素对免疫细胞的调节则是另一条路径。</p>
+    <p>至于流传甚广的"男性感冒症状更重"的说法，确实有研究者认真讨论过（包括一篇常被引用的综述），但现有证据以观察性研究为主，混杂因素多，远谈不上定论。<strong>有差异，是有据的；差异的方向与大小，尚未定论。</strong>这条线的正面处理留给第 19 章。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 公案</div>
+  <h2>索尔兹伯里的那座研究所：带薪度假，代价是染上感冒</h2>
+  <p>关于感冒，人类做过的最执着的一件事，发生在英国威尔特郡的一片野地上。</p>
+  <p>二战期间，美国红十字会在索尔兹伯里郊外援建了一所野战医院，一排排预制的平房，叫 Harvard Hospital。战后它被移交给英国。1946 年，医学研究理事会在这里成立了一个专门机构，名字朴素得可爱：<strong>普通感冒研究所</strong>（Common Cold Unit）。</p>
+  <p>它运转了四十三年，直到 1989 年关闭。</p>
+  <p>它的做法是这样的：向全国征集志愿者，两人一组住进独立的小屋，隔离十天。研究人员往他们鼻子里滴入含病毒的液体（或者作为对照的盐水），然后每天观察、采样、称量用掉的手帕。志愿者可以读书、散步、听广播，只是不能靠近其他组，也不能进城。伙食免费，还有少量津贴。</p>
+  <p>广告词说白了就是：<strong>一次乡下的免费假期，代价是可能得一场感冒。</strong>四十三年里，约<strong>两万人次</strong>报名参加，其中不乏把这里当成度蜜月和写论文的清静去处的人。</p>
+  <p>这个机构留下了不少扎实的成果。1965 年，David Tyrrell 的团队在这里分离出一株编号 B814 的病毒，它不属于当时已知的任何一类——这是最早被分离出的人类冠状病毒之一。"冠状病毒"这个名字（因其表面的冠状突起而得名）也正是在这一批研究之后定下的。半个世纪后，这个词会以谁也没料到的方式家喻户晓。</p>
+
+  <h3>那么，着凉到底会不会感冒</h3>
+  <p>研究所最想解决的问题，恰恰是它招牌上的那个民间信念。</p>
+  <p>Christopher Andrewes 和同事做了一系列在今天看来颇为苛刻的实验：让志愿者洗完澡后穿着湿泳衣在走廊里站上半小时，直冻得发抖，然后与保持温暖的对照组比较发病率。</p>
+  <p>结果是：<strong>没有差别。</strong>受冻的人并没有更容易感冒。研究所据此宣布，"着凉致感冒"是一个误解——没有病毒，冻死也不会得感冒。</p>
+  <p>这本该是个干净的结论，但故事没有到此为止。2005 年，卡迪夫大学的 Ronald Eccles 团队做了一个不同的设计：让志愿者把双脚泡在冷水里二十分钟，然后跟踪其后数日的症状。这一次，受凉组自我报告出现感冒症状的比例明显更高。他们提出的解释是：受凉引起鼻部血管收缩，局部血流与温度下降，可能削弱了本地防线，让原本已经"潜伏在身上、尚未发作"的病毒得以扩张。</p>
+  <p>两组实验矛盾吗？其实各说了一半。<strong>受凉不产生病毒</strong>——这一点索尔兹伯里的结论至今成立；<strong>受凉是否降低已暴露者的抵抗力</strong>——这是另一个问题，证据尚不充分，Eccles 的研究依赖自我报告，也未被大规模重复。</p>
+  <p>这个公案值得留在书里，因为它示范了一种常见的思维事故：把"A 不导致 B"和"A 与 B 完全无关"当成同一句话。它们不是。而更常见的解释其实平淡得多——冬天感冒多发，很大程度上是因为人们更多地待在室内、聚在一起、通风更差。</p>
+
+  <h3>一个喷嚏到底有多快</h3>
+  <p>最后说一个几乎每本科普书都会给出、而且每本给的数字都不一样的量。</p>
+  <p>关于喷嚏的气流速度，你能查到从每小时十几公里到超过一百六十公里的各种说法。分歧的根源在于"测的是什么"：是气流本身，是最大的那颗飞沫，还是整团气溶胶云的推进前沿？测量手段也从早期的照相法一路换到高速摄影与粒子测速，结果自然对不上。</p>
+  <p>比较稳妥的表述是给量级：<strong>喷嚏喷出的气流速度大致在每秒数米到数十米的量级</strong>，单次释放的飞沫数以万计到数十万计。2014 年，麻省理工的 Lydia Bourouiba 团队用高速摄影得到一个更有价值的发现：喷嚏喷出的并不是一颗颗独立飞行的飞沫，而是一团裹挟着飞沫的<strong>湍流气体云</strong>；云团减缓了小飞沫的蒸发与沉降，使它们能被带到比单颗飞沫模型预测的远得多的距离。</p>
+  <p>换个自然界的参照就不难理解：马勃菌成熟后被雨滴一击，会喷出一团孢子烟雾；那团烟雾能飘多远，靠的不是单颗孢子的初速度，而是整团气流的走势。喷嚏也是如此。</p>
+  <p>下周二，你已经完全好了。鼻腔的上皮修好了，档案存进了骨髓，那一株鼻病毒此生大概不会再让你难受第二次。</p>
+  <p>只是它还有一百多个兄弟。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>往鼻子里打疫苗，和一支不必年年换的流感疫苗。</strong>现行的流感疫苗有两个结构性弱点：它主要诱导血液里的抗体，而病毒是从黏膜进来的；它针对的是病毒外壳上变化最快的那部分，所以每年都要重猜。两条前沿正好各对一个。</p>
+    <p><strong>其一，黏膜免疫。</strong>把疫苗做成鼻喷剂，目标是在呼吸道表面建立分泌型 IgA 与常驻记忆细胞——在门口拦人，而不是等进屋再打；这不只减轻发病，还有望减少传播。目前 FDA 批准的黏膜流感疫苗仍只有减毒活疫苗 FluMist 一种（2024 年起在美国获准自行在家使用）。走得最前的新候选是美国国立过敏与感染性疾病研究所的鼻喷灭活全病毒疫苗 BPL-1357：一期试验已完成，2026 年 6 月又启动了一项约 120 人的二期<strong>攻毒试验</strong>——接种之后主动让志愿者接触病毒，直接看它拦不拦得住。</p>
+    <p>这里要拆掉一条常被混引的"捷报"：2026 年 2 月《科学》报道的一支鼻喷佐剂疫苗，确实在小鼠身上把肺内病毒载量压低了数百倍、把免疫应答从两周提前到三天——但那是一支<strong>广谱呼吸道</strong>疫苗，压的是新冠病毒的载量，<strong>研究中并未测试流感</strong>。它是黏膜免疫路线的好消息，不是流感疫苗的进展；这两件事经常被合并成一条，值得留神。</p>
+    <p><strong>其二，通用疫苗。</strong>思路是避开善变的头部、瞄准相对保守的"茎部"或其他保守表位，让一次接种覆盖多个亚型甚至跨年份。mRNA 平台让"一针含很多种"在技术上变得可行——2026 年 8 月 5 日，Moderna 的 mRNA-1010 获 FDA 批准用于 50 岁以上人群。但要看清它究竟是什么：那仍是一支<strong>季节性、肌肉注射、每年一打</strong>的疫苗，换掉的是生产平台（因而能更快跟上毒株更新），不是"每年重猜"这件事本身。截至本栏写就，<strong>尚无通用流感疫苗获批</strong>——平台可行，不等于目标达成。</p>
+    <p>至于普通感冒本身：由于鼻病毒有一百六十余个型别，可预见的将来仍不会有"感冒疫苗"。真正务实的方向是广谱抗病毒药与宿主靶点药物——不认对方是谁，只堵它必须用的那把锁。</p>
+  </div>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">一场感冒 · 关键数字</div>
+    <table>
+      <tr><td class="k">鼻病毒直径</td><td class="v">~30 nm</td><td class="n">一段 RNA 加一层二十面体外壳</td></tr>
+      <tr><td class="k">最适复制温度</td><td class="v">33–35 ℃</td><td class="n">鼻腔温度；所以它不往肺里去</td></tr>
+      <tr><td class="k">潜伏期</td><td class="v">12–72 h</td><td class="n">此期间已具传染性</td></tr>
+      <tr><td class="k">病毒载量峰值</td><td class="v">第 2–3 天</td><td class="n">早于症状峰值</td></tr>
+      <tr><td class="k">症状强度峰值</td><td class="v">第 3–4 天</td><td class="n">滞后于载量峰——症状多为自身反应</td></tr>
+      <tr><td class="k">首次适应性应答起效</td><td class="v">5–10 天</td><td class="n">再次遭遇缩短到 1–3 天</td></tr>
+      <tr><td class="k">体温每升 1℃ 代谢增幅</td><td class="v">10–13%</td><td class="n">发热是策略，不是故障</td></tr>
+      <tr><td class="k">鼻病毒型别</td><td class="v">160+ 个</td><td class="n">分 RV-A/B/C 三个种；经典血清型约 100 种</td></tr>
+      <tr><td class="k">可致感冒的病毒总数</td><td class="v">200+ 种</td><td class="n">"感冒"是症状统称，不是一种病</td></tr>
+      <tr><td class="k">年均感冒次数</td><td class="v">成人 2–4 次 / 学龄前 6–8 次</td><td class="n">入托第一年常更多；一生累计约二百次</td></tr>
+      <tr><td class="k">黏液纤毛清除速度</td><td class="v">5–6 mm/min</td><td class="n">整层黏液十几二十分钟换一次</td></tr>
+      <tr><td class="k">喷嚏气流速度</td><td class="v">每秒数米–数十米</td><td class="n">文献分歧大，只宜给量级</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">感冒第三四天最难受时，病毒载量处于什么状态？</div>
+      <div class="opts">
+        <button>正处于峰值，症状与载量同步</button>
+        <button data-c="1">已经过了峰值、正在下降——难受的主要来源已经从病毒换成了自身的免疫反应</button>
+        <button>还在快速上升，峰值要到第七天</button>
+        <button>已经完全清零，症状纯属心理作用</button>
+      </div>
+      <div class="explain">这个错位是本章的题眼。鼻病毒其实不怎么杀细胞——感染的鼻黏膜活检显示上皮结构大体完好。鼻塞来自血管扩张充血而非"堵满鼻涕"，喉痛主要与缓激肽刺激痛觉末梢有关（把缓激肽滴进健康人鼻腔就能复制出典型症状），酸痛困倦则是细胞因子作用于中枢的"病态行为"。症状是战报，不是伤情。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">鼻病毒为什么几乎只感染上呼吸道，很少往肺里去？</div>
+      <div class="opts">
+        <button>肺里有更强的抗体防线</button>
+        <button>它太大，无法通过狭窄的支气管</button>
+        <button data-c="1">它在 33–35℃ 复制得最好，而气道越往深处越接近 37℃，复制效率随之下降</button>
+        <button>纤毛只存在于下呼吸道，能把它全部清走</button>
+      </div>
+      <div class="explain">研究还发现较高温度会同时增强被感染细胞的抗病毒反应，等于双重不利。它待在门口不是客气，是屋里太热——像一粒只在特定温度区间才发芽的种子。顺带一提，纤毛恰恰主要分布在包括鼻腔在内的整条呼吸道，把黏液以每分钟 5–6 毫米推向咽部，绝大多数吸入的病毒在找到门之前就被送去胃里了。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">沙漠鬣蜥实验最有力地说明了什么？</div>
+      <div class="opts">
+        <button>变温动物比恒温动物更耐感染</button>
+        <button data-c="1">发热是一条古老的适应性策略——被感染的蜥蜴会主动爬去晒太阳升温，而被阻止升温者死亡率显著更高</button>
+        <button>体温越高越好，退烧药一律有害</button>
+        <button>细菌感染与病毒感染的发热机制完全不同</button>
+      </div>
+      <div class="explain">一只体温调节机制与人类完全不同的爬行动物，被感染后不惜爬去晒太阳也要把自己弄热，说明发热不是哺乳动物的副作用，而是更古老的策略。但别把结论推过头：这说的是"发热是适应性反应"，不是"任何温度都有益"。退热药让人睡得着、喝得下水，这些好处不该被理论抹掉——不必因体温升高本身而恐慌，也不必为追求"零度数"硬扛。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">鼻涕变黄绿色说明了什么？</div>
+      <div class="opts">
+        <button>已经继发细菌感染，应当开始服用抗生素</button>
+        <button data-c="1">中性粒细胞大量到场——颜色来自它们体内的绿色含铁酶，反映的是免疫细胞来了多少，不是来了什么敌人</button>
+        <button>病毒正在大量繁殖</button>
+        <button>身体的免疫系统已经失效</button>
+      </div>
+      <div class="explain">那种绿色来自髓过氧化物酶，中性粒细胞完成任务解体后被释放出来。切开的苹果变褐同样源于自家的酶接触空气，而非沾了脏东西。多项研究表明仅凭鼻涕颜色无法区分病毒性与细菌性感染，而抗生素对病毒毫无作用。真正提示需要就医评估的是病程与全身表现——比如症状好转后突然加重、持续高热不退、呼吸困难。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">索尔兹伯里的普通感冒研究所（1946–1989）关于"着凉"得出了什么结论，后来又如何被补充？</div>
+      <div class="opts">
+        <button>证实了着凉是感冒的直接原因</button>
+        <button data-c="1">让志愿者穿湿泳衣受冻并未提高发病率——没有病毒就不会感冒；但受凉是否降低已暴露者的抵抗力，是另一个尚无定论的问题</button>
+        <button>研究所从未研究过着凉问题</button>
+        <button>结论是冬天感冒多发完全由气温决定</button>
+      </div>
+      <div class="explain">这个公案示范了一种常见的思维事故：把"A 不导致 B"当成"A 与 B 完全无关"。2005 年 Eccles 团队的冷水泡脚实验报告受凉组自我报告症状更多，提出受凉可能削弱本地防线；但该研究依赖自我报告，未获大规模重复。更平淡的解释是：冬天人们更多待在室内、聚在一起、通风更差。这所机构还有另一项成果：1965 年在此分离出的 B814 是最早被分离的人类冠状病毒之一。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第三幕 满负荷运行</div>
+  <div class="title">第 17 章 · 一次受伤</div>
+  <p>这一次入侵是从鼻腔那扇本来就开着的门进来的。下一次不一样：一把水果刀划开手指，屏障被直接撕出一道口子。接下来的几秒钟里会有一场级联反应以惊人的速度展开，而随后几周的修复要分四个阶段完成——其中有的组织能长回原样，有的只能留下疤。</p>
+  <nav class="footnav">
+    <a href="ch15-sleep.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch17-injury.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 战役曲线：点天数移动游标 + 切换说明
+  var COORD = {
+    '0':  {x:90,  v:256, s:260},
+    '1':  {x:148, v:187, s:250},
+    '2':  {x:206, v:82,  s:187},
+    '3':  {x:264, v:50,  s:103},
+    '5':  {x:380, v:166, s:82},
+    '7':  {x:496, v:235, s:166},
+    '10': {x:670, v:258, s:243}
+  };
+  var svg = document.getElementById('battle');
+  var cue = document.getElementById('cueLine');
+  var dotV = document.getElementById('dotV');
+  var dotS = document.getElementById('dotS');
+  var tabs = document.querySelectorAll('#battle-fig .day-btn');
+  var panes = document.querySelectorAll('#battle-fig .dp');
+  function showDay(key){
+    var c = COORD[key];
+    if (!c) return;
+    svg.classList.add('picked');
+    cue.setAttribute('x1', c.x); cue.setAttribute('x2', c.x);
+    dotV.setAttribute('cx', c.x); dotV.setAttribute('cy', c.v);
+    dotS.setAttribute('cx', c.x); dotS.setAttribute('cy', c.s);
+    var i;
+    for (i = 0; i < tabs.length; i++) {
+      tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-day') === key ? 'true' : 'false');
+    }
+    for (i = 0; i < panes.length; i++) {
+      panes[i].classList.toggle('on', panes[i].getAttribute('data-dp') === key);
+    }
+  }
+  for (var t = 0; t < tabs.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){ showDay(el.getAttribute('data-day')); });
+    })(tabs[t]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

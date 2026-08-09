@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>序章 · 你是一场接力 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 序-1 受精时间表（本章专用） ---- */
+#fertline .axis{stroke:var(--line); stroke-width:2;}
+#fertline .pre{stroke:var(--line); stroke-width:2; stroke-dasharray:6 6;}
+#fertline .tick{stroke:var(--line);}
+#fertline .tick-label{fill:var(--ink-faint); font-size:11.5px;}
+#fertline .zero{stroke:var(--gold); stroke-width:1.4; stroke-dasharray:4 5;}
+#fertline .ev-dot{fill:var(--gold);}
+#fertline .ev-dot.pre-dot{fill:var(--ink-faint);}
+#fertline .ev-dot.late{fill:var(--deoxy);}
+#fertline .ev-stem{stroke:var(--line); stroke-width:1.2;}
+#fertline .ev-label{fill:var(--ink); font-size:12.5px; font-weight:600;}
+#fertline .ev-sub{fill:var(--ink-dim); font-size:11px;}
+
+/* ---- 图 序-2 四幕地图（本章专用） ---- */
+#actmap-fig .act-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#actmap-fig .act-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.06em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 15px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#actmap-fig .act-btn:hover{border-color:var(--gold); color:var(--ink);}
+#actmap-fig .act-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#actmap-fig .act-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#actmap-fig .act-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#actmap-fig .ap{display:none;}
+#actmap-fig .ap.on{display:block;}
+#actmap-fig .ap-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#actmap-fig .ap p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+#actmap .act-block{stroke:var(--line); stroke-width:1.5; cursor:pointer; transition:fill-opacity .3s, stroke .3s;}
+#actmap .a1{fill:var(--green); fill-opacity:.14;}
+#actmap .a2{fill:var(--deoxy); fill-opacity:.14;}
+#actmap .a3{fill:var(--gold); fill-opacity:.14;}
+#actmap .a4{fill:var(--mixed-r); fill-opacity:.14;}
+#actmap .act-block.on{fill-opacity:.4; stroke:var(--gold); stroke-width:2.5;}
+#actmap .cap{fill:var(--surface2); stroke:var(--line); stroke-width:1.5;}
+#actmap .cap-t{fill:var(--ink-dim); font-size:14px; font-weight:700;}
+#actmap .act-t{fill:var(--ink); font-size:14px; font-weight:700; pointer-events:none;}
+#actmap .act-n{fill:var(--ink-dim); font-size:11px; pointer-events:none;}
+#actmap .mile{stroke:var(--line); stroke-width:1.2;}
+#actmap .mile-t{fill:var(--ink-faint); font-size:11.5px;}
+#actmap .you{fill:var(--gold); font-size:11px;}
+#actmap .life{stroke:var(--ink-faint); stroke-width:1.2; fill:none;}
+#actmap .life-t{fill:var(--ink-faint); font-size:11.5px;}
+@media (prefers-reduced-motion: reduce){
+  #actmap .act-block{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>序章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>你是一场接力</h1>
+  <p class="subtitle">两个细胞赴一场约：一个已经等了几十年，另一个才两个多月大。它们合成一个的那一刻，你这一棒才算接稳。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>此刻，你还不存在。</p>
+  <p>但组成你的材料已经在路上了。在一位女性的输卵管里，一个直径约十分之一毫米的球体正被纤毛一下一下往下推——它是人体最大的细胞之一，摊在纸上，视力好的人凑近了大概能看见一个极小的点，像一粒细沙。它有一道死线：离开卵巢之后的十二到二十四小时，如果没有人来，它就会自行解体。与此同时，几十厘米之外，数以亿计的另一种细胞正沿着一条黏滑的通道往上走。它们是人体最小的细胞之一，除了一份图纸、一小截动力和一条尾巴，什么都没带。</p>
+  <p>接下来的三十个小时里，这两个细胞会合成一个。而这件事真正不寻常的地方在于：它不是一次开始，而是一次交接。从三十多亿年前某个不知名的祖先算起，通往你的这条细胞谱系一次也没有断过——每一代都从上一代手里接过一个还活着的细胞。你不是被造出来的，你是被递过来的。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 悬殊</div>
+  <h2>两个细胞，两种活法</h2>
+  <p>先看看这两位当事人。它们同属一个物种，长得却像是从两个星球来的。</p>
+  <p><strong>卵子</strong>直径 0.10 到 0.12 毫米。这个尺寸听着不起眼，却已经是人体最大的细胞之一。它圆、饱满、几乎不主动运动，全靠输卵管内壁的纤毛推着走。它体内塞满了往后几天要用的一切：现成的信使 RNA、现成的蛋白质、成堆的营养颗粒，还有十万到六十万个线粒体。它不是来赶路的，它是来携带的。</p>
+  <p><strong>精子</strong>是另一个极端。全长约 50 微米，其中头部只占 4 到 5 微米——单看细胞本体，它的体积不到卵子的万分之一。它把能扔的全扔了：细胞质几乎不留，只保下三样东西。头部是一套折得极紧的染色体，外加一顶装着酶的帽子（顶体）；中段缠着几十个线粒体；再往后是一条长鞭。一份图纸、一小截动力、一条尾巴，就是它的全部行李。</p>
+  <p>自然界里，这两种策略随处可见。一棵橡树在一个秋天落下上万颗橡子，每颗都带着够小苗吃好几天的口粮，落地就在树荫下发芽；一株蒲公英把几百把小伞抛进风里，每把轻到几乎没有重量，赌的是总有几把落在好地方。带口粮的走得近、活得久、押注在质量上；轻装的走得远、损耗惊人、押注在数量上。你的父母各自派出的，恰好就是这两类使者。</p>
+  <p>但人身上这两套策略还有一处更深的不对称，在时间上。</p>
+  <h3>一眼泉，和一座冰川</h3>
+  <p>男性这一边是一眼常年出水的泉。睾丸从青春期起日夜不停，走完一个完整的生产周期约 <strong>64 到 74 天</strong>，每天新出的精子以亿计，边出边用，用不完就代谢掉。这眼泉终生涌着，只是水量和成色随年龄缓慢下滑——第 20 章还会回到这件事。</p>
+  <p>女性这一边是一座冰川。她的全部卵母细胞，在她自己还是胎儿的时候就已经堆积完成：孕 5 个月前后（孕龄口径，见第 4 章）达到峰值，约六七百万个；出生时只剩一两百万；到青春期约三四十万；此后每个月放行一个，一生真正走完全程的大约<strong>四百到五百个</strong>，只占出生时库存的万分之三上下。其余的一直在悄悄退场，不排卵的月份也在退。冰川只会消融，不会重新下雪——按目前的主流认识，这份存货只出不进。</p>
+  <p>所以这场约会的两方，一方是当月新做的，一方是几十年前就备好的。它们要在几个小时之内认出彼此，然后把两套各自保管了半辈子的说明书对齐、合并，一个字都不能错行。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>你的外祖母见过组成你的那颗卵子。</strong>既然卵母细胞在胎儿期就已备齐，那么当你的外祖母怀着你母亲、孕程过半时，你母亲卵巢里那六七百万个卵母细胞已经全部就位——其中一颗，几十年后成了你。那一刻，三代人同处一室：外祖母、腹中的母亲，和将来成为你的那颗细胞。</p>
+    <p>这也解释了母亲年龄与某些染色体数目异常的风险为什么相关：那颗卵母细胞停在分裂的半途一停就是几十年，负责把染色体捆在一起的蛋白质随年头一点点松弛，等它终于被唤醒、要把染色体分成两份时，分错的概率就上去了。它经历过的年头，和你母亲一样长。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 筛选</div>
+  <h2>亿里挑一，挑的不是冠军</h2>
+  <p>"几亿个精子赛跑，冠军受精"——这大概是关于生命起点流传最广的说法之一，也错得格外整齐。它错在三个地方。</p>
+  <p><strong>第一处：这不是一条赛道，是一路关卡。</strong>一次射精释放的精子通常在一到三亿的量级（世界卫生组织第六版参考值的下限是每次 3900 万）。第一道关口是宫颈：那里常年积着一层黏稠如胶冻的黏液，绝大多数精子根本挤不进去；只有在排卵前后的几天，雌激素把这层黏液变稀、把它的分子排成一条条细密的通道，闸门才短暂打开，通过的大约只剩百分之一量级。进了子宫还要在两条输卵管之间赌一把——卵子只在其中一条里。最后真正抵达受精部位的，通常只有<strong>数十到数百个</strong>。从上亿到几十，是一场十万分之一量级的层层筛除，而其中绝大部分损耗与"游得快不快"无关。</p>
+  <p><strong>第二处：路不是自己游完的。</strong>人类精子的游速大约每分钟两到四毫米，而从宫颈到输卵管壶腹部有十五到二十厘米——纯靠自己划，快的要三四十分钟，慢的将近两小时。可实测中，最快的精子在射精后几分钟内就能在输卵管里被找到：这段路它不是游完的，是被送上去的，子宫和输卵管的肌层一波波收缩，把精子往目的地推。那条尾巴真正派上大用场，是在最后几厘米的近身周旋和钻透外壳的那一下。</p>
+  <p><strong>第三处：到了也未必能用。</strong>刚离开男性身体的精子并不具备受精能力。它必须在女性生殖道里泡上几个小时，让膜上的胆固醇被一点点抽走、通道蛋白重新排布，尾巴的摆动从匀速推进变成大幅甩打——这个改装过程叫<strong>获能</strong>。候场的方式也讲究：先到的精子不会一头扎向卵子，而是贴在输卵管峡部的上皮细胞上安静待着，像候场的演员靠在侧幕的墙边，随着排卵临近分批松开、分批放行。所以卵子迎来的不是一次洪峰，而是一支持续到场的小分队。</p>
+  <p>到最后那一刻，围在卵子外面的是几十到几百个精子，一起分泌酶、一起松动外壳。最终进去的那一个，并没有可靠证据表明它游得最快或最强壮——更接近事实的描述是：它恰好在对的时间待在对的位置。亿里挑一是真的，但挑法不是赛跑，是层层设卡，加上最后一次抽签。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>精液分析的"参考值"不是及格线。</strong>化验单上那几个数字——每次 3900 万、前向运动 30%、正常形态 4%——常被当成合格与不合格的分界，看到低于它就以为判了刑。这些数字其实是这么来的：找一批在一年内让伴侣自然受孕的男性，测他们的精液，取人群分布的第 5 百分位。</p>
+    <p>换句话说，下限的含义是"已知能生育的人里，还有 5% 比这更低"。它描述的是一道概率的斜坡，不是一道悬崖。反过来同样成立：各项都漂亮，也不等于一定能怀上。</p>
+  </div>
+
+  <h3>代尔夫特的那封信</h3>
+  <p>1677 年，一位名叫约翰·哈姆的年轻医科学生带着一小瓶样本，去敲代尔夫特一位布商的门。这位布商没上过大学，不懂拉丁文，靠自己磨的小玻璃珠做显微镜，放大倍数却远超同时代任何人——他叫安东尼·范·列文虎克。</p>
+  <p>哈姆说他在样本里看见了会动的小东西。列文虎克复验，又取自己的样本反复观察，然后向伦敦皇家学会写信报告：那里面挤满了"微动物"，摆着长尾巴游动，多得数不清。信里他小心翼翼地声明，样本得自夫妻生活的自然结果，不是用什么见不得人的手段取得的；如果学会觉得有伤风化，尽可把信烧掉。学会没有烧。</p>
+  <p>麻烦从这里开始。看见了会游的东西，下一个问题就是：它到底是什么？当时分成两派。<strong>精源论</strong>者认为新生命完整地藏在精子里，母亲只提供土壤；<strong>卵源论</strong>者认为一切都在卵里，精液只负责点火。1694 年，荷兰人尼古拉斯·哈索克为精源论画了一幅插图：一枚精子的头部里蜷着一个抱膝的小人。他自己在书里写明那是设想、不是所见——但图跑得比谨慎快，"精子里坐着小人"从此流传了两百年。</p>
+  <p>这场官司拖得很久。1827 年，卡尔·冯·贝尔在一条狗的卵巢里确认了哺乳动物的卵长什么样；到 1870 年代，奥斯卡·赫特维希在透明的海胆卵里亲眼看着两个细胞核靠拢、合成一个——两派同时输掉：新生命不是谁藏在谁身上，是两边各出一半，当场合成。</p>
+  <p>今天我们说"接力"，指的正是这两只手的交接，而不是一只手把包裹递给另一只手。这个区别，三百多年前有人为它吵了两个世纪。</p>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 点火</div>
+  <h2>三十个小时：从相认到第一次分裂</h2>
+  <p>接触发生了。一枚精子挤过卵子外面那层叫<strong>透明带</strong>的糖蛋白外壳时，头顶那顶装酶的帽子破开，酶倒出来，在壳上化开一条窄道。它扭着身子钻过去，落进壳与卵细胞膜之间的窄缝。</p>
+  <p>然后是相认。两张细胞膜要贴合，靠的是各自表面的一对蛋白：精子这边的叫 <strong>IZUMO1</strong>，卵子这边的叫 <strong>JUNO</strong>。发现它们的团队给了这样一对名字——出云大社是日本掌管姻缘的神社，尤诺是罗马神话里主婚姻的女神。两个分子握上手，膜融合，精子的核连同一小段中段被拉进卵子。从此刻起计时，钟表归零。</p>
+  <h3>火线，不是涟漪</h3>
+  <p>融合后几秒，精子带进来的一种酶开始拆解卵子膜上的一类脂质，间接撬开了细胞内钙库的闸门。一道<strong>钙波</strong>从接触点出发，扫过整个卵子，三十到六十秒走完全程。</p>
+  <p>很容易把它想象成一颗石子落进水面激起的涟漪——但这个类比会把机制推错。涟漪是被撞出来的，能量来自石子，越远越弱；钙波不是。它更像草原上点着的一道火线：每一处的钙一放出来，就去撬开邻居的闸门，邻居再撬开下一个。能量是沿途现取的，所以它走到卵子最远的那一端时，一点也不比出发时弱。之后钙浓度还会像脉搏一样反复起落，持续好几个小时——这串起落才是真正的指令，它告诉卵子：可以开工了。</p>
+  <h3>关门</h3>
+  <p>第一件要办的事是关门。两个精子进来，就是三套染色体，这样的胚胎几乎无法存活（在试管婴儿实验室里，多精受精是常见的失败判读之一）。</p>
+  <p>卵子的皮层下埋着数千颗<strong>皮质颗粒</strong>。火线扫过之处，它们纷纷向外倾倒内容物：酶把透明带上的糖蛋白交联起来，外壳当场硬化，精子受体被削平。门是从外面焊死的，几分钟内完成。海胆和蛙类另有一道毫秒级的"电闸"——卵子膜电位瞬间翻转，抢在硬化完成前先拦一道；哺乳动物这道电闸并不明显，主要靠这层硬化的壳。</p>
+  <h3>迟到了几十年的一次分裂</h3>
+  <p>卵子这时才做完自己的功课。它其实一直停在减数分裂的半途：从胎儿期起停在第一次分裂的前期，排卵前才推进到第二次分裂的中期，然后又停住——等的就是这道火线。钙的起落是它的起床铃：染色体分开，多余的一套被裹进一个极小的袋子扔出细胞外，那就是<strong>第二极体</strong>。这一步在受精后一到三小时内完成。</p>
+  <p>接着，两套染色体各自裹上核膜，成为两个并排的<strong>原核</strong>，在细胞中央慢慢靠拢。受精后 6 到 12 小时，显微镜下就能看见这两个圆了；但胚胎实验室正式判读受精是否正常要再等一等——通常安排在受精后 <strong>16 到 17 小时</strong>，那时两个原核最清晰，也还没开始消解。看见和判读，是两个时点。注意：它们并不马上合并成一个核。两套染色体各自复制一份 DNA，直到第一次分裂时才在同一根纺锤丝上真正会合。父母双方的基因，是在细胞第一次一分为二的那一刻才彻底混编的。</p>
+  <p>第一次卵裂发生在受精后 <strong>24 到 30 小时</strong>。但即便到了这一步，这个细胞读的还不是自己的书：头两天里，指挥它的仍是卵子当年备下的母源信使 RNA 和蛋白质，就像母亲留在桌上的便条。要到 4 到 8 细胞期、大约第 3 天，新的基因组才大规模开工，第一次用上父亲那一半的字。而这一整段时间它都还漂在输卵管里，没有着床，得不到一滴母血的接济——它靠的完全是卵子备下的那份家当。那份家当里都有什么，就是下一章的事了。</p>
+
+  <figure>
+    <svg id="fertline" viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="受精前后三十小时的事件时间表，按时间量级排布">
+      <line class="pre" x1="44" y1="180" x2="150" y2="180"/>
+      <line class="axis" x1="150" y1="180" x2="716" y2="180"/>
+      <line class="zero" x1="150" y1="180" x2="150" y2="76"/>
+      <text class="ev-sub" x="44" y="152" text-anchor="start">受精前 · 获能 → 顶体反应 → 穿越透明带</text>
+      <circle class="ev-dot pre-dot" cx="95" cy="180" r="5"/>
+      <text class="tick-label" x="716" y="172" text-anchor="end">时间 · 量级刻度 →</text>
+
+      <line class="tick" x1="200" y1="174" x2="200" y2="186"/><text class="tick-label" x="200" y="204" text-anchor="middle">秒</text>
+      <line class="tick" x1="320" y1="174" x2="320" y2="186"/><text class="tick-label" x="320" y="204" text-anchor="middle">分</text>
+      <line class="tick" x1="440" y1="174" x2="440" y2="186"/><text class="tick-label" x="440" y="204" text-anchor="middle">时</text>
+      <line class="tick" x1="560" y1="174" x2="560" y2="186"/><text class="tick-label" x="560" y="204" text-anchor="middle">天</text>
+      <line class="tick" x1="680" y1="174" x2="680" y2="186"/><text class="tick-label" x="680" y="204" text-anchor="middle">周</text>
+
+      <circle class="ev-dot" cx="150" cy="180" r="5"/>
+      <text class="ev-label" x="150" y="56" text-anchor="middle">精卵膜融合</text>
+      <text class="ev-sub" x="150" y="72" text-anchor="middle">0 秒 · IZUMO1 与 JUNO 相认</text>
+
+      <line class="ev-stem" x1="300" y1="180" x2="300" y2="132"/><circle class="ev-dot" cx="300" cy="180" r="5"/>
+      <text class="ev-label" x="300" y="110" text-anchor="middle">钙波扫过整个卵子</text>
+      <text class="ev-sub" x="300" y="126" text-anchor="middle">30–60 秒</text>
+
+      <line class="ev-stem" x1="352" y1="180" x2="352" y2="226"/><circle class="ev-dot" cx="352" cy="180" r="5"/>
+      <text class="ev-label" x="352" y="248" text-anchor="middle">透明带硬化 · 关门</text>
+      <text class="ev-sub" x="352" y="264" text-anchor="middle">数分钟内</text>
+
+      <line class="ev-stem" x1="455" y1="180" x2="455" y2="76"/><circle class="ev-dot" cx="455" cy="180" r="5"/>
+      <text class="ev-label" x="455" y="56" text-anchor="middle">完成减数第二次分裂</text>
+      <text class="ev-sub" x="455" y="72" text-anchor="middle">1–3 小时 · 排出第二极体</text>
+
+      <line class="ev-stem" x1="505" y1="180" x2="505" y2="280"/><circle class="ev-dot" cx="505" cy="180" r="5"/>
+      <text class="ev-label" x="505" y="302" text-anchor="middle">两个原核并排出现</text>
+      <text class="ev-sub" x="505" y="318" text-anchor="middle">6–12 小时</text>
+
+      <line class="ev-stem" x1="568" y1="180" x2="568" y2="132"/><circle class="ev-dot" cx="568" cy="180" r="5"/>
+      <text class="ev-label" x="568" y="110" text-anchor="middle">第一次卵裂</text>
+      <text class="ev-sub" x="568" y="126" text-anchor="middle">24–30 小时</text>
+
+      <line class="ev-stem" x1="618" y1="180" x2="618" y2="226"/><circle class="ev-dot late" cx="618" cy="180" r="5"/>
+      <text class="ev-label" x="618" y="248" text-anchor="middle">自己的基因组开工</text>
+      <text class="ev-sub" x="618" y="264" text-anchor="middle">4–8 细胞 · 约第 3 天</text>
+
+      <line class="ev-stem" x1="676" y1="180" x2="676" y2="280"/><circle class="ev-dot late" cx="676" cy="180" r="5"/>
+      <text class="ev-label" x="700" y="302" text-anchor="end">着床</text>
+      <text class="ev-sub" x="716" y="318" text-anchor="end">第 6–10 天</text>
+    </svg>
+    <figcaption><b>图 序-1 · 受精的三十小时。</b>横轴按时间量级排布（秒 → 分 → 时 → 天 → 周），不等距。金色为受精当场的动作，蓝色为随后几天的事件；虚线段是融合之前、发生在精子身上的准备工作。整场交接里，"进门"只用了几秒，"关门"用了几分钟，而两套染色体真正混编要等到二十多小时后的第一次分裂。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 写定</div>
+  <h2>这一分钟定下的两件终身之事</h2>
+  <p>膜融合之后的那一分钟里，有两件事就此写定，往后八九十年都不会改。它们一件来自父亲，一件来自母亲。</p>
+  <h3>一封只有两种版本的信</h3>
+  <p>卵子携带的性染色体只有一种：X。精子有两种：X 或 Y。所以这一栏由父亲那一半填写——填的是哪一种，在膜融合的瞬间就已经决定。</p>
+  <p>这套规律是 1905 年前后被看清的。美国生物学家<strong>内蒂·史蒂文斯</strong>在粉甲虫的精子里发现有一种染色体明显小得多，且只出现在一半的精子里；与她几乎同时，埃德蒙·威尔逊得到了相近的结论。在那之前，人们普遍相信性别是由营养、温度或受孕时的情绪之类的外因决定的。史蒂文斯的名字后来长期被排在威尔逊之后，近几十年才逐渐还原。</p>
+  <p>X 和 Y 悬殊得厉害：X 约 1.56 亿个碱基、携带八九百个基因，其中不少与免疫和神经系统有关（这条线会一路铺到第 19 章）；Y 只有约 5700 万个碱基，编码基因数以几十计。两者的差别落到精子的重量上却微乎其微——两类精子的 DNA 含量只差约 2.8%，"带 Y 的精子更轻更快所以更容易生男孩"这个流传已久的说法，在人类身上一直缺乏可靠证据。出生性别比稳定在 105 比 100 上下（男比女），成因至今没有定论；也有大样本研究提示受孕那一刻其实更接近一比一。</p>
+  <p>还有一点要说清楚：这一刻写定的只是开关的初始位置，不是结果。此后<strong>六到七周</strong>里，男胚胎和女胚胎在结构上没有分别——同一套零件摆在那里，两条装法都留着接口，等一个叫 SRY 的信号来扳道岔。分化真正发生是在那之后，第 6 章会专门讲这个岔路口。性别在受精那一刻被<em>写进指令</em>，而不是在那一刻<em>完成</em>。</p>
+  <h3>一条只走母亲的线</h3>
+  <p>第二件事更安静，几乎没有仪式感。</p>
+  <p>卵子带着十万到六十万个线粒体入场，精子中段那几十个（约五十到七十五个）进入卵子后会被打上一种"待回收"的化学标记，随即被拆解清除；即便有个别漏网，也会在后续的分裂里被稀释到检测不出。结果是：<strong>你的线粒体几乎全部来自母亲。</strong>父系线粒体传递并非绝对没有，医学文献里有过零星的病例报告并引发过争论，但它是罕见的例外，不是常态。</p>
+  <p>线粒体自带一小圈 DNA：<strong>16,569 个碱基对，37 个基因</strong>，环形，长得像细菌的染色体——为什么像细菌，第 1 章会给出那个有点惊人的答案。它不参与父母双方每一代的洗牌，几乎原样传下来。于是你身上有两份遗产：核里那一套，是父母双方的牌被彻底洗过再发的；线粒体这一份，是一条没被洗过牌的直线，从你母亲、外祖母、外曾祖母一路往回接。</p>
+  <p>顺着这条线往上追，全人类的母系谱系会汇到一个点上，通常叫<strong>"线粒体夏娃"</strong>，大致在十五到二十万年前的非洲。这个名字很容易引出两个错误结论，值得就地拆掉：她不是当时唯一的女性——和她同时代的女性有很多，只是她们的母系线在后来的某一代断了（生了儿子，或者没有后代）；她也不是"人类的第一位母亲"——她只是现存人类的母系线唯一都能回溯到的那个交汇点，而这个交汇点会随着人口的生生灭灭在时间上前后移动。它是一个统计学上的会合点，不是一位始祖。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>给线粒体找第三方。</strong>有些女性携带致病的线粒体 DNA 突变，按母系规律，孩子有很高概率继承。对策之一是把她卵子的细胞核搬进一枚已去核的捐赠卵子——孩子的核基因仍来自父母双方，线粒体来自第三人。英国 2015 年立法允许这项技术在严格审批下使用；2025 年 7 月，纽卡斯尔团队在《新英格兰医学杂志》报告了首批随访：22 人入组，8 名婴儿活产，其中 <strong>3 个孩子体内能检出母源的突变型线粒体，但比例都远低于致病阈值</strong>。值得注意的是这点回升出现在胚胎与出生之间——搬核并不能把旧线粒体清得一个不剩，只能压到极低。长期随访仍在继续。各国法律地位差异很大：英国那条通道有审批和登记，而在监管更松的地方，这项技术也被用于普通不孕治疗——不同来源估计全球已逾两百例，但<strong>没有国际登记</strong>，确切例数和这些孩子的结局都无从核实。这本身就是一条值得记住的信息：一项技术的公开成绩，往往只来自愿意被记录的那部分。</p>
+    <p><strong>从皮肤到配子。</strong>体外配子发生（IVG）想做的事更彻底：把普通体细胞重编程成干细胞，再在培养皿里诱导它变成卵子或精子。小鼠身上已经走通全程——2016 年，日本团队用完全体外培养出的卵子产下了健康幼鼠；2023 年又报告用雄鼠细胞诱导出可用的卵子。人类这边还差得远：经同行评审的成果已经能把诱导出来的细胞送进减数分裂前期，但越往后效率越低，始终走不完这一关。2026 年有两家公司先后公告了进展——Conception 称已把体外诱导的人类卵母细胞推到减数分裂早期，Paterna 称从活检来源获得了精子样细胞。<strong>两者都是公司公告，未经同行评审，也未被独立复现</strong>；在那之前，"减数分裂这一关尚未过"这个判断不宜推翻。（另需分清：把患者细胞核搬进供体卵子的核移植是另一条路线，不属于 IVG。）若有一天走通，不孕治疗、生育年龄的边界乃至"父母"这个词的定义都要重新讨论——伦理与监管的争论已经先一步开始了。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 接力</div>
+  <h2>这一棒要跑的全程</h2>
+  <p>好了。三十小时过去，一个细胞变成了两个。从这里到你合上这本书时的那具身体，中间隔着约三十七万亿个细胞、两百多种细胞类型、八九十年，以及一段可以分成四幕来讲的路。</p>
+  <p>这本书就沿着这条路走。它不按系统分章——"循环系统一章、消化系统一章"那种分法适合查，不适合读。它按时间走：跟着一具身体，从这个细胞开始，一路到它把原子还给世界。凡是需要解释"为什么身体长成这个样子"的地方，答案通常不在结构里，而在它当时正处在人生的哪一段。</p>
+
+  <figure id="actmap-fig">
+    <div class="switch-row">
+      <span class="switch-hint">点幕看路线 →</span>
+      <div class="act-tabs" role="group" aria-label="选择要查看的幕">
+        <button class="act-btn" data-act="1" aria-pressed="false">第一幕</button>
+        <button class="act-btn" data-act="2" aria-pressed="false">第二幕</button>
+        <button class="act-btn" data-act="3" aria-pressed="false">第三幕</button>
+        <button class="act-btn" data-act="4" aria-pressed="false">第四幕</button>
+      </div>
+    </div>
+    <svg id="actmap" viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="全书四幕地图：受精到死亡的时间线，分为建造、调试与扩容、满负荷运行、磨损与谢幕四幕">
+      <line class="life" x1="92" y1="88" x2="300" y2="88"/>
+      <line class="life" x1="460" y1="88" x2="662" y2="88"/>
+      <polyline class="life" points="654,83 664,88 654,93"/>
+      <text class="life-t" x="380" y="93" text-anchor="middle">一具身体的一生</text>
+
+      <rect class="cap" x="44" y="110" width="40" height="60" rx="8"/>
+      <text class="cap-t" x="64" y="146" text-anchor="middle">序</text>
+      <text class="you" x="64" y="102" text-anchor="middle">你在这里</text>
+
+      <rect class="act-block a1" data-act="1" x="92" y="110" width="184" height="60" rx="8"/>
+      <text class="act-t" x="184" y="138" text-anchor="middle">第一幕 建造</text>
+      <text class="act-n mono" x="184" y="158" text-anchor="middle">第 1–8 章</text>
+
+      <rect class="act-block a2" data-act="2" x="276" y="110" width="92" height="60" rx="8"/>
+      <text class="act-t" x="322" y="138" text-anchor="middle">第二幕</text>
+      <text class="act-n mono" x="322" y="158" text-anchor="middle">第 9–12 章</text>
+
+      <rect class="act-block a3" data-act="3" x="368" y="110" width="185" height="60" rx="8"/>
+      <text class="act-t" x="460" y="138" text-anchor="middle">第三幕 满负荷运行</text>
+      <text class="act-n mono" x="460" y="158" text-anchor="middle">第 13–20 章</text>
+
+      <rect class="act-block a4" data-act="4" x="553" y="110" width="115" height="60" rx="8"/>
+      <text class="act-t" x="610" y="138" text-anchor="middle">第四幕</text>
+      <text class="act-n mono" x="610" y="158" text-anchor="middle">第 21–25 章</text>
+
+      <rect class="cap" x="676" y="110" width="40" height="60" rx="8"/>
+      <text class="cap-t" x="696" y="146" text-anchor="middle">终</text>
+
+      <line class="mile" x1="92" y1="170" x2="92" y2="182"/><text class="mile-t" x="92" y="200" text-anchor="middle">受精</text>
+      <line class="mile" x1="276" y1="170" x2="276" y2="182"/><text class="mile-t" x="276" y="200" text-anchor="middle">出生</text>
+      <line class="mile" x1="368" y1="170" x2="368" y2="182"/><text class="mile-t" x="368" y="200" text-anchor="middle">青春期</text>
+      <line class="mile" x1="460" y1="170" x2="460" y2="178"/><text class="mile-t" x="460" y="200" text-anchor="middle">壮年</text>
+      <line class="mile" x1="553" y1="170" x2="553" y2="182"/><text class="mile-t" x="553" y="200" text-anchor="middle">中年</text>
+      <line class="mile" x1="668" y1="170" x2="668" y2="182"/><text class="mile-t" x="668" y="200" text-anchor="middle">死亡</text>
+    </svg>
+    <div class="act-panel" id="actPanel">
+      <div class="ap on" data-ap="0">
+        <div class="ap-t">四幕 · 一条时间线</div>
+        <p>点上方任意一幕，看这一段路要跑些什么。色块的宽度按章数分配，不按年龄等比例——按年龄画的话，第一幕那不到十个月会窄得看不见，而它正是变化最剧烈的一段。</p>
+      </div>
+      <div class="ap" data-ap="1">
+        <div class="ap-t">第一幕 建造 · 第 1–8 章 · 受精 → 出生</div>
+        <p>一个细胞在三十八周里长成一具三公斤重、器官齐备的身体。这一幕讲"从无到有"：细胞如何决定自己将来是谁，三层胚层如何分家，心脏在第 22 天前后开始跳，以及为什么身体一长到某个尺寸就非有肺和血管不可。收尾是出生。</p>
+      </div>
+      <div class="ap" data-ap="2">
+        <div class="ap-t">第二幕 调试与扩容 · 第 9–12 章 · 出生 → 青春期</div>
+        <p>零件齐了，但没调好。大脑先铺设远超所需的连接，再花十几年拆掉其中一半；免疫系统进一所淘汰率极高的军校；骨头靠生长板一段段接力变长；最后由沉睡了十年的下丘脑按下青春期那枚重启键。这一幕的关键词是"删减"，不是"增加"。</p>
+      </div>
+      <div class="ap" data-ap="3">
+        <div class="ap-t">第三幕 满负荷运行 · 第 13–20 章 · 壮年</div>
+        <p>这一幕不按时间走，按场景走：一顿饭、一次奔跑、一夜睡眠、一场感冒、一次受伤。同一具身体在不同任务下如何重新分配血流、燃料和注意力，比静态的解剖图更能说明它怎么工作。男女之别与繁殖也在这一幕正面登场——接力的下一棒。</p>
+      </div>
+      <div class="ap" data-ap="4">
+        <div class="ap-t">第四幕 磨损与谢幕 · 第 21–25 章 · 中年 → 死亡</div>
+        <p>衰退并不同步：肌肉和骨从三十几岁开始下坡，晶状体四十岁前后，高频听力更早。身体还有反过来的一手——代偿，以及一些到七十岁仍在上行的能力。最后一章讲死亡的生理学：它是一个有先后顺序的过程，不是一个瞬间。</p>
+      </div>
+    </div>
+    <figcaption><b>图 序-2 · 全书四幕地图。</b>横轴是一具身体的一生，色块宽度按各幕章数分配。序章与终章立在两端：一个讲你如何接过这一棒，一个讲你把它交出去之后，组成你的原子去了哪里。</figcaption>
+  </figure>
+
+  <h3>棒交给谁</h3>
+  <p>最后回到"接力"这个词，把它说完整。</p>
+  <p>大约在你还是个三周左右的胚胎时，会有几十个细胞被单独划出来，编入另册。它们不参与建造任何器官——不做心脏，不做神经，不做骨头——只是被小心地搬运到将来长成性腺的那个位置，藏好，然后等上十几年。它们叫<strong>原始生殖细胞</strong>。</p>
+  <p>你身上其余的一切，无论多精巧——那颗跳了三十亿次的心脏、那副能认出一张脸的视觉系统、那双弹钢琴的手——都会随你一起谢幕。只有这一小撮被编入另册的细胞，有机会把棒递出去。身体的其余部分，从这个角度看，是它们的运载工具和保管人。</p>
+  <p>而这根棒已经传了很久。地球上最早的生命痕迹落在三十五到四十亿年前之间；从那时到你，中间没有任何一代是从非活物重新组装起来的，每一代都从上一代手里接过一个正在活着的细胞。这句话听着像抒情，其实是定义上的必然：任何一次落棒，都不会有你。</p>
+  <p>你手里现在拿着的，就是这个东西。接下来我们把它拆开看看。</p>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">接力交接 · 关键数字</div>
+    <table>
+      <tr><td class="k">卵子直径</td><td class="v">0.10–0.12 mm</td><td class="n">人体最大的细胞之一，接近肉眼可见</td></tr>
+      <tr><td class="k">精子全长 / 头部长</td><td class="v">~50 μm / 4–5 μm</td><td class="n">细胞体积不到卵子的万分之一</td></tr>
+      <tr><td class="k">单次射精精子数</td><td class="v">1–3 亿</td><td class="n">WHO 第六版参考下限 3900 万/次</td></tr>
+      <tr><td class="k">抵达受精部位的精子</td><td class="v">数十–数百个</td><td class="n">层层设卡，不是速度竞赛</td></tr>
+      <tr><td class="k">精子获能所需时间</td><td class="v">数小时</td><td class="n">刚射出时并不具备受精能力</td></tr>
+      <tr><td class="k">精子生产周期</td><td class="v">64–74 天</td><td class="n">自青春期起终生生产，每日新产以亿计</td></tr>
+      <tr><td class="k">卵母细胞库存（出生时）</td><td class="v">100–200 万</td><td class="n">胎儿期峰值约 600–700 万</td></tr>
+      <tr><td class="k">一生实际排卵数</td><td class="v">约 400–500 个</td><td class="n">约为出生库存的万分之三</td></tr>
+      <tr><td class="k">钙波扫过卵子</td><td class="v">30–60 秒</td><td class="n">其后钙的起落持续数小时</td></tr>
+      <tr><td class="k">卵子线粒体数</td><td class="v">10 万–60 万个</td><td class="n">精子带入的约 50–75 个被清除</td></tr>
+      <tr><td class="k">线粒体 DNA</td><td class="v">16,569 bp · 37 基因</td><td class="n">环形，几乎只随母系传递</td></tr>
+      <tr><td class="k">受精到第一次卵裂</td><td class="v">24–30 小时</td><td class="n">自身基因组约第 3 天才大规模开工</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">"几亿个精子赛跑，冠军受精"——这个说法哪里出了问题？</div>
+      <div class="opts">
+        <button>精子数量其实只有几十万，远没有几亿</button>
+        <button data-c="1">损耗主要来自一路的关卡而非速度，最后抵达的只剩几十到几百个</button>
+        <button>精子并不移动，全靠卵子主动接近</button>
+        <button>受精的是最后到达的那一个</button>
+      </div>
+      <div class="explain">宫颈黏液挡掉约百分之九十九，输卵管还要二选一。更反直觉的是那段路多半不是精子自己游的：它的游速每分钟只有两到四毫米，而全程十五到二十厘米，可最快的精子几分钟内就出现在输卵管里——是子宫肌层的收缩把它们送上去的。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">刚离开男性身体的精子，为什么还不能立刻使卵子受精？</div>
+      <div class="opts">
+        <button>它还没有获得足够的能量</button>
+        <button>它的染色体尚未完成最后一次分裂</button>
+        <button data-c="1">它需要在女性生殖道里停留数小时完成"获能"改装</button>
+        <button>它必须先与另一枚精子交换遗传物质</button>
+      </div>
+      <div class="explain">获能过程中，精子膜上的胆固醇被抽走、通道蛋白重排，尾部摆动从匀速推进转为大幅甩打。等待期间它们并不乱闯，而是贴在输卵管峡部的上皮上待命，随排卵临近分批放行——所以卵子迎来的是持续到场的小分队，不是一次洪峰。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">在哺乳动物身上，阻止第二枚精子进入的主要机制是什么？</div>
+      <div class="opts">
+        <button>卵子膜电位在毫秒内翻转，形成电屏障</button>
+        <button data-c="1">皮质颗粒外排，使透明带交联硬化、受体被削平</button>
+        <button>第一枚精子进入后立即封住通道口</button>
+        <button>输卵管收缩把其余精子冲走</button>
+      </div>
+      <div class="explain">那道毫秒级的"电闸"确实存在，但主要见于海胆和蛙类；哺乳动物并不明显，靠的是钙波过后数分钟内完成的外壳硬化。这道门必须关严：两枚精子进入意味着三套染色体，这样的胚胎几乎无法存活，在试管婴儿实验室里是常见的失败判读。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">关于线粒体的遗传，下列哪一项正确？</div>
+      <div class="opts">
+        <button>父母各贡献一半，与核基因相同</button>
+        <button data-c="1">几乎只来自母亲；精子带入的少量线粒体入卵后被标记清除</button>
+        <button>完全来自父亲，母亲的在受精时被排出</button>
+        <button>受精卵不含线粒体，出生后才逐渐生成</button>
+      </div>
+      <div class="explain">卵子带着十万到六十万个线粒体入场，精子那几十个进门即被打上回收标记。它自带的那圈 DNA 只有 16,569 个碱基对、37 个基因，不参加每一代的洗牌。顺着这条线上溯到的"线粒体夏娃"并不是当时唯一的女性，只是现存人类母系线的交汇点，而这个点会随人口变动前后移动。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">受精之后，这个细胞什么时候才开始大规模使用自己的基因组？</div>
+      <div class="opts">
+        <button>膜融合后几秒，钙波一起就开始</button>
+        <button>第一次卵裂时，两套染色体会合的那一刻</button>
+        <button data-c="1">4–8 细胞期、大约第 3 天</button>
+        <button>要等到着床、与母体血液连通之后</button>
+      </div>
+      <div class="explain">头两天它读的是卵子备下的母源信使 RNA 和蛋白质，像照着母亲留在桌上的便条办事。这也解释了为什么第 1 章要专门盘点这份"家当"：那几天没有母血接济，一个细胞独自过日子，全靠上一棒交接时塞给它的物资。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第一幕 建造</div>
+  <div class="title">第 1 章 · 一个细胞的全部家当</div>
+  <p>接下来几天，这个细胞得不到母亲一滴血的接济，全靠卵子备下的家当独自活着：一层五纳米厚的油膜，一份两米长、却要塞进直径六微米的核里的说明书，几十万座自带外壳的小火炉，还有一种存量只有几十克、一天却要周转掉与你体重同量级分量的通货。下一章，我们把这份家当一件件摊开来数。</p>
+  <nav class="footnav">
+    <span class="none">—</span>
+    <a href="../index.html">目录</a>
+    <a href="ch01-cell.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 四幕地图：点幕高亮 + 切换说明
+  var tabs = document.querySelectorAll('#actmap-fig .act-btn');
+  var blocks = document.querySelectorAll('#actmap .act-block');
+  var panes = document.querySelectorAll('#actmap-fig .ap');
+  function showAct(act){
+    var i;
+    for (i = 0; i < tabs.length; i++) {
+      tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-act') === act ? 'true' : 'false');
+    }
+    for (i = 0; i < blocks.length; i++) {
+      blocks[i].classList.toggle('on', blocks[i].getAttribute('data-act') === act);
+    }
+    for (i = 0; i < panes.length; i++) {
+      panes[i].classList.toggle('on', panes[i].getAttribute('data-ap') === act);
+    }
+  }
+  for (var t = 0; t < tabs.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){ showAct(el.getAttribute('data-act')); });
+    })(tabs[t]);
+  }
+  for (var b = 0; b < blocks.length; b++) {
+    (function(el){
+      el.addEventListener('click', function(){ showAct(el.getAttribute('data-act')); });
+    })(blocks[b]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

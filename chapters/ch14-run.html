@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第14章 · 一次奔跑 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 14-1 三套供能系统（本章专用） ---- */
+#fuel-fig .slider-row{display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:center; margin:2px 0 6px;}
+#fuel-fig .slider-row label{font-family:var(--mono); font-size:12px; color:var(--ink-faint); letter-spacing:.1em;}
+#fuel-fig input[type="range"]{width:min(340px,72vw); accent-color:var(--gold); cursor:pointer;}
+#fuel-fig input[type="range"]:focus-visible{outline:2px solid var(--gold); outline-offset:4px;}
+#fuel-fig .readout{font-family:var(--mono); font-size:13.5px; color:var(--gold); font-weight:700; text-align:center; margin-bottom:12px;}
+#fuel-fig .fuel-note{margin-top:16px; padding:14px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0; font-size:14.5px; line-height:1.9; color:var(--ink-dim);}
+#fuel .band-a{fill:var(--gold);}
+#fuel .band-b{fill:var(--mixed-r);}
+#fuel .band-c{fill:var(--oxy);}
+#fuel .band-a,#fuel .band-b,#fuel .band-c{transition:width .25s, x .25s;}
+#fuel .track{fill:var(--surface2); stroke:var(--line); stroke-width:1.5;}
+#fuel .tick-label{fill:var(--ink-faint); font-size:11.5px;}
+#fuel .lb{fill:var(--ink); font-size:12.5px; font-weight:600;}
+#fuel .lb-s{fill:var(--ink-dim); font-size:11px;}
+#fuel .pct{fill:var(--bg); font-size:12px; font-weight:700;}
+
+/* ---- 图 14-2 血流大迁徙（本章专用） ---- */
+#shift .col-head{fill:var(--ink); font-size:13.5px; font-weight:700;}
+#shift .bar-rest{fill:var(--deoxy); fill-opacity:.75;}
+#shift .bar-max{fill:var(--oxy); fill-opacity:.85;}
+#shift .organ{fill:var(--ink-dim); font-size:12.5px;}
+#shift .val{fill:var(--gold); font-size:11.5px;}
+#shift .rule{stroke:var(--line); stroke-width:1;}
+#shift .cap{fill:var(--ink-faint); font-size:11.5px;}
+@media (prefers-reduced-motion: reduce){
+  #fuel .band-a,#fuel .band-b,#fuel .band-c{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第三幕 满负荷运行 · 第 14 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>一次奔跑</h1>
+  <p class="subtitle">起跑后的前十秒、前两分钟、前二十分钟，你烧的根本不是同一种燃料——而喊停的那个，多半也不是你的腿。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>晚上八点五十分。你系好鞋带，站在小区门口，深吸一口气。</p>
+  <p>前面是一条五公里的路。你打算跑完它。</p>
+  <p>接下来的半小时里，你身上会发生一连串你完全不会察觉的调度：三套供能系统依次接手又依次交班，心脏的出水量翻上四五倍，内脏的血被大量抽走送去腿上，体温一路爬到接近发烧的高度。而在终点前那段最难熬的路上，真正在权衡"还能不能再撑一会儿"的，其实并不是你的双腿。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 起跑</div>
+  <h2>前十秒：抽屉里那点零钱</h2>
+  <p>第 1 章清点细胞家当时留过一个悬念：ATP 是零钱不是存款——存量只有几十克，一天却要周转掉与体重同量级的分量。现在这笔账要当场结了。</p>
+  <p>你蹬地的那一瞬，肌肉纤维伸手去抓 ATP。而肌肉里现存的 ATP，全力收缩状态下只够用 <strong>1 到 2 秒</strong>。</p>
+  <p>两秒。这就是身体愿意为"随时能动"备下的全部现金。</p>
+  <p>好在抽屉旁边还有一只应急的钱罐：<strong>磷酸肌酸</strong>。它本身不能直接驱动肌肉，但能在一步反应之内把自己身上那个磷酸基递给用完的 ADP，当场变回 ATP。这只罐子里的存货能再撑 <strong>5 到 10 秒</strong>——恰好是百米冲刺、一次纵跳、一记扣杀的长度。</p>
+  <p>为什么身体宁愿备一只"能一步换成现金的罐子"，也不肯多屯零钱？因为速度。这一步反应快到几乎不占时间，而且完全不需要氧气——氧气还在肺里，血还没来得及加速，肌肉已经在全力工作了。你起跑后那几秒的动力，是在完全无氧的条件下由存货支付的。</p>
+  <p>这套系统的短板同样明显：它力量最大，续航最短。十秒钟一到，罐底见了，功率必须往下掉——除非有别的系统接上。</p>
+  <p>顺带解释一件常被问到的事：肌酸补剂为什么是极少数被反复验证有效的运动补剂之一。它的作用机制正是把这只钱罐做大一点——让肌肉里的磷酸肌酸存量多出百分之十几，于是那五到十秒的窗口稍微拉长，短时高强度的重复能力随之改善。它帮不上马拉松的忙，因为马拉松根本不烧这只罐子。一个补剂管不管用，先看它加的是哪一棒。</p>
+
+  <h3>接下来交给谁</h3>
+  <p>后面的三十分钟里，供能这件事会在三套系统之间反复移交，很像一场接力：并不是前一棒跑完才交出去，而是重叠着交、边跑边接。序章说你是一场跨代的接力；在这半小时的尺度上，你身体内部也在跑一场小得多的接力。</p>
+  <p>三棒分别是：<strong>磷酸原系统</strong>（十秒内，力量最大，无氧）、<strong>糖酵解系统</strong>（十秒到两分钟，中等功率，无氧）、<strong>有氧系统</strong>（此后一直到你停下，功率最低，续航最长）。</p>
+  <p>要紧的是别把"交接"想成开关。任何一个瞬间，三套系统都在同时供能，只是比例不同——图 14-1 那根滑块，拖到哪里都不会看到某一条彻底归零。</p>
+
+  <figure id="fuel-fig">
+    <div class="slider-row">
+      <label for="fuelRange">拖动运动时长 →</label>
+      <input type="range" id="fuelRange" min="0" max="10" step="1" value="1" aria-label="选择持续全力运动的时长，查看三套供能系统的占比">
+    </div>
+    <div class="readout" id="fuelRead">10 秒 · 全力冲刺</div>
+    <svg id="fuel" viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三套供能系统随运动时长变化的占比条形图：磷酸原系统、糖酵解系统、有氧系统">
+      <rect class="track" x="60" y="60" width="640" height="54" rx="8"/>
+      <rect class="band-a" id="bandA" x="60" y="60" width="352" height="54"/>
+      <rect class="band-b" id="bandB" x="412" y="60" width="256" height="54"/>
+      <rect class="band-c" id="bandC" x="668" y="60" width="32" height="54"/>
+      <text class="pct" id="pctA" x="236" y="92" text-anchor="middle">55%</text>
+      <text class="pct" id="pctB" x="540" y="92" text-anchor="middle">40%</text>
+      <text class="pct" id="pctC" x="684" y="92" text-anchor="middle"></text>
+
+      <rect class="band-a" x="60" y="150" width="16" height="16" rx="3"/>
+      <text class="lb" x="86" y="163" text-anchor="start">磷酸原系统</text>
+      <text class="lb-s" x="86" y="181" text-anchor="start">现存 ATP + 磷酸肌酸 · 无氧 · 功率最大 · 5–10 秒见底</text>
+      <rect class="band-b" x="60" y="200" width="16" height="16" rx="3"/>
+      <text class="lb" x="86" y="213" text-anchor="start">糖酵解系统</text>
+      <text class="lb-s" x="86" y="231" text-anchor="start">糖原拆到丙酮酸／乳酸 · 无氧 · 10 秒–2 分钟的主力</text>
+      <rect class="band-c" x="60" y="250" width="16" height="16" rx="3"/>
+      <text class="lb" x="86" y="263" text-anchor="start">有氧系统</text>
+      <text class="lb-s" x="86" y="281" text-anchor="start">糖与脂肪彻底氧化 · 功率最低 · 续航以小时计</text>
+
+      <text class="tick-label mono" x="60" y="44" text-anchor="start">0%</text>
+      <text class="tick-label mono" x="700" y="44" text-anchor="end">100%</text>
+      <text class="tick-label" x="700" y="136" text-anchor="end">条形长度 = 该系统在这一时长里供能的大致份额</text>
+    </svg>
+    <div class="fuel-note" id="fuelNote">前十秒是磷酸原系统的天下：存货直接支付，一步反应，不用氧气。功率是三套里最高的，代价是十秒就见底。</div>
+    <figcaption><b>图 14-1 · 三套系统的交接。</b>拖动滑块看不同持续时长下三套供能系统的大致占比。数字为典型量级而非精确值，个体差异与训练水平影响很大；要留意的是三条永远同时存在——交接是重叠的，没有哪一刻某一套彻底关停。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 死撑</div>
+  <h2>乳酸平反记</h2>
+  <p>起跑十秒后，你还在加速。磷酸原见底了，第二棒接上：<strong>糖酵解</strong>。</p>
+  <p>它做的事很直接：把储存在肌肉里的糖原一段段拆下来，在细胞质里经过十来步反应变成丙酮酸，每拆一个葡萄糖单位净赚 2 到 3 个 ATP。产率低得可怜——同样一个葡萄糖，交给线粒体彻底氧化能出三十个上下。但糖酵解有一样无可替代的好处：<strong>它不等氧气</strong>。反应全在细胞质里进行，血流还没跟上、线粒体还没进入状态，它已经在出货了。</p>
+  <p>问题出在丙酮酸的去向。当产出的速度超过线粒体接收的速度，多余的丙酮酸就被就地转成另一种分子——<strong>乳酸</strong>。</p>
+  <p>接下来的一百年，这个分子被误解得相当彻底。而这场误解的源头，是一位相当出色的科学家。</p>
+
+  <h3>一位诺奖得主，和一只青蛙腿</h3>
+  <p>1920 年代，英国生理学家 <strong>A. V. Hill</strong> 与德国的 Otto Meyerhof 分享了诺贝尔生理学或医学奖，表彰的正是他们对肌肉产热与乳酸代谢的研究。Hill 观察到，离体的蛙肌在无氧条件下反复收缩会积累乳酸并逐渐失去力量；一旦重新供氧，乳酸消失，力量恢复。</p>
+  <p>这个实验做得漂亮，结论也顺理成章：<strong>缺氧 → 乳酸 → 疲劳</strong>。它进了教科书，被简化成"乳酸是疲劳的废物"，一待就是半个多世纪，还顺手催生了"运动后要按摩把乳酸揉出去"这类至今仍在流传的说法。</p>
+  <p>回头看，问题不在实验，在外推。一段被切下来、泡在液体里、没有血流也无处可去的蛙肌，与一条连着心脏、肝脏和另外几十公斤肌肉的活人的腿，处境完全不同。前者的乳酸确实无路可走，只能就地堆着；后者的乳酸有整套运输和消费网络在等着它。<strong>把封闭系统里观察到的因果搬到开放系统里，是这类误解最常见的出错方式。</strong></p>
+
+  <h3>它不是废料，是被送去别处的燃料</h3>
+  <p>流行的说法是这样的：乳酸是无氧运动的废物，堆在肌肉里让你又酸又痛，第二天的酸痛也是它干的。这三句话，基本上都不成立。</p>
+  <p>先说第二天的酸痛。运动后血乳酸通常在<strong>半小时到一小时内</strong>回到基线，而延迟性肌肉酸痛要到 24 到 48 小时才达到高峰——那时乳酸早就没了。今天普遍认为，那种酸痛来自肌纤维和结缔组织的微损伤及随后的炎症反应，尤其是离心收缩（下坡跑、放下重物这类"边发力边被拉长"的动作）造成的。乳酸不在场。</p>
+  <p>再说"废物"。1980 年代起，George Brooks 等人用同位素标记追踪乳酸的去向，得到的图景与教科书完全相反：乳酸产生之后大量离开肌纤维进入血液，被<strong>另一些组织收下来当燃料烧掉</strong>——心肌尤其爱吃它，慢肌纤维、大脑也用；肝和肾则把一部分乳酸重新拼回葡萄糖，再送回血里。这条来回被称作"乳酸穿梭"。换句话说，乳酸不是终点，是中转站；它是把能量从"来不及用"的地方运到"用得掉"的地方的载体。</p>
+  <p>自然界里这种事随处可见。林子里的落叶对树来说是弃物，对地上的真菌来说是口粮——同一堆东西，换一个消费者就换了身份。乳酸也是如此：对全速运转的快肌纤维，它是不得不排出去的产物；对隔壁的心肌，它是送上门的燃料。</p>
+  <p>不过顺着这个类比往下推，容易得出"那乳酸就完全无害"的结论，这一步要拆掉。剧烈运动时肌肉里确实会变酸，酸也确实与力量下降和那股灼烧感相关；只是酸的来源并非乳酸分子本身，而是与之伴生的氢离子累积，且疲劳的成因不止一条（钙的处理、钾的外流、能量供应速率都有份），学界至今仍在细分各自的权重。<strong>准确的说法是：乳酸是一同出现的信号和燃料，不是元凶。</strong></p>
+  <p>这一棒能撑多久？大约<strong>两分钟</strong>，八百米跑那种"跑完想躺下"的长度。此后功率必须再降一档，交给第三棒。</p>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 长途</div>
+  <h2>第三棒：慢，但几乎不下班</h2>
+  <p>21:05。你已经跑出去两公里，呼吸沉了下来，节奏稳住了。这时候接管全场的是<strong>有氧系统</strong>：丙酮酸不再被转成乳酸，而是进了线粒体，接上第 1 章那台水磨——先把能量换成跨膜的质子落差，再让质子回流推动 ATP 合酶。</p>
+  <p>它的功率在三套里最低，只有磷酸原系统的四分之一上下。但它有两个别人没有的优势：产率高得多（一个葡萄糖出三十个上下的 ATP），而且<strong>能烧脂肪</strong>。</p>
+  <p>这一条决定了你能跑多远。你身上的糖是有限的：肝糖原约 100 克，肌糖原 300 到 500 克，合计能提供 <strong>1600 到 2400 千卡</strong>，跑完二三十公里就见底。脂肪则是另一个数量级——一个体重、体脂都很普通的成年人，身上储着几万千卡的脂肪，理论上够跑好几天。</p>
+  <p>那为什么马拉松还会"撞墙"？因为脂肪虽多，出货慢。脂肪的动员和氧化速度有上限，跑得越快，能由脂肪供应的比例就越低；配速一旦超过某个点，缺口只能由糖来补。于是糖原一点点见底，通常在三十公里前后，功率被迫断崖式下降——腿还在，燃料还在身上，就是取不出来。</p>
+  <p>撞墙时最难受的往往不是腿，而是脑子里那片突如其来的灰。原因在于大脑几乎不烧脂肪：脂肪酸不易穿过血脑屏障，脑平时只认葡萄糖，饥饿时才改烧肝脏送来的酮体。所以当肝糖原也见了底、血糖开始往下掉，最先出状况的是判断力、情绪和配速感——跑者形容那种感觉像"世界忽然变得很吵、很远"。补给站那杯糖水解决的与其说是腿的问题，不如说是脑的问题。</p>
+  <p>自然界把这件事做到了极致。斑尾塍鹬每年从阿拉斯加飞到新西兰，全程一万多公里，中途不落地、不进食，连续飞行八到十一天。它出发前把体重的一半以上囤成脂肪，飞行途中还会分解一部分内脏来续命。它的问题和马拉松选手的问题是同一个问题，只是它把"带够燃料"这件事推到了极限。</p>
+  <p>顺带说一句关于比例的常见误解：低强度运动时脂肪供能的<em>百分比</em>确实更高，但那不等于低强度更"减脂"。百分比高不等于总量大——高强度虽然脂肪占比低，总消耗却大得多。看比例还是看总量，结论会翻个个儿。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>你喘，不是因为缺氧。</strong>跑起来大口喘气，直觉上像是身体在喊"氧不够了"。可事实上，健康人在海平面高度运动时，动脉血的氧饱和度基本维持在 95% 以上，几乎不掉——肺的供氧能力远远没有到极限。</p>
+    <p>真正驱动你加大呼吸的，是<strong>二氧化碳</strong>。血里的二氧化碳一升高就变成碳酸，脑干上的感受器对这一点极其敏感，立刻下令加快加深呼吸。所以呼吸系统监控的其实是"废气有没有排干净"，而不是"燃料够不够"。这也解释了一个反直觉的现象：憋气憋不下去时那股难受，来自二氧化碳积累而不是缺氧——正因如此，过度换气之后再憋气会格外危险，警报被提前清空了，人可能在毫无预兆的情况下先失去意识。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 迁徙</div>
+  <h2>血液的大搬家</h2>
+  <p>燃料的事说完了，还有一件更紧迫的：把氧和燃料送到腿上去，再把热带走。</p>
+  <p>安静坐着时，你的心脏每分钟泵出 <strong>4 到 6 升</strong>血。全力运动时，这个数字升到 <strong>20 到 25 升</strong>；训练有素的耐力运动员可以到 <strong>35 到 40 升</strong>。四到八倍的扩容，靠两件事叠加：心率从每分钟六七十升到接近上限，每搏输出量也涨了三到五成。</p>
+  <p>但即使涨到五倍，也远远不够。安静时全身肌肉只分到约两成血流；全力运动时肌肉需要的是<strong>八成以上</strong>。差额从哪来？答案是从别处抢。</p>
+  <p>于是有了一场彻底的血流重新分配（图 14-2）：内脏血管收缩，胃、肠、肝分到的份额从约四分之一压到几个百分点；肾脏同样被大幅调低。腿上的血管则反向扩张——工作中的肌肉自己会释放让血管舒张的信号，谁在干活谁就多分。</p>
+  <p>两条日常经验由此得解。饭后立刻剧烈运动容易恶心，是因为消化道正需要血，却被抽走了；而长跑途中很少感到饿，也是同一个原因——整条消化道暂时被降级了。</p>
+  <p>还有一件事帮了大忙，而且完全不由心脏出力：<strong>肌肉泵</strong>。腿部静脉里长着一排单向的瓣膜，只许血往心脏方向走。每一次小腿肌肉收缩，都会把这段静脉挤扁，血被推向上游；肌肉一松，瓣膜关上，血不会退回来。于是你每迈一步，小腿就替心脏做了一次泵送。这也是为什么长时间一动不动地站着容易头晕，而"走两步"就缓过来了：不是心脏突然变强了，是那台辅助泵重新开工。</p>
+  <p>长期练下来，心脏本身也会改样子。耐力训练让心腔容积增大、心壁适度增厚，每一搏能泵出更多血——这就是所谓"运动员心脏"，也是许多耐力运动员静息心率只有四五十的原因：每搏出水量大，就不需要跳那么勤。要说清楚的是，这种改变与病理性的心肌肥厚在结构和功能上并不相同，前者是可逆的适应，停训后会慢慢退回去。</p>
+
+  <figure>
+    <svg id="shift" viewBox="0 0 760 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="安静与全力运动时血流分配的对比条形图：骨骼肌、内脏、肾、心脏、皮肤、脑">
+      <text class="col-head" x="300" y="28" text-anchor="middle">安静 · 心输出量 4–6 L/分</text>
+      <text class="col-head" x="600" y="28" text-anchor="middle">全力 · 20–25 L/分</text>
+      <text class="cap" x="60" y="28" text-anchor="start">占心输出量的比例</text>
+
+      <text class="organ" x="150" y="66" text-anchor="end">骨骼肌</text>
+      <rect class="bar-rest" x="160" y="52" width="40" height="18" rx="3"/><text class="val mono" x="208" y="66" text-anchor="start">~20%</text>
+      <rect class="bar-max" x="440" y="52" width="170" height="18" rx="3"/><text class="val mono" x="618" y="66" text-anchor="start">80–85%</text>
+
+      <text class="organ" x="150" y="110" text-anchor="end">内脏（胃肠肝）</text>
+      <rect class="bar-rest" x="160" y="96" width="50" height="18" rx="3"/><text class="val mono" x="218" y="110" text-anchor="start">~25%</text>
+      <rect class="bar-max" x="440" y="96" width="10" height="18" rx="3"/><text class="val mono" x="458" y="110" text-anchor="start">3–5%</text>
+
+      <text class="organ" x="150" y="154" text-anchor="end">肾</text>
+      <rect class="bar-rest" x="160" y="140" width="40" height="18" rx="3"/><text class="val mono" x="208" y="154" text-anchor="start">~20%</text>
+      <rect class="bar-max" x="440" y="140" width="8" height="18" rx="3"/><text class="val mono" x="456" y="154" text-anchor="start">2–4%</text>
+
+      <text class="organ" x="150" y="198" text-anchor="end">皮肤</text>
+      <rect class="bar-rest" x="160" y="184" width="18" height="18" rx="3"/><text class="val mono" x="186" y="198" text-anchor="start">~9%</text>
+      <rect class="bar-max" x="440" y="184" width="14" height="18" rx="3"/><text class="val mono" x="462" y="198" text-anchor="start">比例略降，绝对量大增（散热）</text>
+
+      <text class="organ" x="150" y="242" text-anchor="end">心脏本身</text>
+      <rect class="bar-rest" x="160" y="228" width="8" height="18" rx="3"/><text class="val mono" x="176" y="242" text-anchor="start">~4%</text>
+      <rect class="bar-max" x="440" y="228" width="9" height="18" rx="3"/><text class="val mono" x="457" y="242" text-anchor="start">比例相近，绝对量大增</text>
+
+      <text class="organ" x="150" y="286" text-anchor="end">脑</text>
+      <rect class="bar-rest" x="160" y="272" width="28" height="18" rx="3"/><text class="val mono" x="196" y="286" text-anchor="start">~14%</text>
+      <rect class="bar-max" x="440" y="272" width="9" height="18" rx="3"/><text class="val mono" x="457" y="286" text-anchor="start">绝对量基本保住</text>
+
+      <line class="rule" x1="60" y1="300" x2="700" y2="300"/>
+      <text class="cap" x="60" y="320" text-anchor="start">条形长度按各自比例绘制；两侧的"总量"不同——运动时的 3% 与安静时的 25%，绝对流量可能相当接近。</text>
+    </svg>
+    <figcaption><b>图 14-2 · 谁被抽走，谁被优先保障。</b>比例变化最剧烈的是内脏与肾，被压到个位数百分比；脑的<em>比例</em>掉得厉害，绝对流量却基本保住——身体在任何时候都不会拿供脑做交易。心脏本身的比例几乎不变，意味着它的绝对供血随总量同步放大。数值为典型范围，随强度、体位、环境温度变动。</figcaption>
+  </figure>
+
+  <h3>顺便处理一炉子热</h3>
+  <p>肌肉把化学能变成动作的效率大约只有 <strong>20% 到 25%</strong>，剩下四分之三全部变成热。跑起来的你，是一台正在全速运转的炉子。</p>
+  <p>散热靠两条：血流把热带到皮肤，汗蒸发把热带走。出汗率通常在每小时 <strong>0.5 到 2 升</strong>，高温下的耐力运动员可达每小时 3 升。饶是如此，马拉松途中核心体温仍会升到 <strong>39 到 40℃</strong>——一个放在病房里会被记作发烧的数字，在跑道上却是正常运转。</p>
+  <p>这里藏着一个冲突：皮肤要血来散热，肌肉也要血来供氧，而心脏就那么多产能。天热时成绩下滑、心率比同样配速下更高，正是这场争抢的结果。</p>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 刹车</div>
+  <h2>喊停的那个，不在你的腿上</h2>
+  <p>21:22。第四公里，最难熬的一段。腿沉，呼吸乱，脑子里冒出一句"要不今天就到这儿吧"。</p>
+  <p>这句话是谁说的？</p>
+  <p>朴素的答案是：肌肉说的——燃料快没了、代谢废物堆积了、它干不动了。这个答案有一半问题：在绝大多数的力竭时刻，肌肉里的 ATP 并<em>没有</em>耗尽，糖原也远未见底，肌肉在实验条件下受到电刺激时仍能产生可观的力量。真正先撤的，是发给肌肉的指令。</p>
+  <p>还有一个人人都验证过的现象：<strong>终点冲刺</strong>。跑到力竭边缘的人，一旦看见终点线，往往还能加速——如果刚才真的一点余量都没有了，这一下从哪来？</p>
+  <p>基于这类观察，Tim Noakes 等人提出了<strong>中央调控器假说</strong>：大脑持续整合来自肌肉、心肺、体温、血糖乃至"还剩多远"的信息，提前调节运动单位的募集程度，把身体留在安全边界之内。疲惫感在这个框架里不是"电池没电了"的读数，而是一种被制造出来的、用来劝你减速的感受。</p>
+  <p>一个更贴切的类比来自剧场：一位懂行的歌手从不把嗓子唱满，即使她还能再大声一点。留出的那一档不是给观众的，是给下半场的。你的大脑一直在替你留那一档。</p>
+  <p>要说清楚的是，这个假说至今仍有争论。反对者指出外周（肌肉本身）的疲劳机制证据同样扎实，而"中央调控器"很难被直接测量。目前比较稳妥的表述是：<strong>力竭是中枢与外周共同决定的，而中枢的权重比过去认为的大得多。</strong></p>
+  <p>有一个实验把这件事演示得格外干净：让受试者在计时骑行中<strong>含一口糖水漱口，然后吐掉</strong>——一克糖也没咽下去，血糖不受任何影响。成绩仍然改善了，幅度约百分之二到三，而含同样甜度的代糖水则没有这个效果。口腔里那几处感受器把"燃料正在进来"的消息报了上去，调控器随即松了一档。同样能松那一档的还有音乐、同伴、赛事氛围、终点线出现在视野里——它们改变的不是你的肌肉，是那位歌手的判断。</p>
+
+  <h3>1954 年 5 月 6 日，牛津</h3>
+  <p>关于"极限"这件事，有一个故事绕不过去。</p>
+  <p>二十世纪上半叶，一英里跑进四分钟被广泛当成人类的生理天花板。世界纪录在 4 分 01 秒上下卡了九年，各种说法流传开来：跑进四分钟会心脏破裂，肺会崩溃，人体结构不允许。</p>
+  <p>1954 年 5 月 6 日傍晚，牛津的 Iffley Road 跑道，风大得让人犹豫要不要放弃这次尝试。一位二十五岁的医学院学生站上起跑线——<strong>Roger Bannister</strong>，白天在医院实习，训练时间挤在午休里，一周练不满五小时。两位朋友 Chris Brasher 和 Chris Chataway 替他领跑控速，前三圈把配速稳稳压在计划线上，最后一圈他独自跑完，冲线后当场瘫倒。</p>
+  <p>报成绩的广播员懂得如何制造悬念，他把开头那个字拖得很长："时间是……三分……"——全场已经淹没在欢呼里，后面的数字几乎没人听清。<strong>3 分 59.4 秒。</strong>顺带一提，那位广播员叫 Norris McWhirter，他后来和兄弟一起创办了《吉尼斯世界纪录》——一本专门收录人类极限的书。这个名字下一章还会再出现一次。</p>
+  <p>真正耐人寻味的是后面发生的事。<strong>四十六天后</strong>，澳大利亚人 John Landy 就把纪录又拉低到 3 分 58 秒；一年出头（1955 年 5 月 28 日），又有三人在同一场比赛里跑进四分钟。那道卡了九年的墙，在被推倒之后迅速变成了平地。</p>
+  <p>这个故事常被讲成"心理战胜生理"，但值得诚实一点：同一时期跑鞋、跑道、分段配速与训练方法都在进步，Landy 本人此前已多次逼近四分。可即便打了这些折扣，剩下的部分依然惊人——一个被认为是硬性生理上限的数字，在有人证明它可以被跨过之后，一年之内就被多人跨过。这正是中央调控器假说要说的事：<strong>"极限"里含着一份判断，而判断是可以被改写的。</strong></p>
+  <p>Bannister 自己对这件事的看法，比所有传记作者都平淡。他后来成为一名神经科医生，专攻自主神经系统，做了四十年临床与研究。晚年被问及一生最重要的成就时，他说的不是那四分钟，而是他在神经病学上的工作。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>同一场跑步，男女身上不完全是同一件事。</strong>成年男性的最大摄氧量（VO₂max，按每公斤体重计）平均比女性高出约 15% 到 25%，主要来自可解释的生理差异：血红蛋白浓度更高（携氧能力更强）、心脏更大（每搏输出量更大）、瘦体重比例更高。差距是群体平均值，个体重叠极大——一位训练有素的女性远胜绝大多数未训练的男性。</p>
+    <p>另有两条差异证据相对稳定：同等相对强度下，女性在耐力运动中脂肪供能的比例通常略高、糖原消耗略慢；而随着距离拉长到超长距离，男女成绩差距有缩小的趋势。后一条的成因仍在讨论，样本量也不如常规项目扎实，暂时只宜当作值得关注的观察。第 19 章会正面处理成年男女的系统差异。</p>
+  </div>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>"运动药丸"目前还不存在。</strong>运动能改善的指标多得惊人，于是有了一个诱人的问题：能不能用药把这些好处直接给到跑不动的人（卧床者、重症康复期患者、肌少症老人）？这类候选物被称作运动模拟剂。研究得较多的几条路线包括激活能量感受器 AMPK、作用于 PPARδ 与雌激素相关受体 ERR 的化合物——2023 年报道的 SLU-PP-332 能在小鼠肌肉里诱发一套酷似有氧运动的基因反应并提升跑步耐力，是近年最常被引用的一个。另一条路线更迂回：从运动者血浆里寻找起效的分子（GPLD1、clusterin 等），试图把"运动过的血"里的有益成分单独拎出来。</p>
+    <p>但要把话说清楚：截至 2026 年年中，<strong>没有任何运动模拟剂获批用于人类，SLU-PP-332 也仍停留在动物阶段，未见已注册的临床试验。</strong>这条路上还有一个警示性的先例：PPARδ 激动剂 GW501516 曾被寄予厚望，后因动物实验中出现多器官肿瘤而终止开发，却已流入黑市并被列为违禁药物。更根本的一点是，运动带来的好处横跨骨骼、血管、免疫、代谢与情绪，很难想象由单一分子全部复刻——目前更现实的目标不是取代运动，而是给真的动不了的人一份部分替代。</p>
+  </div>
+
+  <p>21:31。你停下来，手撑着膝盖。心率还在每分钟一百五十上下，几分钟后才会慢慢降下去。刚才被抽走的血正在往回还，肠胃重新开张，皮肤持续散热——这场重新分配要花上不少时间才能完全复位。</p>
+  <p>而在你歇着的这段时间里，身体已经开始悄悄记账：这次跑步造成的微小损伤要修，用掉的糖原要补，被反复刺激的线粒体会在接下来几天里增多一点点。这些账，多数要等到今晚你躺下之后才真正结算。</p>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">一次奔跑 · 关键数字</div>
+    <table>
+      <tr><td class="k">肌肉现存 ATP 维持时间</td><td class="v">1–2 s</td><td class="n">全力收缩状态下</td></tr>
+      <tr><td class="k">磷酸肌酸系统续航</td><td class="v">5–10 s</td><td class="n">无氧，功率三套中最高</td></tr>
+      <tr><td class="k">糖酵解主导窗口</td><td class="v">10 s – 2 min</td><td class="n">每葡萄糖净产 2–3 个 ATP</td></tr>
+      <tr><td class="k">有氧系统产率</td><td class="v">~30 ATP / 葡萄糖</td><td class="n">功率最低，续航以小时计</td></tr>
+      <tr><td class="k">心输出量</td><td class="v">4–6 → 20–25 L/min</td><td class="n">耐力运动员可达 35–40</td></tr>
+      <tr><td class="k">骨骼肌血流占比</td><td class="v">~20% → 80–85%</td><td class="n">内脏同时被压到 3–5%</td></tr>
+      <tr><td class="k">全身糖原储备</td><td class="v">400–600 g</td><td class="n">约 1600–2400 kcal，三十公里前后见底</td></tr>
+      <tr><td class="k">肌肉做功效率</td><td class="v">20–25%</td><td class="n">其余四分之三变成热</td></tr>
+      <tr><td class="k">出汗率</td><td class="v">0.5–2 L/h</td><td class="n">高温下运动员可达 3 L/h</td></tr>
+      <tr><td class="k">马拉松核心体温</td><td class="v">39–40 ℃</td><td class="n">病房里算发烧，跑道上是常态</td></tr>
+      <tr><td class="k">血乳酸浓度</td><td class="v">~1 → 15–25 mmol/L</td><td class="n">停止后 30–60 分钟回落至基线</td></tr>
+      <tr><td class="k">VO₂max 典型值</td><td class="v">30–45 → 70–85 mL/kg/min</td><td class="n">未训练成人 → 顶尖耐力运动员</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">起跑后最初几秒，肌肉的动力主要来自哪里？</div>
+      <div class="opts">
+        <button>血里刚送来的葡萄糖，经线粒体氧化</button>
+        <button data-c="1">肌肉里现存的 ATP（1–2 秒）加上磷酸肌酸这只"一步换现金"的钱罐（再 5–10 秒）</button>
+        <button>脂肪快速动员供能</button>
+        <button>肝脏紧急释放的糖原</button>
+      </div>
+      <div class="explain">这一段完全不需要氧气——氧气还在肺里，血流也没跟上。身体宁可备一只能一步换回 ATP 的磷酸肌酸罐，也不肯多屯 ATP 本身，原因在第 1 章说过：ATP 是零钱不是存款，存量只有几十克，真要囤够一天的量得多背几十公斤。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">关于乳酸，下列哪一项是当前证据支持的？</div>
+      <div class="opts">
+        <button>它是无氧代谢的废物，堆积在肌肉里无法清除</button>
+        <button>它是第二天肌肉酸痛的直接原因</button>
+        <button data-c="1">它是一种可被运走的燃料——心肌、慢肌纤维和脑会收下来烧掉，肝肾还能把它拼回葡萄糖</button>
+        <button>只有在完全无氧时才会产生乳酸</button>
+      </div>
+      <div class="explain">这条"乳酸穿梭"是 1980 年代起用同位素标记追踪出来的。延迟性肌肉酸痛在 24–48 小时达峰，而血乳酸半小时到一小时就回到基线，时间对不上；那种酸痛来自肌纤维与结缔组织的微损伤和炎症，离心收缩（下坡跑）尤甚。但也别推过头：剧烈运动时肌肉确实变酸，只是酸来自伴生的氢离子累积，而非乳酸分子本身。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">全力运动时，为了给肌肉腾出八成以上的血流，身体主要牺牲了谁？</div>
+      <div class="opts">
+        <button>心脏自身的冠脉供血</button>
+        <button data-c="1">内脏与肾——从合计约四成半压到个位数百分比</button>
+        <button>大脑，其绝对血流量大幅下降</button>
+        <button>皮肤，运动中皮肤血流降到接近零</button>
+      </div>
+      <div class="explain">心输出量本身涨到四五倍还不够，缺口靠"从别处抢"补齐。脑的比例掉得厉害，但绝对流量基本保住——身体不拿供脑做交易。皮肤反而需要血来散热，与肌肉形成争抢，这正是天热时同样配速心率更高的原因。饭后剧烈运动容易恶心，也是同一场迁徙的副作用（第 13 章那趟旅程被临时降了级）。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">中央调控器假说最有力的日常证据之一是什么？</div>
+      <div class="opts">
+        <button>力竭时肌肉里的 ATP 已完全耗尽</button>
+        <button data-c="1">跑到力竭边缘的人一看见终点线往往还能加速——说明刚才并非真的毫无余量</button>
+        <button>运动员的心率总能达到理论最大值</button>
+        <button>疲劳感与血乳酸浓度严格成正比</button>
+      </div>
+      <div class="explain">力竭时肌肉 ATP 通常并未耗尽，糖原也远未见底，先撤的是发给肌肉的指令。这个假说至今有争论——外周疲劳的证据同样扎实，而"调控器"很难直接测量；稳妥的说法是中枢与外周共同决定，中枢权重比过去认为的大。它也解释了为什么音乐、同伴，甚至只是含一口糖水漱口不咽，都能实测地改善耐力表现。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">1954 年 Bannister 跑进四分钟之后，最耐人寻味的事实是？</div>
+      <div class="opts">
+        <button>此后三十年无人能再次做到</button>
+        <button>他随即转为职业运动员</button>
+        <button data-c="1">四十六天后纪录就被再次刷新，一年出头又有三人在同一场比赛里跑进四分钟——那道卡了九年的"生理天花板"迅速变成平地</button>
+        <button>国际田联认定该成绩无效</button>
+      </div>
+      <div class="explain">要诚实的是，同期跑鞋、跑道、配速策略与训练方法也在进步，Landy 此前已多次逼近四分——所以这不是纯粹的"心理战胜生理"。但打完这些折扣，剩下的部分仍然说明"极限"里含着一份可被改写的判断。Bannister 本人后来成为神经科医生，专攻自主神经系统；晚年他说，一生最重要的成就是神经病学上的工作，不是那四分钟。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第三幕 满负荷运行</div>
+  <div class="title">第 15 章 · 一夜睡眠</div>
+  <p>跑完这一趟，账单要到今晚才结。你会躺下、失去意识，然后在接下来的八小时里被一列每九十分钟到站一次的列车载着上上下下：深处冲洗，浅处整理，还有一段时间里你的身体被彻底锁住、大脑却活跃得像醒着。下一章，我们看看你睡着的时候都发生了什么。</p>
+  <nav class="footnav">
+    <a href="ch13-meal.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch15-sleep.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 供能占比滑块
+  var STEPS = [
+    {t:'5 秒 · 起跑瞬间',      a:80, b:18, c:2,  n:'现存 ATP 与磷酸肌酸直接支付。一步反应，不用氧气，功率是三套里最高的——代价是十秒就见底。'},
+    {t:'10 秒 · 全力冲刺',     a:55, b:40, c:5,  n:'磷酸原开始见底，糖酵解已经顶上。百米跑基本在这两套系统里跑完，全程几乎不靠氧气。'},
+    {t:'30 秒 · 二百米末段',   a:25, b:65, c:10, n:'糖酵解成为主力：糖原在细胞质里被拆成丙酮酸，来不及进线粒体的部分转成乳酸运出去。'},
+    {t:'1 分钟 · 四百米',      a:12, b:63, c:25, n:'四百米被称作最痛苦的项目不是没有道理——它几乎全程压在糖酵解的功率上限上。'},
+    {t:'2 分钟 · 八百米',      a:6,  b:44, c:50, n:'交接点。有氧系统追平了糖酵解，此后功率必须再降一档，换取续航。'},
+    {t:'4 分钟 · 一英里',      a:3,  b:27, c:70, n:'Bannister 那 3 分 59.4 秒就落在这里：有氧为主，但仍要在糖酵解的痛苦区里泡上一大半。'},
+    {t:'10 分钟 · 三公里',     a:2,  b:13, c:85, n:'有氧系统全面接管。呼吸和心率进入稳态，配速不再靠意志压着，而是被供氧能力限定。'},
+    {t:'30 分钟 · 五公里慢跑', a:1,  b:7,  c:92, n:'今晚这一趟就在这里。燃料以糖为主、脂肪为辅；核心体温开始明显上升，出汗接管散热。'},
+    {t:'2 小时 · 半马以上',    a:1,  b:4,  c:95, n:'脂肪供能比例继续上升，糖原一点点见底。能不能跑完，取决于取糖的速度跟不跟得上配速。'},
+    {t:'4 小时 · 马拉松',      a:1,  b:3,  c:96, n:'糖原多半已在三十公里前后耗尽——"撞墙"。燃料还在身上（脂肪），只是取不出那么快。'},
+    {t:'10 小时以上 · 超长距离', a:1, b:2, c:97, n:'几乎全部由脂肪与外部补给支撑。此时限制因素往往不再是供能，而是体温、水盐、消化道能不能继续吸收。'}
+  ];
+  var range = document.getElementById('fuelRange');
+  var read = document.getElementById('fuelRead');
+  var note = document.getElementById('fuelNote');
+  var bA = document.getElementById('bandA'), bB = document.getElementById('bandB'), bC = document.getElementById('bandC');
+  var pA = document.getElementById('pctA'), pB = document.getElementById('pctB'), pC = document.getElementById('pctC');
+  var X0 = 60, W = 640;
+  function draw(i){
+    var s = STEPS[i];
+    var wa = W * s.a / 100, wb = W * s.b / 100, wc = W * s.c / 100;
+    bA.setAttribute('width', wa);
+    bB.setAttribute('x', X0 + wa); bB.setAttribute('width', wb);
+    bC.setAttribute('x', X0 + wa + wb); bC.setAttribute('width', wc);
+    function put(el, x, w, v){
+      if (w < 34) { el.textContent = ''; return; }
+      el.textContent = v + '%';
+      el.setAttribute('x', x + w / 2);
+    }
+    put(pA, X0, wa, s.a);
+    put(pB, X0 + wa, wb, s.b);
+    put(pC, X0 + wa + wb, wc, s.c);
+    read.textContent = s.t;
+    note.textContent = s.n;
+  }
+  range.addEventListener('input', function(){ draw(parseInt(range.value, 10)); });
+  draw(parseInt(range.value, 10));
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人体手册 · The Human Body Handbook</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ============ 导读页特有 ============ */
+.cover h1{font-size:clamp(34px,7.4vw,56px);}
+.cover .subtitle{font-size:17.5px;}
+.intro p:last-child{margin-bottom:0;}
+
+/* ---- 四幕地图 ---- */
+#actmap .band{stroke-width:1.6; transition:opacity .25s, stroke-width .25s;}
+#actmap .band-fill{opacity:.14; transition:opacity .25s;}
+#actmap a:hover .band,#actmap a:focus-visible .band{stroke-width:3;}
+#actmap a:hover .band-fill,#actmap a:focus-visible .band-fill{opacity:.3;}
+#actmap a:focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+#actmap .act-name{fill:var(--ink); font-size:12.5px; font-weight:700;}
+#actmap .act-range{fill:var(--ink-dim); font-size:10.5px;}
+#actmap .axis{stroke:var(--line); stroke-width:2;}
+#actmap .tick{stroke:var(--line); stroke-width:1.4;}
+#actmap .tick-label{fill:var(--ink-faint); font-size:11.5px;}
+#actmap .hint{fill:var(--ink-faint); font-size:11.5px;}
+
+/* ---- 分幕目录 ---- */
+.actline{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--ink-faint); margin-bottom:26px;}
+.chlist{list-style:none;}
+.chlist li{border-top:1px solid var(--line);}
+.chlist li:last-child{border-bottom:1px solid var(--line);}
+.chlist a{
+  display:grid; grid-template-columns:52px 1fr; gap:2px 14px;
+  padding:15px 8px; text-decoration:none; color:var(--ink);
+  transition:background .2s;
+}
+.chlist a:hover{background:var(--surface);}
+.chlist a:focus-visible{outline:2px solid var(--gold); outline-offset:-2px;}
+.chlist .no{font-family:var(--mono); font-size:12.5px; color:var(--gold); padding-top:5px; letter-spacing:.04em;}
+.chlist .tt{font-family:var(--serif); font-weight:700; font-size:17.5px; line-height:1.5;}
+.chlist a:hover .tt{color:var(--gold);}
+.chlist .hook{grid-column:2; color:var(--ink-dim); font-size:14.5px; line-height:1.7;}
+
+/* ---- 页脚 ---- */
+footer.site{border-top:1px solid var(--line); margin-top:64px; padding-top:30px;}
+footer.site .disclaimer{color:var(--ink-dim); font-size:14.5px;}
+footer.site .sig{font-family:var(--mono); font-size:11.5px; letter-spacing:.24em; color:var(--ink-faint); margin-bottom:0;}
+
+@media (max-width:420px){
+  .chlist a{grid-template-columns:44px 1fr; gap:2px 10px;}
+  .chlist .tt{font-size:16.5px;}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  #actmap .band,#actmap .band-fill,.chlist a{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 封面 ==================== -->
+<header class="chap cover">
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>人体手册</h1>
+  <p class="subtitle">跟随一具身体，从受精卵到死亡——一部关于你自己的说明书。</p>
+  <div class="meta"><span>四幕 · 序章 + 25 章 + 终章</span><span>手写 SVG 图表 · 每章测验</span><span>深色默认 · 右上角切换昼夜</span></div>
+</header>
+
+<!-- ==================== 导读 ==================== -->
+<section class="intro" id="intro">
+  <div class="eyebrow">HOW TO READ · 导读</div>
+  <h2>这本书讲的是你</h2>
+  <p>你现在正在读这一行。就在这一秒，你的心脏推出了约 70 毫升血，几百万个细胞悄悄退役、又有几百万个补上，肠道里数十万亿只微生物正等着你的下一顿饭——这些事你一件也没察觉，它们也不打算征求你同意。</p>
+  <p>这本书讲的就是这具你住了一辈子、却很少翻过说明书的身体。它不按"系统"分章——循环一节、呼吸一节、消化一节，那是教科书的排法。它按时间讲：从两个细胞相遇的那一刻开始，跟着同一具身体往下走，看它怎么被造出来、怎么调试、怎么满负荷运转，又怎么一点点磨损，最后谢幕。</p>
+  <p>全书四幕。<strong>第一幕 建造</strong>，从受精到出生；<strong>第二幕 调试与扩容</strong>，从出生到青春期；<strong>第三幕 满负荷运行</strong>，用一顿饭、一次奔跑、一夜睡眠、一场感冒这样的日常场景，拆开成年身体的运行细节；<strong>第四幕 磨损与谢幕</strong>，从峰值之后一直写到死亡的生理学。序章与终章在四幕之外，一头一尾接上同一个母题：你是一场接力。</p>
+  <p>按顺序读，你会得到一条完整的时间线；跳着读也行，每章自成一篇。每章末尾有规格表和几道测验——规格表里的数字值得慢慢看，测验的解释里往往还藏着正文没讲的一层。蓝色边栏标着"前沿窗口"，那里放的是更新较快的内容，都带日期戳；正文里的原理，十年内不会变。</p>
+</section>
+
+<!-- ==================== 四幕地图 ==================== -->
+<section id="map">
+  <div class="eyebrow">MAP · 全书地图</div>
+  <h2>一具身体的四幕剧</h2>
+  <figure>
+    <svg id="actmap" viewBox="0 0 760 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="全书四幕时间地图：序章、第一幕建造、第二幕调试与扩容、第三幕满负荷运行、第四幕磨损与谢幕、终章">
+      <!-- 序章端点 -->
+      <a href="#prologue" aria-label="跳到序章目录">
+        <rect class="band-fill" x="8" y="84" width="56" height="56" rx="10" fill="var(--mixed-l)"/>
+        <rect class="band" x="8" y="84" width="56" height="56" rx="10" fill="none" stroke="var(--mixed-l)"/>
+        <text class="act-name" x="36" y="110" text-anchor="middle">序章</text>
+        <text class="act-range" x="36" y="128" text-anchor="middle">接力</text>
+      </a>
+      <!-- 第一幕 -->
+      <a href="#act1" aria-label="跳到第一幕目录">
+        <rect class="band-fill" x="72" y="84" width="152" height="56" rx="10" fill="var(--green)"/>
+        <rect class="band" x="72" y="84" width="152" height="56" rx="10" fill="none" stroke="var(--green)"/>
+        <text class="act-name" x="148" y="110" text-anchor="middle">第一幕 建造</text>
+        <text class="act-range" x="148" y="128" text-anchor="middle">第 1–8 章 · 受精 → 出生</text>
+      </a>
+      <!-- 第二幕 -->
+      <a href="#act2" aria-label="跳到第二幕目录">
+        <rect class="band-fill" x="232" y="84" width="126" height="56" rx="10" fill="var(--gold)"/>
+        <rect class="band" x="232" y="84" width="126" height="56" rx="10" fill="none" stroke="var(--gold)"/>
+        <text class="act-name" x="295" y="110" text-anchor="middle">第二幕 调试与扩容</text>
+        <text class="act-range" x="295" y="128" text-anchor="middle">第 9–12 章</text>
+      </a>
+      <!-- 第三幕 -->
+      <a href="#act3" aria-label="跳到第三幕目录">
+        <rect class="band-fill" x="366" y="84" width="186" height="56" rx="10" fill="var(--oxy)"/>
+        <rect class="band" x="366" y="84" width="186" height="56" rx="10" fill="none" stroke="var(--oxy)"/>
+        <text class="act-name" x="459" y="110" text-anchor="middle">第三幕 满负荷运行</text>
+        <text class="act-range" x="459" y="128" text-anchor="middle">第 13–20 章 · 壮年场景</text>
+      </a>
+      <!-- 第四幕 -->
+      <a href="#act4" aria-label="跳到第四幕目录">
+        <rect class="band-fill" x="560" y="84" width="132" height="56" rx="10" fill="var(--deoxy)"/>
+        <rect class="band" x="560" y="84" width="132" height="56" rx="10" fill="none" stroke="var(--deoxy)"/>
+        <text class="act-name" x="626" y="110" text-anchor="middle">第四幕 磨损与谢幕</text>
+        <text class="act-range" x="626" y="128" text-anchor="middle">第 21–25 章</text>
+      </a>
+      <!-- 终章端点 -->
+      <a href="#finale" aria-label="跳到终章目录">
+        <rect class="band-fill" x="700" y="84" width="52" height="56" rx="10" fill="var(--mixed-r)"/>
+        <rect class="band" x="700" y="84" width="52" height="56" rx="10" fill="none" stroke="var(--mixed-r)"/>
+        <text class="act-name" x="726" y="110" text-anchor="middle">终章</text>
+        <text class="act-range" x="726" y="128" text-anchor="middle">循环</text>
+      </a>
+      <!-- 生命时间轴 -->
+      <line class="axis" x1="14" y1="172" x2="746" y2="172"/>
+      <line class="tick" x1="72" y1="166" x2="72" y2="178"/>
+      <text class="tick-label" x="72" y="196" text-anchor="middle">受精</text>
+      <line class="tick" x1="232" y1="166" x2="232" y2="178"/>
+      <text class="tick-label" x="232" y="196" text-anchor="middle">出生</text>
+      <line class="tick" x1="366" y1="166" x2="366" y2="178"/>
+      <text class="tick-label" x="366" y="196" text-anchor="middle">青春期</text>
+      <line class="tick" x1="470" y1="166" x2="470" y2="178"/>
+      <text class="tick-label" x="470" y="196" text-anchor="middle">壮年</text>
+      <line class="tick" x1="560" y1="166" x2="560" y2="178"/>
+      <text class="tick-label" x="560" y="196" text-anchor="middle">中年</text>
+      <line class="tick" x1="692" y1="166" x2="692" y2="178"/>
+      <text class="tick-label" x="692" y="196" text-anchor="middle">死亡</text>
+      <text class="hint" x="14" y="224" text-anchor="start">点击任一幕，跳到该幕目录 ↓</text>
+      <text class="hint" x="746" y="224" text-anchor="end">时间轴不按比例</text>
+    </svg>
+    <figcaption><b>全书四幕地图。</b>横轴是一具身体的一生：受精、出生、青春期、壮年、中年、死亡。四个色块是四幕，两端的小方块是四幕之外的序章与终章——它们各自接住同一个母题的开头和结尾。点击任一幕，跳到该幕目录。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 目录 · 序章 ==================== -->
+<section id="prologue">
+  <div class="eyebrow">OPENING · 开篇</div>
+  <h2>序章</h2>
+  <div class="actline">四幕之外 · 接力母题的第一次登场</div>
+  <ul class="chlist">
+    <li><a href="chapters/ch00-relay.html"><span class="no">序</span><span class="tt">你是一场接力</span><span class="hook">两个细胞的相遇，和一条 38 亿年没断过的链。</span></a></li>
+  </ul>
+</section>
+
+<!-- ==================== 目录 · 第一幕 ==================== -->
+<section id="act1">
+  <div class="eyebrow">ACT I · 第一幕</div>
+  <h2>建造</h2>
+  <div class="actline">受精 → 出生 · 共 8 章</div>
+  <ul class="chlist">
+    <li><a href="chapters/ch01-cell.html"><span class="no">01</span><span class="tt">一个细胞的全部家当</span><span class="hook">边界、炉灶、厨房，和一套三十亿字母的菜谱库。</span></a></li>
+    <li><a href="chapters/ch02-differentiation.html"><span class="no">02</span><span class="tt">分裂与分化：细胞如何决定自己是谁</span><span class="hook">同一本菜谱，翻开不同的页，命运就此分岔。</span></a></li>
+    <li><a href="chapters/ch03-gastrulation.html"><span class="no">03</span><span class="tt">原肠运动：人生最重要的一天</span><span class="hook">有人说这天比出生、结婚、死亡都更要紧，而你毫不知情。</span></a></li>
+    <li><a href="chapters/ch04-organogenesis.html"><span class="no">04</span><span class="tt">器官发生：心脏第一跳</span><span class="hook">第 22 天，一根管子开始搏动；手指是被雕出来的。</span></a></li>
+    <li><a href="chapters/ch05-scaling.html"><span class="no">05</span><span class="tt">尺度的物理学：为什么需要肺和血管</span><span class="hook">扩散只够一毫米，这条限制解释了身体一半的形状。</span></a></li>
+    <li><a href="chapters/ch06-sex-divergence.html"><span class="no">06</span><span class="tt">性别分化的岔路口</span><span class="hook">孕六周前男女胚胎长得一样，直到一只小小的扳道工上岗。</span></a></li>
+    <li><a href="chapters/ch07-placenta.html"><span class="no">07</span><span class="tt">胎盘：一个临时器官</span><span class="hook">半副基因来自"外人"，它如何在母体里拿到居留权。</span></a></li>
+    <li><a href="chapters/ch08-birth.html"><span class="no">08</span><span class="tt">出生：生命最惊险的十分钟</span><span class="hook">不落幕换景：十分钟内换掉氧气来源，改写血液的河道。</span></a></li>
+  </ul>
+</section>
+
+<!-- ==================== 目录 · 第二幕 ==================== -->
+<section id="act2">
+  <div class="eyebrow">ACT II · 第二幕</div>
+  <h2>调试与扩容</h2>
+  <div class="actline">出生 → 青春期 · 共 4 章</div>
+  <ul class="chlist">
+    <li><a href="chapters/ch09-brain.html"><span class="no">09</span><span class="tt">大脑的野蛮生长与修剪</span><span class="hook">先铺出超过所需一倍的连接，再花十几年亲手拆掉一半。</span></a></li>
+    <li><a href="chapters/ch10-immune.html"><span class="no">10</span><span class="tt">免疫系统上学</span><span class="hook">胸腺是一所淘汰率九成五以上的军校，毕业考只考一题：认出你自己。</span></a></li>
+    <li><a href="chapters/ch11-bones.html"><span class="no">11</span><span class="tt">骨骼如何变长</span><span class="hook">骨头不从两端堆着长，而且每十年就悄悄换掉一整副。</span></a></li>
+    <li><a href="chapters/ch12-puberty.html"><span class="no">12</span><span class="tt">青春期：激素系统重启</span><span class="hook">沉睡十年的脉冲重新点火，一场持续数年的系统重启。</span></a></li>
+  </ul>
+</section>
+
+<!-- ==================== 目录 · 第三幕 ==================== -->
+<section id="act3">
+  <div class="eyebrow">ACT III · 第三幕</div>
+  <h2>满负荷运行</h2>
+  <div class="actline">壮年 · 场景式 · 共 8 章</div>
+  <ul class="chlist">
+    <li><a href="chapters/ch13-meal.html"><span class="no">13</span><span class="tt">一顿饭的旅程</span><span class="hook">胃酸比柠檬汁烈上十倍，它为什么不消化胃自己。</span></a></li>
+    <li><a href="chapters/ch14-run.html"><span class="no">14</span><span class="tt">一次奔跑</span><span class="hook">三套供能系统的接力，和一个由大脑说了算的极限。</span></a></li>
+    <li><a href="chapters/ch15-sleep.html"><span class="no">15</span><span class="tt">一夜睡眠</span><span class="hook">深睡时大脑开闸冲洗，白天攒下的废物连夜清运。</span></a></li>
+    <li><a href="chapters/ch16-cold.html"><span class="no">16</span><span class="tt">一场感冒</span><span class="hook">大半症状是自家火力：发烧是策略，不是故障。</span></a></li>
+    <li><a href="chapters/ch17-injury.html"><span class="no">17</span><span class="tt">一次受伤</span><span class="hook">割破手指后的秒级响应，以及肝为何能长回大半。</span></a></li>
+    <li><a href="chapters/ch18-signals.html"><span class="no">18</span><span class="tt">两套指挥系统</span><span class="hook">专线电话与广播电台：同一件急事，两路指令赛跑。</span></a></li>
+    <li><a href="chapters/ch19-sex-adult.html"><span class="no">19</span><span class="tt">男女之别 · 成年篇</span><span class="hook">免疫、心梗、用药剂量——差异写在细节里，也写在漏诊里。</span></a></li>
+    <li><a href="chapters/ch20-reproduction.html"><span class="no">20</span><span class="tt">繁殖：接力的下一棒</span><span class="hook">存量派与流水线派的合作，接力母题在此第一次收束。</span></a></li>
+  </ul>
+</section>
+
+<!-- ==================== 目录 · 第四幕 ==================== -->
+<section id="act4">
+  <div class="eyebrow">ACT IV · 第四幕</div>
+  <h2>磨损与谢幕</h2>
+  <div class="actline">中年 → 死亡 · 共 5 章</div>
+  <ul class="chlist">
+    <li><a href="chapters/ch21-decline.html"><span class="no">21</span><span class="tt">峰值之后：衰退的时间表</span><span class="hook">衰退并不同步，每个器官都有自己的下坡起点。</span></a></li>
+    <li><a href="chapters/ch22-midlife.html"><span class="no">22</span><span class="tt">更年期与中年转折</span><span class="hook">女性的激素悬崖与男性的缓坡，和一场惊魂二十年的争论。</span></a></li>
+    <li><a href="chapters/ch23-aging.html"><span class="no">23</span><span class="tt">衰老的机制</span><span class="hook">端粒、衰老细胞、蛋白质稳态：衰老是程序，还是磨损。</span></a></li>
+    <li><a href="chapters/ch24-compensation.html"><span class="no">24</span><span class="tt">老年身体的代偿智慧</span><span class="hook">衰退叙事之外：九十岁开始练力量，肌肉依然会长。</span></a></li>
+    <li><a href="chapters/ch25-death.html"><span class="no">25</span><span class="tt">死亡的生理学</span><span class="hook">死亡是过程不是瞬间，器官按各自的时限依次关机。</span></a></li>
+  </ul>
+</section>
+
+<!-- ==================== 目录 · 终章 ==================== -->
+<section id="finale">
+  <div class="eyebrow">CODA · 收束</div>
+  <h2>终章</h2>
+  <div class="actline">四幕之外 · 接力母题的最后一棒</div>
+  <ul class="chlist">
+    <li><a href="chapters/ch26-atoms.html"><span class="no">终</span><span class="tt">循环：你的原子回到生态圈</span><span class="hook">你的原子来自恒星，也终将回到风、水与另一具身体。</span></a></li>
+  </ul>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="site">
+  <p class="disclaimer">本书为科普读物，内容不构成医疗建议；涉及个人健康问题请咨询医生。</p>
+  <p class="sig">人体手册 · THE HUMAN BODY HANDBOOK</p>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+})();
+</script>
+</body>
+</html>

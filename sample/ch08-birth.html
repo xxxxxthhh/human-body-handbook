@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第8章 · 出生：生命最惊险的十分钟 — 人体手册</title>
+<style>
+/* ============ 设计令牌 ============ */
+:root{
+  --bg:#0F1216; --surface:#171C23; --surface2:#1E2530; --line:#2A323E;
+  --ink:#E9E4D8; --ink-dim:#98A1AC; --ink-faint:#6B7480;
+  --oxy:#FF6D5C; --deoxy:#5B8DEF; --mixed-l:#7C86D9; --mixed-r:#B77BC9;
+  --gold:#E3B25A; --green:#6FBF8F;
+  --serif:"Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;
+  --sans:"PingFang SC","Noto Sans SC","Source Han Sans SC","Microsoft YaHei",-apple-system,sans-serif;
+  --mono:"JetBrains Mono","SF Mono","Menlo","Consolas",monospace;
+  --maxw:720px;
+}
+html.light{
+  --bg:#F7F4EC; --surface:#FFFFFF; --surface2:#EFEBE1; --line:#DDD6C8;
+  --ink:#23282E; --ink-dim:#5C6570; --ink-faint:#8B939D;
+  --oxy:#E04E3C; --deoxy:#3D6FD4; --mixed-l:#5F6BC4; --mixed-r:#9C5FB0;
+  --gold:#B07E1F; --green:#3D8B60;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--sans); font-size:17px; line-height:1.95;
+  transition:background .3s, color .3s;
+}
+::selection{background:var(--gold); color:#111;}
+
+/* ============ 布局 ============ */
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px 96px;}
+p{margin:0 0 1.4em;}
+em{font-style:normal; color:var(--gold);}
+strong{color:var(--ink); font-weight:700;}
+a{color:var(--deoxy);}
+
+/* ============ 章头 ============ */
+header.chap{padding:84px 0 40px; border-bottom:1px solid var(--line); margin-bottom:48px;}
+.series{font-family:var(--mono); font-size:12px; letter-spacing:.28em; color:var(--ink-faint); text-transform:uppercase;}
+.act{font-family:var(--mono); font-size:13px; color:var(--gold); letter-spacing:.14em; margin-top:26px;}
+h1{font-family:var(--serif); font-weight:900; font-size:clamp(30px,5.6vw,44px); line-height:1.34; margin-top:10px; letter-spacing:.01em;}
+.subtitle{color:var(--ink-dim); font-size:16.5px; margin-top:16px; max-width:56ch;}
+.meta{font-family:var(--mono); font-size:12.5px; color:var(--ink-faint); margin-top:22px; display:flex; gap:1.6em; flex-wrap:wrap;}
+
+/* ============ 小节 ============ */
+section{margin:0 0 56px;}
+.eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:.24em; color:var(--gold);}
+h2{font-family:var(--serif); font-weight:900; font-size:clamp(22px,3.6vw,28px); line-height:1.5; margin:6px 0 22px;}
+h3{font-family:var(--sans); font-weight:700; font-size:18px; margin:30px 0 12px;}
+
+/* 引子 */
+.lede{font-family:var(--serif); font-size:18.5px; line-height:2.05; border-left:3px solid var(--gold); padding-left:22px; margin-bottom:56px;}
+.lede p:last-child{margin-bottom:0;}
+
+/* ============ 侧栏容器 ============ */
+.callout{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:20px 22px 8px; margin:28px 0 34px;}
+.callout .tag{font-family:var(--mono); font-size:11.5px; letter-spacing:.22em; display:inline-block; margin-bottom:12px;}
+.callout.eng .tag{color:var(--green);}
+.callout.eng{border-left:3px solid var(--green);}
+.callout.frontier{border-left:3px solid var(--deoxy);}
+.callout.frontier .tag{color:var(--deoxy);}
+.callout p{font-size:15.5px; line-height:1.9; color:var(--ink-dim); margin-bottom:1.1em;}
+.callout p strong{color:var(--ink);}
+.callout .stamp{font-family:var(--mono); font-size:11.5px; color:var(--ink-faint); margin:2px 0 12px;}
+
+/* ============ 图表框 ============ */
+figure{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:24px 18px 18px; margin:34px 0 40px;}
+figcaption{font-size:14px; color:var(--ink-dim); line-height:1.8; padding:14px 8px 0; border-top:1px dashed var(--line); margin-top:14px;}
+figcaption b{color:var(--ink);}
+svg{display:block; width:100%; height:auto;}
+svg text{font-family:var(--sans);}
+svg .mono{font-family:var(--mono);}
+
+/* ---- 电路图状态机 ---- */
+.switch-row{display:flex; align-items:center; justify-content:center; gap:14px; margin:2px 0 18px; flex-wrap:wrap;}
+.switch-hint{font-family:var(--mono); font-size:12px; color:var(--ink-faint); letter-spacing:.1em;}
+.rocker{display:flex; background:var(--surface2); border:1px solid var(--line); border-radius:999px; padding:4px; position:relative;}
+.rocker button{
+  font-family:var(--mono); font-size:13.5px; letter-spacing:.08em; color:var(--ink-dim);
+  background:none; border:none; border-radius:999px; padding:8px 22px; cursor:pointer; position:relative; z-index:1;
+  transition:color .25s;
+}
+.rocker button:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+.rocker .thumb{
+  position:absolute; top:4px; bottom:4px; left:4px; width:calc(50% - 4px);
+  background:var(--bg); border:1px solid var(--gold); border-radius:999px;
+  transition:transform .35s cubic-bezier(.4,1.4,.4,1);
+}
+.rocker.after .thumb{transform:translateX(100%);}
+.rocker button[aria-pressed="true"]{color:var(--gold); font-weight:700;}
+
+#circuit .rail-l{stroke:var(--mixed-l);}
+#circuit .rail-r{stroke:var(--mixed-r);}
+#circuit.after .rail-l{stroke:var(--deoxy);}
+#circuit.after .rail-r{stroke:var(--oxy);}
+#circuit .rail-l,#circuit .rail-r,#circuit .lungline,#circuit .plac-line{transition:stroke .6s, stroke-width .6s, opacity .6s;}
+#circuit .lungline{stroke:var(--mixed-r); stroke-width:2.5; opacity:.6;}
+#circuit.after .lungline{stroke:var(--oxy); stroke-width:6; opacity:1;}
+#circuit .lungline.inlet{stroke:var(--mixed-l);}
+#circuit.after .lungline.inlet{stroke:var(--deoxy);}
+#circuit .shunt{stroke:var(--gold); stroke-width:3; fill:none; stroke-dasharray:7 6; transition:opacity .6s;}
+#circuit .shunt-label{fill:var(--gold); transition:opacity .6s;}
+#circuit.after .shunt{stroke:var(--ink-faint); opacity:.22; animation:none;}
+#circuit.after .shunt-label{opacity:.3;}
+#circuit .xmark{opacity:0; transition:opacity .6s .25s; fill:none; stroke:var(--oxy); stroke-width:2.5;}
+#circuit.after .xmark{opacity:1;}
+#circuit .plac{transition:opacity .6s;}
+#circuit.after .plac{opacity:.16;}
+#circuit .st-fetal{transition:opacity .5s;}
+#circuit .st-after{opacity:0; transition:opacity .5s;}
+#circuit.after .st-fetal{opacity:0;}
+#circuit.after .st-after{opacity:1;}
+#circuit .box{fill:var(--surface2); stroke:var(--line); stroke-width:1.5; rx:9;}
+#circuit .box-label{fill:var(--ink); font-weight:700; font-size:15px;}
+#circuit .box-sub{fill:var(--ink-dim); font-size:11px;}
+#circuit .flow-note{fill:var(--ink-faint); font-size:11px;}
+@keyframes dashmove{to{stroke-dashoffset:-26;}}
+#circuit:not(.after) .shunt{animation:dashmove 1.2s linear infinite;}
+@media (prefers-reduced-motion: reduce){
+  #circuit .shunt{animation:none !important;}
+  .rocker .thumb{transition:none;}
+}
+
+/* ---- 时间轴 ---- */
+#timeline .axis{stroke:var(--line); stroke-width:2;}
+#timeline .tick{stroke:var(--line);}
+#timeline .tick-label{fill:var(--ink-faint); font-size:11.5px;}
+#timeline .ev-dot{fill:var(--gold);}
+#timeline .ev-dot.slow{fill:var(--deoxy);}
+#timeline .ev-stem{stroke:var(--line); stroke-width:1.2;}
+#timeline .ev-label{fill:var(--ink); font-size:12.5px; font-weight:600;}
+#timeline .ev-sub{fill:var(--ink-dim); font-size:11px;}
+
+/* ============ 规格表 ============ */
+.spec{border:1px solid var(--line); border-radius:14px; overflow:hidden; margin:30px 0 40px;}
+.spec .spec-head{background:var(--surface2); padding:14px 20px; font-family:var(--mono); font-size:12.5px; letter-spacing:.24em; color:var(--gold); border-bottom:1px solid var(--line);}
+.spec table{width:100%; border-collapse:collapse; background:var(--surface);}
+.spec td{padding:12px 20px; border-bottom:1px solid var(--line); font-size:14.5px; vertical-align:top;}
+.spec tr:last-child td{border-bottom:none;}
+.spec td.k{color:var(--ink-dim); width:38%;}
+.spec td.v{font-family:var(--mono); font-size:14px; color:var(--gold); white-space:nowrap;}
+.spec td.n{color:var(--ink-faint); font-size:13px;}
+@media (max-width:560px){ .spec td.n{display:none;} .spec td.k{width:52%;} }
+
+/* ============ 测验 ============ */
+.quiz{counter-reset:q;}
+.quiz-q{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:22px 24px; margin:0 0 20px;}
+.quiz-q .qt{font-weight:700; font-size:16.5px; margin-bottom:14px; line-height:1.8;}
+.quiz-q .qt::before{counter-increment:q; content:"Q" counter(q) " · "; font-family:var(--mono); color:var(--gold);}
+.opts{display:grid; gap:10px;}
+.opts button{
+  text-align:left; font-size:15px; line-height:1.7; color:var(--ink);
+  background:var(--surface2); border:1px solid var(--line); border-radius:10px;
+  padding:11px 16px; cursor:pointer; font-family:var(--sans);
+  transition:border-color .2s, background .2s;
+}
+.opts button:hover{border-color:var(--gold);}
+.opts button:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+.quiz-q.done .opts button{cursor:default; opacity:.55;}
+.quiz-q.done .opts button.correct{opacity:1; border-color:var(--green); background:color-mix(in srgb, var(--green) 12%, var(--surface2)); color:var(--ink);}
+.quiz-q.done .opts button.wrong{opacity:1; border-color:var(--oxy);}
+.explain{display:none; margin-top:14px; padding:14px 16px; border-left:3px solid var(--green); background:var(--surface2); border-radius:0 10px 10px 0; font-size:14.5px; color:var(--ink-dim); line-height:1.85;}
+.quiz-q.done .explain{display:block;}
+
+/* ============ 页脚 ============ */
+footer.next{border-top:1px solid var(--line); margin-top:72px; padding-top:36px;}
+.next .label{font-family:var(--mono); font-size:12px; letter-spacing:.26em; color:var(--ink-faint);}
+.next .title{font-family:var(--serif); font-weight:900; font-size:22px; margin-top:10px;}
+.next p{color:var(--ink-dim); font-size:15px; margin-top:10px;}
+
+/* ============ 主题开关 ============ */
+#themeBtn{
+  position:fixed; top:18px; right:18px; z-index:9;
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.1em;
+  color:var(--ink-dim); background:var(--surface); border:1px solid var(--line);
+  border-radius:999px; padding:8px 16px; cursor:pointer;
+}
+#themeBtn:hover{color:var(--ink); border-color:var(--gold);}
+#themeBtn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <div class="act">第一幕 建造 · 第 8 章</div>
+  <h1>出生：生命最惊险的<br>十分钟</h1>
+  <p class="subtitle">十分钟内：换掉氧气的来源，改写血液的河道，唤醒一台从未启用过的器官——而大幕自始至终没有落下。</p>
+  <div class="meta"><span>阅读 ≈ 16 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>此刻，距离你的第一声啼哭还有一个小时。</p>
+  <p>你漂在 37℃ 的暖水里，蜷着，闭着眼。九个月来，你从未呼吸过一次，从未挨过饿，也从未觉得冷。氧气、食物、体温，一切由一条脐带和它另一端的胎盘代劳。你甚至从未见过光。</p>
+  <p>剧院里有一门绝活，叫<strong>不落幕换景</strong>：大幕不降，灯光一暗，布景、道具、乐队在观众的眼皮底下全部换掉，而戏一秒都不停。出生就是这样一场换景——只是要换的，是氧气的来源、血液的河道，和一台从未点亮过的器官；台上唯一的演员，赌上的是自己的性命。这场换景每天在世界各地上演约 37 万场，几乎场场成功。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 幕启之前</div>
+  <h2>水下的日子：出生前的血液地图</h2>
+  <p>先回答一个朴素的问题：胎儿在子宫里，怎么"呼吸"？</p>
+  <p>答案是：不呼吸。肺要到出生那一刻才第一次投入使用。在那之前，它安静地泡在液体里——肺泡中充盈着肺自己分泌的液体（不是羊水），血管收得很紧，只分到全身血流的一成左右。氧气另有来路：母亲的血流经胎盘时，氧分子隔着一层薄膜渗进你的血液，再由脐静脉送入体内。胎盘像树根扎进土壤那样扎进母亲的血流，替你汲取一切——它是你临时的肺，顺便兼任肠道、肾脏，还有半个内分泌腺。</p>
+  <p>但这条供氧线路有个代价：损耗。层层转手之后，胎儿动脉血的氧饱和度只有 <strong>60% 左右</strong>——成年人到了这个数值，会被直接送进 ICU。研究高原的生理学家 Joseph Barcroft 给这种状态起过一个流传至今的名字：<strong>"子宫里的珠穆朗玛峰"</strong>。胎儿的整个胎内生涯，都相当于扎营在珠峰峰顶的氧气条件下，却毫无高原反应。靠的是两件装备：一是<strong>胎儿血红蛋白（HbF）</strong>——一种抓氧更紧的特制版本，能在低氧处把氧分子从母亲的血红蛋白手里稳稳接过来，像接力赛里那只伸得更远的手；二是更稠的红细胞和更卖力的心跳——单次抓得少，就多跑几趟。</p>
+  <h3>三条便河</h3>
+  <p>既然肺还没开放，让全部血液照常流经它，就是白白绕远。水乡的船工都懂这个道理：河道未通，就截弯取直，另开便河。胎儿的血管里恰好开着三条：</p>
+  <p><strong>便河① 静脉导管</strong>——脐静脉带回的富氧血，一多半绕开肝脏这片水流缓慢的湖区，直插下腔静脉，先紧着心和脑用，不在半路耽搁。<br>
+  <strong>便河② 卵圆孔</strong>——左右心房之间的一道<strong>活页水门</strong>。血液进入右心房后，大部分推门而过，直接去了左心房，把整段肺循环甩在身后。<br>
+  <strong>便河③ 动脉导管</strong>——就算有血被泵进了肺动脉，前方还有最后一个岔口：一条粗短的水道把它引回主动脉，再次绕开肺。</p>
+  <p>三条便河一开，清水浊水在管路里汇成一片——这就是为什么下图里胎儿的河道是紫色的。整套水系宽松、混杂，却运转良好：反正上游有胎盘兜底，混一点，无妨。</p>
+
+  <figure>
+    <div class="switch-row">
+      <span class="switch-hint">拨动开关 →</span>
+      <div class="rocker" id="rocker" role="group" aria-label="切换出生前后状态">
+        <div class="thumb" aria-hidden="true"></div>
+        <button id="btnBefore" aria-pressed="true">出生前</button>
+        <button id="btnAfter" aria-pressed="false">出生后</button>
+      </div>
+    </div>
+    <svg id="circuit" viewBox="0 0 760 660" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="胎儿循环与新生儿循环对比示意图">
+      <!-- 主管路 -->
+      <line class="rail-l" x1="180" y1="459" x2="180" y2="65" stroke-width="5" stroke-linecap="round"/>
+      <line class="rail-r" x1="580" y1="65" x2="580" y2="459" stroke-width="5" stroke-linecap="round"/>
+      <line class="lungline inlet" x1="180" y1="65" x2="300" y2="65" stroke-linecap="round"/>
+      <line class="lungline" x1="460" y1="65" x2="580" y2="65" stroke-linecap="round"/>
+      <line class="rail-r" x1="580" y1="459" x2="460" y2="459" stroke-width="5" stroke-linecap="round"/>
+      <line class="rail-l" x1="300" y1="459" x2="180" y2="459" stroke-width="5" stroke-linecap="round"/>
+      <!-- 流向箭头 -->
+      <polyline class="rail-l" points="174,158 180,146 186,158" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline class="rail-l" points="174,388 180,376 186,388" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline class="rail-r" points="574,146 580,158 586,146" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline class="rail-r" points="574,376 580,388 586,376" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- 胎盘模块 -->
+      <g class="plac">
+        <line x1="410" y1="488" x2="410" y2="545" stroke="var(--mixed-l)" stroke-width="4" stroke-linecap="round"/>
+        <text class="flow-note" x="422" y="522" text-anchor="start">脐动脉</text>
+        <path d="M290 573 H110 V398" fill="none" stroke="var(--oxy)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M110 352 V320 H180" fill="none" stroke="var(--oxy)" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="180" cy="320" r="4.5" fill="var(--oxy)"/>
+        <text class="flow-note" x="200" y="565" text-anchor="start">脐静脉 · 全身最富氧的血</text>
+        <rect class="box" x="70" y="352" width="80" height="46" rx="9"/>
+        <text class="box-label" x="110" y="381" text-anchor="middle">肝</text>
+        <rect class="box" x="290" y="545" width="180" height="56" rx="9"/>
+        <text class="box-label" x="380" y="570" text-anchor="middle">胎盘</text>
+        <text class="box-sub" x="380" y="590" text-anchor="middle">临时的肺 · 肠 · 肾</text>
+      </g>
+      <!-- 三条便河 -->
+      <path class="shunt" d="M110 412 C 42 412, 42 338, 110 338"/>
+      <text class="shunt-label" x="110" y="448" text-anchor="middle" font-size="11.5">便河① 静脉导管（绕过肝）</text>
+      <path class="shunt" d="M230 254 H388 a9 9 0 0 1 18 0 H530"/>
+      <text class="shunt-label" x="252" y="240" text-anchor="start" font-size="11.5">便河② 卵圆孔</text>
+      <line class="shunt" x1="180" y1="140" x2="580" y2="350"/>
+      <circle class="shunt-label" cx="180" cy="140" r="4"/>
+      <circle class="shunt-label" cx="580" cy="350" r="4"/>
+      <text class="shunt-label" x="262" y="172" text-anchor="start" font-size="11.5">便河③ 动脉导管</text>
+      <!-- 器官盒 -->
+      <rect class="box" x="300" y="36" width="160" height="58" rx="9"/>
+      <text class="box-label" x="380" y="60" text-anchor="middle">肺</text>
+      <text class="box-sub st-fetal" x="380" y="80" text-anchor="middle">泡在液体里 · 分得血流 ~10%</text>
+      <text class="box-sub st-after" x="380" y="80" text-anchor="middle">通气 · 全部血流必经之地</text>
+      <rect class="box" x="130" y="210" width="100" height="88" rx="9"/>
+      <text class="box-label" x="180" y="248" text-anchor="middle">右心</text>
+      <text class="box-sub" x="180" y="270" text-anchor="middle">接收回流</text>
+      <rect class="box" x="530" y="210" width="100" height="88" rx="9"/>
+      <text class="box-label" x="580" y="248" text-anchor="middle">左心</text>
+      <text class="box-sub" x="580" y="270" text-anchor="middle">泵向全身</text>
+      <rect class="box" x="300" y="430" width="160" height="58" rx="9"/>
+      <text class="box-label" x="380" y="454" text-anchor="middle">全身组织</text>
+      <text class="box-sub" x="380" y="474" text-anchor="middle">用氧的一端</text>
+      <!-- 换景后的封条 -->
+      <g class="xmark"><line x1="402" y1="508" x2="418" y2="524"/><line x1="418" y1="508" x2="402" y2="524"/></g>
+      <g class="xmark"><line x1="232" y1="565" x2="248" y2="581"/><line x1="248" y1="565" x2="232" y2="581"/></g>
+      <g class="xmark"><line x1="45" y1="368" x2="61" y2="384"/><line x1="61" y1="368" x2="45" y2="384"/></g>
+      <g class="xmark"><line x1="293" y1="247" x2="307" y2="261"/><line x1="307" y1="247" x2="293" y2="261"/></g>
+      <g class="xmark"><line x1="453" y1="280" x2="467" y2="294"/><line x1="467" y1="280" x2="453" y2="294"/></g>
+      <!-- 状态注记 -->
+      <text class="flow-note mono st-fetal" x="60" y="624" text-anchor="start" font-size="12">此刻：三条便河畅通 · 河道里多为混合血</text>
+      <text class="flow-note mono st-after" x="60" y="624" text-anchor="start" font-size="12">此刻：全部血流必经肺 · 清浊分明，各行其道</text>
+      <!-- 图例 -->
+      <line x1="60" y1="646" x2="92" y2="646" stroke="var(--gold)" stroke-width="3" stroke-dasharray="7 6"/>
+      <text class="flow-note" x="100" y="650">胎儿便河</text>
+      <line x1="200" y1="646" x2="232" y2="646" stroke="var(--mixed-r)" stroke-width="4"/>
+      <text class="flow-note" x="240" y="650">混合血</text>
+      <line x1="330" y1="646" x2="362" y2="646" stroke="var(--oxy)" stroke-width="4"/>
+      <text class="flow-note" x="370" y="650">富氧血</text>
+      <line x1="460" y1="646" x2="492" y2="646" stroke="var(--deoxy)" stroke-width="4"/>
+      <text class="flow-note" x="500" y="650">乏氧血</text>
+    </svg>
+    <figcaption><b>图 8-1 · 出生前后的血液地图。</b>出生前：三条金色便河让血液绕开尚未开放的肺，体外的胎盘代行气体交换，河道里多为混合血。拨到"出生后"：胎盘断开，三条便河相继封闭，肺成为全部血流的必经之地，水路分成清浊分明的红蓝两条。示意图只画路线，不代表解剖形状。</figcaption>
+  </figure>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>全身最红的血，在脐带里。</strong>我们从小学的常识——动脉血鲜红、静脉血暗沉——在胎儿身上几乎失效：便河纵横，处处混流。全身唯一一段名副其实的"鲜红"，反而是那条从胎盘归来的<strong>脐静脉</strong>（没错，是静脉）。它也因此成了产科医生的取样宝地：脐血的成分，就是胎儿收到的"原装货"。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 备航</div>
+  <h2>换景不是即兴演出：九个月里的悄悄准备</h2>
+  <p>如此惊险的换景，当然不能靠临场发挥。妊娠最后几周，胎儿其实在做一次远航前的备航，物资一件件搬上甲板：</p>
+  <p><strong>先备一样神奇的液体。</strong>肺泡内壁的细胞从孕 24 周前后开始，分泌一种叫<strong>肺表面活性物质</strong>的磷脂——它和洗洁精是同门（都属于表面活性剂），到 34–36 周才备足。别小看这瓶"洗洁精"，第一口气的成败全系于它，下一节详谈。<br>
+  <strong>再囤一仓口粮。</strong>肝脏在最后一个月里加倍囤积糖原，为断开脐带后的头几个小时备荒。<br>
+  <strong>最后装一只暖炉。</strong>肩胛之间和颈后堆起一种成人几乎没有的组织——棕色脂肪，约占体重的 2–5%。它的妙处，留到第 5 节。</p>
+  <p>然后，产程拉开序幕。对胎儿来说，分娩是一场结结实实的风暴：宫缩一阵阵挤压，氧供一阵阵起伏。风暴逼出了肾上腺的全力一搏——<strong>一生中浓度最高的一次肾上腺素洪峰</strong>，高过成年人冲刺、搏斗、心跳骤停时的任何时刻。这场洪峰不是灾难，而是<strong>发令枪</strong>：它命令肺里的"抽水机"调转方向，从向肺泡里注水改为向外抽水；命令肝脏开仓放粮；命令血流收拢，先保心脑。老教科书说肺液主要靠产道"挤"出来——如今我们知道，挤压只是配角，主角是这声枪响之后的主动抽吸。</p>
+  <p>一个旁证：未经历产程的择期剖宫产婴儿，没有听到完整的发令枪，肺液退得更慢，出现"湿肺"（出生后一过性的呼吸急促）的比例明显更高。那声枪响，不是可有可无的仪式。</p>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 点亮</div>
+  <h2>第一口气：一生中最贵的一次呼吸</h2>
+  <p>离开产道，世界的参数瞬间跳变：温度从 37℃ 跌到室温，光、声音、触碰第一次涌来。多重刺激轰击呼吸中枢，一条沉睡了九个月的指令终于发出：<strong>吸气。</strong></p>
+  <p>这是你一生中最费力的一次呼吸。往后每一次平静吸气，胸腔只需产生约 5 cmH₂O 的负压；而第一口气，需要 <strong>−50 到 −70 cmH₂O</strong>——十倍以上的力气。</p>
+  <p>为什么这么难？吹过气球的人都知道：最难的永远是第一口。瘪着的气球内壁粘在一起，表面张力死死抗拒着展开——一旦吹开了，后面就顺了。新生儿面对的，是<strong>数亿只从未吹开过、还泡在水里的微型气球</strong>。物理规律还要落井下石（Laplace 定律）：气球越小越难吹开，小气泡还会把气体拱手让给大气泡、自己彻底瘪死。若无对策，每次呼气后肺泡都会重新粘合，每一口气都得像第一口那样搏命。</p>
+  <p>对策就是备航时囤下的那瓶"洗洁精"。表面活性物质铺在肺泡内壁，把表面张力削去一个量级，而且越小的肺泡削得越狠——恰好抹平了物理定律的偏心。于是肺泡吹开一次，便能常开；呼吸的代价从搏命降为几乎免费。洗洁精能吹出经久不破的泡泡，靠的是同一个原理。</p>
+  <p>顺带解开一个老谜：新生儿为什么落地就大哭？听诊器下的真相是——哭，是<strong>对着半掩的声门长长呼气</strong>。半掩的门让气流出得慢，胸腔里便始终留着一点余压，像吹好气球后捏住吹嘴不放，护着那几亿只刚刚展开的小气球不再瘪回去。产房里最动人的声音，同时也是最实用的。</p>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 改道</div>
+  <h2>十分钟：血液的河道如何改写</h2>
+  <p>第一口气不只属于呼吸系统——它同时推倒了整个循环系统的第一张多米诺。回看图 8-1，改道按这个顺序传开：</p>
+  <p><strong>① 氧气涌入肺泡，肺的水闸全开。</strong>氧气是肺血管最听从的开闸信号。几分钟内，肺血管的阻力跌去约八成，肺血流量涨了 8–10 倍——一条干涸了九个月的河道，转眼间满水行舟。<br>
+  <strong>② 水门被顶死。</strong>涌过肺的血又浩浩荡荡回到左心房，左边的水位有生以来第一次高过右边。还记得便河②那道活页水门吗？它只朝一个方向开。此刻门外水位更高，门板被水压结结实实地顶在墙上。<em>没有伤口愈合，没有组织生长——只是水压把门关上了。</em>前后不过几分钟。<br>
+  <strong>③ 最大的支流被截断。</strong>脐带被钳夹，胎盘这片吞吐量巨大的水域退出水系，全身水压随之抬升，左高右低的形势愈发稳固。<br>
+  <strong>④ 运河自行收窄。</strong>便河③的管壁察觉到两件事同时发生：水里的氧变多了，而一种名叫前列腺素的"保开信号"骤然断供（它的主产地胎盘已经下线，全速运转的肺还在加紧清除余量）。管壁于是缓缓收缩，24–72 小时内断流，数周内彻底淤平，化作一条纤细的韧带。<br>
+  <strong>⑤ 断了水源的便河干涸。</strong>脐静脉断流后，便河①无水可引，几天内自行闭合，同样归于韧带。</p>
+  <p>至此，混杂的水系分成清浊两路，动脉血氧饱和度从 60% 一路爬上 95% 以上；左右两颗泵首尾相接，从此每一搏的出水量都必须分毫不差。核心改道在<strong>十分钟内</strong>尘埃落定，收尾工程延续数周——而其中一处，四分之一的人一生都没有完工（见第 6 节）。</p>
+
+  <figure>
+    <svg id="timeline" viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="出生后各系统切换的时间线">
+      <line class="axis" x1="50" y1="170" x2="722" y2="170"/>
+      <g>
+        <line class="tick" x1="70" y1="164" x2="70" y2="176"/><text class="tick-label" x="70" y="194" text-anchor="middle">秒</text>
+        <line class="tick" x1="163" y1="164" x2="163" y2="176"/><text class="tick-label" x="163" y="194" text-anchor="middle">分</text>
+        <line class="tick" x1="256" y1="164" x2="256" y2="176"/><text class="tick-label" x="256" y="194" text-anchor="middle">时</text>
+        <line class="tick" x1="349" y1="164" x2="349" y2="176"/><text class="tick-label" x="349" y="194" text-anchor="middle">天</text>
+        <line class="tick" x1="442" y1="164" x2="442" y2="176"/><text class="tick-label" x="442" y="194" text-anchor="middle">周</text>
+        <line class="tick" x1="535" y1="164" x2="535" y2="176"/><text class="tick-label" x="535" y="194" text-anchor="middle">月</text>
+        <line class="tick" x1="628" y1="164" x2="628" y2="176"/><text class="tick-label" x="628" y="194" text-anchor="middle">年</text>
+        <text class="tick-label" x="722" y="314" text-anchor="end">时间（对数刻度）→</text>
+      </g>
+      <line class="ev-stem" x1="95" y1="170" x2="95" y2="128"/><circle class="ev-dot" cx="95" cy="170" r="5"/>
+      <text class="ev-label" x="95" y="106" text-anchor="middle">第一口气</text>
+      <text class="ev-sub" x="95" y="122" text-anchor="middle">~10 秒内</text>
+      <line class="ev-stem" x1="372" y1="170" x2="372" y2="128"/><circle class="ev-dot" cx="372" cy="170" r="5"/>
+      <text class="ev-label" x="372" y="106" text-anchor="middle">动脉导管断流</text>
+      <text class="ev-sub" x="372" y="122" text-anchor="middle">24–72 小时</text>
+      <line class="ev-stem" x1="628" y1="170" x2="628" y2="128"/><circle class="ev-dot" cx="628" cy="170" r="5"/>
+      <text class="ev-label" x="628" y="106" text-anchor="middle">卵圆孔彻底长合</text>
+      <text class="ev-sub" x="628" y="122" text-anchor="middle">多数在 1 岁内</text>
+      <line class="ev-stem" x1="245" y1="170" x2="245" y2="74"/><circle class="ev-dot" cx="245" cy="170" r="5"/>
+      <text class="ev-label" x="245" y="52" text-anchor="middle">卵圆孔水门顶闭</text>
+      <text class="ev-sub" x="245" y="68" text-anchor="middle">数分钟–数小时</text>
+      <line class="ev-stem" x1="470" y1="170" x2="470" y2="74"/><circle class="ev-dot" cx="470" cy="170" r="5"/>
+      <text class="ev-label" x="470" y="52" text-anchor="middle">动脉导管淤平成韧带</text>
+      <text class="ev-sub" x="470" y="68" text-anchor="middle">数周</text>
+      <line class="ev-stem" x1="185" y1="170" x2="185" y2="216"/><circle class="ev-dot" cx="185" cy="170" r="5"/>
+      <text class="ev-label" x="185" y="238" text-anchor="middle">肺血管开闸</text>
+      <text class="ev-sub" x="185" y="254" text-anchor="middle">数分钟 · 阻力↓约80%</text>
+      <line class="ev-stem" x1="408" y1="170" x2="408" y2="216"/><circle class="ev-dot" cx="408" cy="170" r="5"/>
+      <text class="ev-label" x="408" y="238" text-anchor="middle">黄疸峰值</text>
+      <text class="ev-sub" x="408" y="254" text-anchor="middle">第 3–5 天</text>
+      <line class="ev-stem" x1="712" y1="170" x2="712" y2="216"/><circle class="ev-dot slow" cx="712" cy="170" r="5"/>
+      <text class="ev-label" x="724" y="238" text-anchor="end">25% 的人终生未完全长合</text>
+      <text class="ev-sub" x="724" y="254" text-anchor="end">卵圆孔留缝（PFO）</text>
+      <line class="ev-stem" x1="290" y1="170" x2="290" y2="270"/><circle class="ev-dot" cx="290" cy="170" r="5"/>
+      <text class="ev-label" x="290" y="292" text-anchor="middle">血糖低谷</text>
+      <text class="ev-sub" x="290" y="308" text-anchor="middle">生后 1–2 小时</text>
+      <line class="ev-stem" x1="555" y1="170" x2="555" y2="270"/><circle class="ev-dot" cx="555" cy="170" r="5"/>
+      <text class="ev-label" x="555" y="292" text-anchor="middle">HbF 谢幕</text>
+      <text class="ev-sub" x="555" y="308" text-anchor="middle">6–12 个月</text>
+    </svg>
+    <figcaption><b>图 8-2 · 换景的时间表。</b>台前的动作以秒和分钟计，幕后的收尾以周和月计——还有一处，在四分之一的人身上永远停在"施工中"。金色为换景事件，蓝色为终生遗留。</figcaption>
+  </figure>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>同一扇门，医生备着两把钥匙。</strong>动脉导管的开与关，听命于前列腺素的浓度——这给了医学一对精巧的钥匙。有些先天性心脏病的孩子恰恰<em>靠这条便河活着</em>（比如主动脉某段没长通，下半身的血全靠导管接济），医生便持续静滴前列腺素，把门撑住不许关，为手术争取时间。反过来，早产儿的导管迟迟不闭时，用布洛芬这类抑制前列腺素的药，轻轻把门推上。同一扇门，一把钥匙保开，一把钥匙催关。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 同一时刻</div>
+  <h2>与此同时：舞台侧幕的四条换景线</h2>
+  <p>血液改道是台前的主线，但同一时刻，侧幕里还有几条换景线在并行推进，每一条都性命攸关。</p>
+  <h3>供暖</h3>
+  <p>从 37℃ 的恒温浴缸跌进 25℃ 的空气，浑身湿透，而婴儿的体表面积相对体重又大得离谱（还记得第 5 章的表面积/体积比吗）——新生儿散热的速度是成人的四倍，偏偏还不会有效地打寒战。救场的是备航时装好的棕色脂肪：普通脂肪储存能量，棕色脂肪<strong>燃烧</strong>能量，细胞里的"炉膛"不产出可存的能量，径直生热。这只暖炉并非人类独创——冬眠的旱獭和黑熊在初春苏醒时，靠的正是同一种组织把冻透的身体烧回体温。刚出生的你，和一只出洞的旱獭，用的是同款炉子。</p>
+  <h3>开饭</h3>
+  <p>剪断脐带，等于拔掉一根连续输了九个月的"营养点滴"。从此吃饭是一顿一顿的，两餐之间全靠自己调度。出生后 1–2 小时，血糖滑向一生中的第一个低谷，靠孕晚期囤下的肝糖原顶住，大脑还能临时改烧酮体救急。这是代谢系统的第一次大考。</p>
+  <h3>换血</h3>
+  <p>抓氧神器 HbF 在出生后反倒成了累赘——它抓得太紧，舍不得把氧撒给组织。身体于是启动一场为期约一年的<strong>换角计划</strong>，像剧团在巡演途中一场一场地换主演：逐步停产 HbF，改产成人版 HbA；出生时约八成的 HbF，一岁前降到 2% 以下。副作用随之而来：胎儿红细胞寿命偏短，出生后成批退役，分解出的胆红素在血里堆积，而负责回收它的肝脏还没上满班。于是过半的新生儿会在第 3–5 天泛起淡淡的黄——你其实见过这种黄色：淤青消退前泛出的那一圈黄晕，正是胆红素的本色。生理性黄疸，不过是同一场化学在全身尺度上演了一遍。</p>
+  <h3>第一批住客</h3>
+  <p>还有一个系统，到出生这一刻才迎来第一批居民：肠道微生物组。子宫内近乎无菌，产道、母乳、怀抱，送来第一批定植的细菌——这批开城元老将参与训练免疫系统长达数年，我们在第 10 章《免疫系统上学》再细说。与此同时，肾脏正式接管水盐，肠道迎来第一餐。72 小时内，一具独立的人体，各处灯火次第亮起。</p>
+</section>
+
+<!-- ==================== 第 6 节 ==================== -->
+<section id="s6">
+  <div class="eyebrow">06 · 当换景出错</div>
+  <h2>三种意外，和一道终生未上锁的门</h2>
+  <p>1963 年 8 月，美国总统肯尼迪的小儿子帕特里克提前五周半来到人间。他的第一口气吸得异常艰难，此后的每一口都是——三十九个小时后，这个孩子在高压氧舱里离世。死因写作"肺透明膜病"，也就是今天说的<strong>新生儿呼吸窘迫综合征（RDS）</strong>：早产，那瓶"洗洁精"没有备够，肺泡吹开又瘪、瘪了再吹，每一口气都是第一口气。总统之子尚且救不回来——这件事震动了美国公众，大笔经费自此涌向新生儿医学。而就在几年前，波士顿的儿科医生 Mary Ellen Avery 已经查明病根正是表面活性物质的缺失；沿着这条线索，人工替代疗法在 1980 年代终于问世，把 RDS 的死亡率压下了一个数量级。今天，产科医生还能抢在早产发生前给母亲注射激素，催熟胎儿的肺——相当于把身体自己的备航清单，提前人工执行一遍。帕特里克若晚生三十年，大概率能活。</p>
+  <p>第二种意外更为凶险：<strong>换景拒绝发生</strong>。少数新生儿的肺血管在出生后拒不开闸，血液固执地沿着旧便河奔流，绕开肺——可胎盘已经不在了。身体仿佛认定自己还在子宫里，而子宫早已谢幕，缺氧于是急转直下。这是新生儿持续性肺动脉高压（PPHN），抢救时会让婴儿直接吸入一氧化氮，用药物之手去撬那道打不开的闸门。</p>
+  <p>第三种意外温和些但更常见：<strong>便河③关不上（PDA）</strong>。动脉导管迟迟不肯断流（早产儿尤甚），主动脉的高压血持续倒灌回肺里，肺被淹得湿重，心脏日夜加班。如上一节所说，医生手里有催关的钥匙；药物无效，还有手术和介入封堵兜底。</p>
+  <p>最后是那处永远的"施工中"：<strong>卵圆孔（PFO）</strong>。水门被压力顶闭只在一瞬，门框彻底长死却要靠组织慢慢愈合——而在<strong>约 25% 的人</strong>身上，这道缝终生没有长严。绝大多数时候它无声无息：左边水位常年更高，门始终关着，只是没上锁。但在某些瞬间——潜水员携气泡上浮、用力屏气的一刹那——右边压力短暂反超，门缝会开出一线，让本该被肺滤掉的微小血栓或气泡溜进动脉一侧，直上大脑。这就是为什么一部分查无病因的中风，最终被追溯到这扇门；也是潜水体检格外关心它的原因。环顾此刻你身边的人：每四个人里，就有一个人的心底，还留着出生那天没来得及上锁的一道门。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>晚一分钟剪脐带。</strong>剪脐带的时机曾被认为无关紧要，越快越"利索"。近十几年的临床试验改写了共识：延迟 30–60 秒以上钳夹，胎盘会把最后约 80–100 毫升血"归还"给新生儿——接近其血容量的三分之一，能明显改善此后数月的铁储备。世界卫生组织现已建议不早于 1 分钟剪断。一个零成本的等待，改写了一项百年产房惯例；针对需要抢救的新生儿"不断脐复苏"的研究仍在推进。</p>
+    <p><strong>人工子宫：把陡坎铺成缓坡。</strong>本章的一切凶险都源于换景太陡——而极早产儿被迫在道具远未备齐时仓促登台。2017 年，费城儿童医院团队让相当于人类 23–24 周胎龄的羊羔，在灌满人工羊水的"生物袋"（Biobag）里继续发育了四周：脐带接着体外供氧装置，肺照旧安静地泡在液体里长大——等于把胎盘的谢幕时间推迟了一个月。这一方向已进入人类试验的监管讨论（美国 FDA 于 2023 年召开专门咨询会议）。若能成真，"出生"将从一道陡坎变成一段可以调节的缓坡，"极早产"的定义可能被彻底改写；随之而来的伦理争论同样激烈——缓坡的两端，连着关于生存底线与母体角色的古老追问。</p>
+  </div>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">出生换景 · 关键数字</div>
+    <table>
+      <tr><td class="k">第一口气所需胸腔负压</td><td class="v">−50 ~ −70 cmH₂O</td><td class="n">平静呼吸的 10 倍以上</td></tr>
+      <tr><td class="k">肺血流量变化</td><td class="v">× 8–10</td><td class="n">数分钟内，占血流 ~10% → 100%</td></tr>
+      <tr><td class="k">肺血管阻力</td><td class="v">↓ 约 80%</td><td class="n">氧气是最有力的开闸信号</td></tr>
+      <tr><td class="k">卵圆孔被顶闭</td><td class="v">数分钟–数小时</td><td class="n">约 25% 的人终生未彻底长合</td></tr>
+      <tr><td class="k">动脉导管断流</td><td class="v">24–72 h</td><td class="n">彻底淤平需数周</td></tr>
+      <tr><td class="k">出生时肾上腺素水平</td><td class="v">一生峰值</td><td class="n">高于成人任何时刻</td></tr>
+      <tr><td class="k">动脉血氧饱和度</td><td class="v">~60% → &gt;95%</td><td class="n">胎儿期 ≈ 珠峰峰顶水平</td></tr>
+      <tr><td class="k">胎儿血红蛋白（HbF）占比</td><td class="v">~80% → &lt;2%</td><td class="n">出生时 → 1 岁</td></tr>
+      <tr><td class="k">出生时肺内液体</td><td class="v">~100 mL</td><td class="n">产程中由注水反转为抽水</td></tr>
+      <tr><td class="k">棕色脂肪储备</td><td class="v">体重的 2–5%</td><td class="n">与冬眠动物同款的暖炉</td></tr>
+      <tr><td class="k">新生儿静息心率</td><td class="v">120–160 次/分</td><td class="n">约为成人的 2 倍</td></tr>
+      <tr><td class="k">这场换景的每日上演场次</td><td class="v">~37 万场 / 天</td><td class="n">几乎场场成功</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">出生前，胎儿的肺处于什么状态？</div>
+      <div class="opts">
+        <button>充满空气，但不进行气体交换</button>
+        <button data-c="1">泡在液体里，只分得约一成血流，尚未启用</button>
+        <button>与成人相同，正常呼吸羊水</button>
+        <button>完全没有血液供应</button>
+      </div>
+      <div class="explain">胎儿的肺充盈着自己分泌的液体（不是羊水），血管收紧，只接收约 10% 的血流。气体交换全部由胎盘代劳——它是胎儿临时的肺，兼任肠道和肾脏。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">卵圆孔在出生后几分钟内就"关闭"了，靠的是什么？</div>
+      <div class="opts">
+        <button>伤口愈合式的组织快速生长</button>
+        <button>神经系统发出的关闭指令</button>
+        <button data-c="1">肺血流暴增使左心房压力反超，把单向的门板顶在墙上</button>
+        <button>体温变化使孔洞收缩</button>
+      </div>
+      <div class="explain">纯粹的水压原理：肺的河道开闸后，回到左心房的血量暴增，左边水位第一次高过右边，反向压力把活页门板顶死。门框彻底长合要再等数月——而约 25% 的人终生没长严（PFO）。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">第一口气为什么需要平静呼吸十倍以上的力气？</div>
+      <div class="opts">
+        <button>新生儿呼吸肌太弱，效率低</button>
+        <button data-c="1">要推开气道里的液体，还要像吹开新气球那样撑开粘连的肺泡</button>
+        <button>气道在出生时是完全闭锁的，需要冲开</button>
+        <button>室温空气密度比羊水大</button>
+      </div>
+      <div class="explain">双重阻力：残余的肺液，加上数亿只从未吹开过的"微型气球"的表面张力（越小的气球越难吹开）。表面活性物质像洗洁精一样削减表面张力，让肺泡开一次便能常开——早产儿缺了它，每口气都是第一口气，这就是 RDS。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">触发动脉导管收缩闭合的两个信号是？</div>
+      <div class="opts">
+        <button>血压升高 + 心率下降</button>
+        <button>体温下降 + 血糖下降</button>
+        <button data-c="1">血氧浓度升高 + 前列腺素水平骤降</button>
+        <button>啼哭产生的胸腔震动</button>
+      </div>
+      <div class="explain">氧含量升高促使管壁收缩；同时"保开信号"前列腺素断供——它的主产地胎盘已下线，全速运转的肺又在加紧清除。医生正是握着这对钥匙双向操作：静滴前列腺素保持导管开放，或用布洛芬类药物催它关闭。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">新生儿不会有效打寒战，他们靠什么对抗出生时的骤冷？</div>
+      <div class="opts">
+        <button>依靠啼哭产生的肌肉热量</button>
+        <button>皮下白色脂肪的隔热作用</button>
+        <button>迅速收缩全身血管，停止散热</button>
+        <button data-c="1">棕色脂肪直接燃烧燃料产热——与冬眠动物回温用的是同一种组织</button>
+      </div>
+      <div class="explain">棕色脂肪不储存能量而是径直生热，约占新生儿体重的 2–5%，集中在肩胛间和颈后。冬眠的旱獭和黑熊初春苏醒时，靠的正是同款"暖炉"。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第二幕 调试与扩容</div>
+  <div class="title">第 9 章 · 大脑的野蛮生长与修剪</div>
+  <p>换景完成，大戏开演。但全身最精贵的一件布景才刚刚动工：未来两年，新生儿的大脑将疯狂铺设超出所需一倍的连接，然后用十几年时间，亲手拆掉其中一半。为什么建了又拆？下一章见。</p>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 血液地图状态切换
+  var circuit = document.getElementById('circuit');
+  var rocker = document.getElementById('rocker');
+  var bBefore = document.getElementById('btnBefore');
+  var bAfter = document.getElementById('btnAfter');
+  function setState(after){
+    circuit.classList.toggle('after', after);
+    rocker.classList.toggle('after', after);
+    bBefore.setAttribute('aria-pressed', after ? 'false' : 'true');
+    bAfter.setAttribute('aria-pressed', after ? 'true' : 'false');
+  }
+  bBefore.addEventListener('click', function(){ setState(false); });
+  bAfter.addEventListener('click', function(){ setState(true); });
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

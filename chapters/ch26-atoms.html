@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>终章 · 循环：你的原子回到生态圈 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 终-2 原子旅程环形图（本章专用） ---- */
+#ring-fig .node-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#ring-fig .node-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#ring-fig .node-btn:hover{border-color:var(--gold); color:var(--ink);}
+#ring-fig .node-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#ring-fig .node-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#ring-fig .node-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#ring-fig .np{display:none;}
+#ring-fig .np.on{display:block;}
+#ring-fig .np-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#ring-fig .np p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+#ring .nd{cursor:pointer; transition:opacity .3s;}
+#ring.picked .nd{opacity:.26;}
+#ring.picked .nd.on{opacity:1;}
+#ring .box{fill:var(--surface2); stroke:var(--line); stroke-width:1.6;}
+#ring .nd.on .box{stroke:var(--gold); stroke-width:2.6;}
+#ring .box-t{fill:var(--ink); font-size:13.5px; font-weight:700;}
+#ring .nd.on .box-t{fill:var(--gold);}
+#ring .loop{fill:none; stroke:var(--line); stroke-width:2;}
+#ring .fast{fill:none; stroke:var(--green); stroke-width:2; stroke-dasharray:7 6;}
+#ring .arrow{fill:var(--ink-faint);}
+#ring .star{fill:none; stroke:var(--gold); stroke-width:2; stroke-dasharray:6 6;}
+#ring .note{fill:var(--ink-faint); font-size:11.5px;}
+#ring .ctr{fill:var(--ink-dim); font-size:12.5px;}
+
+/* ---- 图 终-1 更换周期尺度（本章专用） ---- */
+#turn .axis{stroke:var(--line); stroke-width:2;}
+#turn .tick{stroke:var(--line);}
+#turn .tick-label{fill:var(--ink-faint); font-size:11.5px;}
+#turn .guide{stroke:var(--line); stroke-width:1; stroke-dasharray:3 5;}
+#turn .dot{fill:var(--gold);}
+#turn .dot.slow{fill:var(--deoxy);}
+#turn .lb{fill:var(--ink); font-size:13.5px; font-weight:700;}
+#turn .val{fill:var(--ink-dim); font-size:12px;}
+#turn .band{fill:var(--gold); fill-opacity:.10; stroke:var(--gold); stroke-width:1.2; stroke-dasharray:5 5;}
+#turn .band-t{fill:var(--gold); font-size:12.5px; font-weight:700;}
+#turn .foot{fill:var(--ink-dim); font-size:12px;}
+@media (prefers-reduced-motion: reduce){
+  #ring .nd{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>终章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>循环：你的原子<br>回到生态圈</h1>
+  <p class="subtitle">组成你的东西，大部分在你活着的时候就已经换过很多轮。这一章数一数哪些换、哪些不换，然后看看它们从哪里来，又要到哪里去。</p>
+  <div class="meta"><span>阅读 ≈ 8 分钟</span><span>图 2 · 前沿窗口 1</span><span>规格表 8 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>你此刻用来读这行字的眼睛里，有一小团蛋白质和你同岁。</p>
+  <p>而你身上大部分别的东西都不是。此刻在你肠道内壁干活的细胞，几天前还不存在；你血液里的红细胞，多数几个月前才上岗；十年之后，你骨头里的钙原子会换过一整批。你更像一条河：形状认得出来，水一直在流。</p>
+  <p>这些是怎么知道的？靠的是二十世纪中叶人类在大气层里试爆的几百颗核弹。这话听起来像玩笑，但它确实成了迄今为止测量人体细胞年龄最好用的一把尺。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 更替</div>
+  <h2>核弹留下的那把尺</h2>
+  <p>1955 到 1963 年间，大气层核试验把空气里放射性碳（碳-14）的浓度推高了将近一倍。1963 年《部分禁止核试验条约》签订之后，试验转入地下，空气中的碳-14 开始被海洋和植物一年年吸走，浓度沿着一条陡峭的曲线回落。</p>
+  <p>关键在于这一句：<strong>植物做光合作用时，会把当年空气里的那个比例原封不动地固定进糖分子。</strong>你吃植物，或者吃吃植物的动物；一个细胞在最后一次复制 DNA 时，就把那一年的空气比例封存了进去。测出这个比例，回查大气曲线，就能读出这个细胞诞生于哪一年——误差以年计。</p>
+  <p>卡罗林斯卡学院的团队用这把尺把人体量了一遍，结果就是下面这张图。</p>
+
+  <figure>
+    <svg id="turn" viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="人体各组织的更换周期对数尺度图，从肠道上皮的数天到终生不更换的部件">
+      <text class="tick-label" x="20" y="24">一件件数过来：多久换一批</text>
+      <rect class="band" x="663" y="44" width="80" height="282" rx="8"/>
+      <text class="band-t" x="703" y="66" text-anchor="middle">终生</text>
+
+      <line class="guide" x1="170" y1="92" x2="235" y2="92"/>
+      <circle class="dot" cx="235" cy="92" r="6"/>
+      <text class="lb" x="160" y="88" text-anchor="end">肠道内壁上皮</text>
+      <text class="val" x="249" y="97">3–5 天</text>
+
+      <line class="guide" x1="170" y1="136" x2="313" y2="136"/>
+      <circle class="dot" cx="313" cy="136" r="6"/>
+      <text class="lb" x="160" y="132" text-anchor="end">皮肤表皮</text>
+      <text class="val" x="327" y="141">2–4 周</text>
+
+      <line class="guide" x1="170" y1="180" x2="395" y2="180"/>
+      <circle class="dot" cx="395" cy="180" r="6"/>
+      <text class="lb" x="160" y="176" text-anchor="end">红细胞</text>
+      <text class="val" x="409" y="185">约 120 天</text>
+
+      <line class="guide" x1="170" y1="224" x2="555" y2="224"/>
+      <circle class="dot" cx="555" cy="224" r="6"/>
+      <text class="lb" x="160" y="220" text-anchor="end">脂肪细胞</text>
+      <text class="val" x="569" y="229">平均约 10 年</text>
+
+      <line class="guide" x1="170" y1="268" x2="555" y2="268"/>
+      <circle class="dot" cx="555" cy="268" r="6"/>
+      <text class="lb" x="160" y="264" text-anchor="end">骨骼（全副）</text>
+      <text class="val" x="569" y="273">约 10 年</text>
+
+      <line class="guide" x1="170" y1="312" x2="645" y2="312"/>
+      <circle class="dot slow" cx="645" cy="312" r="6"/>
+      <text class="lb" x="160" y="308" text-anchor="end">心肌细胞</text>
+      <text class="val" x="600" y="296" text-anchor="middle">一生换不到一半</text>
+
+      <line class="axis" x1="170" y1="336" x2="744" y2="336"/>
+      <line class="tick" x1="170" y1="336" x2="170" y2="346"/><text class="tick-label" x="170" y="364" text-anchor="middle">1 天</text>
+      <line class="tick" x1="261" y1="336" x2="261" y2="346"/><text class="tick-label" x="261" y="364" text-anchor="middle">1 周</text>
+      <line class="tick" x1="330" y1="336" x2="330" y2="346"/><text class="tick-label" x="330" y="364" text-anchor="middle">1 月</text>
+      <line class="tick" x1="447" y1="336" x2="447" y2="346"/><text class="tick-label" x="447" y="364" text-anchor="middle">1 年</text>
+      <line class="tick" x1="555" y1="336" x2="555" y2="346"/><text class="tick-label" x="555" y="364" text-anchor="middle">10 年</text>
+      <line class="tick" x1="663" y1="336" x2="663" y2="346"/><text class="tick-label" x="663" y="364" text-anchor="middle">100 年</text>
+      <text class="foot" x="20" y="390">终生基本不换：晶状体核心的蛋白 · 大脑皮层的多数神经元 · 牙釉质</text>
+    </svg>
+    <figcaption><b>图 终-1 · 更替时间表。</b>横轴为对数时间。金色为周期性更新的组织，蓝色为一生只换掉一部分的心肌。右侧色带里的三样基本不更新——损伤只累积，不清零。各值为人群量级，随部位、年龄与健康状况而变。</figcaption>
+  </figure>
+
+  <p>河流这个比方到这里要停一下，否则会推出一个错的结论：并不是全部都在流。<strong>有几处从来不换。</strong></p>
+  <p>第一处是<strong>晶状体的核心</strong>。那团负责聚焦的透明蛋白在胚胎期就已经排布好，此后细胞把内部器官全部拆掉以求透明，也就再没有能力更新它。你三十岁看不清近物、七十岁得白内障，都是同一团蛋白几十年累积的改变——这就是引子里那句"和你同岁"。第二处是<strong>大脑皮层的多数神经元</strong>：碳-14 测出它们的年龄与你本人的年龄一致。第三处是<strong>牙釉质</strong>：分泌它的细胞在牙齿萌出时就退场了，磨掉一点就少一点。</p>
+  <p>陪你一辈子的东西不多，而且都很要紧：<em>你看世界用的那块透镜，你之所以是你的那些神经元，和你咬东西的那层壳。</em></p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>这把尺正在失灵。</strong>弹脉冲测年之所以好用，是因为 1963 年之后大气碳-14 沿着一条陡峭且单调的曲线回落，每一年对应一个不重复的读数。但曲线正在走平：到 2020 年代，大气碳-14 已经接近核试验之前的本底水平，而燃烧化石燃料释放的、完全不含碳-14 的碳还在继续稀释它。对二十一世纪出生的人，这把尺读不出年份了。</p>
+    <p>接替它的方法正在竞争：读 DNA 甲基化模式的"表观遗传时钟"、靠体细胞突变的累积做单细胞谱系追踪、以及蛋白质中氨基酸自发变构的经典测法（牙釉质与晶状体正是它的传统用武之地）。本书写作时，还没有哪一种能像弹脉冲那样，直接读出一个细胞的"出厂年份"。连量身体年龄的工具，也在交接棒。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 来处</div>
+  <h2>这些原子是借来的</h2>
+  <p>先看清单。按质量算，你身上 65% 是氧，18% 是碳，10% 是氢，3% 是氮，其余全部元素加起来约 4%。按原子个数算，排序变了：氢最多，约占六成，氧约两成四，碳约一成二——氢又轻又小，重量上不显眼，数量上却是主力。总数在 <strong>10²⁷ 到 10²⁸ 个</strong>的量级，写成十进制要将近三十位。</p>
+  <p>这些原子的来路分两段，一段极远，一段极近。</p>
+  <p><strong>极远的那一段。</strong>你身上的氢，几乎全部诞生于大爆炸之后的最初几分钟，年龄约一百三十八亿年。碳、氮、氧是恒星内部核聚变的产物；钙、铁这些更重的元素，来自大质量恒星末期的剧变与更极端的天体并合。它们被抛进星际空间，混进后来坍缩成太阳系的那团气体和尘埃。</p>
+  <p>1980 年，Carl Sagan 在《宇宙》里把这件事说成了一句流传至今的话，大意是：我们 DNA 里的氮、牙齿里的钙、血液里的铁，都曾在恒星内部被造出来——<strong>我们是星尘做的。</strong></p>
+  <p>这句话容易被当成纯粹的抒情，其实它是一个可以核对的物理陈述：每一种元素的合成场所都有明确的核反应路径，也有观测证据支撑。但顺着它也别推过头——它说的是<em>元素的产地</em>，不是"你的某个原子曾属于某颗特定的恒星"，那种追溯做不到。</p>
+  <p><strong>极近的那一段。</strong>这些原子进入你身体走的是同一条路：植物用阳光把空气里的二氧化碳拆开，把碳接进糖；你把糖吃下去。你身上几乎每一个碳原子，在成为你的一部分之前都在某个绿色的东西里待过；再往前，在空气里；再往前，在别的活物身上，或者在海水与岩石里。水更快——它占你体重的 55% 到 60%，而其中的水分子只在你体内停留几周。</p>
+  <p>所以"你"这个东西，从物质上说更像是一个持续的<strong>过程</strong>，而不是一堆持续的<strong>材料</strong>。材料一直在换手，过程没有中断。</p>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 归还</div>
+  <h2>归还从来不是从死亡那天才开始的</h2>
+  <p>按上一节的比例算，一具 70 公斤的成人身体里约含 <strong>13 公斤碳</strong>。如果把它全部氧化，大约生成 47 公斤二氧化碳。</p>
+  <p>拿这笔账和呼吸比一比会很有意思：一个成年人每天呼出的二氧化碳约 1 公斤上下，也就是说——<strong>你活着的时候，一个半月左右呼出的碳，就相当于把整个身体的碳全部还了一遍。</strong>归还不是死亡那天开始的一次性事件，它每天都在发生，只是身体一边还一边补，账面看不出来。死亡改变的只是补的那一头停了。</p>
+  <p>此后的事很朴素：维持秩序的酶不再工作，组织开始自溶，细菌与真菌接手；软组织里的碳大部分以二氧化碳的形式回到大气，氮回到土壤，钙和磷留在骨里久一些。</p>
+
+  <figure id="ring-fig">
+    <div class="switch-row">
+      <span class="switch-hint">点环上任意一站 →</span>
+      <div class="node-tabs" role="group" aria-label="选择原子旅程中的一站">
+        <button class="node-btn" data-nd="star" aria-pressed="false">恒星</button>
+        <button class="node-btn" data-nd="air" aria-pressed="false">空气</button>
+        <button class="node-btn" data-nd="plant" aria-pressed="false">植物</button>
+        <button class="node-btn" data-nd="you" aria-pressed="false">你</button>
+        <button class="node-btn" data-nd="soil" aria-pressed="false">分解者与土壤</button>
+        <button class="node-btn" data-nd="rock" aria-pressed="false">海水与岩石</button>
+      </div>
+    </div>
+    <svg id="ring" viewBox="0 0 760 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="一个碳原子的循环路径：空气、植物、你、分解者与土壤、海水与岩石构成的环，恒星在环外，是一次性送达的产地">
+      <circle class="loop" cx="380" cy="230" r="140"/>
+      <polygon class="arrow" points="-7,-6 8,0 -7,6" transform="translate(462,117) rotate(36)"/>
+      <polygon class="arrow" points="-7,-6 8,0 -7,6" transform="translate(513,273) rotate(108)"/>
+      <polygon class="arrow" points="-7,-6 8,0 -7,6" transform="translate(380,370) rotate(180)"/>
+      <polygon class="arrow" points="-7,-6 8,0 -7,6" transform="translate(247,273) rotate(252)"/>
+      <polygon class="arrow" points="-7,-6 8,0 -7,6" transform="translate(298,117) rotate(324)"/>
+
+      <path class="fast" d="M298 318 C 330 240, 340 160, 372 118"/>
+      <text class="note" x="352" y="230" text-anchor="end">多数走这条快道</text>
+
+      <path class="star" d="M150 118 C 190 140, 200 160, 214 176"/>
+      <text class="note" x="96" y="152">46 亿年前一次送达</text>
+      <text class="note" x="96" y="168">此后基本只在环里转</text>
+
+      <g class="nd" data-nd="star">
+        <rect class="box" x="40" y="72" width="112" height="46" rx="10"/>
+        <text class="box-t" x="96" y="101" text-anchor="middle">恒星</text>
+      </g>
+      <g class="nd" data-nd="air">
+        <rect class="box" x="320" y="67" width="120" height="46" rx="10"/>
+        <text class="box-t" x="380" y="96" text-anchor="middle">空气</text>
+      </g>
+      <g class="nd" data-nd="plant">
+        <rect class="box" x="453" y="164" width="120" height="46" rx="10"/>
+        <text class="box-t" x="513" y="193" text-anchor="middle">植物</text>
+      </g>
+      <g class="nd" data-nd="you">
+        <rect class="box" x="402" y="320" width="120" height="46" rx="10"/>
+        <text class="box-t" x="462" y="349" text-anchor="middle">你</text>
+      </g>
+      <g class="nd" data-nd="soil">
+        <rect class="box" x="234" y="320" width="128" height="46" rx="10"/>
+        <text class="box-t" x="298" y="349" text-anchor="middle">分解者与土壤</text>
+      </g>
+      <g class="nd" data-nd="rock">
+        <rect class="box" x="183" y="164" width="128" height="46" rx="10"/>
+        <text class="box-t" x="247" y="193" text-anchor="middle">海水与岩石</text>
+      </g>
+
+      <text class="ctr" x="380" y="252" text-anchor="middle">一个碳原子的旅程</text>
+      <text class="note" x="380" y="446" text-anchor="middle">环里的一圈：以年到几十年计；绕经岩石与深海的那一段：千年到百万年计</text>
+    </svg>
+    <div class="node-panel" id="ndPanel">
+      <div class="np on" data-np="none">
+        <div class="np-t">一个碳原子的旅程</div>
+        <p>这个环是封闭的：除了少量陨石尘埃，地球此后没有再收到新的原子。你身上的每一个都在环里转过很多圈，只是转速差别极大——快道以年计，绕经岩石与深海的慢道以千年到百万年计。点上方任意一站。</p>
+      </div>
+      <div class="np" data-np="star">
+        <div class="np-t">恒星 · 产地</div>
+        <p>氢来自大爆炸最初的几分钟，碳氮氧在恒星内部聚变而成，钙铁来自大质量恒星末期的剧变。它们随恒星死亡被抛入星际空间。这是一次性的送达，不是环的一站。</p>
+      </div>
+      <div class="np" data-np="air">
+        <div class="np-t">空气 · 交汇点</div>
+        <p>大气里的二氧化碳是这个环的交汇点：植物从这里取碳，呼吸与分解把碳还到这里。单个分子在空气里平均只待几年就被吸走——但要注意，这说的是<em>分子换手的快慢</em>，不是"排放的碳几年就消失"。吸走的同时也有等量吐回，总量的增减是另一回事。</p>
+      </div>
+      <div class="np" data-np="plant">
+        <div class="np-t">植物 · 碳的入口</div>
+        <p>把无机的碳接进有机分子，在陆地上几乎全靠光合作用。你身上的碳没有一个是自己从空气里抓来的——都是植物先抓好，再经食物递到你手里。第 13 章那顿饭的起点其实在这里。</p>
+      </div>
+      <div class="np" data-np="you">
+        <div class="np-t">你 · 一段停留</div>
+        <p>停留时间比想象中短：水分子几周，肠道上皮几天，红细胞约四个月，骨骼十年一副。你不是容器，更像河道里被认得出形状的那一段水流。</p>
+      </div>
+      <div class="np" data-np="soil">
+        <div class="np-t">分解者与土壤 · 拆解</div>
+        <p>细菌与真菌把大分子拆回小分子：碳多以二氧化碳回到空气，氮回土壤供下一轮植物使用，钙磷在骨矿里停留更久。这一站没有浪费，只有转手。</p>
+      </div>
+      <div class="np" data-np="rock">
+        <div class="np-t">海水与岩石 · 慢道</div>
+        <p>一小部分碳没有很快回到空气，而是溶进海水、沉降成碳酸盐、压成石灰岩，这条路以千年到百万年计。今天燃烧的化石燃料，正是几亿年前走上这条慢道的碳被提前放回环里。</p>
+      </div>
+    </div>
+    <figcaption><b>图 终-2 · 一个碳原子的环。</b>示意图只画路径与快慢，不按通量比例。绿色虚线为快道（分解产物直接回大气），环左侧经海水与岩石的一段为慢道。恒星在环外，是产地而非循环的一站。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 接棒</div>
+  <h2>散开的是原子，没断的是那条线</h2>
+  <p>把这本书从头翻回去，会看见两件方向相反的事，同时发生在同一具身体上。</p>
+  <p>一件是<strong>散开</strong>。上面数过了：物质从头到尾都在换手，你只是它们路过时短暂停留的一段，最后连这一段停留也结束。</p>
+  <p>另一件是<strong>没断</strong>。序章里那几十个被编入另册的细胞，那根跑了三十多亿年、一次也没有落过地的棒——那件事你已经知道了。这一章能给它补上的，是从原子这一侧看过去的样子。</p>
+  <p>而从这一侧看过去，会看清一件在序章还看不清的事：<strong>传下去的到底是什么。</strong></p>
+  <p><strong>不是物质。</strong>交接时递过去的那点东西——一枚卵子加一枚精子的分量——早在孩子出生之前，就已经被拆散、稀释进了亿万倍于它的新材料里；到那个孩子长大成人，身上几乎找不出一星半点当年的原料。<strong>也不完全是信息。</strong>DNA 本身在一代代改写，你手里这份和三十多亿年前那份，读起来是两本书。</p>
+  <p>传下去的是<strong>一种没有中断的状态</strong>：这条线上，某处始终有一个细胞正活着，一次也没有停过。物质是借的，信息是改的，只有"一直活着"这件事本身，是原样递过来的。</p>
+  <p>序章说，你不是被造出来的，你是被递过来的。走完这一程再看，那句话可以补上后半截：<strong>你也不会被收走，你只是被摊开</strong>——摊回土里、水里、空气里，摊回那些正在建造之中的身体。四幕戏演完，舞台并没有拆，只是换了人。</p>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">物质账单 · 关键数字</div>
+    <table>
+      <tr><td class="k">人体原子总数</td><td class="v">10²⁷–10²⁸ 个</td><td class="n">量级估算，随体重变化</td></tr>
+      <tr><td class="k">元素质量占比前四位</td><td class="v">O 65 · C 18 · H 10 · N 3 %</td><td class="n">其余全部元素合计约 4%</td></tr>
+      <tr><td class="k">按原子个数的占比</td><td class="v">H ~62% · O ~24% · C ~12%</td><td class="n">氢最轻，重量不显、数量最多</td></tr>
+      <tr><td class="k">水占体重</td><td class="v">55–60%</td><td class="n">随体脂比例与年龄变化</td></tr>
+      <tr><td class="k">最快 / 较慢的更新</td><td class="v">3–5 天 / 约 10 年</td><td class="n">肠道内壁上皮 / 全副骨骼</td></tr>
+      <tr><td class="k">终生基本不更新</td><td class="v">3 处</td><td class="n">晶状体核心蛋白 · 皮层多数神经元 · 牙釉质</td></tr>
+      <tr><td class="k">70 kg 身体的含碳量</td><td class="v">约 13 kg</td><td class="n">完全氧化约合 47 kg 二氧化碳</td></tr>
+      <tr><td class="k">同等碳量的呼出时间</td><td class="v">约 1.5 个月</td><td class="n">按每日呼出约 1 kg 二氧化碳估算</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 页脚 · 致读者 ==================== -->
+<footer class="next">
+  <div class="title">致读者</div>
+  <p>这本书从一次尚未发生的受精写起，跟着一具身体走过建造、调试、满负荷与磨损，到这里把它的原子交还回去。二十七章，一条时间线，没有别的结构。</p>
+  <p>它没打算教你怎么活得更久——那是另一类书的事。它想做的只有一件：合上它之后，你对此刻正在自己胸口和指尖发生的那些事，多知道一点，也多敬重一点。三十七万亿个细胞正各干各的，没有一个知道你是谁，也没有一个偷懒。</p>
+  <p>路上顺利。</p>
+  <nav class="footnav">
+    <a href="ch25-death.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="../index.html">全书完 · 返回目录</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 图 终-2：点环上的站点
+  var nbs = document.querySelectorAll('#ring-fig .node-btn');
+  var ring = document.getElementById('ring');
+  var nds = document.querySelectorAll('#ring .nd');
+  var nps = document.querySelectorAll('#ring-fig .np');
+  function showNode(nd){
+    var i;
+    ring.classList.add('picked');
+    for (i = 0; i < nbs.length; i++) {
+      nbs[i].setAttribute('aria-pressed', nbs[i].getAttribute('data-nd') === nd ? 'true' : 'false');
+    }
+    for (i = 0; i < nds.length; i++) {
+      nds[i].classList.toggle('on', nds[i].getAttribute('data-nd') === nd);
+    }
+    for (i = 0; i < nps.length; i++) {
+      nps[i].classList.toggle('on', nps[i].getAttribute('data-np') === nd);
+    }
+  }
+  for (var t = 0; t < nbs.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){ showNode(el.getAttribute('data-nd')); });
+    })(nbs[t]);
+  }
+  for (var n = 0; n < nds.length; n++) {
+    (function(el){
+      el.addEventListener('click', function(){ showNode(el.getAttribute('data-nd')); });
+    })(nds[n]);
+  }
+})();
+</script>
+</body>
+</html>

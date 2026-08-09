@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第25章 · 死亡的生理学 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 25-1 缺氧耐受与移植时间窗（本章专用） ---- */
+#ische-fig .org-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#ische-fig .org-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#ische-fig .org-btn:hover{border-color:var(--gold); color:var(--ink);}
+#ische-fig .org-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#ische-fig .org-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#ische-fig .org-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#ische-fig .op{display:none;}
+#ische-fig .op.on{display:block;}
+#ische-fig .op-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#ische-fig .op p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+#ische .row{cursor:pointer; transition:opacity .3s;}
+#ische.picked .row{opacity:.24;}
+#ische.picked .row.on{opacity:1;}
+#ische .axis{stroke:var(--line); stroke-width:2;}
+#ische .tick{stroke:var(--line);}
+#ische .tick-label{fill:var(--ink-faint); font-size:11.5px;}
+#ische .warm{stroke:var(--oxy); stroke-width:9; stroke-linecap:round;}
+#ische .cold{stroke:var(--deoxy); stroke-width:9; stroke-linecap:round; stroke-dasharray:9 6;}
+#ische .row.on .warm,#ische .row.on .cold{stroke-width:12;}
+#ische .lb{fill:var(--ink); font-size:13.5px; font-weight:700;}
+#ische .lb-s{fill:var(--ink-dim); font-size:11.5px;}
+#ische .row.on .lb{fill:var(--gold);}
+#ische .ann{fill:var(--ink-dim); font-size:11.5px;}
+#ische .hd{fill:var(--ink-faint); font-size:11.5px;}
+
+/* ---- 图 25-2 两性预期寿命差（本章专用） ---- */
+#gap .bar{fill:var(--deoxy); fill-opacity:.42; stroke:var(--deoxy); stroke-width:1.5;}
+#gap .axis{stroke:var(--line); stroke-width:2;}
+#gap .tick{stroke:var(--line);}
+#gap .tick-label{fill:var(--ink-faint); font-size:11.5px;}
+#gap .lb{fill:var(--ink); font-size:13.5px; font-weight:700;}
+#gap .val{fill:var(--gold); font-size:12.5px;}
+#gap .ref{stroke:var(--gold); stroke-width:1.4; stroke-dasharray:5 5;}
+#gap .ref-t{fill:var(--gold); font-size:12px;}
+#gap .hd{fill:var(--ink-faint); font-size:11.5px;}
+@media (prefers-reduced-motion: reduce){
+  #ische .row{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第四幕 磨损与谢幕 · 第 25 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>死亡的生理学</h1>
+  <p class="subtitle">它不是一个瞬间，是一串有先后的事件。这个先后决定了抢救有多少时间、移植有多长窗口，也决定了人类把那条线划在了哪里。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>监护仪上的那条线拉平了。有人看一眼时钟，说出一个时间。</p>
+  <p>但这具身体里，此刻绝大多数细胞还活着。心肌还在做最后几分钟的无氧代谢；角膜还完好得可以在明天给另一个人带去视力；肠道里的细菌根本不知道发生了什么，照常分裂。被宣告的是这个人，不是这些细胞——这两件事从来不是同一件事，只是平时没有必要分开说。</p>
+  <p>死亡更像剧场散场：大幕落下之后，灯是一盏一盏灭的，而且有固定的先后。这一章讲的就是这个先后。它决定了抢救有多少时间，决定了移植医学每一个时间窗，也决定了人类在什么位置为"死亡"划下了那条线——那条线是人划的，而且划过不止一次。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 时差</div>
+  <h2>同一具身体里，几十个不同的时钟</h2>
+  <p>血流停止的那一刻，先出局的是意识。</p>
+  <p>大约 <strong>10 到 20 秒</strong>，人就失去知觉——这个数字不是推算的，飞行员在离心机里被过载抽走脑部血流时，昏厥来得同样快。脑电活动随后在几十秒内趋于平直。</p>
+  <p>为什么脑跑在最前面？两个原因，都在第 5 章那条尺度线上有根：它<strong>耗得最凶</strong>——占体重约 2%，却拿走你全身约 20% 的氧；它又<strong>存得最少</strong>——几乎不储备可用的燃料，靠的是血流一刻不停地送。耗得多又不存货的部门，断供时第一个停摆。常温下，皮层神经元大约 <strong>4 到 6 分钟</strong>就开始出现不可逆的损伤，这也是心肺复苏那个著名的"黄金四分钟"的来处。</p>
+  <p>但你身上别处的时钟慢得多。心肌在常温下还能撑 <strong>20 到 30 分钟</strong>；肾差不多同一量级；而角膜、皮肤、骨、心脏瓣膜这些代谢缓慢、甚至没有血管直接供养的组织，在死亡十几个小时之后仍然可以取用。</p>
+  <p>退潮时露出来的礁石有先有后，靠得高的先露头，低洼处最后见底——你的身体断供时也是这样，只不过决定先后的不是高度，是每一处对氧的胃口。</p>
+
+  <figure id="ische-fig">
+    <div class="switch-row">
+      <span class="switch-hint">点一处看它的时钟 →</span>
+      <div class="org-tabs" role="group" aria-label="选择要查看的器官或组织">
+        <button class="org-btn" data-org="brain" aria-pressed="false">大脑皮层</button>
+        <button class="org-btn" data-org="heart" aria-pressed="false">心</button>
+        <button class="org-btn" data-org="lung" aria-pressed="false">肺</button>
+        <button class="org-btn" data-org="liver" aria-pressed="false">肝</button>
+        <button class="org-btn" data-org="kidney" aria-pressed="false">肾</button>
+        <button class="org-btn" data-org="tissue" aria-pressed="false">角膜与组织</button>
+      </div>
+    </div>
+    <svg id="ische" viewBox="0 0 760 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="血流停止后各器官的常温耐受时限与低温保存的移植时间窗对比，横轴为对数时间">
+      <text class="hd" x="20" y="22">血流停止之后，各处还剩多少时间</text>
+      <line class="axis" x1="160" y1="58" x2="744" y2="58"/>
+      <g>
+        <line class="tick" x1="160" y1="52" x2="160" y2="64"/><text class="tick-label" x="160" y="42" text-anchor="middle">10 秒</text>
+        <line class="tick" x1="246" y1="52" x2="246" y2="64"/><text class="tick-label" x="246" y="42" text-anchor="middle">1 分</text>
+        <line class="tick" x1="356" y1="52" x2="356" y2="64"/><text class="tick-label" x="356" y="42" text-anchor="middle">10 分</text>
+        <line class="tick" x1="441" y1="52" x2="441" y2="64"/><text class="tick-label" x="441" y="42" text-anchor="middle">1 小时</text>
+        <line class="tick" x1="527" y1="52" x2="527" y2="64"/><text class="tick-label" x="527" y="42" text-anchor="middle">6 小时</text>
+        <line class="tick" x1="593" y1="52" x2="593" y2="64"/><text class="tick-label" x="593" y="42" text-anchor="middle">1 天</text>
+        <line class="tick" x1="686" y1="52" x2="686" y2="64"/><text class="tick-label" x="686" y="42" text-anchor="middle">1 周</text>
+      </g>
+
+      <g class="row" data-org="brain">
+        <rect x="20" y="82" width="724" height="36" fill="transparent"/>
+        <text class="lb" x="150" y="94" text-anchor="end">大脑皮层</text>
+        <text class="lb-s" x="150" y="114" text-anchor="end">耗氧最凶 · 几乎不存货</text>
+        <line class="warm" x1="160" y1="100" x2="331" y2="100"/>
+        <text class="ann" x="343" y="104">4–6 分钟</text>
+      </g>
+
+      <g class="row" data-org="heart">
+        <rect x="20" y="134" width="724" height="36" fill="transparent"/>
+        <text class="lb" x="150" y="146" text-anchor="end">心</text>
+        <text class="lb-s" x="150" y="166" text-anchor="end">常温 20–30 分钟</text>
+        <line class="warm" x1="160" y1="152" x2="408" y2="152"/>
+        <line class="cold" x1="408" y1="152" x2="527" y2="152"/>
+        <text class="ann" x="539" y="156">低温 4–6 小时</text>
+      </g>
+
+      <g class="row" data-org="lung">
+        <rect x="20" y="186" width="724" height="36" fill="transparent"/>
+        <text class="lb" x="150" y="198" text-anchor="end">肺</text>
+        <text class="lb-s" x="150" y="218" text-anchor="end">离体保存窗较宽</text>
+        <line class="cold" x1="160" y1="204" x2="541" y2="204"/>
+        <text class="ann" x="553" y="208">低温 6–8 小时</text>
+      </g>
+
+      <g class="row" data-org="liver">
+        <rect x="20" y="238" width="724" height="36" fill="transparent"/>
+        <text class="lb" x="150" y="250" text-anchor="end">肝</text>
+        <text class="lb-s" x="150" y="270" text-anchor="end">体积大，降温需时间</text>
+        <line class="cold" x1="160" y1="256" x2="560" y2="256"/>
+        <text class="ann" x="572" y="260">低温 8–12 小时</text>
+      </g>
+
+      <g class="row" data-org="kidney">
+        <rect x="20" y="290" width="724" height="36" fill="transparent"/>
+        <text class="lb" x="150" y="302" text-anchor="end">肾</text>
+        <text class="lb-s" x="150" y="322" text-anchor="end">常温约 30 分钟</text>
+        <line class="warm" x1="160" y1="308" x2="408" y2="308"/>
+        <line class="cold" x1="408" y1="308" x2="612" y2="308"/>
+        <text class="ann" x="624" y="312">24–36 小时</text>
+      </g>
+
+      <g class="row" data-org="tissue">
+        <rect x="20" y="342" width="724" height="36" fill="transparent"/>
+        <text class="lb" x="150" y="354" text-anchor="end">角膜与组织</text>
+        <text class="lb-s" x="150" y="374" text-anchor="end">皮肤 · 骨 · 瓣膜同理</text>
+        <text class="ann" x="170" y="350">死后 12–24 小时内取材 · 保存 7–14 天</text>
+        <line class="warm" x1="160" y1="360" x2="593" y2="360"/>
+        <line class="cold" x1="593" y1="360" x2="719" y2="360"/>
+      </g>
+
+      <line class="warm" x1="160" y1="404" x2="192" y2="404"/>
+      <text class="tick-label" x="202" y="408">体内常温</text>
+      <line class="cold" x1="330" y1="404" x2="362" y2="404"/>
+      <text class="tick-label" x="372" y="408">离体低温保存（移植时间窗）</text>
+    </svg>
+    <div class="org-panel" id="orgPanel">
+      <div class="op on" data-op="none">
+        <div class="op-t">一具身体，六种时钟</div>
+        <p>横轴是对数时间，从十秒到一周跨越五个数量级。红色是体内常温下的耐受时限，蓝色虚线是取出后降到接近冰点所能撑到的时间。两者之间那一大段全是<em>低温</em>买来的。点上方任意一处，看你身上那一处的时钟。</p>
+      </div>
+      <div class="op" data-op="brain">
+        <div class="op-t">大脑皮层 · 4–6 分钟</div>
+        <p>占体重 2%，拿走约 20% 的氧，几乎不储备燃料。断供十几秒失去意识，几十秒脑电趋平，4 到 6 分钟后不可逆的损伤开始累积。它至今无法移植，也无法用低温长时间保存——别的时间窗，都是为了赶在它之前。</p>
+      </div>
+      <div class="op" data-op="heart">
+        <div class="op-t">心 · 常温 20–30 分钟，低温 4–6 小时</div>
+        <p>心肌相当耐受，这正是心肺复苏能把人拉回来的物质基础：只要按压维持住一点血流，心与脑都还在时限里。取出后低温保存的移植窗通常按 4 到 6 小时算，心脏移植的地理半径至今受制于航程。</p>
+      </div>
+      <div class="op" data-op="lung">
+        <div class="op-t">肺 · 低温 6–8 小时</div>
+        <p>肺自带一腔空气：取出时保持适度膨胀，肺泡里的残氧还能继续供应表层细胞，耐受因此比同等代谢水平的实质器官宽裕些。离体肺灌注技术还能在移植前把边缘供肺"修一修"再评估。</p>
+      </div>
+      <div class="op" data-op="liver">
+        <div class="op-t">肝 · 低温 8–12 小时</div>
+        <p>肝的血供有两路（肝动脉与门静脉），体积又大，降温本身就要时间。它的另一面是再生能力极强——第 17 章讲过，切掉一大半仍能长回来，这也是活体部分肝移植可行的原因。</p>
+      </div>
+      <div class="op" data-op="kidney">
+        <div class="op-t">肾 · 常温约 30 分钟，低温 24–36 小时</div>
+        <p>肾在实质器官里耐受最宽，低温保存可到一天以上，因此有条件做全国范围的配型调配。代价是时间越长，移植后出现延迟功能恢复的概率越高——窗口不是悬崖，是一道逐渐变陡的坡。</p>
+      </div>
+      <div class="op" data-op="tissue">
+        <div class="op-t">角膜与组织 · 死后 12–24 小时取材</div>
+        <p>角膜没有血管，靠房水和泪膜扩散供养，代谢慢；皮肤、骨、瓣膜、肌腱同理。通常在死后 12 到 24 小时内取材，随后可保存一到两周甚至更久。同一位捐献者身上，器官以小时计，组织以天计。</p>
+      </div>
+    </div>
+    <figcaption><b>图 25-1 · 六种时钟。</b>横轴为对数时间（起点取 10 秒，即循环停止后失去意识的量级），不等距。红色为体内常温耐受，蓝色虚线为离体低温保存的移植时间窗。各数值为临床通用的量级范围，实际取决于供者情况、保存方式与移植中心的标准，不同来源略有出入。</figcaption>
+  </figure>
+
+  <p>把这张图倒过来看，它就是一份低温的功劳簿。<strong>体温每下降 1℃，脑代谢约降低 6% 到 7%</strong>——降温不救活任何东西，它只是把你身上这些时钟一起拨慢。移植保存的全部把戏在此；冰水中溺水的人偶尔能在远超四到六分钟之后被救回来，也是同一个原因。急救界因此有一句流传很广的话：在低温的情况下，<em>没有回暖之前，不算结束</em>。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>尸僵，是肌肉松不开。</strong>人们常以为尸僵是肌肉"绷紧了"，其实相反：它是<em>松不开</em>。肌肉收缩靠两种蛋白搭桥，而把桥拆开这一步需要消耗 ATP。死亡之后，残存的燃料很快耗尽，桥就搭在那里拆不掉，全身随之僵住。通常在两到六小时出现，十二小时前后最明显，一两天后随蛋白自身分解而缓解——温度越高来得越快、去得也越快。这是"细胞还在按自己的规矩办事"的一个直白证据：它们不知道人已经死了，只是把最后一点燃料用完了。</p>
+    <p>顺带澄清一个流传很久的说法：头发和指甲并不会在死后继续生长。生长需要持续的细胞分裂和物质供应，两者都已停止。看上去变长，是因为皮肤脱水回缩，露出了原本埋在里面的那一截。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 划线</div>
+  <h2>1968 年夏天，一个委员会重新定义了死亡</h2>
+  <p>在二十世纪中叶以前，这条线不需要讨论：心跳和呼吸停了，人就死了。判据简单到听诊器都算新技术——十八、十九世纪欧洲对"被误判死亡"的普遍恐惧，催生过带铃铛和通气管的"安全棺材"专利，那是判据不可靠年代留下的痕迹。</p>
+  <p>把这条线搅乱的是一台机器。</p>
+  <p>1952 年哥本哈根脊髓灰质炎大流行期间，麻醉医生 Bjørn Ibsen 组织医学生轮班用手挤压皮球给病人通气，硬是把死亡率压了下来——正压通气从此走进病房，后来变成呼吸机。到 1950 年代末，医生们开始遇到一种前所未有的病人：心脏在跳，血在流，体温正常，可脑已经不可逆地毁了，自主呼吸永不会回来。1959 年，法国的 Mollaret 与 Goulon 给这种状态起了个名字，直译过来是"超越昏迷"。</p>
+  <p>然后是 1967 年 12 月 3 日。开普敦，Christiaan Barnard 完成了首例人际心脏移植。移植的时代开门了，而这扇门后面立刻站着一个尖锐的问题：什么时候可以取心脏？</p>
+  <h3>报告本身写了什么</h3>
+  <p>1968 年 8 月，哈佛医学院一个特设委员会在《美国医学会杂志》上发表了一份四页的报告，标题是《不可逆昏迷的定义》。委员会主席是麻醉学家 <strong>Henry Beecher</strong>——两年前，他刚因为公开揭露一批不道德的人体试验而在医学界声名大噪。</p>
+  <p>报告给出的判定操作很清楚：对刺激完全无反应、无自主运动、离开呼吸机三分钟无自主呼吸、各项反射消失，脑电图平直作为佐证，二十四小时后重复一次；同时必须排除低体温和中枢抑制药物这两种可以模仿上述状态的情况。这套操作的骨架沿用至今——今天你在新闻里读到"脑死亡"三个字，背后用的仍是这份四页报告立下的判据。</p>
+  <p>但报告的开头有两句话，后来被引用了几十年。委员会自陈了改定义的两条理由：其一，不可逆昏迷的病人给自身、家属和医院带来沉重负担；其二，<strong>过时的死亡判据会在获取移植器官时引起争议</strong>。</p>
+  <p>把动机写在纸面上，在今天看是罕见的坦率。但这份坦率也暴露了报告最被诟病的地方：<strong>怎么判，写得很细；为什么这样判就等于死亡，几乎没写。</strong></p>
+  <h3>之后的半个世纪</h3>
+  <p>补论证的工作落在了后来人身上。1981 年，美国总统委员会提出了一个沿用至今的双轨定义，写进《统一死亡判定法》：<strong>循环与呼吸功能不可逆停止，或者全脑（包括脑干）功能不可逆停止</strong>，二者居一即为死亡。支撑它的论证是"整合"——脑是把身体各部分整合成一个有机整体的那个中枢，整合一旦不可逆地丧失，剩下的就是一堆还在各自运转的器官，而不是一个人。</p>
+  <p>这条线在各国划的位置并不一样。英国采用的是<strong>脑干死亡</strong>标准，判据集中在脑干，与美国的全脑标准在理论上并不等同。日本长期不接受脑死亡，直到 1997 年才立法承认，而且最初只在器官捐献、且本人生前有书面同意的前提下适用，2009 年才放宽。同一件事，在不同的社会里划在不同的地方——这本身就说明它不是一条自然给定的线。</p>
+  <p>批评也从未停过。最有力的一类是经验层面的：如果脑死亡意味着整合功能不可逆丧失，那么被判定脑死亡的身体不应该还能维持体温、愈合伤口、对抗感染、在儿童身上继续长个子，更不应该能把一次妊娠维持数周直至分娩——而这些都有过记录。<strong>Jahi McMath</strong> 的案子被讨论得最多：2013 年，这个十三岁的女孩在一次扁桃体手术后出现严重并发症，被判定脑死亡；家人不接受这一判定，将她转到承认宗教豁免的新泽西州，靠呼吸机维持到 2018 年去世，其间她的身体经历了青春期发育。这件事没有让任何一方改变立场，但它让"整合已经不可逆丧失"这个论证变得不那么干净。</p>
+  <p>2023 年，美国一次修订《统一死亡判定法》的尝试因为无法达成共识而搁置。半个多世纪过去，这条线的<em>位置</em>仍在争论，但有一件事没有争议：呼吸机出现之后，必须有一条线。因为"什么时候可以停下来"和"什么时候可以捐献"，都需要一个答案，而沉默不是答案。</p>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 退场</div>
+  <h2>最后那几天，身体在做什么</h2>
+  <p>这一节写的是自然临终过程中常见的生理变化，来自临终关怀领域的长期观察。写在这里是为了<strong>理解</strong>：许多守在旁边的人把身体的正常反应误读成痛苦，多年之后仍然不安。需要说清楚的是，这些描述<strong>不是判断表，也不构成任何诊疗或护理建议</strong>——每一个具体的人由医生和照护团队负责。</p>
+  <p>大方向是<strong>收拢</strong>。身体不再维持全部业务，把剩下的资源集中到心和脑。</p>
+  <p><strong>进食与饮水减少。</strong>这通常不是"饿着"，而是代谢需求本身在下降，消化道也在退出工作。</p>
+  <p><strong>睡的时间越来越长。</strong>清醒的窗口一天天变短，最后大多数时间处在难以唤醒的状态。</p>
+  <p><strong>四肢先凉，皮肤出现网状的花斑。</strong>血流优先保住核心，外周血管收缩，膝盖、足部、手部常最先出现颜色的变化。这是循环集中的外在表现。</p>
+  <p><strong>呼吸的节律改变。</strong>常见的一种是潮式呼吸：一串由浅渐深、再由深渐浅的呼吸之后，停顿十几秒到几十秒，然后重新开始。更晚一些会出现下颌式呼吸——张口如同叹气，间隔很长。这种样子最容易被误读成挣扎，而它通常是脑干层面的反射性动作，发生在意识已经很浅的时候。</p>
+  <p><strong>咽喉部的分泌物随气流发出声音。</strong>这个声音听起来相当难受，容易被理解为"喘不上气"。现有证据提示，此时患者多半已经没有意识，也并不体验为窒息；这个声音对旁边的人的困扰，通常大于对当事人的困扰。</p>
+  <p><strong>躁动也很常见。</strong>末期的意识混乱、坐立不安、说胡话，是这段时间常见的表现之一，并不代表痛苦无法控制。</p>
+  <h3>关于听觉的那句老话</h3>
+  <p>临终关怀里流传着一句话：<strong>听觉可能是最后消退的感官之一</strong>，所以要继续对着他说话。这句话过去更多是经验和善意，直到近些年才有了较直接的检验。</p>
+  <p>2020 年，加拿大一支团队在安宁疗护病房里给临终患者做脑电监测，播放有规律的声音序列并偶尔插入变化，看大脑是否还"注意"到了这个变化。结果是：<strong>部分已经对外界没有反应的患者，脑电上仍然出现了对声音模式变化的反应</strong>，模式与健康对照者相似。</p>
+  <p>这项研究的分量要摆正：样本很小，而且脑电上有反应<em>不等于</em>有主观体验——这中间隔着一整个尚未解决的问题。所以这句话到今天仍然要带着"可能"和"之一"来说。但它至少不再只是一句安慰：继续说话这件事，有了一点证据上的立足点。</p>
+  <p>此后的事，第 1 节已经讲过了：循环停止，十几秒后意识消失，几分钟后脑开始不可逆地损伤，而身体其余部分的时钟还要各自走上一段。</p>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 余响</div>
+  <h2>垂死的大脑并不安静</h2>
+  <p>被从心脏骤停中救回来的人里，有一部分会讲起同一类经历：从上方看见自己的身体，一条隧道和尽头的光，一段快速回放的生平，还有一种难以描述的平静。这类叙述的报告比例，不同研究给出的数字从不足一成到接近四成不等，差别主要来自"算不算"的定义和访谈的时机——被救回后越早问，记得的人越多。</p>
+  <p>过去几十年，这件事在科学上一直卡在同一个地方：没有人能在事发当时记录到那颗大脑正在做什么。这需要一件近乎不可能的巧合——某人恰好在被连续监测脑电的时候心脏停跳。</p>
+  <h3>三次记录</h3>
+  <p><strong>2013 年，密歇根大学的团队在大鼠身上做了实验。</strong>心脏停跳之后的约三十秒里，他们记录到一阵高频（伽马频段）振荡的激增，而且跨脑区的同步性一度<em>高于</em>清醒时的水平。垂死的大脑不是安静地滑向平线，它先响了一下。</p>
+  <p><strong>2022 年，那个巧合发生了。</strong>一位 87 岁的癫痫患者正在接受连续脑电监测时发生心脏骤停，记录因此覆盖了心跳停止前后各约三十秒。研究者报告了伽马等多个频段活动的变化，模式与记忆提取、做梦时的一些特征有相似之处。论文本身把话说得很紧：这是<strong>单一个案</strong>，这颗大脑有出血、正在使用抗癫痫药物，不能外推到一般情况。</p>
+  <p><strong>2023 年，另一项研究观察了四位撤除生命支持的昏迷患者</strong>，在其中两位身上看到了类似的伽马活动激增，位置集中在与视觉意识相关的后部皮层区域；另外两位没有。</p>
+  <h3>能说什么，不能说什么</h3>
+  <p>这些研究记录到的是<strong>电活动</strong>，不是<strong>体验</strong>。这两个词之间的距离，比你在新闻标题里看到的远得多：伽马振荡与主观意识的关系，即使在清醒的健康人身上也仍有争论，用它来倒推一个人当时"经历了什么"，目前没有办法验证。样本也小得可怜——一只大鼠群体、一位患者、四人中的两人。</p>
+  <p>另一面同样要说：<strong>并不是每个被救回的人都有这类叙述</strong>，大多数人什么也没有。而对这类体验的生理学解释也不止一种——缺氧、二氧化碳蓄积、内源性物质的释放、颞顶交界区功能紊乱引起的离体感，各有各的证据，也各有各的缺口，目前没有哪一种能解释全部现象。</p>
+  <p>所以这一节的结论只能收得很窄：<strong>垂死的大脑有过一阵不寻常的活跃，这一点现在有了记录；这阵活跃是不是那些叙述的来源，还不知道。</strong>在一个特别容易被过度解读的题目上，把话说到这里就该停住。</p>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 差距</div>
+  <h2>五年之差：一条贯穿全书的线在这里收尾</h2>
+  <p>这本书从序章起就带着一条性别差异线：受精那一刻为你写定的染色体（序章），孕六到八周的岔路（第 6 章），青春期的双轨时序（第 12 章），成年后的免疫、心血管与用药差异（第 19 章），更年期的悬崖与缓坡（第 22 章）。它在这里收尾，收在一个所有人都能看见、却少有人能解释清楚的现象上。</p>
+  <p><strong>在几乎所有有可靠数据的国家和地区，女性的平均预期寿命高于男性。</strong>全球平均的差距大约是五年。这个方向的稳定性相当惊人——它跨越了收入水平、医疗制度、宗教与气候。</p>
+
+  <figure>
+    <svg id="gap" viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="若干国家与全球平均的女性与男性预期寿命差距条形图，从约三年到约十年不等">
+      <text class="hd" x="20" y="24">女性平均预期寿命 − 男性平均预期寿命（年）</text>
+      <line class="ref" x1="438" y1="60" x2="438" y2="316"/>
+      <text class="ref-t" x="438" y="50" text-anchor="middle">全球平均 ≈ 5 年</text>
+
+      <text class="lb" x="190" y="91" text-anchor="end">俄罗斯</text>
+      <rect class="bar" x="200" y="77" width="440" height="18" rx="4"/>
+      <text class="val" x="652" y="91">约 10 年</text>
+
+      <text class="lb" x="190" y="141" text-anchor="end">日本</text>
+      <rect class="bar" x="200" y="127" width="264" height="18" rx="4"/>
+      <text class="val" x="476" y="141">约 6 年</text>
+
+      <text class="lb" x="190" y="191" text-anchor="end">中国</text>
+      <rect class="bar" x="200" y="177" width="242" height="18" rx="4"/>
+      <text class="val" x="454" y="191">约 5–6 年</text>
+
+      <text class="lb" x="190" y="241" text-anchor="end">冰岛</text>
+      <rect class="bar" x="200" y="227" width="132" height="18" rx="4"/>
+      <text class="val" x="344" y="241">约 3 年</text>
+
+      <text class="lb" x="190" y="291" text-anchor="end">印度</text>
+      <rect class="bar" x="200" y="277" width="132" height="18" rx="4"/>
+      <text class="val" x="344" y="291">约 3 年</text>
+
+      <line class="axis" x1="200" y1="326" x2="700" y2="326"/>
+      <line class="tick" x1="200" y1="326" x2="200" y2="336"/><text class="tick-label" x="200" y="354" text-anchor="middle">0</text>
+      <line class="tick" x1="288" y1="326" x2="288" y2="336"/><text class="tick-label" x="288" y="354" text-anchor="middle">2</text>
+      <line class="tick" x1="376" y1="326" x2="376" y2="336"/><text class="tick-label" x="376" y="354" text-anchor="middle">4</text>
+      <line class="tick" x1="464" y1="326" x2="464" y2="336"/><text class="tick-label" x="464" y="354" text-anchor="middle">6</text>
+      <line class="tick" x1="552" y1="326" x2="552" y2="336"/><text class="tick-label" x="552" y="354" text-anchor="middle">8</text>
+      <line class="tick" x1="640" y1="326" x2="640" y2="336"/><text class="tick-label" x="640" y="354" text-anchor="middle">10 年</text>
+      <text class="hd" x="700" y="382" text-anchor="end">画的是差距本身，不是寿命长短</text>
+    </svg>
+    <figcaption><b>图 25-2 · 一道普遍存在、幅度各异的差距。</b>只画男女之差，不画寿命本身——差距的数值比绝对水平在不同数据来源之间更稳定。各值为近年估计的量级，不同来源与年份略有出入（新冠流行的几年里，多国的差距一度扩大）；此处呈现的是排序与量级，不作精确比较。</figcaption>
+  </figure>
+
+  <p>但幅度差得很远：俄罗斯与东欧一些国家接近十年，冰岛、荷兰这类国家只有三年上下，印度也在三年左右。<strong>一个在几乎所有社会都成立的方向，加上一个随社会剧烈变化的幅度</strong>——这个组合，正好是解释这件事最大的难点：任何单一原因都解释不了它。</p>
+  <h3>四种假说，都还没赢</h3>
+  <p>下面四条不分先后，因为学界也还没分出先后。</p>
+  <p><strong>一、两条 X，互为替补。</strong>女性的每个细胞有两条 X 染色体（其中一条大部分失活，但不是全部），一条上的有害变异有机会被另一条掩盖；男性只有一条，中招就没有替补。X 上还密集分布着免疫相关的基因——第 19 章讲过这条线的另一头：女性的免疫应答通常更强悍，代价是自身免疫病的患者中女性占了绝大多数。同一份遗传配置，一头是优势，一头是代价。</p>
+  <p><strong>二、激素。</strong>雌激素对血脂和血管内壁的作用，被认为可能延后心血管事件的发生——一个常被援引的观察是，绝经之后女性的心血管风险明显上升，向男性靠拢（第 22 章）。睾酮那一侧的讨论则涉及它与免疫的关系和与冒险行为的关系。有一项常被提起的历史研究统计了朝鲜王朝宦官的寿命，报告他们比同阶层男性长十几年；但样本只有八十余人，档案的完整性与对照的可比性都受到质疑，它更像一条线索，不是一份证据。</p>
+  <p><strong>三、行为与暴露。</strong>吸烟、饮酒、机动车事故、暴力伤害、高危职业，历史上在男性中都明显更高，就医也往往更晚。烟草被认为能解释相当一部分差距：二十世纪男性吸烟率远高于女性，而随着男性吸烟率下降、女性吸烟率上升，一些国家的男女寿命差先扩大、后收窄，时间上对得相当整齐。</p>
+  <p><strong>四、比较生物学。</strong>多数哺乳动物中雌性活得更长，这提示原因可能比人类社会更深；但并非所有物种如此，某些鸟类反过来（在鸟类中雌性才是携带两种不同性染色体的一方），这一点常被用来支持第一条假说，不过反例同样存在。</p>
+  <p>把四条放在一起看，最合理的读法是：<strong>生物学给了一个方向，社会决定了幅度。</strong>幅度可变这件事本身就是证据——如果差距全由染色体决定，它不会在几十年里从十年缩到三年。</p>
+  <h3>活得更久，不等于活得更好</h3>
+  <p>最后是第 24 章末尾留下的那个尾巴。女性活得更长，但在自评健康、慢性病负担和需要照护的年数上，通常并不占优——这个组合在人口学里被称为<strong>男女健康与生存的悖论</strong>。粗略地说：男性更早离场，失能期相对较短；女性走得更远，其中带着病痛的一段也更长。</p>
+  <p>"寿命"和"健康寿命"是两条不同的曲线，它们之间的缺口才是这一幕真正关心的东西——对你来说要紧的，从来不是哪条曲线更长，而是缺口有多宽。第 24 章讲的代偿与储备，讲的正是怎样让这道缺口窄一点。</p>
+  <p>顺带说清一件事：有记录的极端长寿者中女性占绝大多数，目前公认的最长寿者是一位法国女性，活到 122 岁。读这类纪录时请一并记住上一章的提醒：越是极端的年龄，越依赖出生档案的质量。</p>
+</section>
+
+<!-- ==================== 第 6 节 ==================== -->
+<section id="s6">
+  <div class="eyebrow">06 · 边界</div>
+  <h2>这条线还在动</h2>
+  <p>把这一章倒回去看，会看见一条清晰的历史轨迹：<strong>死亡的判据，一直跟着技术走。</strong></p>
+  <p>听诊器之前，判据靠等待与观察，要等到明确的尸体现象才敢下结论。有了可靠的听诊与心电，判据落在心跳上。呼吸机把心跳与脑分开之后，判据被迫上移到脑。而现在，另一批实验正在从下面推这条线——从细胞的层面。</p>
+  <p>需要提前说明的是：这些实验没有让任何动物复活，也没有任何一项接近人体应用。它们改变的不是"人是否可以复生"，而是"不可逆"这个词该放在时间轴的哪个位置。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>BrainEx：死后四小时的猪脑。</strong>2019 年，耶鲁大学 Nenad Sestan 的团队报告了一项实验：取自屠宰场的猪脑，在死后四小时开始接入一套特制灌流系统循环六小时。结果是部分细胞结构得以保存、部分代谢与突触活动恢复、血管对药物仍有反应——这些原本被认为在几分钟内就永久消失的性质。团队在灌流液中加入了神经活动阻断剂，并全程监测脑电，一旦出现全脑范围的整合性电活动即中止实验；实验中没有观察到这类活动。这项设计本身就说明了研究者的谨慎：<strong>细胞层面的一部分功能可以被重新点亮，这和"意识回来了"是两件事。</strong></p>
+    <p><strong>OrganEx：把范围扩大到整具身体。</strong>2022 年，同一实验室把方法推广到猪的全身：心脏停跳一小时后开始体外灌流，六小时后心、肝、肾等器官的部分细胞功能与结构得到保存，实验中还观察到一些自发的肌肉运动。如果器官在传统意义的死亡时间之后仍能被"挽回"，那么移植的时间窗、循环死亡后捐献的判定时点、乃至"不可逆"这一判词本身，都需要重新讨论。伦理审查、动物福利和"部分复苏"该如何定义，目前都在争论之中，短期内不会有定论。</p>
+  </div>
+
+  <p>这一章从一条拉平的线开始：讲了同一具身体里那些快慢不同的时钟，讲了人类为死亡划线的经过与争论，也讲了最后那几天身体如何收拢。</p>
+  <p>还剩一件事没讲：<strong>组成你的那些物质，接下来去哪里。</strong>那不是一个悲伤的问题，而且答案比大多数人以为的更有意思——它们中的大部分，其实早在这一天到来之前，就已经来来去去换过很多轮了。</p>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">时限与窗口 · 关键数字</div>
+    <table>
+      <tr><td class="k">循环停止 → 失去意识</td><td class="v">10–20 秒</td><td class="n">脑电在几十秒内趋于平直</td></tr>
+      <tr><td class="k">大脑皮层常温耐受</td><td class="v">4–6 分钟</td><td class="n">占体重 2%，耗氧约 20%，几乎不存货</td></tr>
+      <tr><td class="k">体温每降 1℃ 的脑代谢</td><td class="v">↓ 6–7%</td><td class="n">低温不救活，只把这些时钟拨慢</td></tr>
+      <tr><td class="k">心肌常温耐受</td><td class="v">20–30 分钟</td><td class="n">心肺复苏能奏效的物质基础</td></tr>
+      <tr><td class="k">心脏移植冷缺血窗</td><td class="v">4–6 小时</td><td class="n">至今限制着心脏移植的地理半径</td></tr>
+      <tr><td class="k">肺 / 肝 冷缺血窗</td><td class="v">6–8 h / 8–12 h</td><td class="n">肺自带残氧，耐受相对宽裕</td></tr>
+      <tr><td class="k">肾冷缺血窗</td><td class="v">24–36 小时</td><td class="n">越长，延迟功能恢复的概率越高</td></tr>
+      <tr><td class="k">角膜取材 / 保存</td><td class="v">死后 ≤24 h / 7–14 天</td><td class="n">无血管、代谢慢；皮肤骨瓣膜同理</td></tr>
+      <tr><td class="k">尸僵出现 / 高峰 / 缓解</td><td class="v">2–6 h / ~12 h / 24–48 h</td><td class="n">ATP 耗竭使肌桥拆不开，温度影响很大</td></tr>
+      <tr><td class="k">哈佛脑死亡标准发表</td><td class="v">1968 年 8 月</td><td class="n">首例人际心脏移植后八个月</td></tr>
+      <tr><td class="k">两性预期寿命差（全球）</td><td class="v">约 5 年</td><td class="n">各国约 3–10 年，方向高度一致</td></tr>
+      <tr><td class="k">全球每日死亡人数</td><td class="v">约 16–17 万 / 天</td><td class="n">与本书第 8 章的每日出生场次对照读</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">血流停止后，大脑为什么是最先出局的器官？</div>
+      <div class="opts">
+        <button>脑组织最柔软，最容易受到机械性损伤</button>
+        <button data-c="1">它耗氧比例极高（约占全身 20%）而几乎不储备可用燃料，完全依赖不间断的血流</button>
+        <button>脑血管比其他器官的血管细，最先塌陷</button>
+        <button>神经元不能进行无氧代谢，其他细胞都可以</button>
+      </div>
+      <div class="explain">"耗得多、存得少"这两条叠加，才让它跑在最前面——神经元并非不能无氧代谢，只是那点产出远远填不上它的胃口。这也解释了低温为什么管用：体温每降 1℃，脑代谢约降 6–7%，时钟随之拨慢。急救中"没有回暖之前不算结束"这句话，说的就是低温溺水这类情形。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">1968 年哈佛报告最常被批评的一点是什么？</div>
+      <div class="opts">
+        <button>它提出的判定操作过于宽松，此后很快被废弃</button>
+        <button>它隐瞒了与器官移植有关的动机</button>
+        <button data-c="1">它详细规定了怎么判定，却几乎没有论证"为什么不可逆昏迷等于死亡"</button>
+        <button>它主张脑死亡的判定不需要排除低体温和药物影响</button>
+      </div>
+      <div class="explain">动机恰恰没有隐瞒——报告开头自陈了两条理由，其中一条明确提到过时的死亡判据会在获取移植器官时引起争议，这份坦率在今天看颇为罕见。它的判定骨架（无反应、无自主呼吸、反射消失、排除低温与药物、间隔复查）沿用至今；缺的是论证。补论证的工作要等到 1981 年美国总统委员会提出双轨定义，而英国用脑干标准、日本迟至 1997 年才立法，说明这条线在不同社会里划在不同位置。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">关于垂死大脑的脑电记录（2013 年大鼠、2022 年单一人类个案、2023 年四人中的两人），可以得出的结论是？</div>
+      <div class="opts">
+        <button>已经证明濒死体验是大脑缺氧产生的幻觉</button>
+        <button>已经证明人在临床死亡后仍保有意识</button>
+        <button data-c="1">记录到的是电活动的一阵异常活跃，它与主观体验的关系目前无法验证</button>
+        <button>这些记录彼此矛盾，说明垂死的大脑其实是安静的</button>
+      </div>
+      <div class="explain">伽马振荡与主观意识的关系，即使在清醒的健康人身上也仍有争论，用它倒推当时"经历了什么"没有办法验证。样本也极小：2022 年那例是一颗有出血、正在用抗癫痫药的大脑，作者本人明确反对外推。还有一面常被忽略——大多数被救回的人并没有这类叙述，而现有的几种生理学解释（缺氧、二氧化碳蓄积、内源性物质、颞顶交界区功能紊乱）各有缺口。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">临终阶段出现的下颌式呼吸和咽喉分泌物的声音，应当如何理解？</div>
+      <div class="opts">
+        <button>是明确的痛苦信号，说明需要立即加大镇痛</button>
+        <button data-c="1">多为脑干层面的反射性动作与分泌物流动的声音，发生时患者多已无意识，对旁人的困扰通常大于对当事人的困扰</button>
+        <button>是脱水造成的，说明补液不足</button>
+        <button>是意识正在恢复的迹象</button>
+      </div>
+      <div class="explain">这类误读常让守在旁边的人多年不安，所以值得讲清楚。同一段时间里的其他常见变化还有：进食饮水减少（代谢需求下降，而非"饿着"）、四肢发凉与皮肤花斑（循环向核心收拢）、潮式呼吸、末期躁动。反过来，听觉可能是最后消退的感官之一——2020 年一项小样本脑电研究发现，部分已无反应的临终患者对声音模式的变化仍有脑电反应。需要强调：以上都是为了理解过程，不是判断表，具体的人由医生和照护团队负责。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">关于两性预期寿命差，下列哪种说法最符合现有证据？</div>
+      <div class="opts">
+        <button>差距完全由染色体和激素决定，因此各国大体相同</button>
+        <button>差距完全由吸烟、饮酒等行为差异造成，与生物学无关</button>
+        <button data-c="1">方向在几乎所有有可靠数据的地区一致，幅度却从约 3 年到约 10 年不等——提示生物学给了方向，社会决定了幅度</button>
+        <button>近几十年全球各地的差距都在稳定收窄</button>
+      </div>
+      <div class="explain">幅度可变本身就是证据：如果差距全由染色体决定，它不会在几十年里从十年缩到三年。烟草能解释相当一部分——男性吸烟率下降、女性上升的过程，与不少国家差距先扩大后收窄的时间对得相当整齐；但新冠流行的几年里多国差距又一度扩大，"稳定收窄"并不成立。另一个容易被忽略的事实是：女性活得更久，但需要照护的年数通常也更长——寿命与健康寿命是两条不同的曲线。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 终章</div>
+  <div class="title">终章 · 循环：你的原子回到生态圈</div>
+  <p>组成你的原子，大部分在你活着的时候就已经换过很多轮了——肠道内壁几天一换，红细胞四个月一换，骨头十年一副。只有极少数几样东西陪了你一辈子。最后一章去数一数它们，然后看看这些原子从哪里来、又要到哪里去。</p>
+  <nav class="footnav">
+    <a href="ch24-compensation.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch26-atoms.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 图 25-1：逐器官展开
+  var obs = document.querySelectorAll('#ische-fig .org-btn');
+  var ische = document.getElementById('ische');
+  var rows = document.querySelectorAll('#ische .row');
+  var ops = document.querySelectorAll('#ische-fig .op');
+  function showOrg(org){
+    var i;
+    ische.classList.add('picked');
+    for (i = 0; i < obs.length; i++) {
+      obs[i].setAttribute('aria-pressed', obs[i].getAttribute('data-org') === org ? 'true' : 'false');
+    }
+    for (i = 0; i < rows.length; i++) {
+      rows[i].classList.toggle('on', rows[i].getAttribute('data-org') === org);
+    }
+    for (i = 0; i < ops.length; i++) {
+      ops[i].classList.toggle('on', ops[i].getAttribute('data-op') === org);
+    }
+  }
+  for (var t = 0; t < obs.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){ showOrg(el.getAttribute('data-org')); });
+    })(obs[t]);
+  }
+  for (var r = 0; r < rows.length; r++) {
+    (function(el){
+      el.addEventListener('click', function(){ showOrg(el.getAttribute('data-org')); });
+    })(rows[r]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第22章 · 更年期与中年转折 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 22-1 悬崖与缓坡（本章专用） ---- */
+#hormone-fig .track-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#hormone-fig .track-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#hormone-fig .track-btn:hover{border-color:var(--gold); color:var(--ink);}
+#hormone-fig .track-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#hormone-fig .track-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#hormone-fig .track-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#hormone-fig .tp{display:none;}
+#hormone-fig .tp.on{display:block;}
+#hormone-fig .tp-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#hormone-fig .tp p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+#hormones .tr-line{fill:none; stroke-width:2.8; stroke-linecap:round; stroke-linejoin:round; transition:opacity .3s, stroke-width .3s;}
+#hormones .tr-lb{font-size:12px; transition:opacity .3s;}
+#hormones.picked .tr-line{opacity:.15;}
+#hormones.picked .tr-line.on{opacity:1; stroke-width:4.2;}
+#hormones.picked .tr-lb{opacity:.28;}
+#hormones.picked .tr-lb.on{opacity:1; font-weight:700;}
+#hormones .t-e2{stroke:var(--oxy);}
+#hormones .t-t{stroke:var(--deoxy);}
+#hormones .t-fsh{stroke:var(--green); stroke-dasharray:8 6;}
+#hormones .l-e2{fill:var(--oxy);}
+#hormones .l-t{fill:var(--deoxy);}
+#hormones .l-fsh{fill:var(--green);}
+#hormones .band{fill:var(--gold); fill-opacity:.07; stroke:var(--gold); stroke-opacity:.35; stroke-dasharray:5 5; transition:fill-opacity .3s;}
+#hormones.picked .band{fill-opacity:.03;}
+#hormones.picked .band.on{fill-opacity:.16;}
+#hormones .band-lb{fill:var(--gold); font-size:11.5px; transition:opacity .3s;}
+#hormones.picked .band-lb{opacity:.3;}
+#hormones.picked .band-lb.on{opacity:1;}
+#hormones .axis{stroke:var(--line); stroke-width:1.6;}
+#hormones .grid{stroke:var(--line); stroke-width:1; opacity:.45;}
+#hormones .tick-label{fill:var(--ink-faint); font-size:11.5px;}
+#hormones .note{fill:var(--ink-faint); font-size:11.5px;}
+
+/* ---- 图 22-2 舒适带收窄（本章专用） ---- */
+#zone .frame{fill:var(--surface2); stroke:var(--line); stroke-width:1.4; rx:10;}
+#zone .comfort{fill:var(--green); fill-opacity:.16; stroke:var(--green); stroke-width:1.4;}
+#zone .thresh{stroke:var(--oxy); stroke-width:2; stroke-dasharray:6 5;}
+#zone .thresh.cold{stroke:var(--deoxy);}
+#zone .wiggle{fill:none; stroke:var(--ink); stroke-width:2.2;}
+#zone .hit{fill:var(--oxy);}
+#zone .hit.cold{fill:var(--deoxy);}
+#zone .ttl{fill:var(--ink); font-size:14px; font-weight:700;}
+#zone .lb{fill:var(--ink-dim); font-size:11.5px;}
+#zone .lb-hot{fill:var(--oxy); font-size:11.5px;}
+#zone .lb-cold{fill:var(--deoxy); font-size:11.5px;}
+#zone .note{fill:var(--ink-faint); font-size:11.5px;}
+@media (prefers-reduced-motion: reduce){
+  #hormones .tr-line,#hormones .tr-lb,#hormones .band,#hormones .band-lb{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第四幕 磨损与谢幕 · 第 22 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>更年期与<br>中年转折</h1>
+  <p class="subtitle">同样一件事，在一条路上是几年之内的悬崖，在另一条路上是四十年的缓坡。悬崖那一侧，还附带了一场持续二十年的误读。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>凌晨三点，你醒了。不是被声音吵醒的。</p>
+  <p>是从胸口往上涌的一股热——先到脖子，再到脸，几秒之内后背就湿了一层。你掀开被子，躺着等它过去。三五分钟后热潮退下，跟着来的是一阵发冷，你又把被子拉回来。窗外还黑着，你知道再睡着大概要一个小时。这是这一周的第四次。</p>
+  <p>此刻正走在这条路上的人，全世界数以亿计。可它背后的那件事——一套用了三四十年的激素供应在几年之内撤走——在人类之外的动物里少见得出奇，少见到值得专门去问一句"为什么会有这种事"（第 3 节我们去看虎鲸）。而在你身边熟睡的那个人身上，同一类激素也在下降，只是把差不多的落差摊成了四十年的缓坡，摊到几乎看不出坡度。这一章讲这两条路：悬崖上究竟在发生什么，缓坡那侧又是什么样，以及横在中间的一场持续了二十年的误读。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 两条路</div>
+  <h2>悬崖与缓坡：同一件事的两种走法</h2>
+  <p>中年时分，身体有两条路。<strong>一条在四五年之内下一道陡坎，另一条把同样的落差摊成半辈子。</strong>你走在其中一条上，你身边的人分走这两条。两条都要讲，而且要讲清楚它们为什么长得这么不一样。</p>
+  <h3>悬崖是怎么形成的</h3>
+  <p>陡坎的根源，在序章那座冰川：女性的卵母细胞库存在她还是胎儿时就已备齐，此后只出不进，到四十几岁已接近见底。而要紧的是下面这句——<strong>雌激素的主产地不是卵巢这个器官，而是卵巢里那一批正在发育的卵泡。</strong>卵泡是产地，也是原料。原料用完了，产地也就不在了。所以这条曲线不是缓慢下滑，而是在库存跌破某个量级之后突然失去支撑：悬崖不是被凿出来的，是脚下的东西用完了。</p>
+  <p>男性那侧的睾丸则是第 20 章说的"一眼常年出水的泉"：精原细胞终生分裂，间质细胞终生分泌，没有一份会耗尽的库存。泉眼的出水量随年头缓慢变小，总睾酮大约每年降<strong>百分之零点四到二</strong>（常被引作 1% 上下，游离睾酮降得更快些），但泉不会在某一年断流。同样是下坡，一边是台阶，一边是斜面。</p>
+  <p>顺带把三个常被混用的词分开：<strong>围绝经期</strong>是那段震荡期，通常 4 到 8 年，激素波动最剧烈的就是这几年；<strong>绝经</strong>指最后一次月经这一个时间点；<strong>绝经后</strong>是此后的余生。</p>
+  <p>还有一件反直觉的事，也是围绝经期最容易被误解的地方：<strong>这几年的雌激素不是一路走低，而是大起大落</strong>，短暂冲上比生育期还高的水平，随后跌进谷底（下图里那串锯齿）。把它想成一条平滑下降的斜线，就理解不了为什么这几年比绝经后更难熬。</p>
+
+  <figure id="hormone-fig">
+    <div class="switch-row">
+      <span class="switch-hint">点一条看清楚 →</span>
+      <div class="track-tabs" role="group" aria-label="选择要高亮的激素曲线">
+        <button class="track-btn" data-track="e2" aria-pressed="false">雌二醇 · 悬崖</button>
+        <button class="track-btn" data-track="t" aria-pressed="false">睾酮 · 缓坡</button>
+        <button class="track-btn" data-track="fsh" aria-pressed="false">FSH · 反向上升</button>
+        <button class="track-btn" data-track="peri" aria-pressed="false">围绝经期窗口</button>
+      </div>
+    </div>
+    <svg id="hormones" viewBox="0 0 760 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="20 至 80 岁的激素曲线对照：雌二醇在 45 至 53 岁间剧烈波动后陡降至低位；睾酮自 20 岁起以每年约百分之一的速度缓慢下降；FSH 在同期反向上升；45 至 53 岁标为围绝经期窗口">
+      <text class="note" x="80" y="30" text-anchor="start">纵轴：各自以生育期典型水平为 100%（三条线各用各的尺子，只比形状，不比高低）</text>
+
+      <rect class="band" x="313" y="60" width="75" height="280" rx="6"/>
+      <text class="band-lb" x="351" y="52" text-anchor="middle">围绝经期 · 约 45–53 岁</text>
+
+      <line class="grid" x1="80" y1="70" x2="640" y2="70"/>
+      <line class="grid" x1="80" y1="205" x2="640" y2="205"/>
+      <text class="tick-label mono" x="70" y="74" text-anchor="end">100%</text>
+      <text class="tick-label mono" x="70" y="209" text-anchor="end">50%</text>
+
+      <polyline class="tr-line t-fsh" points="80,322 173,318 267,310 295,300 313,286 332,262 350,222 368,180 386,140 407,112 453,96 547,92 640,94"/>
+      <polyline class="tr-line t-t" points="80,70 173,92 267,113 360,135 453,156 547,178 640,200"/>
+      <polyline class="tr-line t-e2" points="80,70 173,72 267,84 300,80 313,52 331,104 349,48 367,128 385,196 407,262 453,312 547,322 640,327"/>
+
+      <text class="tr-lb l-e2" x="648" y="331" text-anchor="start">雌二醇</text>
+      <text class="tr-lb l-t" x="648" y="204" text-anchor="start">睾酮</text>
+      <text class="tr-lb l-fsh" x="648" y="98" text-anchor="start">FSH</text>
+
+      <line class="axis" x1="80" y1="340" x2="640" y2="340"/>
+      <text class="tick-label" x="80" y="360" text-anchor="middle">20</text>
+      <text class="tick-label" x="173" y="360" text-anchor="middle">30</text>
+      <text class="tick-label" x="267" y="360" text-anchor="middle">40</text>
+      <text class="tick-label" x="360" y="360" text-anchor="middle">50</text>
+      <text class="tick-label" x="453" y="360" text-anchor="middle">60</text>
+      <text class="tick-label" x="547" y="360" text-anchor="middle">70</text>
+      <text class="tick-label" x="640" y="360" text-anchor="middle">80 岁</text>
+      <text class="note" x="80" y="392" text-anchor="start">注意金色窗口内那串锯齿：围绝经期不是平滑下滑，而是先剧烈震荡（可短暂高过生育期水平），</text>
+      <text class="note" x="80" y="412" text-anchor="start">然后才跌进低位。示意曲线，个体差异很大；绝经年龄的常见区间为 49–52 岁。</text>
+    </svg>
+    <div class="track-panel">
+      <div class="tp on" data-tp="0">
+        <div class="tp-t">两条路，三条线</div>
+        <p>点上方任意一项，看那条线在发生什么。三条曲线各以自身生育期水平为 100%，纵向高低不可互比——这张图比的是<strong>形状</strong>：一道坎，一道斜面，一条反向爬升的线。</p>
+      </div>
+      <div class="tp" data-tp="e2">
+        <div class="tp-t">雌二醇 · 那道坎</div>
+        <p>生育期的雌二醇随月经周期起伏，跨度可达每毫升数十到数百皮克；绝经后长期落在 20 pg/mL 以下。落点这么低，是因为卵泡这个主产地不复存在；此后仅存的少量雌激素主要靠脂肪等组织转化而来——这也是体脂率会影响症状轻重的原因。</p>
+      </div>
+      <div class="tp" data-tp="t">
+        <div class="tp-t">睾酮 · 那道斜面</div>
+        <p>总睾酮自成年后每年约降 0.4–2%，游离睾酮（真正起作用的那部分）降得更快。六十年累积下来可观，但任何单独一年都察觉不到。要点在于：<strong>没有对应的节点。</strong>正因如此，"男性更年期"是个容易误导的说法，第 5 节细说。</p>
+      </div>
+      <div class="tp" data-tp="fsh">
+        <div class="tp-t">FSH · 反过来爬的那条</div>
+        <p>卵泡刺激素来自垂体，任务是催促卵泡发育。卵巢回应变弱后垂体便加大音量——绝经后 FSH 可升到生育期的数倍乃至十余倍，因此成为临床判断卵巢功能的常用指标之一。</p>
+      </div>
+      <div class="tp" data-tp="peri">
+        <div class="tp-t">围绝经期 · 最难熬的那几年</div>
+        <p>通常 4–8 年，激素波动最剧烈的就是这一段。但别就此以为绝经那天一到症状就收尾——症状最密集的窗口跨在末次月经前后，按 SWAN 的中位病程，有相当一部分落在绝经之后；泌尿生殖道的萎缩性变化更是绝经后才逐年加重。也正因为这几年月经还在（只是没了规律），很多人不会把失眠、心悸和情绪波动跟它联系起来，往往辗转于几个科室。</p>
+      </div>
+    </div>
+    <figcaption><b>图 22-1 · 悬崖、缓坡，和反向爬升的那条线。</b>三条曲线各以自身生育期水平为 100%，纵向高低不可互比，比的是形状。金色窗口为围绝经期，其间的锯齿是重点：激素不是平滑下滑，而是先大起大落。示意曲线，个体差异很大。</figcaption>
+  </figure>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>一个只能事后确认的日子。</strong>绝经在医学上的定义是：末次月经之后连续十二个月没有再来。那个日子在当时认不出来——你要等满一年，才能回头指着日历上的某一天说，原来那次就是最后一次。</p>
+    <p>这听起来像技术细节，其实它塑造了整段体验：围绝经期里月经没了规律，隔两个月、隔四个月来一次都可能，于是没有任何一次能被当场认定为终点。人生里少有这样的事件——它发生时你不知道，你知道时它已经过去一年了。很多人对更年期那种悬而未决的感觉，一部分就来自这里。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 窄峡</div>
+  <h2>凌晨三点的那把火，究竟是什么</h2>
+  <p>回到引子里那一幕：潮热到底是身体出了什么故障？</p>
+  <p>先排除一个多数人猜错的答案——不是体温真的飙升了。连续的核心体温监测显示，潮热发作前的上升往往只有零点几度，有时几乎测不出来。<strong>反应是全力的，触发它的信号却极微弱。</strong>问题不在体温，在判读体温的那一段。</p>
+  <h3>从宽谷到窄峡</h3>
+  <p>下丘脑里有一小片区域负责裁定"此刻算冷还是算热"。它并不照着一个精确刻度办事，而是划出一条带子：体温落在带子里，什么也不做；越过上沿，启动散热——皮肤血管扩张、出汗；跌破下沿，启动产热——血管收缩、寒战。这条带子有个正式名字叫热中性带，它在生育期是相当宽的一条。</p>
+  <p>想象一条流过宽阔河谷的河。上游多下了一场雨，水量涨了几分，在宽谷里几乎看不出变化，两岸的滩地把它悄悄吃掉了；同样的涨幅要是发生在一段狭窄的峡谷里，水位就会猛地窜起来，拍上两侧的岩壁。</p>
+  <p>雌激素撤走之后，这条带子明显变窄——从宽谷收成窄峡。体温还是以零点几度的幅度起伏（人一整天都在这样起伏），可现在，同样的起伏一抬头就撞上了上沿。<strong>下丘脑忠实地照章办事：越沿了，就全力散热。</strong>皮肤血管骤然扩张，一股热从胸口涌上脸，汗腺全开；几分钟内散掉的热超出了需要，体温又跌破下沿，于是接着发冷、打寒战。引子里"热完就冷"的次序，正是水位在窄峡里来回拍击两壁的样子。</p>
+  <p>这个类比要就地拆一句：<em>变窄的不是体温，是判读体温的那条带子。</em>说潮热是"体温调节失灵"并不确切——调节一点没失灵，它执行得非常认真，只是判定标准被改窄了。这个区别很实际：泼冷水解决不了问题，因为问题不在热；而调整环境温度、避开会推高体温的诱因（酒精、辛辣、闷热的房间），确实能减少越沿的次数。</p>
+
+  <figure>
+    <svg id="zone" viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="体温舒适带收窄示意图：左侧为生育期，出汗阈与寒战阈之间是宽带，同样的体温波动始终落在带内；右侧为雌激素撤退后，带子收窄成窄峡，同样的波动反复越过上下沿，触发出汗与随后的发冷">
+      <rect class="frame" x="40" y="70" width="330" height="250"/>
+      <rect class="comfort" x="56" y="120" width="298" height="170"/>
+      <line class="thresh" x1="56" y1="120" x2="354" y2="120"/>
+      <line class="thresh cold" x1="56" y1="290" x2="354" y2="290"/>
+      <path class="wiggle" d="M64 205 q 20 -22 40 0 q 20 24 40 -2 q 20 -20 40 4 q 20 22 40 -4 q 20 -22 40 2 q 20 20 40 -2 q 15 -10 30 0"/>
+      <text class="ttl" x="205" y="52" text-anchor="middle">生育期 · 宽谷</text>
+      <text class="lb-hot" x="64" y="113" text-anchor="start">出汗阈</text>
+      <text class="lb-cold" x="64" y="305" text-anchor="start">寒战阈</text>
+      <text class="lb" x="205" y="343" text-anchor="middle">同样的体温起伏，整天都在带子里，你毫无察觉</text>
+
+      <rect class="frame" x="400" y="70" width="330" height="250"/>
+      <rect class="comfort" x="416" y="192" width="298" height="30"/>
+      <line class="thresh" x1="416" y1="192" x2="714" y2="192"/>
+      <line class="thresh cold" x1="416" y1="222" x2="714" y2="222"/>
+      <path class="wiggle" d="M424 205 q 20 -22 40 0 q 20 24 40 -2 q 20 -20 40 4 q 20 22 40 -4 q 20 -22 40 2 q 20 20 40 -2 q 15 -10 30 0"/>
+      <circle class="hit" cx="444" cy="187" r="4.5"/>
+      <circle class="hit cold" cx="504" cy="228" r="4.5"/>
+      <circle class="hit" cx="564" cy="185" r="4.5"/>
+      <circle class="hit cold" cx="624" cy="228" r="4.5"/>
+      <circle class="hit" cx="684" cy="186" r="4.5"/>
+      <text class="ttl" x="565" y="52" text-anchor="middle">雌激素撤退后 · 窄峡</text>
+      <text class="lb-hot" x="424" y="185" text-anchor="start">出汗阈</text>
+      <text class="lb-cold" x="424" y="238" text-anchor="start">寒战阈</text>
+      <text class="lb" x="565" y="343" text-anchor="middle">同样的起伏，反复越沿：先全力散热，随后发冷</text>
+
+      <text class="note" x="40" y="378" text-anchor="start">横轴为时间（数小时），纵轴为核心体温。实测的起伏幅度只有零点几度——变的不是体温，是两条虚线之间的距离。</text>
+    </svg>
+    <figcaption><b>图 22-2 · 判读体温的那条带子。</b>左右两侧的体温起伏完全相同，不同的只是两条阈值线之间的距离。示意图，阈值间距未按真实温标绘制。</figcaption>
+  </figure>
+
+  <h3>带子为什么会变窄</h3>
+  <p>过去二三十年，答案逐渐指向下丘脑里一小群神经元。它们同时分泌三种物质，研究者取三者首字母称之为 <strong>KNDy 神经元</strong>——其中就有第 12 章点火时出场过的那位 kisspeptin。生育期里雌激素持续压着这群细胞；雌激素一撤，压制解除，它们变得肥大而活跃，把信号大声送往隔壁负责体温裁定的区域，把带子挤窄。</p>
+  <p>这条线索有个漂亮的验证：若机制说得对，挡住这群细胞发出的信号就该能减少潮热，而且不必补充任何激素。这正是第 5 节前沿窗口里那类新药的由来。</p>
+  <h3>不只是"有点热"</h3>
+  <p>最后说一句得体的实话。约四分之三的女性会经历潮热，其中约三成属于中重度。它常被当成一件可以拿来打趣的小事，数据却不这么看：它持续的往往不是几个月，而是几年。美国跟踪了三千多名女性十余年的 SWAN 队列给出的中位数是<strong>约 7.4 年</strong>，围绝经期早期就出现症状的人中位超过十年。夜间发作把睡眠切成碎片，而睡眠碎片化本身就会带来白天的注意力涣散、情绪低落和判断力下降（第 15 章讲过这条链路）。所以当一个人说她"这一年脑子不清楚"，未必是记忆力衰退，很可能是连续两百个夜晚没睡整过。既不夸大，也不打发——这是本章的底线。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>有些人的悬崖是一夜之间的。</strong>本章画的那道坎是四五年下完的。但对另一些人来说，它发生在一次手术之后：因病切除双侧卵巢，激素供应在麻醉苏醒的那一刻就断了。化疗、盆腔放疗也可能造成类似的骤停。落差相同，坡度却陡了上千倍，症状因此常常更重、来得更急。</p>
+    <p>还有一种不由外因引起：约 1% 的女性在 40 岁前进入绝经，医学上称为原发性卵巢功能不全（POI）。它的意义不止于早几年——雌激素缺失的年头更长，骨骼与心血管承受的时间也更长，因此处理原则与自然绝经不同，通常主张补充到自然绝经的年龄段。把"更年期"默认成五十岁上下的事，会让这部分人被整段忽略掉。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 祖母</div>
+  <h2>虎鲸给的旁证：为什么会有绝经这回事</h2>
+  <p>把镜头拉远，有个问题一直悬着：从演化的角度看，绝经根本不该存在。</p>
+  <p>自然选择的算盘打得直白：能多留后代的性状会传下去。一个雌性在生命还剩三分之一甚至一半时就停止繁殖，等于放弃了一段本可用来留后代的时间——这样的性状该被淘汰才对。绝大多数哺乳动物也确实这么活：非洲象、狒狒、大猩猩，雌性的生育力随衰老一起下降，多数直到死亡仍保有一些。</p>
+  <p>可有一小撮例外，名单很有意思：除人以外，已知会经历明确绝经的野生动物集中在几种齿鲸——虎鲸、短肢领航鲸、伪虎鲸、白鲸、一角鲸，近年的比较研究还在往名单里添名字。人和几种鲸隔着上亿年的演化距离，却在同一件古怪的事上撞了车。</p>
+  <h3>太平洋东北的那几个家族</h3>
+  <p>最好的证据来自北美西海岸的"定居型"虎鲸：研究者从 1970 年代起一头一头地认脸、记谱系，跟了半个世纪，因此我们对这些家族的了解细到能画出每一头鲸的家谱。这些虎鲸的雌性大约三四十岁停止生育，却常能再活三四十年。它们停下之后并没有闲着：</p>
+  <p><strong>其一，它们在带路。</strong>分析鲸群行进队形的研究发现，处在领航位置的往往是已经停止生育的老年雌鲸；鲑鱼歉收的年份，这种倾向更明显。一头活了六十年的鲸，脑子里装着六十年份的鱼汛记忆——哪条水道在什么年景还有鱼。这份知识没法写下来，只能长在一个活得够久的个体身上。</p>
+  <p><strong>其二，它们在保命。</strong>另一项对长期数据的分析发现，一头已停止生育的祖母鲸去世后，它的孙辈在随后两年里的死亡率明显上升，且在食物短缺的年份影响更强。另有研究注意到，母鲸在场的成年儿子身上，来自同类的咬痕伤更少。</p>
+  <p>这是人类学里提了几十年的<strong>祖母假说</strong>的水下版本。1990 年代，Kristen Hawkes 等人观察坦桑尼亚的哈扎人时提出：一位不再生育的祖母若把采集来的食物投给女儿的孩子、让女儿更早恢复生育，她通过孙辈传下去的基因可能比自己再生一个还多。<strong>停下来，有时候更划算。</strong></p>
+  <p>虎鲸还提供了另一半答案，一个不那么温情的版本：一头母鲸和它的成年女儿同期怀孕时，母鲸那一胎的死亡率明显高于女儿那一胎——两代在同一片水域争同样的资源，年轻的一方赢面更大。既然争不过，不如及早退出，把力气转投孙辈。这个<strong>生殖冲突</strong>假说和祖母假说不是对手，更像同一件事的两半：一半解释"为什么值得停下"，一半解释"为什么停下的是老一辈"。</p>
+  <p>这里必须诚实：祖母假说在人类学界至今有争议。不同人群的历史人口数据支持强弱不一，有的研究发现祖母在场显著提高孙辈存活，有的没找到效应。虎鲸的证据之所以珍贵，正在于它来自另一条演化路线：两类彼此独立的生物，在长期社群生活、后代抚育漫长这两个共同条件下，各自走到了同一种安排。这在生物学里是很有分量的一种巧合。</p>
+  <p>说回你自己。这一段的用处不在于给谁下结论，而在于换个看法：<strong>绝经不是身体坏掉了，更像一次被写进演化剧本的角色转换。</strong>凌晨三点那把火当然不好受，机制上它确实是激素撤退的副产物；但撤退本身，未必是故障。</p>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 二十年</div>
+  <h2>惊魂二十年：一项研究，和一次集体误读</h2>
+  <p>2002 年 7 月 9 日，美国国立卫生研究院开了一场新闻发布会，宣布提前中止一项大型试验的其中一个组别。第二天，全世界的报纸头版上出现同一类标题：<em>激素替代疗法致癌</em>。此后几年欧美相关处方量急剧下滑，跌幅以数成计；数以百万计的女性在一周之内停了药，许多人再没回去过。</p>
+  <p>这一节的重点不是"当年到底该不该停药"，而是：<strong>同一份数据，为什么能被读成两个如此不同的结论。</strong></p>
+  <h3>先看前史</h3>
+  <p>故事要从更早说起。1966 年，纽约的妇科医生 Robert Wilson 出版畅销书《Feminine Forever》，把绝经描述成一种可以治疗的"缺乏症"，主张终生补充雌激素。书卖得极好，处方随之激增；后来披露的资料显示，Wilson 的相关活动接受过雌激素厂商的资助。1975 年第一记警钟敲响：单用雌激素与子宫内膜癌风险升高相关。对策是加上孕激素保护子宫内膜，处方量于是再度回升。</p>
+  <p>到 1990 年代，激素替代已被广泛认为不仅缓解症状，还能顺带预防心脏病和骨折——但这个"顺带"的证据主要来自观察性研究，而观察性研究有个绕不开的坑：会去用激素的女性往往本来就更健康、更常看医生。你以为在比较"用药与不用药"，其实在比较两群不同的人。</p>
+  <p>为了拿到硬证据，美国启动了<strong>妇女健康倡议（WHI）</strong>：大规模、随机、安慰剂对照，雌孕激素联合组纳入 16,608 名女性。2002 年，这一组因观察到的风险指标越过预设的中止界限而提前终止。</p>
+  <h3>再看那个数字</h3>
+  <p>头版标题背后的关键数字是乳腺癌的风险比：<strong>1.26</strong>。写成大白话就是"风险增加 26%"——这句话没错，而且极其吓人。</p>
+  <p>可同一份报告里还有另一种写法：用药组每一万名女性每年新发乳腺癌约 38 例，安慰剂组约 30 例。<strong>差额是每年每万人 8 例。</strong></p>
+  <p>两个数字说的是同一件事：前者是相对风险，后者是绝对风险。基础发生率本来就低时，相对风险的百分比会显得极大，绝对增量却可能很小；反过来，若一件事本就常见，同样的 26% 就是完全不同的分量。<strong>看到任何"风险增加百分之多少"的说法，都该追问一句：从多少增加到多少？</strong>这是本章想留给你的一件工具，余生里会反复派上用场。</p>
+  <p>同样值得追问的还有第二件事：<strong>这项研究招的是谁？</strong>WHI 的受试者平均年龄约 63 岁，多数人绝经已有十年以上。它设计的初衷是检验激素能否用于长期预防慢性病，而不是检验它能否缓解五十岁上下那几年的症状。可 2002 年之后，那份结论被套用到了后一群人身上——两群人的年龄、血管状况、用药目的都不同。</p>
+  <h3>再平衡</h3>
+  <p>此后二十年，研究者把 WHI 数据按年龄重新分层，逐渐浮出<strong>时机假说</strong>：获益风险比很大程度上取决于开始的时间。60 岁以前、或绝经十年以内开始的人群，风险表现明显优于更晚开始者；血管已有明显硬化的年长人群中，同样的药可能带来相反效果。只用雌激素那一组（子宫已切除者）也未见同样的乳腺癌风险升高。今天各国指南的共同点大致是：对中重度症状且无禁忌证的人，在合适的时间窗内，激素治疗仍是有效选项之一——这个决定该由具体的人和具体的医生一起做，而不是由二十多年前的一条头版标题替他们做。</p>
+  <p>把这段历史放进第 19 章那条线里看，会更清楚：从 Wilson 把绝经定义成"缺乏症"，到 2002 年后把整件事一刀切掉，钟摆在两个极端之间荡了半个世纪。两次摆动的共同点是——女性的中年被当成一个需要被外部一举裁决的问题，而不是一段需要具体信息和个体判断的人生。</p>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 两侧的账</div>
+  <h2>骨、心，和缓坡那一侧</h2>
+  <p>潮热会过去，另外几笔账不会。这一节把两条路上的中长期变化各算一遍。</p>
+  <h3>骨：拆队还在，建队掉了队</h3>
+  <p>第 11 章讲过，你的骨头终生在翻新：一队细胞拆掉旧骨，另一队填上新骨，两队常年跟着彼此走，约十年换完一副骨架。雌激素在这套安排里扮演的是<strong>约束拆队</strong>的角色。它一撤走，拆队的人数和干劲都上来了，建队却没跟上，收支于是转负——绝经后头几年骨量流失可达每年 2–3%（松质骨为主的部位更明显），此后减速但不停止。一生累计下来，女性松质骨的流失比例远高于男性，这也是骨质疏松性骨折性别差异如此悬殊的主因之一。</p>
+  <p>这里也要拆一句类比，免得推错：骨量流失不是骨头被"蛀出了洞"，而是整根骨的密度下降加上内部微结构变稀——细密的骨小梁变细、断连，像一张编得紧密的网被慢慢抽掉了一部分丝线。网还在，形状也还在，可同样一下冲击穿过去的概率变了。这解释了骨质疏松为什么在骨折之前几乎没有任何感觉。</p>
+  <h3>心：一段被拉平的差距</h3>
+  <p>生育期里女性的心血管事件发生率明显低于同龄男性，绝经之后这段差距开始收窄——脂质谱变化（低密度脂蛋白上行）、血管弹性下降、内脏脂肪比例上升，几件事同时发生。要谨慎的是因果：这段收窄有多少来自雌激素撤退、有多少来自年龄，学界仍在争论；WHI 之后的教训恰恰是别把相关当成可直接干预的因果。</p>
+  <p>但有一条实践提醒是稳固的：<strong>女性心梗的表现常与教科书那套"胸口压榨感、放射到左臂"不同</strong>——更多是气短、极度疲惫、恶心、背部或下颌不适，因而更容易被本人和医生一起低估。第 19 章展开讲过；这里再点一次，是因为绝经后正是它开始变得要紧的年纪。</p>
+  <h3>缓坡那一侧</h3>
+  <p>男性这边没有那道坎，却有别的账。睾酮缓降会带来肌量与力量减少（叠加第 21 章那条本就最陡的肌力曲线）、骨密度下降、体脂重新分布、性欲变化、疲惫感。问题在于这些表现<strong>没有一样是睾酮独有的</strong>——睡眠不足、抑郁、甲状腺问题、肥胖、慢性病都能造出同一套症状。</p>
+  <p>所以医学上对"男性更年期"这个说法保留意见。被承认的诊断（迟发性性腺功能减退）要求症状与反复测得的低睾酮值同时成立，且抽血须在早晨——睾酮有明显昼夜节律，同一个人下午测和早上测能差出一大截，仅凭一次下午抽血就开始补充是常见的过度诊断路径。治疗本身也有代价：可能抑制自身精子生成（对还有生育计划的人尤其要紧）、升高红细胞压积、加重睡眠呼吸暂停；心血管安全性曾长期存疑，直到近年才有大型试验给出较明确的答案——见下方前沿窗口。</p>
+  <p>两条路走到这里可以并起来说一句：中年不是身体开始崩坏的年份，而是<strong>两条曲线各自转弯</strong>的年份。一条转得急，急到有一段颠簸路要走；一条转得缓，缓到容易被忽略、被误诊、被当成别的东西。下一章把镜头再拉近一步，去看这些曲线底下发生了什么——不在激素层面，在细胞层面。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>照着机制造出来的止热药。</strong>第 2 节说过，如果 KNDy 神经元的信号确实是把体温带子挤窄的那只手，那么挡住这条信号就该能止住潮热，且不必补充任何激素。这个推论已经变成了处方药：<strong>非索奈坦（fezolinetant）</strong>作为神经激肽 3（NK3）受体拮抗剂，2023 年获美国 FDA 批准用于中重度潮热；2025 年 10 月，同时阻断 NK1 与 NK3 的<strong>依林奈坦（elinzanetant）</strong>也获批，三期试验中 12 周内把中重度潮热的发作频率降低约七成（安慰剂组约降四成半）。要留意：这类药解决的是血管舒缩症状，并不替代雌激素在骨骼等处的作用；上市后的肝功能监测要求也提示长期安全性数据仍在积累。真正值得记住的是这条路径本身——先把机制讲通，再照着机制造药，在药物史上并非常态。</p>
+    <p><strong>缓坡那一侧的一次大考。</strong>睾酮补充治疗的心血管安全性争论了十几年。2023 年公布的 TRAVERSE 试验给出了目前分量最重的答案：5,246 名有心血管病或高风险、且确诊性腺功能减退的男性，随机分组随访后主要心血管不良事件发生率与安慰剂组相当（约 7.0% 对 7.3%），达到非劣效。但同一份报告里也有需要注意的信号：治疗组的肺栓塞、非致死性心律失常（含房颤）和骨折更多。所以结论是有条件的——"在有明确指征的人群中未见心血管风险增加"，而不是"睾酮是安全的补品"。这两句话之间的距离，和上一节 1.26 与每万人年 8 例之间的距离，是同一种。</p>
+    <p><strong>更上游的方向。</strong>另有一批研究不满足于处理症状，而问能不能改变卵巢衰老本身的速度：干预卵泡消耗的相关通路，或把卵巢组织冻存移植的既有技术往"推迟绝经"延伸。这些多处于早期临床或概念验证阶段，样本小、终点多为激素与影像学指标而非长期健康结局。若你在数年后读到这段，请当作起点而非结论去核实。</p>
+  </div>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">中年转折 · 关键数字</div>
+    <table>
+      <tr><td class="k">绝经年龄（常见区间）</td><td class="v">49–52 岁</td><td class="n">多数人群报告中位数在 51 岁上下</td></tr>
+      <tr><td class="k">绝经的诊断标准</td><td class="v">停经满 12 个月</td><td class="n">只能回溯确认，当时认不出来</td></tr>
+      <tr><td class="k">围绝经期时长</td><td class="v">4–8 年</td><td class="n">激素剧烈震荡，可短暂高过生育期</td></tr>
+      <tr><td class="k">出现潮热的比例</td><td class="v">约 3/4</td><td class="n">程度差异很大，约三成为中重度</td></tr>
+      <tr><td class="k">潮热持续时间（中位）</td><td class="v">≈7.4 年</td><td class="n">SWAN 队列；早发者中位超过 10 年</td></tr>
+      <tr><td class="k">绝经后雌二醇</td><td class="v">&lt; 20 pg/mL</td><td class="n">主要靠脂肪等组织转化而来</td></tr>
+      <tr><td class="k">绝经后 FSH</td><td class="v">升至数倍–十余倍</td><td class="n">垂体加大催促，卵巢不再回应</td></tr>
+      <tr><td class="k">绝经后早期骨量流失</td><td class="v">2–3% / 年</td><td class="n">头 5–10 年最快，之后减速（第 11 章）</td></tr>
+      <tr><td class="k">40 岁前绝经（POI）</td><td class="v">约 1%</td><td class="n">处理原则不同于自然绝经</td></tr>
+      <tr><td class="k">男性总睾酮年降幅</td><td class="v">0.4–2% / 年</td><td class="n">常引 ~1%；游离睾酮降得更快</td></tr>
+      <tr><td class="k">WHI 雌孕激素组规模</td><td class="v">16,608 人 · 均龄 63</td><td class="n">2002 年 7 月提前中止</td></tr>
+      <tr><td class="k">WHI 乳腺癌风险</td><td class="v">HR 1.26 = +8/万人年</td><td class="n">38 对 30 例/万人年，同一数据两种说法</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">关于围绝经期的激素变化，下面哪一条是对的？</div>
+      <div class="opts">
+        <button>雌激素从四十岁起匀速下降，直到归零</button>
+        <button data-c="1">雌激素在这几年剧烈震荡，可短暂高过生育期水平，之后才跌入低位</button>
+        <button>雌激素保持不变，只有孕激素下降</button>
+        <button>FSH 与雌激素同步下降</button>
+      </div>
+      <div class="explain">垂体察觉卵巢回应变弱后加大催促（FSH 升高），偶尔真能把某个卵泡催得格外卖力，于是雌二醇短暂冲高。要留意的是：激素波动最剧烈的确实是这几年，但症状最密集的窗口跨在末次月经前后，而不是绝经那天就收尾——按 SWAN 的中位病程，潮热有相当一部分落在绝经之后，泌尿生殖道的变化还会逐年加重。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">潮热发作时，身体里真正发生了什么？</div>
+      <div class="opts">
+        <button>核心体温骤升两三度，身体全力散热</button>
+        <button>血管发生了痉挛，导致皮肤发红</button>
+        <button data-c="1">判读体温的"热中性带"变窄，微小的体温起伏就越过了出汗阈</button>
+        <button>甲状腺激素短暂过量分泌</button>
+      </div>
+      <div class="explain">实测的体温上升往往只有零点几度，甚至测不出来——变的是标准，不是温度。这也解释了"先热后冷"的次序：散热过头之后，同一条窄带的下沿又被跌破，于是接着发冷。顺着这个机制，研究者反推出了不含激素的止热药（见前沿窗口）。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">虎鲸的长期观察为绝经的演化之谜提供了什么旁证？</div>
+      <div class="opts">
+        <button>虎鲸不会绝经，说明绝经是人类独有的疾病</button>
+        <button data-c="1">停止生育的老年雌鲸在带路和护住孙辈上作用显著，支持"停下来可能更划算"</button>
+        <button>虎鲸绝经后寿命很短，说明繁殖结束即接近死亡</button>
+        <button>虎鲸的绝经年龄与人类完全相同</button>
+      </div>
+      <div class="explain">鲑鱼歉收的年份，领航的多是已停止生育的老年雌鲸；祖母鲸去世后，孙辈两年内的死亡率明显上升。还有一半答案不那么温情：母女同期怀孕时，母亲那一胎存活更差——既然争不过，及早退出把力气转投孙辈更合算。人和几种齿鲸在上亿年的演化距离之外撞了车，这种巧合在生物学里很有分量。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">WHI 报告的乳腺癌风险比 1.26，正确的读法是？</div>
+      <div class="opts">
+        <button>用药者中有 26% 会得乳腺癌</button>
+        <button>乳腺癌风险增加了 26 个百分点</button>
+        <button data-c="1">相对风险增加约 26%，换成绝对量是每万人每年多约 8 例（38 对 30）</button>
+        <button>1.26 意味着风险翻了一倍多</button>
+      </div>
+      <div class="explain">相对与绝对是同一份数据的两种说法；基础发生率低时，同样的百分比对应的绝对增量可以很小。还有一层同样重要：WHI 受试者平均 63 岁、多数绝经十年以上，研究目的是长期预防慢病，结论却被套用到了五十岁上下求缓解症状的人身上。看到风险数字先追问两句——从多少增加到多少，以及研究招的是谁。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">为什么医学上对"男性更年期"这个说法保留意见？</div>
+      <div class="opts">
+        <button>因为男性的睾酮并不会随年龄下降</button>
+        <button data-c="1">因为睾酮是缓慢连续下降、没有对应节点，且相关症状也可由睡眠、抑郁、肥胖等造成</button>
+        <button>因为男性激素变化不会带来任何症状</button>
+        <button>因为只有女性才有激素周期</button>
+      </div>
+      <div class="explain">总睾酮每年约降 0.4–2%，是一道斜面而非台阶。诊断要求症状与反复测得的低值同时成立，且抽血须在早晨——睾酮有明显昼夜节律，下午测的数字常偏低，仅凭一次下午抽血就开始补充，是这个领域常见的过度诊断路径。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第四幕 磨损与谢幕</div>
+  <div class="title">第 23 章 · 衰老的机制</div>
+  <p>激素撤退能解释中年那几年，却解释不了更根本的一问：为什么身体会老？1912 年，纽约一间实验室里养着一颗据说不会死的鸡心，全世界信了三十几年。下一章，一个年轻人发现细胞其实在数数——而它们数到大约五十就停。</p>
+  <nav class="footnav">
+    <a href="ch21-decline.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch23-aging.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 图 22-1：逐条激素曲线高亮 + 切换说明
+  var chart = document.getElementById('hormones');
+  var tabs = document.querySelectorAll('#hormone-fig .track-btn');
+  var lines = document.querySelectorAll('#hormones .tr-line');
+  var tlbs = document.querySelectorAll('#hormones .tr-lb');
+  var band = document.querySelector('#hormones .band');
+  var bandLb = document.querySelector('#hormones .band-lb');
+  var panes = document.querySelectorAll('#hormone-fig .tp');
+  function showTrack(key){
+    var i;
+    chart.classList.add('picked');
+    for (i = 0; i < tabs.length; i++) {
+      tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-track') === key ? 'true' : 'false');
+    }
+    for (i = 0; i < lines.length; i++) {
+      lines[i].classList.toggle('on', lines[i].getAttribute('class').indexOf('t-' + key) > -1);
+    }
+    for (i = 0; i < tlbs.length; i++) {
+      tlbs[i].classList.toggle('on', tlbs[i].getAttribute('class').indexOf('l-' + key) > -1);
+    }
+    band.classList.toggle('on', key === 'peri');
+    bandLb.classList.toggle('on', key === 'peri');
+    for (i = 0; i < panes.length; i++) {
+      panes[i].classList.toggle('on', panes[i].getAttribute('data-tp') === key);
+    }
+  }
+  for (var t = 0; t < tabs.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){ showTrack(el.getAttribute('data-track')); });
+    })(tabs[t]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

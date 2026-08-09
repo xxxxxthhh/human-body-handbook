@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第7章 · 胎盘：一个临时器官 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 7-1 胎盘断面与通关（本章专用） ---- */
+#gates-fig .sub-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#gates-fig .sub-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 13px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#gates-fig .sub-btn:hover{border-color:var(--gold); color:var(--ink);}
+#gates-fig .sub-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#gates-fig .sub-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#gates-fig .gate-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#gates-fig .gp{display:none;}
+#gates-fig .gp.on{display:block;}
+#gates-fig .gp-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#gates-fig .gp p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+
+#gates .lane{transition:opacity .3s;}
+#gates.picked .lane{opacity:.2;}
+#gates.picked .lane.on{opacity:1;}
+#gates .plate{fill:var(--surface2); stroke:var(--line); stroke-width:1.5;}
+#gates .pool{fill:var(--oxy); fill-opacity:.09;}
+#gates .villus{fill:none; stroke:var(--deoxy); stroke-width:2.2; stroke-linecap:round;}
+#gates .tip{fill:var(--deoxy); fill-opacity:.20; stroke:var(--deoxy); stroke-width:1.4;}
+#gates .uv{stroke:var(--oxy); stroke-width:3.4; stroke-linecap:round; fill:none;}
+#gates .ua{stroke:var(--deoxy); stroke-width:3.4; stroke-linecap:round; fill:none;}
+#gates .mflow{stroke:var(--oxy); stroke-width:2.4; fill:none; stroke-linecap:round;}
+#gates .mflow.out{stroke:var(--ink-faint);}
+#gates .band{fill:var(--surface2); stroke:var(--line); stroke-width:1;}
+#gates .band.mid{fill:var(--gold); fill-opacity:.10;}
+#gates .arrow{stroke:var(--gold); stroke-width:2.4; fill:none; stroke-linecap:round;}
+#gates .stopbar{stroke:var(--oxy); stroke-width:5; stroke-linecap:round;}
+#gates .carrier{fill:none; stroke:var(--gold); stroke-width:2.4;}
+#gates .lb{fill:var(--ink); font-size:13px; font-weight:600;}
+#gates .lb-s{fill:var(--ink-dim); font-size:11px;}
+#gates .lb-f{fill:var(--ink-faint); font-size:11px;}
+#gates .lane-t{fill:var(--gold); font-size:12px;}
+
+/* ---- 图 7-2 母胎拉锯（本章专用） ---- */
+#tug .rope{stroke:var(--line); stroke-width:5; stroke-linecap:round;}
+#tug .pullL{stroke:var(--mixed-l); stroke-width:3; fill:none; stroke-linecap:round;}
+#tug .pullR{stroke:var(--mixed-r); stroke-width:3; fill:none; stroke-linecap:round;}
+#tug .mark{stroke:var(--gold); stroke-width:2.5;}
+#tug .tL{fill:var(--mixed-l); font-size:13px; font-weight:600;}
+#tug .tR{fill:var(--mixed-r); font-size:13px; font-weight:600;}
+#tug .gene{fill:var(--ink-dim); font-size:11.5px;}
+#tug .mid{fill:var(--gold); font-size:12px;}
+#tug .card{fill:var(--surface2); stroke:var(--line); stroke-width:1.4;}
+#tug .card-t{fill:var(--ink); font-size:13px; font-weight:700;}
+#tug .card-b{fill:var(--ink-dim); font-size:11.5px;}
+#tug .foot{fill:var(--ink-faint); font-size:12px;}
+
+@media (prefers-reduced-motion: reduce){
+  #gates .lane{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第一幕 建造 · 第 7 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>胎盘：<br>一个临时器官</h1>
+  <p class="subtitle">它有一半基因来自母亲免疫系统眼中的外人，本该被排掉；它做了九个月你的肺、肾和肠子；你出生那天它被扔进托盘——却把自己的一部分长久地留在了母亲身上。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>孩子出生之后大约十分钟，产房里还会再发生一件事，几乎没有人为它拍照。</p>
+  <p>一团暗红色的、盘子大小的组织从母体娩出，被接进托盘。助产士会把它翻过来，对着灯检查是否完整——哪怕留下一小片在子宫里，都可能引起出血。称重，记录，然后在多数情况下，它被当作医疗废物处理掉。</p>
+  <p>这团东西刚刚做了九个月你的肺、你的肾、你的肠道和半个内分泌腺。它是你身上最早成形并投入运转的器官，也是你用完就丢的那一个。而它真正不寻常的地方在于：它有一半基因来自一个在母亲免疫系统看来彻头彻尾的外人。按七十年前的免疫学常识，它该被排斥掉。它没有。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 外人</div>
+  <h2>一位免疫学家出的难题</h2>
+  <p>1953 年，英国免疫学家<strong>彼得·梅达沃</strong>（Peter Medawar）在一次演讲里，把一件人人熟悉的事说成了一个问题。</p>
+  <p>他当时正在研究移植排斥——这项工作让他在七年后拿到诺贝尔奖。他知道一件铁律般的事实：把一个人的皮肤移到另一个人身上，除非双方基因足够接近，否则免疫系统会在两周内把它认出来并摧毁。而胎儿携带的基因有一半来自父亲，对母体而言，它就是一块半异体的组织。</p>
+  <p>那么，为什么它能在里面待九个月？</p>
+  <p>梅达沃提了三种可能：<strong>一</strong>，母胎之间有一道解剖学上的屏障，双方根本碰不着面；<strong>二</strong>，胎儿的抗原还不成熟，免疫系统认不出它；<strong>三</strong>，孕期母亲的免疫功能整体减弱了。</p>
+  <p>七十多年过去，这三条基本都站不住。</p>
+  <p>第一条：母胎细胞持续互相往来，而且往来得相当频繁——这件事本章第 5 节会专门讲，它比"隔开"要有意思得多。第二条：侵入母体组织的那批胎盘细胞确实带着来自父方的分子，并不隐形。第三条最容易验证也最先被推翻：孕妇并没有失去免疫力，她仍然能对付绝大多数感染，也仍然会排斥移植来的皮肤。真要说变化，是免疫系统在局部作了细致的调整，而不是整体退场。</p>
+  <h3>不是躲藏，是交涉</h3>
+  <p>真实的机制，比"藏起来"精巧得多。</p>
+  <p>负责往母体组织里深入的是一类叫<strong>绒毛外滋养层</strong>的胎盘细胞。它们做的第一件事，是不表达 <strong>HLA-A</strong> 和 <strong>HLA-B</strong>——这是身份标记里最容易被 T 细胞盯上、也最容易引发排斥的两类。</p>
+  <p>到这里为止，听起来还是"隐身"。但接下来这一步把整个故事翻了过来。</p>
+  <p>免疫系统里还有一支叫<strong>自然杀伤细胞（NK 细胞）</strong>的队伍，它们的执勤规则恰好相反：<em>谁不出示证件就打谁。</em>正常细胞表面挂着身份标记，NK 细胞路过便放行；病毒感染的细胞和不少肿瘤细胞会把标记摘掉以躲开 T 细胞，而这一摘，就撞到了 NK 细胞的枪口上。所以，一个把证件全摘光的细胞，非但不安全，反而死得更快。</p>
+  <p>胎盘细胞的解法是：<strong>摘掉最扎眼的那几张，出示另外几张。</strong>它们表达 HLA-G、HLA-E 和 HLA-C——这几种分子在 T 细胞那边不太引起注意，却足以让 NK 细胞确认"这是自己人"。</p>
+  <p>更进一步，它们不只是求得放行，还把对方拉进来干活。子宫内膜（怀孕后叫<strong>蜕膜</strong>）里聚集着一群特殊的 NK 细胞，在孕早期能占到当地免疫细胞的多数。它们几乎不执行杀伤，主业是分泌一批因子，帮着改造母体的<strong>螺旋动脉</strong>——把这些原本细而多肌肉、能收缩调节的小动脉，扩成粗大、松弛、低阻力的通道，好让血源源不断地涌进胎盘。母亲的免疫细胞，被雇去替胎盘修路。</p>
+  <p>还有一路是<strong>调节性 T 细胞</strong>：孕期它们在局部扩增，专门对父源来的抗原维持一种"知道你是外人，但放你过"的耐受状态。</p>
+  <p>所以"胎盘披了件隐身衣"这个说法要就地拆掉，因为顺着它推会得出一个错误的机制：<em>完全隐身在免疫学里不是保护，是找死。</em>胎盘做的从来不是消失，而是出示一套经过挑选的证件，压住一路追兵，再把另一路请来替自己修路。这不是躲藏，是交涉——而交涉一旦谈崩，代价相当具体：螺旋动脉重塑不足被认为与子痫前期的发生有关，那是妊娠期最凶险的并发症之一。</p>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 隔膜</div>
+  <h2>两套血液，隔着一层膜相望</h2>
+  <p>谈判谈成了，接下来是搭台子。</p>
+  <p>先纠正一个几乎人人都有的印象：<strong>母亲的血和胎儿的血，从头到尾没有混在一起过。</strong>"母亲用自己的血养孩子"是个方便的说法，但它把结构说错了。真实的样子是这样的——</p>
+  <p>胎儿一侧伸出一棵棵反复分叉的<strong>绒毛树</strong>，树里跑的是胎儿自己的血，由脐带送来送回。母亲一侧的螺旋动脉则把血直接喷进一个开放的腔隙（<strong>绒毛间隙</strong>），血在里面漫开，浸没这些绒毛树，再从静脉口流走。两套血液各走各的，中间始终隔着绒毛表面那层膜。</p>
+  <p>第 8 章会用一个比喻——"胎盘像树根扎进土壤那样扎进母亲的血流"。这句话的方向是对的，但值得在这里先补精确一点：绒毛不是扎进母体组织去<em>取</em>东西，它是<strong>浸在一池母血里</strong>。更贴切的画面是红树林——根系立在潮间带，潮水一天两次漫上来又退下去，根一动不动，交换全发生在被水泡着的那层表皮上。母体的血就是那片潮水。</p>
+  <p>这层结构解释了第 5 节要讲的那件怪事：既然隔着膜，为什么双方的细胞还是跑到了对方身上？答案是这层膜足够薄，也就足够容易破；<strong>足月时它最薄处只有 2 到 4 微米</strong>，早期还要厚得多。它薄到氧气可以在微秒内穿过，也就薄到偶尔会漏。</p>
+  <p>顺便替这层膜算一笔第 5 章的账：足月胎盘的绒毛表面积加起来在 <strong>11 到 14 平方米</strong>上下。一个直径二十厘米出头、重不到一斤的圆盘，交换面积相当于四五张双人床摊开——这是表面积／体积比那条规律的又一次现身。它用的还是老办法：分叉，分叉，再分叉。</p>
+
+  <figure id="gates-fig">
+    <div class="switch-row">
+      <span class="switch-hint">点一样东西，看它怎么过 →</span>
+      <div class="sub-tabs" role="group" aria-label="选择一种物质查看它如何通过胎盘">
+        <button class="sub-btn" data-sub="o2" data-gate="free" aria-pressed="false">氧与二氧化碳</button>
+        <button class="sub-btn" data-sub="glu" data-gate="carry" aria-pressed="false">葡萄糖</button>
+        <button class="sub-btn" data-sub="aa" data-gate="carry" aria-pressed="false">氨基酸</button>
+        <button class="sub-btn" data-sub="igg" data-gate="carry" aria-pressed="false">抗体 IgG</button>
+        <button class="sub-btn" data-sub="alc" data-gate="free" aria-pressed="false">酒精</button>
+        <button class="sub-btn" data-sub="igm" data-gate="block" aria-pressed="false">IgM 与多数细菌</button>
+      </div>
+    </div>
+    <svg id="gates" viewBox="0 0 760 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="胎盘断面示意与母胎屏障通关图：上半为绒毛树浸在母血腔隙中的断面，下半为屏障的三条通道——自由扩散、转运体搬运、被拦下">
+      <!-- ===== 上半：断面 ===== -->
+      <path class="ua" d="M366 12 V 46"/>
+      <path class="ua" d="M394 12 V 46"/>
+      <path class="uv" d="M380 12 V 46"/>
+      <text class="lb-f" x="410" y="26" text-anchor="start">脐动脉 ×2 · 脐静脉 ×1</text>
+      <rect class="pool" x="60" y="62" width="640" height="176"/>
+      <rect class="plate" x="60" y="46" width="640" height="16" rx="3"/>
+      <text class="lb-s" x="68" y="58" text-anchor="start">绒毛膜板 · 胎儿侧</text>
+
+      <g class="villus">
+        <path d="M180 62 V 110 M180 110 L 140 140 M180 110 L 220 140 M140 140 L 120 175 M140 140 L 160 175 M220 140 L 200 175 M220 140 L 240 175"/>
+        <path d="M380 62 V 110 M380 110 L 340 140 M380 110 L 420 140 M340 140 L 320 175 M340 140 L 360 175 M420 140 L 400 175 M420 140 L 440 175"/>
+        <path d="M580 62 V 110 M580 110 L 540 140 M580 110 L 620 140 M540 140 L 520 175 M540 140 L 560 175 M620 140 L 600 175 M620 140 L 640 175"/>
+      </g>
+      <g class="tip">
+        <circle cx="120" cy="183" r="8"/><circle cx="110" cy="197" r="7"/><circle cx="130" cy="197" r="7"/>
+        <circle cx="160" cy="183" r="8"/><circle cx="150" cy="197" r="7"/><circle cx="170" cy="197" r="7"/>
+        <circle cx="200" cy="183" r="8"/><circle cx="190" cy="197" r="7"/><circle cx="210" cy="197" r="7"/>
+        <circle cx="240" cy="183" r="8"/><circle cx="230" cy="197" r="7"/><circle cx="250" cy="197" r="7"/>
+        <circle cx="320" cy="183" r="8"/><circle cx="310" cy="197" r="7"/><circle cx="330" cy="197" r="7"/>
+        <circle cx="360" cy="183" r="8"/><circle cx="350" cy="197" r="7"/><circle cx="370" cy="197" r="7"/>
+        <circle cx="400" cy="183" r="8"/><circle cx="390" cy="197" r="7"/><circle cx="410" cy="197" r="7"/>
+        <circle cx="440" cy="183" r="8"/><circle cx="430" cy="197" r="7"/><circle cx="450" cy="197" r="7"/>
+        <circle cx="520" cy="183" r="8"/><circle cx="510" cy="197" r="7"/><circle cx="530" cy="197" r="7"/>
+        <circle cx="560" cy="183" r="8"/><circle cx="550" cy="197" r="7"/><circle cx="570" cy="197" r="7"/>
+        <circle cx="600" cy="183" r="8"/><circle cx="590" cy="197" r="7"/><circle cx="610" cy="197" r="7"/>
+        <circle cx="640" cy="183" r="8"/><circle cx="630" cy="197" r="7"/><circle cx="650" cy="197" r="7"/>
+      </g>
+      <text class="lb-s" x="380" y="228" text-anchor="middle">绒毛间隙 · 一池母血，绒毛浸在里面</text>
+      <rect class="plate" x="60" y="238" width="640" height="16" rx="3"/>
+      <text class="lb-s" x="68" y="270" text-anchor="start">基底板 · 母体侧（蜕膜与子宫肌层）</text>
+      <path class="mflow" d="M290 290 V 246 M282 258 L 290 246 L 298 258"/>
+      <path class="mflow" d="M470 290 V 246 M462 258 L 470 246 L 478 258"/>
+      <text class="lb-f" x="380" y="288" text-anchor="middle">螺旋动脉 · 母血涌入</text>
+      <path class="mflow out" d="M150 246 V 290 M142 278 L 150 290 L 158 278"/>
+      <path class="mflow out" d="M610 246 V 290 M602 278 L 610 290 L 618 278"/>
+      <text class="lb-f" x="150" y="308" text-anchor="middle">静脉引流</text>
+      <text class="lb-f" x="610" y="308" text-anchor="middle">静脉引流</text>
+
+      <!-- ===== 下半：屏障三条通道 ===== -->
+      <line x1="30" y1="324" x2="730" y2="324" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 5"/>
+      <text class="lb" x="30" y="348" text-anchor="start">放大：母血与胎儿血之间的那 2–4 微米</text>
+      <rect class="band" x="250" y="362" width="90" height="122"/>
+      <rect class="band mid" x="340" y="362" width="60" height="122"/>
+      <rect class="band" x="400" y="362" width="70" height="122"/>
+      <text class="lb-f" x="295" y="376" text-anchor="middle">合体滋养层</text>
+      <text class="lb-f" x="370" y="376" text-anchor="middle">基膜</text>
+      <text class="lb-f" x="435" y="376" text-anchor="middle">胎儿内皮</text>
+      <text class="lb" x="120" y="404" text-anchor="middle">母血侧</text>
+      <text class="lb" x="600" y="404" text-anchor="middle">胎儿血侧</text>
+
+      <g class="lane" data-gate="free">
+        <path class="arrow" d="M140 424 H 560 M548 416 L 560 424 L 548 432"/>
+        <text class="lane-t mono" x="600" y="428" text-anchor="middle">自由扩散</text>
+      </g>
+      <g class="lane" data-gate="carry">
+        <path class="arrow" d="M140 452 H 282 M418 452 H 560 M548 444 L 560 452 L 548 460"/>
+        <path class="carrier" d="M290 440 a12 12 0 0 0 0 24 M410 440 a12 12 0 0 1 0 24"/>
+        <path class="arrow" d="M300 452 H 400"/>
+        <text class="lane-t mono" x="600" y="456" text-anchor="middle">转运体搬运</text>
+      </g>
+      <g class="lane" data-gate="block">
+        <path class="arrow" d="M140 476 H 236 M224 468 L 236 476 L 224 484"/>
+        <line class="stopbar" x1="248" y1="464" x2="248" y2="488"/>
+        <text class="lane-t mono" x="600" y="480" text-anchor="middle">拦下</text>
+      </g>
+    </svg>
+    <div class="gate-panel">
+      <div class="gp on" data-gp="0">
+        <div class="gp-t">"屏障"这个词其实不太准</div>
+        <p>点上方任意一样东西，看它走哪条通道。你会发现这层膜的行为不像一道滤网：它对某些大分子严得多，对某些小分子几乎不设防，还会主动逆着浓度差把东西<em>搬进来</em>。把它想成一道滤网，会在三个方向上同时想错。</p>
+      </div>
+      <div class="gp" data-gp="o2">
+        <div class="gp-t">氧与二氧化碳 · 自由扩散</div>
+        <p>小、不带电、脂溶，直接穿膜，顺着浓度差走，不花一分钱。这层膜最薄处只有 2 到 4 微米——按第 5 章那道楼梯，穿过它以微秒计。胎儿一侧靠抓氧更紧的胎儿血红蛋白把氧从母亲的血红蛋白手里接过来，这套接力第 8 章还会细讲。</p>
+      </div>
+      <div class="gp" data-gp="glu">
+        <div class="gp-t">葡萄糖 · 顺流搬运</div>
+        <p>走 GLUT1 转运体，属于易化扩散：借了转运体的力，但仍然只能<em>顺着</em>浓度差走，不耗能。所以胎儿的血糖总是略低于母体，且随母体血糖起落。这也是妊娠期糖尿病影响胎儿的通道——母亲血糖高，送过去的就多。</p>
+      </div>
+      <div class="gp" data-gp="aa">
+        <div class="gp-t">氨基酸 · 逆流搬运</div>
+        <p>这一项最反直觉：氨基酸是被<strong>主动转运</strong>过去的，耗能，而且逆着浓度差。结果是胎儿血中若干种氨基酸的浓度<em>高于</em>母体——胎盘不是在漏，是在往里搬。一道会逆着水流往上游运货的关口，很难再叫它"屏障"。</p>
+      </div>
+      <div class="gp" data-gp="igg">
+        <div class="gp-t">抗体 IgG · 被专门搬运</div>
+        <p>IgG 是个大分子，本不该过得去，但胎盘上有一种叫 FcRn 的受体专门抓住它、搬到另一侧。搬运在孕晚期加速，足月时新生儿血中的 IgG 水平可以达到甚至超过母体。这是新生儿头几个月赖以过活的被动免疫，也是为什么早产儿这份家底更薄——他没赶上最后那几周的加急运输。第 10 章会接着讲。</p>
+      </div>
+      <div class="gp" data-gp="alc">
+        <div class="gp-t">酒精 · 几乎不设防</div>
+        <p>酒精分子小、既溶于水又溶于脂，是自由扩散的理想选手。它几乎不受阻拦地通过，胎儿血中的浓度与母体接近。而胎儿的肝脏还没有能力有效分解它，羊水又会形成一个回流的池子——同样的摄入量，胎儿承受的暴露时间更长。尼古丁、咖啡因和多数小分子药物走的也是这条通道。</p>
+      </div>
+      <div class="gp" data-gp="igm">
+        <div class="gp-t">IgM 与多数细菌 · 拦下</div>
+        <p>IgM 是五个抗体单体拼成的大家伙，没有专门的搬运工，过不去；大多数细菌同样进不来。这条"过不去"留下了一个漂亮的临床推论：如果在新生儿血里查到了 IgM，它不可能来自母亲，只能是胎儿自己造的——那就意味着他在子宫里遭遇过感染。少数病原体是例外，能穿过这层膜，风疹病毒、巨细胞病毒、弓形虫、寨卡病毒都在名单上。</p>
+      </div>
+    </div>
+    <figcaption><b>图 7-1 · 一池母血，和那 2–4 微米。</b>上半是断面：绒毛树从胎儿侧垂下，浸在母血漫开的腔隙里，两套血液各行其道；螺旋动脉把母血喷进来，静脉口把它引走。下半把那层膜放大，画出三条通道——直接穿过、由转运体搬过去、被拦下。示意图不代表真实比例，绒毛树的分叉级数远比图中多。</figcaption>
+  </figure>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>"从不混合"是个近似说法，而这处近似救过很多条命。</strong>两套血液确实不相通，但那层膜会漏——分娩时尤其如此，少量胎儿红细胞会挤进母体循环。多数时候这无关紧要，除非母亲是 Rh 阴性而胎儿是 Rh 阳性：母亲的免疫系统第一次见到 Rh 抗原，会认真地建档。第一胎通常平安，因为抗体产生得太晚；可到了下一胎，这批记忆抗体是 IgG——而 IgG 恰好有专门的搬运工。它们被规规矩矩地运进胎儿体内，去攻击胎儿的红细胞。</p>
+    <p>解法出人意料地简洁：在母亲被致敏之前，抢先给她注射抗 D 免疫球蛋白，把漏进去的胎儿红细胞清掉，让她的免疫系统来不及建档。这套做法从 1960 年代末推广开来，把新生儿溶血病从产科的常见杀手变成了少见病。一个"本不该发生的泄漏"，加上一个"本用于保护的搬运通道"，凑成了一场灾难；而阻断它的办法，是赶在建档之前把证据抹掉。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 谈判</div>
+  <h2>一个不太受欢迎的想法</h2>
+  <p>怀孕长期被当作合作的典范：母亲供养，胎儿接受，双方利益一致。</p>
+  <p>1993 年，哈佛的演化生物学家 <strong>David Haig</strong> 在《生物学季评》上发表了一篇长文，题目叫《人类妊娠中的遗传冲突》，把这幅温情的图景换了一个角度。</p>
+  <p>他的论证不依赖任何恶意假设，只依赖一件事：<strong>自然选择作用在母亲的基因上和作用在胎儿的基因上，方向并不完全一致。</strong>母亲的基因要考虑的是一生若干次生育的总和，因此倾向于把资源在这一胎和往后的胎之间留有余地；而胎儿的基因只押在这一胎上，倾向于多要一些。两边的最优解不在同一个点上。既然如此，可以预期一场缓慢的演化升级：胎儿一侧发展出索取的手段，母亲一侧发展出相应的制衡。</p>
+  <p>这个说法要小心地读，所以就地拆一句：<em>这是不同基因拷贝在资源分配上的一场拉锯，双方都没有意图，谈不上敌意，更不是"胎儿在攻击母亲"。</em>绝大多数妊娠的结果，是一个运转良好的妥协。Haig 理论的强形式至今仍有争议，它真正的价值不在于给出定论，而在于改变了这个领域提问的方式：许多妊娠并发症，从此可以被当作"拉锯失衡"来研究，而不只是当作故障。</p>
+
+  <figure>
+    <svg id="tug" viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="母胎拉锯示意图：母源表达的基因限制生长、父源表达的基因促进生长，以及血糖、血压、生长因子三处战场">
+      <text class="tL" x="150" y="40" text-anchor="middle">母源表达的基因</text>
+      <text class="tR" x="610" y="40" text-anchor="middle">父源表达的基因</text>
+      <text class="gene mono" x="150" y="60" text-anchor="middle">H19 · IGF2R · CDKN1C</text>
+      <text class="gene mono" x="610" y="60" text-anchor="middle">IGF2 · PEG3 · PEG10</text>
+
+      <line class="rope" x1="120" y1="104" x2="640" y2="104"/>
+      <path class="pullL" d="M340 88 H 140 M152 80 L 140 88 L 152 96"/>
+      <path class="pullR" d="M420 88 H 620 M608 80 L 620 88 L 608 96"/>
+      <line class="mark" x1="380" y1="82" x2="380" y2="126"/>
+      <text class="mid" x="380" y="146" text-anchor="middle">实际发生的生长与索取</text>
+      <text class="gene" x="150" y="128" text-anchor="middle">留有余地 · 顾及往后的胎</text>
+      <text class="gene" x="610" y="128" text-anchor="middle">只押这一胎 · 倾向多要</text>
+
+      <rect class="card" x="30" y="176" width="216" height="122" rx="10"/>
+      <text class="card-t" x="138" y="204" text-anchor="middle">血糖</text>
+      <text class="card-b" x="138" y="228" text-anchor="middle">胎盘激素降低母体对</text>
+      <text class="card-b" x="138" y="248" text-anchor="middle">胰岛素的敏感性，餐后</text>
+      <text class="card-b" x="138" y="268" text-anchor="middle">血糖维持得更久</text>
+      <text class="card-b" x="138" y="288" text-anchor="middle">失衡 → 妊娠期糖尿病</text>
+
+      <rect class="card" x="272" y="176" width="216" height="122" rx="10"/>
+      <text class="card-t" x="380" y="204" text-anchor="middle">血压与灌注</text>
+      <text class="card-b" x="380" y="228" text-anchor="middle">螺旋动脉重塑得越充分，</text>
+      <text class="card-b" x="380" y="248" text-anchor="middle">胎盘拿到的血流越稳</text>
+      <text class="card-b" x="380" y="268" text-anchor="middle">重塑不足被认为与</text>
+      <text class="card-b" x="380" y="288" text-anchor="middle">子痫前期有关</text>
+
+      <rect class="card" x="514" y="176" width="216" height="122" rx="10"/>
+      <text class="card-t" x="622" y="204" text-anchor="middle">生长因子</text>
+      <text class="card-b" x="622" y="228" text-anchor="middle">同一个基因的父源拷贝</text>
+      <text class="card-b" x="622" y="248" text-anchor="middle">与母源拷贝反向作用</text>
+      <text class="card-b" x="622" y="268" text-anchor="middle">印记失衡 → 过度生长</text>
+      <text class="card-b" x="622" y="288" text-anchor="middle">或生长受限综合征</text>
+
+      <text class="foot" x="380" y="326" text-anchor="middle">双方都没有意图；拉锯的常态结果，是一个运转良好的妥协。</text>
+    </svg>
+    <figcaption><b>图 7-2 · 一场没有敌意的拉锯。</b>绳子两端不是母亲与孩子，而是<em>同一个胎儿体内</em>来自父方和来自母方的基因拷贝。基因组印记让这场拉锯变得可以观测：某些基因只有父源拷贝在工作，另一些只有母源拷贝在工作，而它们作用的方向相反。下方三张卡是这场拉锯落到生理上的三处地方。</figcaption>
+  </figure>
+
+  <h3>印记：拉锯留下的证据</h3>
+  <p>Haig 理论最结实的一根支柱，是一个本身就很古怪的现象：<strong>基因组印记</strong>。</p>
+  <p>按常识，你从父母那里各得一份基因，两份都该干活。但有一小批基因不是这样——它们身上带着"这份来自父亲"或"这份来自母亲"的化学标签，而身体只读其中一份，另一份被静音。</p>
+  <p>怪就怪在，这批基因的作用方向排列得太整齐了：<strong>倾向于只表达父源拷贝的那些，多半促进胎儿和胎盘的生长；倾向于只表达母源拷贝的那些，多半限制生长。</strong>促生长的 IGF2 主要由父源拷贝表达，而抑制它、限制生长的那一批则偏向母源表达。油门踩在一只脚下，刹车踩在另一只脚下，而车只有一辆。</p>
+  <p>这套安排若从"母子合作"出发，几乎无法解释——如果双方目标一致，何必给同一件事装上两套方向相反、还按来源分工的控制？而从拉锯出发，它就是这场拉锯留在基因组里的化石。</p>
+  <p>更硬的证据是失衡的后果：这些印记区域一旦出错，结果不是随机的，而是沿着可预测的两个方向偏——一侧导致过度生长的综合征，另一侧导致生长受限的综合征。踩空的是哪只脚，看结果就知道。</p>
+  <p>所以怀孕在生理上对母亲是件昂贵的事，并不奇怪。血容量增加近一半，心输出量上升，胰岛素敏感性下降，凝血系统整体前倾——这些变化里有一部分是母体主动的适应，也有一部分是被谈出来的。</p>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 海关</div>
+  <h2>什么过得去，什么过不去</h2>
+  <p>图 7-1 下半的三条通道，值得把账再算清楚一点，因为"胎盘屏障"这个词误导了很多人。</p>
+  <p>它容易让人想到一道滤网：孔比它小的过去，比它大的留下。可这层膜的实际行为，在三个方向上都不是这样。</p>
+  <p><strong>它对某些大分子严得多。</strong>IgM 抗体过不去，多数细菌过不去——而这条走不通的路，反倒成了一件诊断工具（见图 7-1 的最后一项）。</p>
+  <p><strong>它对某些小分子几乎不设防。</strong>酒精、尼古丁、咖啡因和大部分小分子药物都从这条路直接扩散过去，第 4 章讲过的沙利度胺同样如此。<strong>"能不能过去"与分子的大小、脂溶性有关，与它对胎儿是好是坏毫无关系</strong>——这层膜不做价值判断。</p>
+  <p><strong>它还会逆着水流往里搬东西。</strong>这一点最能说明"屏障"一词有多不贴切。氨基酸是被主动转运过去的，耗能，逆浓度差——胎儿血中若干种氨基酸的浓度<em>高于</em>母体。抗体 IgG 同样：它本是过不去的大分子，胎盘却专门备了一种叫 FcRn 的受体去抓它、搬它，而且在孕晚期加速，足月时新生儿血里的 IgG 可以达到甚至超过母体水平。</p>
+  <p>这份被搬进来的抗体，是新生儿头几个月赖以过活的家底——他自己的免疫系统还在上学（第 10 章），这几个月靠的是母亲的现成答案。也正因为搬运集中在孕晚期，早产儿这份家底格外薄。</p>
+  <p>顺带解释一个实际问题：为什么妊娠期糖尿病常用胰岛素而不是多数口服降糖药？因为胰岛素是个大分子，过不去胎盘，只作用在母亲身上；而不少口服药会过去，对胎儿的影响不易评估。同样的道理，孕期需要抗凝时常用肝素——它也过不去。<strong>"过不去"在这里不是缺陷，是选药的依据。</strong></p>
+  <p>所以更准确的说法或许是：这不是一堵墙，而是一处有编制、有清单、还会主动出去接货的关口。它的每一条规则背后，都是一次被自然选择反复校准过的取舍。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>验孕棒测的，是胎盘发出的第一封公函。</strong>受精后大约第 6 到 10 天，胚胎着床，最外层那批将来长成胎盘的细胞立刻开始分泌一种激素——<strong>人绒毛膜促性腺激素（hCG）</strong>。它进入母体血液，再出现在尿里，两条杠测的就是它。也就是说，验孕棒检测的从来不是胚胎本身，而是未来那个胎盘发出的第一份通知。</p>
+    <p>这封公函有实质内容：它的收件人是卵巢里的黄体。黄体本来只有约两周寿命，任务完成就该退场；hCG 命令它留任，继续分泌孕酮维持子宫内膜。到孕龄第 8 到 10 周前后（末次月经起算，下同），胎盘自己的产能足够了，便接管孕酮的生产，黄体这才功成身退——这次交接被称为黄体－胎盘转换。hCG 的浓度也在孕龄第 8 到 10 周达到峰值，随后回落，这条曲线的形状和早孕反应的时程大致重合，两者是否有因果关系仍在研究中。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 长住</div>
+  <h2>它留下的，比你以为的多</h2>
+  <p>现在回到第 1 节留下的那个尾巴：既然隔着膜，双方的细胞怎么还是跑到了对方身上？</p>
+  <p>因为那层膜薄，而薄就意味着会漏。孕龄六到七周前后，胎儿来源的细胞已经能在母体血液里检出。整个孕期，双方的细胞持续小规模地互相渗透。</p>
+  <p>这本来只是一件生理学上的琐事，直到有人去问：那些细胞后来怎么样了？</p>
+  <p>1996 年，Diana Bianchi 的团队在《美国科学院院刊》上给出了一个让人愣住的答案。他们检查了一批生育过男孩的女性的血液，寻找带 Y 染色体的细胞——如果查到了，那只能来自儿子。他们查到了。而其中一位女性，距离她生下那个孩子已经过去了 <strong>27 年</strong>。</p>
+  <p>这种"体内住着少量他人细胞"的状态叫<strong>微嵌合</strong>（microchimerism）。此后的研究把这幅图景铺得更开：这些细胞不只是漂在血里，它们能定居到肝、皮肤、甲状腺、心脏等组织中；而且方向是双向的——母亲的细胞同样会进入胎儿，并在其体内长期存留。</p>
+  <p>序章里有过一个旁注，说三代人曾同处一室：你的外祖母怀着你母亲时，将来成为你的那颗卵母细胞已经在场了。这一节讲的是同一件事的反面，而且方向相反：<strong>你身上的一部分细胞，此刻可能仍住在你母亲体内；而你体内，可能也住着来自她的细胞。</strong>甚至有研究报告过更远的传递——母亲从外祖母那里接收的细胞，可能再传给你。这类观察数量还少，结论宜谨慎，但方向是清楚的：所谓"一个人"的边界，比常识以为的模糊。</p>
+  <h3>这些细胞在做什么？</h3>
+  <p>诚实的回答是：还不清楚。</p>
+  <p>已有的观察大多是<strong>关联</strong>，不是因果。研究者在母亲的伤口愈合处发现过胎儿来源的细胞，看上去像是参与了修复；也在一些自身免疫病患者的病变组织中检出过它们，而自身免疫病恰好在女性中高发——这条线索很诱人，但"它们是在修复、在旁观，还是在参与致病"目前无法判定。同一批细胞在不同组织、不同时期可能扮演完全不同的角色。这是一个证据丰富而结论稀薄的领域，值得关注，不值得据此推断任何个人的健康状况。</p>
+  <h3>一管血里的副产品</h3>
+  <p>不过这条线索确实结出过一个极大的果实。</p>
+  <p>既然母亲的血里有来自胎儿的东西，那么理论上，不必动子宫，只抽母亲一管血，就能读到胎儿的信息。1997 年，Dennis Lo 报告了关键一步：母体血浆中存在<strong>胎儿游离 DNA</strong>——不是完整细胞，而是胎盘细胞凋亡后释放出的 DNA 碎片。它的浓度比完整细胞高得多，而且分娩后很快清除，不像细胞那样会留存几十年干扰判断。</p>
+  <p>孕中期，这些碎片约占母血游离 DNA 的一成（常见范围在 3% 到 13% 之间）。二十年后，这个观察长成了全球范围的无创产前检测。一件最初只是"细胞会乱跑"的怪事，最后改变了整个产前诊断的做法。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>让胎盘在皿里长出来。</strong>胎盘常被称为人体研究得最少的器官之一，原因很实际：它只在孕期存在，取材窗口极窄，而人类胎盘的结构与常用实验动物差别相当大——小鼠的结论往往搬不过来。2018 年，剑桥的 Turco 等人在《自然》报告了一项突破：从孕早期胎盘取出的滋养层细胞，可以在体外建立长期稳定的<strong>类器官</strong>培养，自行组织成绒毛样的结构，并分泌 hCG 等胎盘特有的激素；甲基化图谱显示它们与真实的孕早期胎盘高度接近。此后，与之配套的蜕膜类器官也建立起来，第一次让"母胎界面"的两侧可以在皿里被摆到一起研究。</p>
+    <p><strong>微嵌合这条线还在展开。</strong>更灵敏的单细胞与测序方法正在被用来追踪这些长住细胞的去向、数量和状态。目前的共识仍然停在"普遍存在、意义未定"：它与自身免疫、组织修复、乃至某些肿瘤的关联被反复报告，因果关系尚未确立。若干年后重读这一段，最该核实的就是这一句——它是本章最可能被改写的部分。</p>
+  </div>
+
+  <h3>谢幕</h3>
+  <p>胎盘是有寿命的。孕晚期它的绒毛逐渐出现钙化和纤维沉积，交换效率缓缓下滑——这不是病变，是设定好的日程。身体里带着结束日期的结构并不止它一个（下一章那三条便河同样限期关闭），但它是其中唯一一个会被整个交还出去的。</p>
+  <p>而它的谢幕干净利落。孩子娩出后，子宫继续收缩，胎盘从子宫壁上剥离，在几分钟到半小时内随之娩出。它一走，那些维持了九个月的激素浓度断崖式下跌——而这场骤降本身就是一道指令：它同时开启了泌乳，也参与触发了新生儿身上那一连串切换。</p>
+  <p>下一章要讲的，正是那十分钟。氧气的来源要换，血液的河道要改写，一台从未启用过的器官要被点亮。而这一切之所以必须在十分钟内完成，只有一个原因：本章这个器官，刚刚退场了。</p>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">胎盘 · 关键数字</div>
+    <table>
+      <tr><td class="k">足月胎盘重量</td><td class="v">450–600 g</td><td class="n">约为新生儿体重的六分之一</td></tr>
+      <tr><td class="k">足月胎盘直径 / 厚度</td><td class="v">18–22 cm / 2–3 cm</td><td class="n">一只餐盘大小</td></tr>
+      <tr><td class="k">绒毛总交换面积</td><td class="v">11–14 m²</td><td class="n">又一次表面积／体积比（第 5 章）</td></tr>
+      <tr><td class="k">足月子宫血流</td><td class="v">500–750 mL/min</td><td class="n">约占母体心输出量的一成</td></tr>
+      <tr><td class="k">母胎屏障最薄处</td><td class="v">2–4 μm</td><td class="n">足月时；孕早期厚得多</td></tr>
+      <tr><td class="k">脐带长度</td><td class="v">50–60 cm</td><td class="n">两条动脉 + 一条静脉</td></tr>
+      <tr><td class="k">足月脐血流量</td><td class="v">约 250 mL/min</td><td class="n">胎儿一侧的吞吐量</td></tr>
+      <tr><td class="k">hCG 峰值时点</td><td class="v">孕龄 8–10 周</td><td class="n">末次月经起算；验孕棒测的就是它</td></tr>
+      <tr><td class="k">黄体—胎盘转换</td><td class="v">孕龄 8–10 周</td><td class="n">末次月经起算；孕酮生产由卵巢移交胎盘</td></tr>
+      <tr><td class="k">胎儿游离 DNA 占比</td><td class="v">3–13%</td><td class="n">母血游离 DNA 中；孕龄中期常见范围</td></tr>
+      <tr><td class="k">胎儿细胞在母体存续</td><td class="v">至少 27 年</td><td class="n">1996 年报告的最长检出时限</td></tr>
+      <tr><td class="k">胎盘娩出（第三产程）</td><td class="v">5–30 分钟</td><td class="n">需检查是否完整，残留可致出血</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">胎盘细胞为什么不把表面所有的身份标记都摘掉，那样不是更"隐身"吗？</div>
+      <div class="opts">
+        <button>摘光了会导致胎盘细胞自己无法存活</button>
+        <button data-c="1">NK 细胞的规则是"谁不出示证件就打谁"，摘光反而会被杀死</button>
+        <button>身份标记同时负责营养转运，摘掉会断供</button>
+        <button>母体激素强制要求它们保留全部标记</button>
+      </div>
+      <div class="explain">所以它的做法是摘掉最扎眼的 HLA-A 和 HLA-B，改为出示 HLA-G、HLA-E、HLA-C。这也是"隐身衣"这个比喻会把机制推错的地方：完全隐身在免疫学里不是保护，是找死。而且胎盘不止求放行，还把蜕膜里的 NK 细胞收编去改造母体螺旋动脉——它们在孕早期的主业是修路，不是杀伤。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">母亲的血和胎儿的血之间，真实的关系是？</div>
+      <div class="opts">
+        <button>在胎盘内充分混合，氧气与养分随之转移</button>
+        <button>完全隔绝，任何细胞和分子都无法互相通过</button>
+        <button data-c="1">始终不混合：绒毛树里跑胎儿血，外面浸着母血，中间隔一层 2–4 微米的膜</button>
+        <button>孕早期混合，孕晚期分开</button>
+      </div>
+      <div class="explain">母体螺旋动脉把血喷进绒毛间隙，绒毛浸在这池血里——像红树林的根泡在潮水中，而不是扎进土里取物。但"从不混合"只是近似：这层膜薄到会漏，分娩时尤甚。Rh 阴性母亲的致敏和抗 D 免疫球蛋白的发明，整个建立在这处渗漏上。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">下列哪一项在通过胎盘时是<b>逆着浓度差、耗能搬运</b>的？</div>
+      <div class="opts">
+        <button>氧气——由血红蛋白主动泵送</button>
+        <button>葡萄糖——由 GLUT1 逆浓度差转运</button>
+        <button data-c="1">氨基酸——胎儿血中若干种的浓度可高于母体</button>
+        <button>酒精——胎盘主动将其排出以保护胎儿</button>
+      </div>
+      <div class="explain">葡萄糖走 GLUT1，属易化扩散：借了转运体的力，但仍只能顺浓度差走，所以胎儿血糖总略低于母体。氧气是纯粹的自由扩散。酒精不但没被排出，反而几乎不受阻拦地通过。只有氨基酸（以及靠 FcRn 搬运的 IgG）是被主动运进去的——一道会逆流运货的关口，很难再叫它"屏障"。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">在新生儿血液中查到 IgM 抗体，通常意味着什么？</div>
+      <div class="opts">
+        <button>母亲的抗体经胎盘转移完成，属正常现象</button>
+        <button data-c="1">IgM 过不去胎盘，所以它只能是胎儿自己造的，提示宫内感染</button>
+        <button>新生儿对分娩过程产生了应激反应</button>
+        <button>说明母亲在孕期接种过疫苗</button>
+      </div>
+      <div class="explain">IgM 是五个抗体单体拼成的大分子，没有专门的搬运工，过不去。能过去的是 IgG——它有 FcRn 受体专门搬运，孕晚期加速，足月时新生儿血中水平可达到甚至超过母体，这是他头几个月的免疫家底，也是早产儿这份家底更薄的原因。一条走不通的路，反而成了诊断依据。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">支持 Haig 母胎冲突理论最结实的证据，是下面哪一项？</div>
+      <div class="opts">
+        <button>孕妇的血容量与心输出量在孕期明显上升</button>
+        <button>胎盘会分泌大量激素进入母体循环</button>
+        <button data-c="1">基因组印记：促生长的基因多由父源拷贝表达，限制生长的多由母源拷贝表达</button>
+        <button>妊娠期糖尿病和子痫前期的发生率逐年上升</button>
+      </div>
+      <div class="explain">如果母子目标一致，没理由给同一件事装上两套方向相反、还按来源分工的控制。印记失衡的后果也不是随机的，而是沿可预测的两个方向偏——一侧过度生长，一侧生长受限。要留意的是：这是基因拷贝之间的拉锯，双方都没有意图，常态结果是一个运转良好的妥协；Haig 理论的强形式至今仍有争议。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第一幕 建造</div>
+  <div class="title">第 8 章 · 出生：生命最惊险的十分钟</div>
+  <p>本章这个器官谢幕的那一刻，倒计时开始了。十分钟内要换掉氧气的来源、改写血液的河道、点亮一台从未启用过的器官——而这一切必须在戏不停的情况下完成。剧院里管这门绝活叫不落幕换景。下一章，我们站在台侧看完整场。</p>
+  <nav class="footnav">
+    <a href="ch06-sex-divergence.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch08-birth.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 胎盘通关：选物质高亮通道 + 切换说明
+  var gates = document.getElementById('gates');
+  var tabs = document.querySelectorAll('#gates-fig .sub-btn');
+  var lanes = document.querySelectorAll('#gates .lane');
+  var panes = document.querySelectorAll('#gates-fig .gp');
+  function showSub(key, gate){
+    var i;
+    gates.classList.add('picked');
+    for (i = 0; i < tabs.length; i++) {
+      tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-sub') === key ? 'true' : 'false');
+    }
+    for (i = 0; i < lanes.length; i++) {
+      lanes[i].classList.toggle('on', lanes[i].getAttribute('data-gate') === gate);
+    }
+    for (i = 0; i < panes.length; i++) {
+      panes[i].classList.toggle('on', panes[i].getAttribute('data-gp') === key);
+    }
+  }
+  for (var t = 0; t < tabs.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){
+        showSub(el.getAttribute('data-sub'), el.getAttribute('data-gate'));
+      });
+    })(tabs[t]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

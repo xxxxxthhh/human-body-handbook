@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第3章 · 原肠运动：人生最重要的一天 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 3-1 三胚层去向（本章专用） ---- */
+#germ-fig .germ-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#germ-fig .germ-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#germ-fig .germ-btn:hover{border-color:var(--gold); color:var(--ink);}
+#germ-fig .germ-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#germ-fig .germ-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#germ-fig .germ-status{
+  margin:16px 0 0; padding:14px 16px; font-size:14.5px; line-height:1.85; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold);
+  border-radius:0 10px 10px 0;
+}
+#germ .src,#germ .chip{transition:opacity .3s;}
+#germ.picked .src,#germ.picked .chip{opacity:.24;}
+#germ.picked .src.on,#germ.picked .chip.on{opacity:1;}
+#germ .chip{cursor:pointer;}
+#germ .box{fill:var(--surface2); stroke:var(--line); stroke-width:1.5; rx:9;}
+#germ .chip.on .box,#germ .src.on .box{stroke:var(--gold); stroke-width:2.5;}
+#germ .src-t{fill:var(--ink); font-size:13.5px; font-weight:700;}
+#germ .src-s{fill:var(--ink-dim); font-size:11px;}
+#germ .chip-t{fill:var(--ink); font-size:13px;}
+#germ .rule{stroke:var(--line); stroke-width:1;}
+#germ .foot{fill:var(--ink-faint); font-size:11.5px;}
+#germ .sw.ecto{fill:var(--deoxy);}
+#germ .sw.ncc{fill:var(--green);}
+#germ .sw.meso{fill:var(--oxy);}
+#germ .sw.endo{fill:var(--gold);}
+
+/* ---- 图 3-2 折纸四步（本章专用） ---- */
+#fold .card{fill:var(--surface2); stroke:var(--line); stroke-width:1.5;}
+#fold .sheet{fill:none; stroke:var(--ink-faint); stroke-width:2.6; stroke-linecap:round;}
+#fold .neural{fill:none; stroke:var(--gold); stroke-width:4; stroke-linecap:round;}
+#fold .crest{fill:var(--green);}
+#fold .arrow{fill:none; stroke:var(--green); stroke-width:1.6;}
+#fold .chord{fill:var(--ink-faint); opacity:.55;}
+#fold .step-t{fill:var(--ink); font-size:13px; font-weight:700;}
+#fold .step-s{fill:var(--ink-dim); font-size:11.5px;}
+#fold .note{fill:var(--ink-dim); font-size:12.5px;}
+#fold .lg{fill:var(--ink-faint); font-size:11.5px;}
+
+@media (prefers-reduced-motion: reduce){
+  #germ .src,#germ .chip{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第一幕 建造 · 第 3 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>原肠运动：<br>人生最重要的一天</h1>
+  <p class="subtitle">一张两层细胞的薄盘上浮出一条沟。细胞排队从沟里钻进去，几天之内，前后、上下、里外全部定死——而你母亲多半还不知道自己怀孕。</p>
+  <div class="meta"><span>阅读 ≈ 16 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>受精后第十五天。你是一张纸。</p>
+  <p>确切地说，是一张摊平的圆盘，薄薄两层细胞，夹在两只扣在一起的小囊之间。这张纸上没有一个器官的雏形，没有一根神经，也还没有决定哪一头将来是头。上一章那几十个内细胞团细胞铺开成了它，此刻正安静地贴在子宫内膜里。</p>
+  <p>今天，纸的一端会浮出一条细细的沟。接下来的几天，细胞会排着队从那条沟钻进纸的内部，像一队演员从台前的活板门鱼贯下到台下，再从台下横向铺开。这个动作一旦开始，前后、左右、上下、里外就在几天之内全部定死。你日后拥有的每一个器官，都在这几天里领到了自己的出身。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 一张纸</div>
+  <h2>着床之后：你先摊平成一张纸</h2>
+  <p>接着上一章的镜头。囊胚在受精后第 6 到 10 天钻进子宫内膜住了下来，外面那层滋养细胞开始往母亲的组织里扎——那是第 7 章的事。我们只跟着里面那几十个细胞走。</p>
+  <p>它们先做了一件出人意料的事：<strong>不是团成一团，而是摊平。</strong>内细胞团铺成上下两层，上面一层叫上胚层，下面一层叫下胚层。上下各鼓起一只小囊（上面是羊膜腔，下面是卵黄囊），中间夹着这张两层的薄盘。像两只碗口对口扣在一起，中间垫了一张纸。</p>
+  <p>你的整个身体，将来只从<strong>上胚层</strong>这一层出来。下胚层几乎不参与你的身体，它主要去搭卵黄囊那套临时结构。所以到第二周末，这张约零点二毫米宽的纸的上半张，就是你的全部本钱。</p>
+  <p>这时的你没有任何方向感。纸有正反两面，可哪一面朝天、哪一头是头、哪边是左，一概未定。而这几件事必须先定，因为身体的一切都要挂在这几根坐标上：心脏偏左，肝脏偏右，脑袋在一端，尾骨在另一端。</p>
+  <p>英国发育生物学家<strong>刘易斯·沃尔珀特</strong>有一句被引用了几十年的话：</p>
+  <p><em>"真正最重要的时刻不是出生、结婚或死亡，而是原肠运动。"</em></p>
+  <p>它常被当成一句俏皮话流传。等你看完下一节，会发现它其实相当字面。</p>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 一条线</div>
+  <h2>细胞排队钻进纸里</h2>
+  <p>第 15 到 16 天，纸的一端出现一道细细的凹沟，从边缘朝中心延伸，长度约占胚盘的一半。它叫<strong>原条</strong>。前端稍稍膨大的一小块叫原结。</p>
+  <p>这条线一画出来，两件事立刻成立：<strong>有原条的那一端是尾，另一端是头</strong>——前后轴定了；而这条线本身就是身体的中线——左右对称面也定了。此前那张纸是一片没有方向的圆，此后它有了坐标。</p>
+  <p>然后细胞开始动。上胚层的细胞成群地向这条沟聚拢，到了沟边就换一副样子：原本它们像铺地砖一样彼此咬合、规规矩矩地排成一层（这叫上皮），此刻它们松开与邻居的连接，把身子拉长，变成能爬的散兵（这叫间充质）。变形之后，它们从沟里钻下去，钻到纸的底面，再向四面八方铺开。这个身份转换有个专名叫<strong>上皮－间充质转化</strong>。它不是原肠运动专用的一次性把戏：成年之后，伤口边缘的上皮细胞要爬过创面时，用的还是同一套变形——松开邻居，拉长身子，开始爬。</p>
+  <p>关键在于<strong>钻下去的先后</strong>。最早钻进去的那批向下走，把原来的下胚层顶开、换掉，成为<strong>内胚层</strong>；随后钻进去的那批停在中间层，成为<strong>中胚层</strong>；而始终留在原地、没有下沟的那些，成为<strong>外胚层</strong>。</p>
+  <p>一层变三层。这就是原肠运动的全部内容。</p>
+  <p>请注意它不是"一层分裂成三份"。三个胚层是<em>同一批细胞</em>按不同的时间、走不同的路线被派往三个位置的结果——先走的去里面，后走的留中间，没走的待原地。位置又一次决定了身份，和上一章囊胚里那次一样。</p>
+  <h3>为什么是"原肠"</h3>
+  <p>这个名字容易把人带偏。原肠运动的西文 gastrulation 来自"胃"的词根，听着像在说消化道，而消化道确实是内胚层的产物之一。但名字的来历是形态上的：在海胆这类动物的胚胎里，这个阶段的动作是一个空心球被从一侧按凹进去，凹出一个通向内部的口袋——看着就像一只胃。</p>
+  <p>人类胚胎是一张扁盘，动作完全不同：不是按凹一个球，而是从一条沟往下钻。<strong>形状不一样，拓扑结果一样</strong>——都把一层变成了三层，也都造出了一条通向内部的路。所以顺着"胃"这个字去想人的原肠运动，会想错画面；顺着"由外向内翻进去"去想，就对了。</p>
+  <p>现在回头看沃尔珀特那句话。出生只是换了一套供氧方式（第 8 章会看到那场换景有多惊险，但它换的是运行方式，不是零件清单）；而原肠运动决定了你将来会有哪些器官、它们各归其位、身体有几个轴。在这之前，你是一张可能性还没兑现的纸；在这之后，剩下的九个月基本上是照着这几天定下的格局长大。那句话不是俏皮话。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>双胞胎的分家，有个截止日期。</strong>同卵双胞胎来自同一颗受精卵。如果这团细胞在原条出现<em>之前</em>分成两份，每一份都还是一张完整的、没画过线的纸，于是各画各的线，长成两个完整的人。</p>
+    <p>可原条一旦画出来，这张纸就有了唯一的一条中线，"分家"的窗口就关上了。此后若再出现不完全的分离，两个身体会共用一部分结构——这正是联体双胎的由来，也是它罕见的原因：能赶上的时间窗只有那么几天。这条时间线还有一个额外的分量：它是本章末尾那条"14 天规则"的生物学依据之一。在原条出现之前，"这是不是一个个体"这个问题，连生物学上都还没有答案。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 三条路</div>
+  <h2>三层纸，各自的去向</h2>
+  <p>三个胚层就位后，各自领到一份差事。大致的分法是这样的：</p>
+  <p><strong>外胚层</strong>——留在原地那一层，管"朝外的"和"感知的"：表皮、毛发、指甲、汗腺、牙釉质；以及整套神经系统。这两件事凑在同一层里，初听相当古怪：皮肤和大脑怎么会是同乡？可它们确实是。你的大脑是一片皮肤折进去、埋起来、再长了几十亿倍的结果——第 4 节就看这次折叠。神经系统和皮肤共用一个出身，也解释了一些临床上的巧合：某些遗传病会同时在皮肤和神经上留下印记。</p>
+  <p><strong>中胚层</strong>——夹在中间那层，管"承重的"和"输送的"：骨、软骨、骨骼肌、心脏与全部血管、血液细胞、肾、生殖腺、真皮。凡是撑住身体和搬运东西的，多半出自这里。</p>
+  <p><strong>内胚层</strong>——钻到最里那层，管"内衬"：从咽喉到直肠这条长管的上皮内衬，以及从这条管上鼓出去的那些器官——肺、肝、胰、甲状腺、膀胱的内衬。</p>
+  <h3>还有第四条</h3>
+  <p>三层之外，还有一批细胞值得单独立一条，否则下面那张图会给出错误的答案。</p>
+  <p>神经管即将合拢的时候，沿着它两条褶皱的顶脊，有一小群细胞不跟着合拢，反而松开、离队，钻进胚胎内部四处迁徙，走得极远。它们叫<strong>神经嵴细胞</strong>。论出身它们来自外胚层，可它们干的活儿横跨了别的胚层的地盘：周围神经的神经节、肾上腺髓质、皮肤里的黑色素细胞、心脏流出道的一部分间隔，还有你面部的大半骨骼与软骨、牙齿里的牙本质。脊椎动物有这样一群"半路出走"的细胞，是它区别于其他动物门类的显著特征之一，所以它常被半开玩笑地叫作<strong>第四胚层</strong>。</p>
+  <p>这也解释了一类看上去毫无道理的综合征：一个人同时有一绺白色的额发、一只颜色不同的眼睛和一侧听力损失。这三样风马牛不相及，除非你知道色素细胞和内耳里的某些细胞都是神经嵴的客户——同一批移民出了问题，落脚的几个城市就同时报警。</p>
+
+  <figure id="germ-fig">
+    <div class="switch-row">
+      <span class="switch-hint">点胚层看去向，或点下方的器官溯源 →</span>
+      <div class="germ-tabs" role="group" aria-label="选择胚层">
+        <button class="germ-btn" data-src="ecto" aria-pressed="false">外胚层</button>
+        <button class="germ-btn" data-src="ncc" aria-pressed="false">神经嵴</button>
+        <button class="germ-btn" data-src="meso" aria-pressed="false">中胚层</button>
+        <button class="germ-btn" data-src="endo" aria-pressed="false">内胚层</button>
+      </div>
+    </div>
+    <svg id="germ" viewBox="0 0 760 356" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三胚层与神经嵴的去向对照图：上排为四个来源，下排为十六种结构，点击可高亮对应关系">
+      <g class="src" data-src="ecto">
+        <rect class="box" x="18" y="14" width="172" height="46"/>
+        <rect class="sw ecto" x="30" y="26" width="9" height="9"/>
+        <text class="src-t" x="47" y="35" text-anchor="start">外胚层</text>
+        <text class="src-s" x="30" y="52" text-anchor="start">留在原地那一层</text>
+      </g>
+      <g class="src" data-src="ncc">
+        <rect class="box" x="202" y="14" width="172" height="46"/>
+        <rect class="sw ncc" x="214" y="26" width="9" height="9"/>
+        <text class="src-t" x="231" y="35" text-anchor="start">神经嵴</text>
+        <text class="src-s" x="214" y="52" text-anchor="start">半路出走的一批</text>
+      </g>
+      <g class="src" data-src="meso">
+        <rect class="box" x="386" y="14" width="172" height="46"/>
+        <rect class="sw meso" x="398" y="26" width="9" height="9"/>
+        <text class="src-t" x="415" y="35" text-anchor="start">中胚层</text>
+        <text class="src-s" x="398" y="52" text-anchor="start">夹在中间那一层</text>
+      </g>
+      <g class="src" data-src="endo">
+        <rect class="box" x="570" y="14" width="172" height="46"/>
+        <rect class="sw endo" x="582" y="26" width="9" height="9"/>
+        <text class="src-t" x="599" y="35" text-anchor="start">内胚层</text>
+        <text class="src-s" x="582" y="52" text-anchor="start">钻到最里那一层</text>
+      </g>
+      <line class="rule" x1="18" y1="76" x2="742" y2="76"/>
+
+      <g class="chip" data-src="ecto"><rect class="box" x="18" y="94" width="172" height="42"/><rect class="sw ecto" x="28" y="110" width="8" height="8"/><text class="chip-t" x="44" y="120" text-anchor="start">表皮与毛发</text></g>
+      <g class="chip" data-src="ecto"><rect class="box" x="202" y="94" width="172" height="42"/><rect class="sw ecto" x="212" y="110" width="8" height="8"/><text class="chip-t" x="228" y="120" text-anchor="start">大脑与脊髓</text></g>
+      <g class="chip" data-src="ecto"><rect class="box" x="386" y="94" width="172" height="42"/><rect class="sw ecto" x="396" y="110" width="8" height="8"/><text class="chip-t" x="412" y="120" text-anchor="start">眼的视网膜</text></g>
+      <g class="chip" data-src="ecto ncc"><rect class="box" x="570" y="94" width="172" height="42"/><rect class="sw ecto" x="580" y="110" width="8" height="8"/><rect class="sw ncc" x="592" y="110" width="8" height="8"/><text class="chip-t" x="608" y="120" text-anchor="start">牙（釉质＋牙本质）</text></g>
+
+      <g class="chip" data-src="ncc"><rect class="box" x="18" y="150" width="172" height="42"/><rect class="sw ncc" x="28" y="166" width="8" height="8"/><text class="chip-t" x="44" y="176" text-anchor="start">面部大半骨骼</text></g>
+      <g class="chip" data-src="ncc"><rect class="box" x="202" y="150" width="172" height="42"/><rect class="sw ncc" x="212" y="166" width="8" height="8"/><text class="chip-t" x="228" y="176" text-anchor="start">皮肤黑色素细胞</text></g>
+      <g class="chip" data-src="ncc"><rect class="box" x="386" y="150" width="172" height="42"/><rect class="sw ncc" x="396" y="166" width="8" height="8"/><text class="chip-t" x="412" y="176" text-anchor="start">周围神经节</text></g>
+      <g class="chip" data-src="meso ncc"><rect class="box" x="570" y="150" width="172" height="42"/><rect class="sw meso" x="580" y="166" width="8" height="8"/><rect class="sw ncc" x="592" y="166" width="8" height="8"/><text class="chip-t" x="608" y="176" text-anchor="start">肾上腺（皮质＋髓质）</text></g>
+
+      <g class="chip" data-src="meso"><rect class="box" x="18" y="206" width="172" height="42"/><rect class="sw meso" x="28" y="222" width="8" height="8"/><text class="chip-t" x="44" y="232" text-anchor="start">心脏与血管</text></g>
+      <g class="chip" data-src="meso"><rect class="box" x="202" y="206" width="172" height="42"/><rect class="sw meso" x="212" y="222" width="8" height="8"/><text class="chip-t" x="228" y="232" text-anchor="start">骨骼肌</text></g>
+      <g class="chip" data-src="meso"><rect class="box" x="386" y="206" width="172" height="42"/><rect class="sw meso" x="396" y="222" width="8" height="8"/><text class="chip-t" x="412" y="232" text-anchor="start">椎骨与肋骨</text></g>
+      <g class="chip" data-src="meso"><rect class="box" x="570" y="206" width="172" height="42"/><rect class="sw meso" x="580" y="222" width="8" height="8"/><text class="chip-t" x="596" y="232" text-anchor="start">肾与生殖腺</text></g>
+
+      <g class="chip" data-src="meso"><rect class="box" x="18" y="262" width="172" height="42"/><rect class="sw meso" x="28" y="278" width="8" height="8"/><text class="chip-t" x="44" y="288" text-anchor="start">血液细胞</text></g>
+      <g class="chip" data-src="endo"><rect class="box" x="202" y="262" width="172" height="42"/><rect class="sw endo" x="212" y="278" width="8" height="8"/><text class="chip-t" x="228" y="288" text-anchor="start">肠道内衬</text></g>
+      <g class="chip" data-src="endo"><rect class="box" x="386" y="262" width="172" height="42"/><rect class="sw endo" x="396" y="278" width="8" height="8"/><text class="chip-t" x="412" y="288" text-anchor="start">肺与气道内衬</text></g>
+      <g class="chip" data-src="endo"><rect class="box" x="570" y="262" width="172" height="42"/><rect class="sw endo" x="580" y="278" width="8" height="8"/><text class="chip-t" x="596" y="288" text-anchor="start">肝与胰</text></g>
+
+      <text class="foot" x="18" y="330" text-anchor="start">两个色块 = 两个来源。图中只列代表性结构；多数器官由不止一个胚层拼成（例如肠管：内胚层做内衬，中胚层做肌层与血管）。</text>
+    </svg>
+    <p class="germ-status" role="status">点上方任一胚层，看它管哪些去处；也可以点下面任一格，反过来溯源。留意最右一列的两格：它们各有两个来源。</p>
+    <figcaption><b>图 3-1 · 三层纸，外加半路出走的一批。</b>外胚层管朝外与感知，中胚层管承重与输送，内胚层管内衬；神经嵴出身外胚层却跑遍全身，常被叫作"第四胚层"。要当心的是，<b>"来自某胚层"通常说的是器官的某一部分</b>——牙的釉质来自口腔外胚层而牙本质来自神经嵴，肾上腺的皮质来自中胚层而髓质来自神经嵴。胚层不是血统证明，是一份分工表。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 折纸</div>
+  <h2>没有人在折，纸自己卷了起来</h2>
+  <p>三层铺好之后，接下来的动作是折。</p>
+  <p>第 18 天前后，中线两侧的外胚层中央加厚成一条带子，叫<strong>神经板</strong>——就是那片将来要变成脑和脊髓的"皮肤"。几天之内，这条带子沿着中线凹下去成沟，两侧的边缘抬起来成褶，两道褶相向而行，在背上碰头、粘合，最后沉到表面之下，成为一根封闭的管子。这根管子的头端会膨大成脑，其余部分成为脊髓。</p>
+
+  <figure>
+    <svg id="fold" viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="神经管闭合的四步横断面示意：神经板加厚、神经沟凹陷、神经褶相向靠拢、合拢成管并沉入表面之下">
+      <rect class="card" x="16" y="24" width="164" height="150" rx="10"/>
+      <path class="sheet" d="M30 100 H68"/>
+      <path class="neural" d="M68 100 H128"/>
+      <path class="sheet" d="M128 100 H166"/>
+      <ellipse class="chord" cx="98" cy="126" rx="10" ry="5"/>
+      <text class="step-t" x="98" y="196" text-anchor="middle">第 18 天前后</text>
+      <text class="step-s" x="98" y="216" text-anchor="middle">神经板：中央加厚成带</text>
+
+      <rect class="card" x="204" y="24" width="164" height="150" rx="10"/>
+      <path class="sheet" d="M218 100 H256"/>
+      <path class="neural" d="M256 100 C268 104, 272 132, 286 132 C300 132, 304 104, 316 100"/>
+      <path class="sheet" d="M316 100 H354"/>
+      <ellipse class="chord" cx="286" cy="150" rx="10" ry="5"/>
+      <text class="step-t" x="286" y="196" text-anchor="middle">第 20 天前后</text>
+      <text class="step-s" x="286" y="216" text-anchor="middle">神经沟：中央凹下去</text>
+
+      <rect class="card" x="392" y="24" width="164" height="150" rx="10"/>
+      <path class="sheet" d="M406 104 C426 104, 438 96, 446 82"/>
+      <path class="neural" d="M446 82 C434 112, 458 140, 474 140 C490 140, 514 112, 502 82"/>
+      <path class="sheet" d="M502 82 C510 96, 522 104, 542 104"/>
+      <circle class="crest" cx="446" cy="76" r="5"/>
+      <circle class="crest" cx="502" cy="76" r="5"/>
+      <ellipse class="chord" cx="474" cy="156" rx="10" ry="5"/>
+      <text class="step-t" x="474" y="196" text-anchor="middle">第 22 天前后</text>
+      <text class="step-s" x="474" y="216" text-anchor="middle">神经褶举起，相向而行</text>
+
+      <rect class="card" x="580" y="24" width="164" height="150" rx="10"/>
+      <path class="sheet" d="M594 96 C630 86, 694 86, 730 96"/>
+      <circle class="neural" cx="662" cy="128" r="19" fill="none"/>
+      <circle class="crest" cx="636" cy="106" r="5"/>
+      <circle class="crest" cx="688" cy="106" r="5"/>
+      <path class="arrow" d="M630 110 L612 122 M618 122 H612 V116"/>
+      <path class="arrow" d="M694 110 L712 122 M706 122 H712 V116"/>
+      <ellipse class="chord" cx="662" cy="158" rx="10" ry="5"/>
+      <text class="step-t" x="662" y="196" text-anchor="middle">第 26 天前后</text>
+      <text class="step-s" x="662" y="216" text-anchor="middle">合拢成管，沉到表面之下</text>
+
+      <text class="note" x="16" y="252" text-anchor="start">闭合从中段开始，向头尾两端推进：头端的开口约在第 24–26 天关上，尾端约在第 26–28 天。</text>
+      <path class="neural" d="M20 276 H48"/>
+      <text class="lg" x="56" y="280" text-anchor="start">将来的脑与脊髓</text>
+      <circle class="crest" cx="216" cy="276" r="5"/>
+      <text class="lg" x="228" y="280" text-anchor="start">神经嵴细胞（就此出发去全身）</text>
+      <ellipse class="chord" cx="472" cy="276" rx="9" ry="4.5"/>
+      <text class="lg" x="488" y="280" text-anchor="start">脊索：中线的那根标杆，日后退成椎间盘的核</text>
+    </svg>
+    <figcaption><b>图 3-2 · 四步折出一根神经管。</b>横断面示意，比例做了夸张。要留意第三步顶脊上那两粒绿点：神经褶合拢时，它们不跟着合，反而离队，从此走遍全身（见图 3-1 的"神经嵴"一列）。天数自受精起算。</figcaption>
+  </figure>
+
+  <h3>折的人在哪里</h3>
+  <p>"折纸"这个说法很好用，但顺着它推会推出一个错误的画面：折纸总得有一双手。这里没有手。</p>
+  <p>真实的做法是这样的：神经板上的细胞各自把靠上那一端的一圈收缩蛋白束一收，于是每个细胞从柱状变成上宽下窄的楔形。一整排楔形砖并在一起，这排砖自然就弯了。<strong>没有谁在弯这张纸，是每个细胞改了自己的形状，纸就自己弯了起来。</strong>你可以在队列里试出同样的效果：让一排人同时把脚跟并拢、脚尖向外张开，队伍会自己弯成一道弧——没有人推谁。</p>
+  <p>合拢的顺序也值得纠正一个印象。常见的比方是拉链，方向是对的：闭合确实从中段开始，向头尾两端推进，两端最后才关。但拉链只有一个拉头，而人类神经管的合拢起点<em>不止一处</em>（究竟有几处、位置在哪，学界至今没有完全统一的答案）。所以更准的画面是几个拉头同时在不同位置往两边拉。这个细节不是学究气：不同的缺口对应不同的畸形，头端没关上是无脑畸形，尾端没关上是脊柱裂——它们是同一条拉链上不同位置的两个缺口。</p>
+  <h3>切成一节一节</h3>
+  <p>与此同时，中线两侧的中胚层在做另一件事：切块。它像一根从头往尾生长的长条，每隔一段时间就在末端切下一对方块，左右对称，一对接一对。这些方块叫<strong>体节</strong>，最终排到约 <strong>42 到 44 对</strong>，将来做成椎骨、肋骨、背部的骨骼肌和真皮。</p>
+  <p>切块的节奏由一台生物钟控制。它有个直白的名字叫<strong>分节时钟</strong>：胚胎里一组基因的表达像脉搏一样周期性起落，每跳一次，就在末端划下一刀。人的这台钟走一圈大约 <strong>4 到 6 小时</strong>（用干细胞在体外重建出来的人类分节时钟，周期测得约 5 小时；活体测算仍有出入）；小鼠的同一台钟快得多，大约两个多小时——所以小鼠的胚胎发育也整体更快。</p>
+  <p>身体被切成一节一节，这件事在自然界里毫不新鲜：竹子有节，蚯蚓有环，蜈蚣一节配一对足。人身上那种分节的痕迹被后来的肌肉和脂肪盖住了，但它还在——你的每一节脊椎、每一对肋骨、每一段脊神经从脊髓伸出来的位置，都是当年那把刀切下的印子。腹部练出来的那几块"腹肌"之所以横向分块，也是同一个来历。</p>
+  <p>同一手法还要再用一次。第 3 到 4 周，那张扁平的胚盘会沿着头尾和两侧向腹面卷曲，把内胚层那张平板卷成一根前后贯通的管——这根管就是从咽喉到直肠的原始肠道。折出一根神经管，再卷出一根肠管，加上中间那些切好的方块：一具身体的毛坯，就是这么折出来的。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>拓扑上，你是一只甜甜圈。</strong>肠管一旦贯通，你身上就有了一个从嘴到肛门的通孔。这意味着一件很反直觉的事：<strong>消化道的内腔，在拓扑上属于身体的"外面"。</strong>你吞下去的食物，在被肠壁吸收之前，从来没有真正进入过你体内——它只是穿行在一条贯穿你的隧道里。</p>
+    <p>这不只是文字游戏。正因为肠腔算"外面"，那里才能常年住着数以万亿计的细菌而不引发全面的免疫战争（第 10 章）；也正因如此，肠壁那层内衬才要三到五天就整批更换一次——它是真正的前线（第 13 章）。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 面粉</div>
+  <h2>一条拉链，和一场公共卫生的转向</h2>
+  <p>现在把日历摊开看。</p>
+  <p>神经管的闭合在受精后第 28 天前完成。而临床上算孕周是从末次月经的第一天起算的，比受精早了大约两周——所以受精后第 28 天，写在病历上是<strong>孕 6 周</strong>。也就是说，这条拉链拉完的时候，很多人刚刚察觉月经推迟，有些人还没察觉。</p>
+  <p>这就是神经管缺陷这件事真正棘手的地方：<em>预防的窗口，整个落在知情之前。</em></p>
+  <h3>利兹的怀疑与一次提前终止的试验</h3>
+  <p>1960 到 70 年代，英国利兹的儿科医生<strong>理查德·史密瑟尔斯</strong>注意到一件事：在神经管缺陷高发的地区，孕妇的营养状况和某些维生素水平偏低。他做了干预研究，给有过患儿的女性在下次怀孕前补充含叶酸的多种维生素，结果复发率明显下降。</p>
+  <p>可这项研究挨了很重的批评，理由是它不是随机对照——对照组是那些"来晚了、已经怀孕来不及补"的女性，两组本来就不可比。史密瑟尔斯的辩解在今天读来很难受：伦理委员会不批准他做随机分组，因为如果补充真的有效，被分到安慰剂组的家庭就要付出代价。<strong>一项可能有效的干预，恰恰因为可能有效，而难以被严格证明。</strong></p>
+  <p>僵局由英国医学研究理事会（MRC）在 1983 年启动的一项多中心随机试验打破。它招募了 1800 多名生育过神经管缺陷患儿的女性，分组补充叶酸或安慰剂。1991 年，试验被提前终止——不是因为失败，而是因为结果太明显，继续让对照组吃安慰剂已不再站得住：<strong>补充叶酸的一组，复发率下降了约 72%。</strong></p>
+  <p>这个 72% 常被到处引用，但它有一个必须说清的前提：<strong>它说的是"复发"</strong>——受试者都已经生育过一个神经管缺陷的孩子，属于高风险人群。对于从未有过患儿的普通人群，第一次发生的风险能降多少，是另一组证据：来自匈牙利的一项随机试验（1992 年发表）和大量观察研究同样显示了明显的下降，幅度通常报告在五到七成之间。两个数字都很有分量，但它们不是同一个数字。</p>
+  <h3>把干预搬进面粉厂</h3>
+  <p>结论清楚了，接下来是更难的一步：怎么让它真的落到人身上。</p>
+  <p>"打算怀孕的人提前三个月开始服叶酸"——这条建议本身没错，问题是它照顾不到全部。相当一部分妊娠不在计划之内；而等到验孕棒变色，拉链早就拉完了。靠个人记性去赶一个在知情之前关闭的窗口，注定漏掉很多人。</p>
+  <p>于是有了另一种思路：<strong>不要求任何人改变行为，直接改变食物本身。</strong>1998 年，美国和加拿大先后立法，要求在面粉和谷物制品中强化叶酸。这是一次把干预从个人搬到基础设施的操作，和往自来水里加氟、往食盐里加碘是同一类动作。</p>
+  <p>效果是可测的。强化之后，美国的神经管缺陷发生率下降了大约两三成，加拿大下降了约四五成——两地幅度不同，与强化前的基线水平、饮食结构和强化剂量都有关系。此后陆续有几十个国家实施了类似的强制强化政策；也有不少国家至今只做自愿强化或仅发布补充建议，各地的发生率差别因此仍然很大。</p>
+  <p>今天通行的建议是：育龄女性每日补充 <strong>400 微克</strong>叶酸，从计划怀孕前就开始；有过神经管缺陷生育史的高风险人群用量要高得多，须遵医嘱。请注意这条建议的措辞——它落在"育龄"而不是"备孕"上。理由本章已经讲完了：窗口早于知情。</p>
+  <p>顺带说一句，叶酸不是万能的。它能显著降低风险，不能降到零；神经管缺陷还有遗传、糖尿病、某些抗癫痫药、肥胖等多种成因，叶酸只解决了其中相当大的一块。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>没有胚胎的原肠运动。</strong>本章讲的这几天，长久以来几乎无法直接观察——人的胚胎在这个阶段已经埋进子宫内膜，看不见也够不着。近十年出现了一条绕道：把一小团人多能干细胞（上一章那种）放进特定的培养条件，它们会自发地排出前后轴、分出对应三胚层的区域，甚至出现一节一节的体节样结构。这类东西叫<strong>原肠胚样体</strong>（gastruloid），更宽泛的一类叫"干细胞胚胎模型"。2023 到 2024 年，多个团队报告了能走到相当于人胚第 2 到 3 周阶段的模型。</p>
+    <p>它们不是胚胎：配套的胚外结构不完整，迄今也没有证据表明它们能发育成个体。但"像到什么程度就该按胚胎来管"，成了一个真问题。</p>
+    <p><strong>那条 14 天的线。</strong>自 1979 年美国一个咨询委员会提出、1984 年英国的沃诺克报告确立以来，体外培养人胚不得超过受精后 14 天，这条线被多国写进法律。选 14 天不是随手划的：原条大约在此时出现，在那之前，胚胎还可能分成双胞胎（见本章旁注），"这是不是一个个体"还没有答案。2021 年，国际干细胞研究学会在新版指南中取消了对超过 14 天培养的一刀切禁止，改为在当地法律允许、且经过专门的科学与伦理审查的前提下逐案评估；2024 年英国发布了针对干细胞胚胎模型的行为准则；该学会又在 2025 年 8 月更新指南以覆盖这类模型。各国立法并未同步跟进，这一块仍在移动。</p>
+  </div>
+
+  <p>第 3 周结束时，你大约两毫米长，背上有一根刚合拢的管子，中线两侧排着最初的几对方块，肚子里有一根正在卷成形的肠管。三层纸各就各位，格局已经定下。</p>
+  <p>接下来该长了。而排在最前面的那个器官等不到别人准备好——它必须立刻开始，因为其余的要长大，都得等它送料。</p>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">原肠运动与神经管 · 关键数字（天数与周数均为胚龄，即受精后计；另有注明者从其注明）</div>
+    <table>
+      <tr><td class="k">双层胚盘</td><td class="v">第 2 周 · 直径约 0.2 mm</td><td class="n">天数自受精起算（本章下同）</td></tr>
+      <tr><td class="k">原条出现</td><td class="v">第 15–16 天</td><td class="n">前后轴与左右对称面就此定下</td></tr>
+      <tr><td class="k">三胚层就位</td><td class="v">第 3 周</td><td class="n">一层变三层：同一批细胞按先后分派</td></tr>
+      <tr><td class="k">神经板出现</td><td class="v">第 18 天前后</td><td class="n">外胚层中央加厚成带</td></tr>
+      <tr><td class="k">神经管开始闭合</td><td class="v">第 22 天前后</td><td class="n">从中段起向头尾推进，起点不止一处</td></tr>
+      <tr><td class="k">头端开口闭合</td><td class="v">第 24–26 天</td><td class="n">迟迟不闭 → 无脑畸形</td></tr>
+      <tr><td class="k">尾端开口闭合</td><td class="v">第 26–28 天</td><td class="n">迟迟不闭 → 脊柱裂</td></tr>
+      <tr><td class="k">此时的孕龄</td><td class="v">约 6 周</td><td class="n">按末次月经起算，比受精早约两周</td></tr>
+      <tr><td class="k">体节生成节律</td><td class="v">约 4–6 小时一对</td><td class="n">体外重建的人类分节时钟周期测得约 5 小时</td></tr>
+      <tr><td class="k">体节总数</td><td class="v">约 42–44 对</td><td class="n">日后做椎骨、肋骨、骨骼肌与背部真皮</td></tr>
+      <tr><td class="k">围孕期叶酸建议量</td><td class="v">400 µg / 日</td><td class="n">高风险人群用量高得多，须遵医嘱</td></tr>
+      <tr><td class="k">叶酸试验效果</td><td class="v">复发率 ↓ 约 72%</td><td class="n">MRC 1991，高风险人群；一般人群首发下降幅度多报告为五到七成</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">原肠运动这几天，三个胚层是怎么来的？</div>
+      <div class="opts">
+        <button>胚盘一次分裂成三片，各自卷起来</button>
+        <button data-c="1">同一层细胞按先后从原条钻下去：先走的成内胚层，后走的成中胚层，没走的留下成外胚层</button>
+        <button>三层分别由父方、母方和胎盘提供</button>
+        <button>下胚层长成内胚层，上胚层长成外胚层，中间自行填充</button>
+      </div>
+      <div class="explain">又一次由位置决定身份，和上一章囊胚里"在外面"那次同理。下胚层其实被先钻进去的那批顶开换掉了，它主要去搭卵黄囊，几乎不参与你的身体。这个变形动作（上皮变成会爬的间充质）在伤口愈合和癌症转移里还会再出现。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">"原肠运动"这个名字，容易让人误会什么？</div>
+      <div class="opts">
+        <button>误以为它发生在出生以后</button>
+        <button>误以为它只与神经系统有关</button>
+        <button data-c="1">误以为人的胚胎像海胆那样把一个空心球按凹进去——人胚是扁盘，动作是从一条沟往下钻</button>
+        <button>误以为它是一次细胞分裂</button>
+      </div>
+      <div class="explain">这个词来自"胃"的词根，得名于海胆那类胚胎凹出一只口袋的形态。人的形状完全不同，但拓扑结果一样：一层变三层，并造出一条通向内部的路。顺着"由外向内翻进去"想是对的，顺着"胃"想会想错画面。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">下面哪一组结构，都由神经嵴细胞参与造成？</div>
+      <div class="opts">
+        <button>肺的内衬、肝、胰</button>
+        <button data-c="1">面部大半骨骼、皮肤黑色素细胞、肾上腺髓质</button>
+        <button>椎骨、肋骨、骨骼肌</button>
+        <button>表皮、毛发、汗腺</button>
+      </div>
+      <div class="explain">神经嵴出身外胚层，却在神经褶合拢时离队迁徙，跑遍全身干别的胚层的活儿，因此被半开玩笑地称作"第四胚层"。这也解释了那类看似风马牛不相及的综合征：一绺白额发、一只异色的眼睛、一侧听力损失——同一批移民出了问题。选项里另外三组分别是内胚层、中胚层和外胚层的典型产物。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">神经管闭合完成的时候，按病历上的孕周算是第几周？</div>
+      <div class="opts">
+        <button>孕 4 周——与受精后天数一致</button>
+        <button data-c="1">约孕 6 周——孕周从末次月经算起，比受精早约两周</button>
+        <button>约孕 10 周</button>
+        <button>约孕 12 周，此时早已确认怀孕</button>
+      </div>
+      <div class="explain">受精后第 28 天 ≈ 孕 6 周。这两周的差价正是整件事的要害：拉链拉完的时候，很多人刚察觉月经推迟。预防窗口整个落在知情之前——这也是为什么建议落在"育龄女性"而不是"备孕女性"身上。本章凡未注明处，天数一律自受精起算。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">1991 年 MRC 试验得出的"下降约 72%"，说的是什么？</div>
+      <div class="opts">
+        <button>普通人群第一次生下神经管缺陷患儿的风险下降 72%</button>
+        <button data-c="1">已经生育过神经管缺陷患儿的高风险女性，再次生育时复发风险下降约 72%</button>
+        <button>强化面粉之后全国发生率下降 72%</button>
+        <button>叶酸把神经管缺陷的风险降到了零</button>
+      </div>
+      <div class="explain">三个数字要分清：MRC 1991 说的是高风险人群的<b>复发</b>；普通人群<b>首次</b>发生的下降幅度来自匈牙利随机试验和观察研究，多报告在五到七成；而 1998 年强化面粉之后的<b>人群</b>发生率下降，美国约两三成、加拿大约四五成。试验之所以在 1991 年提前终止，正是因为效果明显到再让对照组吃安慰剂已站不住脚。叶酸能显著降低风险，但降不到零。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第一幕 建造</div>
+  <div class="title">第 4 章 · 器官发生：心脏第一跳</div>
+  <p>格局定下，接下来是长。而排在最前面的那个器官等不起：第 22 天前后，一根还没分腔的直管子开始有节奏地抽动，此后一刻不停，直到你人生的最后一天。接下来的五个星期里，全身器官挤在同一段日子里同时成形——这也是它们最容易被外力弄坏的五个星期。</p>
+  <nav class="footnav">
+    <a href="ch02-differentiation.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch04-organogenesis.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 三胚层去向：点胚层看去处 / 点器官反向溯源
+  var SRC = {
+    ecto: '<strong>外胚层</strong>——留在原地没下沟的那一层，管朝外的和感知的：表皮、毛发、指甲、汗腺、牙釉质，以及整套神经系统。皮肤和大脑是同乡。',
+    ncc:  '<strong>神经嵴</strong>——出身外胚层，却在神经褶合拢时离队迁徙，跑遍全身：周围神经节、肾上腺髓质、黑色素细胞、面部大半骨骼与软骨、牙本质。因此被半开玩笑地叫作"第四胚层"。',
+    meso: '<strong>中胚层</strong>——夹在中间那一层，管承重与输送：骨、软骨、骨骼肌、心脏与全部血管、血液细胞、肾、生殖腺、真皮。',
+    endo: '<strong>内胚层</strong>——钻到最里那一层，管内衬：从咽喉到直肠这条长管的上皮，以及从这条管上鼓出去的肺、肝、胰、甲状腺。'
+  };
+  var CHIP = {
+    '表皮与毛发': '<strong>表皮与毛发</strong> ← 外胚层。和大脑同一个出身：一层管朝外，一层折进去管感知。',
+    '大脑与脊髓': '<strong>大脑与脊髓</strong> ← 外胚层。由神经板折成的那根管子长成——你的大脑是一片皮肤折进去、埋起来的结果。',
+    '眼的视网膜': '<strong>眼的视网膜</strong> ← 外胚层。它是从脑上鼓出来的一小块，所以视网膜在解剖学上算中枢神经系统的一部分。',
+    '牙（釉质＋牙本质）': '<strong>牙</strong> ← 外胚层 <em>＋</em> 神经嵴。釉质由口腔外胚层造，牙本质与牙髓由神经嵴细胞造——一颗牙是两条来路的合作。',
+    '面部大半骨骼': '<strong>面部大半骨骼</strong> ← 神经嵴。躯干的骨来自中胚层，脸上的骨大半来自这批移民，这是脊椎动物很特别的一处安排。',
+    '皮肤黑色素细胞': '<strong>皮肤黑色素细胞</strong> ← 神经嵴。它们从背上的顶脊一路迁到皮肤各处；迁徙没走完，就会留下成片的色素缺失。',
+    '周围神经节': '<strong>周围神经节</strong> ← 神经嵴。中枢在管子里，周围的神经节却是移民建的城。',
+    '肾上腺（皮质＋髓质）': '<strong>肾上腺</strong> ← 中胚层 <em>＋</em> 神经嵴。外层的皮质来自中胚层，里面分泌肾上腺素的髓质来自神经嵴——它其实是一团特化的神经细胞。',
+    '心脏与血管': '<strong>心脏与血管</strong> ← 中胚层。下一章的主角；心脏流出道的一部分间隔另有神经嵴参与。',
+    '骨骼肌': '<strong>骨骼肌</strong> ← 中胚层，具体说来自体节。',
+    '椎骨与肋骨': '<strong>椎骨与肋骨</strong> ← 中胚层的体节。你身上那种一节一节的分段，就是当年那把刀切下的印子。',
+    '肾与生殖腺': '<strong>肾与生殖腺</strong> ← 中胚层。两者出自相邻的区域，这也是第 6 章那个岔路口的舞台。',
+    '血液细胞': '<strong>血液细胞</strong> ← 中胚层。最早的一批造血发生在卵黄囊壁上，此后才搬进肝，最后定居骨髓。',
+    '肠道内衬': '<strong>肠道内衬</strong> ← 内胚层。只是内衬——肠壁的肌层和血管来自中胚层。',
+    '肺与气道内衬': '<strong>肺与气道内衬</strong> ← 内胚层。肺是从原始肠管前段鼓出去的一个芽，越分越细。',
+    '肝与胰': '<strong>肝与胰</strong> ← 内胚层。同样是从肠管上鼓出去的芽，长大后搬到管子外面。'
+  };
+  var germ = document.getElementById('germ');
+  var gstatus = document.querySelector('#germ-fig .germ-status');
+  var gbtns = document.querySelectorAll('#germ-fig .germ-btn');
+  var srcs = germ.querySelectorAll('.src');
+  var chips = germ.querySelectorAll('.chip');
+
+  function srcsOf(el){ return (el.getAttribute('data-src') || '').split(' '); }
+  function apply(keys){
+    var i, j;
+    germ.classList.add('picked');
+    for (i = 0; i < srcs.length; i++) {
+      srcs[i].classList.toggle('on', keys.indexOf(srcs[i].getAttribute('data-src')) >= 0);
+    }
+    for (i = 0; i < chips.length; i++) {
+      var hit = false, own = srcsOf(chips[i]);
+      for (j = 0; j < own.length; j++) { if (keys.indexOf(own[j]) >= 0) hit = true; }
+      chips[i].classList.toggle('on', hit);
+    }
+  }
+  function pressBtn(key){
+    for (var i = 0; i < gbtns.length; i++) {
+      gbtns[i].setAttribute('aria-pressed', gbtns[i].getAttribute('data-src') === key ? 'true' : 'false');
+    }
+  }
+  for (var b = 0; b < gbtns.length; b++) {
+    (function(el){
+      el.addEventListener('click', function(){
+        var key = el.getAttribute('data-src');
+        pressBtn(key);
+        apply([key]);
+        gstatus.innerHTML = SRC[key];
+      });
+    })(gbtns[b]);
+  }
+  for (var c = 0; c < chips.length; c++) {
+    (function(el){
+      el.addEventListener('click', function(){
+        var keys = srcsOf(el);
+        var name = el.querySelector('.chip-t').textContent;
+        pressBtn(keys.length === 1 ? keys[0] : '');
+        apply(keys);
+        el.classList.add('on');
+        gstatus.innerHTML = CHIP[name] || '';
+      });
+    })(chips[c]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

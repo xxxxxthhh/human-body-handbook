@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第2章 · 分裂与分化：细胞如何决定自己是谁 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 2-1 华丁顿地景（本章专用） ---- */
+#land-fig .land-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#land-fig .land-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#land-fig .land-btn:hover{border-color:var(--gold); color:var(--ink);}
+#land-fig .land-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#land-fig .land-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#land-fig .land-btn.back{color:var(--deoxy);}
+#land-fig .land-btn.back[aria-pressed="true"]{color:var(--deoxy); border-color:var(--deoxy);}
+#land-fig .land-status{
+  margin:16px 0 0; padding:14px 16px; font-size:14.5px; line-height:1.85; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold);
+  border-radius:0 10px 10px 0;
+}
+#landscape .hill{fill:none; stroke:var(--ink-faint); stroke-width:1.4; opacity:.45;}
+#landscape .valley{fill:none; stroke:var(--line); stroke-width:5; stroke-linecap:round; transition:stroke .35s;}
+#landscape .valley.lit{stroke:var(--gold);}
+#landscape .ridge{fill:none; stroke:var(--ink-faint); stroke-width:1.2; stroke-dasharray:3 5; opacity:.6;}
+#landscape .dest{fill:var(--surface2); stroke:var(--ink-faint); stroke-width:2; transition:fill .35s, stroke .35s;}
+#landscape .dest.lit{fill:var(--gold); stroke:var(--gold);}
+#landscape .ball{fill:var(--gold); stroke:var(--bg); stroke-width:2;}
+#landscape .axis{stroke:var(--ink-faint); stroke-width:1.4; opacity:.7;}
+#landscape .lb{fill:var(--ink); font-size:13.5px; font-weight:700;}
+#landscape .lb-s{fill:var(--ink-dim); font-size:11px;}
+#landscape .stage{fill:var(--gold); font-size:12px;}
+#landscape .axis-t{fill:var(--ink-faint); font-size:11.5px;}
+
+/* ---- 图 2-2 同一段说明书（本章专用） ---- */
+#pages .col-h{fill:var(--ink); font-size:14px; font-weight:700;}
+#pages .row-l{fill:var(--ink-dim); font-size:13px;}
+#pages .row-l tspan.t{fill:var(--gold); font-family:var(--mono); font-size:11.5px;}
+#pages .rule{stroke:var(--line); stroke-width:1;}
+#pages .open{fill:none; stroke:var(--gold); stroke-width:2.4; stroke-linecap:round;}
+#pages .flag{fill:var(--gold);}
+#pages .coil{fill:var(--ink-faint); fill-opacity:.16; stroke:var(--ink-faint); stroke-width:1.6;}
+#pages .coil-in{fill:none; stroke:var(--ink-faint); stroke-width:1.4; opacity:.8;}
+#pages .foot{fill:var(--ink-dim); font-size:12.5px;}
+#pages .lg{fill:var(--ink-faint); font-size:11.5px;}
+
+@media (prefers-reduced-motion: reduce){
+  #landscape .valley,#landscape .dest{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第一幕 建造 · 第 2 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>分裂与分化：<br>细胞如何决定自己是谁</h1>
+  <p class="subtitle">十六个细胞手里拿着一模一样的说明书，却在同一天分成了两拨：一拨将来是胎盘，一拨将来是你。没有人下过通知。</p>
+  <div class="meta"><span>阅读 ≈ 17 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>受精后第四天。你是一小团挤在一起的细胞，看上去像一颗极小的桑葚。</p>
+  <p>这四天你分裂了四次，却一点也没长大——十六个细胞加起来，还是四天前那一颗的大小。分裂在这里不是生长，是切分：同一份家当被切成越来越小的份，而每一份都配着一整套说明书。到此刻为止，这十六份说明书一字不差，谁也不比谁多一页。</p>
+  <p>可就在这一天，第一道分野出现了。挤在外圈的那些细胞开始朝一个方向走，被裹在中心的那一小撮朝另一个方向走。外圈的将来长成胎盘，在你出生那天被剪断、丢弃，一个细胞也不会进入你的身体；中心那一小撮，才是你。它们手里的说明书完全相同。那么，是谁通知外面那些"你在外面"？</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 切分</div>
+  <h2>分裂不等于长大：先把家当切碎</h2>
+  <p>先看这几天到底发生了什么。</p>
+  <p>受精后大约一天半，那颗直径十分之一毫米的细胞裂成两个；再过一天，四个；第三天，八个。此后每一轮大约花 <strong>12 到 24 小时</strong>。这个过程有个专名叫<strong>卵裂</strong>（cleavage），而"裂"字用得极准：整团东西的体积几乎没变，只是被切开。外面那层叫透明带的糖蛋白壳还没有破，像一只不肯松口的核桃，把里面切好的份牢牢箍在原处。</p>
+  <p>于是细胞越切越小。受精卵是人体最大的细胞之一，八细胞期的每一个已经缩到寻常细胞的尺寸。这几天你不是在生长，是在<strong>把一份家当分摊到越来越多的份数上</strong>——上一章清点的那些油膜、炉灶、说明书，正在被一次次对半切开，每一份都得配齐。</p>
+  <p>到第 3 到 4 天，细胞数攒到十六到三十二个，整团东西外形圆钝，医生管它叫<strong>桑椹胚</strong>。也正是在这个阶段，细胞们做了一件此前没做过的事：它们不再是一堆各自为政的圆球，而是彼此贴紧、压扁、把接触面积拉到最大，像一堆挤在一起的肥皂泡。这个动作叫<strong>紧密化</strong>。</p>
+  <h3>没有人下通知，是位置本身在说话</h3>
+  <p>肥皂泡挤成一堆的时候，有一件事自动成立：最外层那些泡，总有一面朝着空气；被埋在里层的泡，四面八方都贴着别的泡。这个几何上的差别，不需要谁来宣布，它自己就在那里。</p>
+  <p>胚胎正是读的这一条。外层细胞有一面朝外、没有邻居，这面膜上于是攒起一套特殊的蛋白分布（细胞生物学上叫"极性"）；内层细胞四面都有邻居，攒不出这种朝向。两类细胞里的同一条信号通路因此走向两个方向，最终打开两套不同的基因。答案朴素得有点扫兴：<strong>没有人通知外面那些"你在外面"，是"在外面"这件事本身在说话。</strong></p>
+  <p>到第 5 到 6 天，这团细胞攒到一两百个，中间积起一腔液体，成了<strong>囊胚</strong>。此时分野已经清清楚楚：外面一层叫滋养外胚层，将来长成胎盘和胎膜（第 7 章的主角）；里面贴着一侧壁的那一小撮叫<strong>内细胞团</strong>，数十个细胞，将来长成你的全部身体。比例悬殊得惊人——一两百个细胞里，只有几十个走上"成为你"这条路，其余全部去做那个九个月后被丢弃的临时器官。</p>
+  <p>不过要当心把"位置决定命运"听成一句判决。1961 年，波兰胚胎学家安德热·塔尔科夫斯基做过一个漂亮的实验：他把两个早期小鼠胚胎的细胞揉到一起，长出来的是一只完整的小鼠，身上带着两套遗传背景的斑纹。被挪了位置的细胞并没有闹脾气，它们跟着新位置改了主意。<em>位置不是一纸判决，是一个被持续读取的信号</em>——只要还没走远，读到新的就改口。这一点在下一节会变成整章的关键。</p>
+  <p>顺带算一笔账。从一颗受精卵到出生时的一整个婴儿，中间大约要走 <strong>42 轮</strong>翻倍。这是个理想化的数法，别拿它去乘 2 的 42 次方：那个乘积比新生儿实际的细胞数大出一截，多出来的正是沿途被主动删掉、没能留到最后的那些（细胞也并不同步分裂）。但这个数字给了一个有用的直觉：42 这个数字小得让人意外。你与一颗受精卵之间，只隔着四十来次对折。</p>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 山谷</div>
+  <h2>一个胚胎学家画的山</h2>
+  <p>1950 年代，爱丁堡。一位叫康拉德·华丁顿的胚胎学家在书里画了一幅图，此后七十年，几乎每一本讲发育的书都要把它再画一遍。</p>
+  <p>图上是一片山坡。山顶有一颗球，山坡上刻着一道道分岔的山谷。球从顶上滚下来，先落进某一条谷，谷再分岔，它再选一次，如此几轮，最后停在坡底某一个谷口。华丁顿用它说三件事：细胞的去路是有限的几条，不是任意方向；每落进一条谷，两侧的谷壁就更高一点，回头和串门都更难；同一颗球滚两次，多半落进同一个谷口——可分岔口上的一点点扰动，会被后面的路放大成完全不同的终点。</p>
+  <p>这幅画之所以耐用，是因为它同时装下了"必然"和"偶然"。但它也容易被误读，而误读恰恰出在最显眼的地方。</p>
+
+  <figure id="land-fig">
+    <div class="switch-row">
+      <span class="switch-hint">选一条路 →</span>
+      <div class="land-tabs" role="group" aria-label="选择细胞的分化路径">
+        <button class="land-btn" data-track="t1" aria-pressed="false">神经元</button>
+        <button class="land-btn" data-track="t2" aria-pressed="false">表皮细胞</button>
+        <button class="land-btn" data-track="t3" aria-pressed="false">心肌细胞</button>
+        <button class="land-btn" data-track="t4" aria-pressed="false">红细胞</button>
+        <button class="land-btn back" data-track="up" aria-pressed="false">↑ 推回山顶</button>
+      </div>
+    </div>
+    <svg id="landscape" viewBox="0 0 760 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="华丁顿地景示意图：一颗小球从山顶沿分岔的山谷滚下，四条路径分别通往神经元、表皮细胞、心肌细胞与红细胞">
+      <path class="hill" d="M56 158 C160 62 320 38 400 38 C480 38 604 62 704 158"/>
+
+      <line class="axis" x1="24" y1="70" x2="24" y2="392"/>
+      <path class="axis" d="M18 384 L24 396 L30 384" fill="none"/>
+      <text class="axis-t" x="8" y="414" text-anchor="start">分化程度 ↓</text>
+
+      <path id="sg-trunk" class="valley" d="M400 78 C400 120 400 130 400 168"/>
+      <path id="sg-L" class="valley" d="M400 168 C400 205 340 215 270 272"/>
+      <path id="sg-R" class="valley" d="M400 168 C400 205 460 215 545 272"/>
+      <path id="sg-LL" class="valley" d="M270 272 C270 310 210 330 175 376"/>
+      <path id="sg-LR" class="valley" d="M270 272 C270 310 330 335 350 376"/>
+      <path id="sg-RL" class="valley" d="M545 272 C545 310 495 335 470 376"/>
+      <path id="sg-RR" class="valley" d="M545 272 C545 310 605 330 650 376"/>
+
+      <path class="ridge" d="M400 178 C408 240 402 320 404 392"/>
+      <path class="ridge" d="M270 282 C266 320 262 352 262 392"/>
+      <path class="ridge" d="M545 282 C550 320 558 352 560 392"/>
+
+      <path id="t1" d="M400 78 C400 120 400 130 400 168 C400 205 340 215 270 272 C270 310 210 330 175 376" fill="none" stroke="none"/>
+      <path id="t2" d="M400 78 C400 120 400 130 400 168 C400 205 340 215 270 272 C270 310 330 335 350 376" fill="none" stroke="none"/>
+      <path id="t3" d="M400 78 C400 120 400 130 400 168 C400 205 460 215 545 272 C545 310 495 335 470 376" fill="none" stroke="none"/>
+      <path id="t4" d="M400 78 C400 120 400 130 400 168 C400 205 460 215 545 272 C545 310 605 330 650 376" fill="none" stroke="none"/>
+
+      <text class="stage" x="748" y="92" text-anchor="end">全能 · 受精卵</text>
+      <text class="stage" x="748" y="206" text-anchor="end">多能 · 内细胞团</text>
+      <text class="stage" x="748" y="328" text-anchor="end">定向 · 只能在一族里选</text>
+
+      <circle id="d1" class="dest" cx="175" cy="376" r="7"/>
+      <circle id="d2" class="dest" cx="350" cy="376" r="7"/>
+      <circle id="d3" class="dest" cx="470" cy="376" r="7"/>
+      <circle id="d4" class="dest" cx="650" cy="376" r="7"/>
+
+      <text class="lb" x="175" y="400" text-anchor="middle">神经元</text>
+      <text class="lb-s" x="175" y="418" text-anchor="middle">大多终身不换</text>
+      <text class="lb" x="350" y="400" text-anchor="middle">表皮细胞</text>
+      <text class="lb-s" x="350" y="418" text-anchor="middle">每月上下换一轮</text>
+      <text class="lb" x="470" y="400" text-anchor="middle">心肌细胞</text>
+      <text class="lb-s" x="470" y="418" text-anchor="middle">更新极慢</text>
+      <text class="lb" x="650" y="400" text-anchor="middle">红细胞</text>
+      <text class="lb-s" x="650" y="418" text-anchor="middle">连核都扔掉</text>
+
+      <circle id="ball" class="ball" cx="400" cy="78" r="9"/>
+    </svg>
+    <p class="land-status" role="status">球停在山顶。此刻它是全能的：既能长成整个胚胎，也能长成胎盘。</p>
+    <figcaption><b>图 2-1 · 华丁顿的地景。</b>拨一个终点，看球怎么滚下去；再按"推回山顶"，看它怎么被推回来。要留意的是：<b>这片地形不是现成的。</b>华丁顿自己在另一幅配图里画出了山坡的背面——底下拉着一大把绳索，每根系在一个基因上，绳子的松紧决定了山谷往哪儿走。球并不是在一个既有的地形上滚，地形是球一边滚一边自己拽出来的。图中左支两处同为外胚层的后代，右支两处同为中胚层的后代（第 3 章会讲这三层从哪来）；但地景分岔的<b>层级</b>只是示意，不对应真实谱系树的每一级。</figcaption>
+  </figure>
+
+  <p>误读就在这里：地景画得像一片刻好的石头山坡，于是人容易以为细胞是被动的，地形是天生的。华丁顿本人恰恰没这么想。他给这幅图配过第二张，画的是山坡的背面：底下拉着一大把绳索，一头钉在地上，一头系在山坡的织物上，每根绳子代表一个基因。哪根绷紧、哪根放松，决定了山谷往哪里走、谷壁有多陡。<strong>球不是在一个现成的地形上滚，地形是球自己拉出来的。</strong>这句话记住，第 5 节整节都靠它。</p>
+  <p>顺着地景，可以把细胞的"辈分"排清楚，这几个词后面几章会反复用到：</p>
+  <p><strong>全能</strong>（totipotent）——山顶那一小段。受精卵和最初几轮卵裂的细胞既能长出整个胚胎，也能长出胎盘和胎膜，全套都行。<br>
+  <strong>多能</strong>（pluripotent）——第一个大分岔之后。内细胞团那几十个细胞能长成身体里各类组织，却已经长不出胎盘了。这一格很要紧：后面说的胚胎干细胞、iPS 细胞，都停在这一格，<em>不是</em>山顶那一格。<br>
+  <strong>定向</strong>（multipotent）——再往下的岔口。造血干细胞能变成红细胞、各种白细胞、血小板，但它变不成神经元。它只能在自己这一族里选。<br>
+  <strong>终末分化</strong>——坡底。一个跳动的心肌细胞不会改行。</p>
+  <p>就自然发生的情形而言，这条坡是单行的：迄今没有观察到体内的细胞自发地爬回山顶。但"单行"说的是坡度，不是禁令——这个区别，第 5 节见分晓。</p>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 翻页</div>
+  <h2>同一本菜谱，翻开不同的页</h2>
+  <p>上一章我们把 DNA 叫作三十亿字母的菜谱库，说总谱锁在馆里、要用哪段就誊一份分谱送出去。现在把这个说法往前推一步：<strong>每个细胞领到的是同一本菜谱，区别只在翻开了哪几页。</strong></p>
+  <p>神经元和肝细胞的字母序列一模一样。神经元没有丢掉白蛋白基因，肝细胞也没有丢掉突触蛋白基因——两边都完整地带着，只是各自摊开的页数不同。你身上二百多种细胞（这是按形态和功能的经典分法；换成单细胞测序按分子特征分，能分出上千个亚型），共用的是同一册书。</p>
+
+  <figure>
+    <svg id="pages" viewBox="0 0 760 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="同一段说明书在三种细胞里的开合状态对照表：看家基因三种细胞都摊开，组织专属基因只在对应细胞里摊开">
+      <text class="col-h" x="380" y="36" text-anchor="middle">神经元</text>
+      <text class="col-h" x="530" y="36" text-anchor="middle">肝细胞</text>
+      <text class="col-h" x="680" y="36" text-anchor="middle">红细胞前体</text>
+      <line class="rule" x1="16" y1="52" x2="744" y2="52"/>
+
+      <text class="row-l" x="16" y="96"><tspan class="t">看家页</tspan> · 肌动蛋白基因</text>
+      <text class="row-l" x="16" y="166"><tspan class="t">神经页</tspan> · 突触蛋白基因</text>
+      <text class="row-l" x="16" y="236"><tspan class="t">肝脏页</tspan> · 白蛋白基因</text>
+      <text class="row-l" x="16" y="296"><tspan class="t">血红页</tspan> · β-珠蛋白基因</text>
+      <line class="rule" x1="16" y1="122" x2="744" y2="122"/>
+      <line class="rule" x1="16" y1="192" x2="744" y2="192"/>
+      <line class="rule" x1="16" y1="262" x2="744" y2="262"/>
+
+      <g transform="translate(380,90)"><path class="open" d="M-32 0 q 11 -10 21 0 q 11 10 22 0 q 11 -10 21 0"/><path class="flag" d="M-4 -22 h14 v20 l-7 -6 -7 6 z"/></g>
+      <g transform="translate(530,90)"><path class="open" d="M-32 0 q 11 -10 21 0 q 11 10 22 0 q 11 -10 21 0"/><path class="flag" d="M-4 -22 h14 v20 l-7 -6 -7 6 z"/></g>
+      <g transform="translate(680,90)"><path class="open" d="M-32 0 q 11 -10 21 0 q 11 10 22 0 q 11 -10 21 0"/><path class="flag" d="M-4 -22 h14 v20 l-7 -6 -7 6 z"/></g>
+
+      <g transform="translate(380,160)"><path class="open" d="M-32 0 q 11 -10 21 0 q 11 10 22 0 q 11 -10 21 0"/><path class="flag" d="M-4 -22 h14 v20 l-7 -6 -7 6 z"/></g>
+      <g transform="translate(530,160)"><circle class="coil" r="15"/><path class="coil-in" d="M-8 0 a8 8 0 1 1 8 8 a5 5 0 1 1 -5 -5"/></g>
+      <g transform="translate(680,160)"><circle class="coil" r="15"/><path class="coil-in" d="M-8 0 a8 8 0 1 1 8 8 a5 5 0 1 1 -5 -5"/></g>
+
+      <g transform="translate(380,230)"><circle class="coil" r="15"/><path class="coil-in" d="M-8 0 a8 8 0 1 1 8 8 a5 5 0 1 1 -5 -5"/></g>
+      <g transform="translate(530,230)"><path class="open" d="M-32 0 q 11 -10 21 0 q 11 10 22 0 q 11 -10 21 0"/><path class="flag" d="M-4 -22 h14 v20 l-7 -6 -7 6 z"/></g>
+      <g transform="translate(680,230)"><circle class="coil" r="15"/><path class="coil-in" d="M-8 0 a8 8 0 1 1 8 8 a5 5 0 1 1 -5 -5"/></g>
+
+      <g transform="translate(380,292)"><circle class="coil" r="15"/><path class="coil-in" d="M-8 0 a8 8 0 1 1 8 8 a5 5 0 1 1 -5 -5"/></g>
+      <g transform="translate(530,292)"><circle class="coil" r="15"/><path class="coil-in" d="M-8 0 a8 8 0 1 1 8 8 a5 5 0 1 1 -5 -5"/></g>
+      <g transform="translate(680,292)"><path class="open" d="M-32 0 q 11 -10 21 0 q 11 10 22 0 q 11 -10 21 0"/><path class="flag" d="M-4 -22 h14 v20 l-7 -6 -7 6 z"/></g>
+
+      <path class="open" d="M28 320 q 8 -7 15 0 q 8 7 16 0"/>
+      <text class="lg" x="68" y="324" text-anchor="start">摊开着，正在读</text>
+      <circle class="coil" cx="216" cy="317" r="9"/>
+      <text class="lg" x="232" y="324" text-anchor="start">卷紧了，夹着书签</text>
+      <text class="foot" x="744" y="324" text-anchor="end">三列的字母序列完全相同——一字不差。</text>
+    </svg>
+    <figcaption><b>图 2-2 · 三种细胞，同一本说明书。</b>横看是基因，竖看是细胞。看家页（细胞骨架、代谢这类谁都要用的段落）在三种细胞里都摊开着；组织专属的页只在自家摊开，在别处卷得死紧。真实情形要密得多——一个细胞同时开着上万个基因，图中只取四行示意。</figcaption>
+  </figure>
+
+  <h3>贴便签的人</h3>
+  <p>那么，谁决定翻哪几页？</p>
+  <p>是一类叫<strong>转录因子</strong>的蛋白质。它们能认出 DNA 上特定的一小段字母，贴上去，把附近的基因摁开或者摁灭。1987 年，西雅图的哈罗德·温特劳布和同事做了一个当时看来近乎鲁莽的实验：他们往普通的成纤维细胞（就是皮肤里那种造胶原的杂役细胞）里塞进单独一个基因，叫 <strong>MyoD</strong>。那些成纤维细胞停下手里的活，排队、融合，长成了会抽动的肌管。<em>一个因子，改掉了一个细胞的身份。</em></p>
+  <p>但 MyoD 是个偏幸运的例子。多数身份不是一个音，是一个<strong>和弦</strong>：几个转录因子同时在场，才按出一种细胞。少一个、多一个，按出来的就是另一种。这也是为什么身体只用两万来个基因，就能配出二百多种细胞——靠的不是给每种细胞发一套专用零件，而是同一批零件的不同组合。</p>
+  <p>这些和弦还会自己按住自己。许多转录因子会去激活自己的基因，形成一圈正反馈：一旦按响，就自己维持着响下去。剧团里管这叫定型——一个演员演过几次某类角色，往后本子递过来的就都是那类角色，而他自己也越演越像。细胞的身份，一半是这么锁住的。</p>
+  <p>顺带把"翻页"这个说法本身校准两下，不然顺着它推会推错。<strong>第一，不是一次翻一页。</strong>一个细胞任何时刻都同时摊开着上万个基因，其中很大一部分是各类细胞共用的看家页；所谓身份差异，是在这个共同底盘上叠了一小叠专属页。<strong>第二，翻过的页不是随手就能翻回去的。</strong>菜谱翻页太轻巧了——真实的情况是，翻过之后有人把不用的那些页粘住了。这是下一节的事。</p>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 记忆</div>
+  <h2>为什么女儿细胞记得妈妈是谁</h2>
+  <p>这里有个不那么显眼、却相当要命的麻烦。</p>
+  <p>细胞分裂时，整团染色质要被拆开、复制、再重新缠好；细胞质里那些贴在 DNA 上的转录因子会被稀释成两份。按理说，每分裂一次，身份就该模糊一分。可事实是：你的肠上皮细胞三到五天就整批换掉一轮，换了几十年，每一批新细胞都毫不含糊地记得自己是肠上皮，没有哪一批醒来发现自己变成了软骨。把全身各处加起来，你每天新造的细胞数以千亿计——每一个都得在诞生的那一刻就知道自己是谁。</p>
+  <p>记忆存在哪儿？存在书上的两种记号里。</p>
+  <p><strong>一种是给字母加的小挂件。</strong>DNA 上某些位置（胞嘧啶后面紧跟鸟嘌呤的那种组合，数以千万计）可以挂上一个甲基。挂上甲基的那一段通常被读得更少，像用胶把书页粘住。复制的时候，双螺旋分成两股各带一股新链，新链上还是光的——这时有一种酶专门巡逻，看见"老链有挂件、新链没有"，就照着补齐。<em>记号因此被复印了过去。</em></p>
+  <p><strong>另一种是给包装纸做的记号。</strong>上一章说过 DNA 要缠在组蛋白上打包，这些组蛋白的尾巴上可以加各种化学基团，标明"这一段常读，松着放"或者"这一段封存，卷紧"。复制时旧的组蛋白被大致平分到两条新链上，再由酶把邻近的新组蛋白改成同样的记号——像折角会传染给相邻的书页。</p>
+  <p>这两种记号合称<strong>表观遗传</strong>标记。名字里的"表观"正是在说：<strong>它们不改一个字母。</strong>整本书的三十亿个字母原封未动，改的只是哪几页粘着、哪几页摊着。这是它和突变的根本分别，也是它可以被擦掉的原因——胶能粘上，就能揭下来。</p>
+  <p>上一章讲过的一个例子，正是这套机制相当铺张的一次演出：女性胚胎早期，每个细胞随机把两条 X 中的一条卷成死紧的一小团，此后这个细胞的全部后代都跟着关同一条。一次抛硬币，被书签记了一辈子。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>有一类细胞，真的会改自己那一份说明书。</strong>本章的规则是"字母不动，只改书签"，但免疫系统里的 B 细胞和 T 细胞是个例外：它们在成熟时会把自己抗体基因的若干段落<strong>剪开、丢弃、重新拼接</strong>，每个细胞拼出的顺序都不一样。这是货真价实的剪刀落在 DNA 上，不是翻页。</p>
+    <p>代价是这一步不可撤销，好处是身体因此能用有限的基因段拼出天文数字量级的抗体式样，去对付它从未见过的病原体。这套剪拼的手艺，我们留到第 10 章《免疫系统上学》细说。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 逆行</div>
+  <h2>把球推回山顶</h2>
+  <p>如果地形是细胞自己拉出来的，那么原则上，改几根绳子的张力，山谷就该能被重塑。二十世纪后半叶，有三代人分别把这件事往前推了一步。</p>
+  <h3>一只青蛙</h3>
+  <p>1962 年，牛津的研究生<strong>约翰·格登</strong>做了一件在当时看来毫无胜算的事。他取来非洲爪蟾蝌蚪的肠道细胞——一种已经彻底定了型的细胞——把它的细胞核吸出来，注进一枚事先用紫外线毁掉了自己核的卵里。多数尝试失败了，但有少数几枚长成了会游的蝌蚪，且带着供核那只蝌蚪的遗传特征。</p>
+  <p>结论比实验本身更烫手：一个已经定型的细胞，它的核里仍然完整保存着做出一整只动物所需的全部信息。分化没有扔掉任何东西，只是把大部分内容封存了起来。这个结果在当时被广泛怀疑了很多年，有人认为他一定是混进了未分化的细胞。顺带说个细节：格登十五岁时的生物学成绩单上，老师写下"他想当科学家的想法很荒唐，这对他本人和教他的人都是纯粹的浪费时间"。他后来把这张成绩单裱起来挂在办公室的桌子上方。</p>
+  <h3>一只羊</h3>
+  <p>青蛙可以，哺乳动物呢？很多人相信不行——哺乳动物的分化"锁"得更死。1996 年 7 月，苏格兰罗斯林研究所的伊恩·威尔穆特和基思·坎贝尔团队用一只成年绵羊乳腺细胞的核，做出了一只小羊。它叫多莉，1997 年 2 月公之于众，随后大概成了二十世纪最出名的一只羊。锁并不比青蛙那把更死，只是更难开。</p>
+  <h3>四个因子</h3>
+  <p>但核移植终究要借一枚卵。有没有办法不借卵，就把一个成体细胞送回坡顶？</p>
+  <p>2006 年，京都大学的<strong>山中伸弥</strong>和高桥和利给出了答案，而办法之直白让整个领域愣了一下。他们先列出二十四个在多能干细胞里高度活跃的基因，把它们统统塞进小鼠的成纤维细胞——成功了。然后开始做减法：一个个撤掉，看少了哪个就不行。最后剩下 <strong>4 个</strong>：Oct3/4、Sox2、Klf4、c-Myc。</p>
+  <p>四个转录因子，把一个已经定型的成体细胞推回到<strong>多能</strong>状态。请注意是多能，不是全能——它回到的是内细胞团那一格，能长成身体的各类组织，长不出胎盘。这种细胞叫<strong>诱导多能干细胞</strong>，简称 iPS 细胞。次年（2007），人的细胞也做成了。2012 年，山中伸弥与约翰·格登共享了当年的诺贝尔生理学或医学奖——两个相隔半个世纪的实验，说的是同一句话。</p>
+  <p>不过要把话说完整。早期方法的重编程效率大约在 <strong>0.01% 到 0.1%</strong>：塞进四个因子的细胞里，一万个大概有一到十个真的爬回了坡顶，其余原地不动或者死掉。后来的方法有提高，但它至今仍是一件小概率的事。</p>
+  <p>所以本章开头那条"单行道"和这一节并不矛盾，两句话合起来才是完整的：<strong>就自然发生的情形而言，还没有观察到体内的细胞自发地往山上走；而在实验条件下，只要按住足够多根绳子，山谷可以被重新拉出来——代价是极低的成功率。</strong>单行道说的是坡有多陡，不是路被封死了。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>一片胡萝卜长回一整棵。</strong>1958 年，康奈尔大学的弗雷德里克·斯图尔德把胡萝卜根里的一小块组织放进培养液，细胞散开、增殖，其中一些长出了根和芽，最后长成完整的、会开花结籽的胡萝卜。植物细胞普遍保留着这种本事，园艺工人天天在用——剪一段枝条插进土里就是一棵新的。</p>
+    <p>动物细胞为什么不行？一个常被提到的解释与生活方式有关：植物钉在原地，被啃掉一截就得就地重造，保留"从任意一处重启"的能力是划算的；动物会跑，也承担不起随便哪个细胞都能长成一整只动物的风险——那种失控的增殖有另一个名字。同一条山坡，两个界给自己选了不同的坡度。</p>
+  </div>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>把球推回山顶之后，能拿它做什么。</strong>2014 年在神户，高桥政代团队把一位老年黄斑变性患者自己的皮肤细胞做成 iPS 细胞，再诱导成视网膜色素上皮细胞移植回去——iPS 细胞就此走进人体。此后十来年，进展比当年的宣传慢，但是真的：2025 年 4 月，京都的团队在《自然》上报告了帕金森病 I/II 期试验的结果，异体 iPS 细胞来源的多巴胺神经前体细胞在患者脑内存活、产生多巴胺、未见成瘤，部分患者症状有改善；受试者只有个位数，这仍是早期安全性结果，不是疗效定论。1 型糖尿病方向，2024 年起也陆续有干细胞来源胰岛移植的个案报告。这些都还是个案与小样本，离常规疗法有距离。</p>
+    <p><strong>另外两条路。</strong>一条是干脆不上山顶：直接把成纤维细胞转成神经元或心肌细胞，横穿山谷而不回坡顶，路程短、残留成瘤风险低，但效率与成熟度仍是难题。另一条更耐人寻味——<strong>部分重编程</strong>：只给一阵子四因子就撤掉，细胞不回到多能态，某些衰老指标却像往回走了几年。小鼠上已有视神经损伤后恢复的报告，但"擦掉一部分表观遗传标记"和"擦过头丢掉身份、长成肿瘤"之间的安全边界在哪里，还没有答案。第 23 章讲衰老机制时会再回到这条线上。</p>
+    <p>而 iPS 细胞眼下最落地的用途之一，其实不在移植：用患者自己的细胞造出带着他那份突变的神经元或心肌细胞，在培养皿里试药、看病理——把一个人的疾病搬到显微镜下重演一遍。</p>
+  </div>
+
+  <p>回到这团正在输卵管里往下漂的细胞。它已经分好了里外，内细胞团那几十个细胞停在山顶下面第一个岔口上，握着一张还没填的去向表。</p>
+  <p>接下来的几天里（第 6 到 10 天），它会钻进子宫内膜住下，再摊平成一张两层的小圆盘。然后，在受精后第十五天前后，这张盘上会出现一条细细的线——那条线一出现，这几十个细胞就要在几天之内决定：谁去做皮肤和大脑，谁去做心和骨，谁去做肠子和肺。</p>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">分裂与分化 · 关键数字</div>
+    <table>
+      <tr><td class="k">受精卵到出生的分裂轮数</td><td class="v">约 42 轮</td><td class="n">理想化翻倍计数，与实测细胞数只在量级上可比</td></tr>
+      <tr><td class="k">卵裂期一轮分裂</td><td class="v">12–24 小时</td><td class="n">只切分不长大，总体积几乎不变</td></tr>
+      <tr><td class="k">桑椹胚</td><td class="v">第 3–4 天 · 16–32 细胞</td><td class="n">天数自受精起算（本章下同）</td></tr>
+      <tr><td class="k">囊胚</td><td class="v">第 5–6 天 · 约 100–200 细胞</td><td class="n">第一道分野：滋养外胚层 vs 内细胞团</td></tr>
+      <tr><td class="k">将来长成身体的细胞</td><td class="v">内细胞团 数十个</td><td class="n">其余全部去做胎盘与胎膜</td></tr>
+      <tr><td class="k">着床</td><td class="v">第 6–10 天</td><td class="n">此后母体一侧才开始供给</td></tr>
+      <tr><td class="k">成体细胞类型</td><td class="v">200+ 种</td><td class="n">形态功能分法；按分子特征可细分出上千亚型</td></tr>
+      <tr><td class="k">一个细胞同时开着的基因</td><td class="v">上万个</td><td class="n">大部分是各类细胞共用的看家页</td></tr>
+      <tr><td class="k">山中因子</td><td class="v">4 个</td><td class="n">Oct3/4 · Sox2 · Klf4 · c-Myc</td></tr>
+      <tr><td class="k">iPS 细胞问世</td><td class="v">2006 小鼠 / 2007 人</td><td class="n">2012 年诺奖，与格登 1962 年的蛙实验共享</td></tr>
+      <tr><td class="k">早期重编程效率</td><td class="v">约 0.01–0.1%</td><td class="n">后续方法有提高，仍属小概率事件</td></tr>
+      <tr><td class="k">成体每日新生细胞</td><td class="v">数千亿量级</td><td class="n">每一个都得"记住"自己是谁</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">受精后头几天的"卵裂"，和后来的细胞增殖有什么根本不同？</div>
+      <div class="opts">
+        <button>细胞一边分裂一边迅速长大，体积翻倍</button>
+        <button data-c="1">只切分不长大——整团体积几乎不变，细胞越分越小</button>
+        <button>每次分裂都会丢掉一部分基因</button>
+        <button>分裂产生的两个细胞立刻就不一样了</button>
+      </div>
+      <div class="explain">外面那层透明带还没破，把切好的份箍在原处，所以八细胞期的每个细胞已经缩到寻常细胞大小。第一道真正的分野要等到第 3–4 天紧密化之后。顺带一提，从受精卵到新生儿总共约 42 轮翻倍——比多数人猜的少得多。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">囊胚外面那一层细胞（滋养外胚层）将来变成什么？</div>
+      <div class="opts">
+        <button>皮肤和神经系统</button>
+        <button>血液和骨骼</button>
+        <button data-c="1">胎盘与胎膜——一个细胞也不会进入身体本身</button>
+        <button>先做胎盘，出生后再并入身体</button>
+      </div>
+      <div class="explain">一两百个细胞里只有内细胞团那几十个走上"成为你"的路，其余全部去做那个九个月后被丢弃的临时器官（第 7 章）。它们的分工靠位置：外层细胞有一面朝外没有邻居，内层四面都有邻居——没有谁下通知，是几何本身在说话。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">华丁顿地景这幅图，容易被顺着推错的是哪一点？</div>
+      <div class="opts">
+        <button>它暗示细胞的去路有无限多条</button>
+        <button data-c="1">它看着像现成的石头山坡，让人以为地形天生如此、细胞只是被动地滚</button>
+        <button>它暗示同一颗球每次滚落的终点都不同</button>
+        <button>它暗示分化可以随时逆转</button>
+      </div>
+      <div class="explain">华丁顿自己配过第二张图：山坡背面拉着一大把绳索，每根系在一个基因上，绳子的松紧决定山谷走向。地形是细胞自己的基因网络拽出来的——正因如此，改几根绳子的张力就有可能重塑山谷，这正是六十多年后重编程实验成立的前提。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">细胞分裂之后，女儿细胞靠什么"记得"自己是哪种细胞？</div>
+      <div class="opts">
+        <button>靠保留母细胞的一部分细胞质，把身份物质分给女儿</button>
+        <button>靠丢弃用不上的基因，只留下本行需要的</button>
+        <button data-c="1">靠 DNA 甲基化与组蛋白修饰这类记号在复制时被照样补齐——字母一个也没改</button>
+        <button>靠周围细胞每次分裂后重新告诉它一遍</button>
+      </div>
+      <div class="explain">这正是"表观"二字的含义：三十亿个字母原封未动，改的只是哪几页粘着、哪几页摊着。也正因为记号是可加可撤的胶而不是剪刀，它才擦得掉。真正动剪刀的是免疫系统的 B、T 细胞——那一步不可撤销（第 10 章）。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">2006 年山中伸弥团队用四个转录因子做成的是什么？</div>
+      <div class="opts">
+        <button>把人的皮肤细胞变回受精卵那样的全能状态</button>
+        <button data-c="1">把小鼠成纤维细胞推回多能状态，得到 iPS 细胞；人的细胞次年做成</button>
+        <button>用一枚卵做核移植，克隆出一只小鼠</button>
+        <button>把成纤维细胞直接变成心肌细胞，不经过干细胞阶段</button>
+      </div>
+      <div class="explain">多能不等于全能：iPS 细胞回到的是内细胞团那一格，能长成身体各类组织，长不出胎盘。核移植是格登（1962，蛙）和多莉羊（1996）那条路，需要借一枚卵；直接把成纤维细胞转成心肌细胞则是"横穿山谷"的转分化，是另一条路线。2012 年的诺奖由山中与格登共享。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第一幕 建造</div>
+  <div class="title">第 3 章 · 原肠运动：人生最重要的一天</div>
+  <p>着床之后，你摊平成一张两层的小圆盘。受精后第十五天前后，盘面上会浮出一条细线——细胞排着队从那条线钻进去，一张纸就此折成三层，前后左右上下也在同一天定了下来。发育生物学家说，这是你一生中最重要的一天，比出生、结婚和死亡都重要。下一章看这条线。</p>
+  <nav class="footnav">
+    <a href="ch01-cell.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch03-gastrulation.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 华丁顿地景：小球滚下山谷 / 推回山顶
+  var TRACKS = {
+    t1: {segs:['sg-trunk','sg-L','sg-LL'], dest:'d1',
+         msg:'球落进最左边的谷口，成了<strong>神经元</strong>。它此后大多终身不再分裂——身份连同那一整套书签，要带上几十年。'},
+    t2: {segs:['sg-trunk','sg-L','sg-LR'], dest:'d2',
+         msg:'球落进左二的谷口，成了<strong>表皮细胞</strong>。它和神经元同出一支，活法却相反：整层皮肤每个月上下换新一轮，而每一批新细胞都记得自己是皮肤。'},
+    t3: {segs:['sg-trunk','sg-R','sg-RL'], dest:'d3',
+         msg:'球落进右二的谷口，成了<strong>心肌细胞</strong>。它从第 4 章的第一跳起就没停过，更新速度却极慢：你心里的大部分心肌细胞，跟你差不多岁数。'},
+    t4: {segs:['sg-trunk','sg-R','sg-RR'], dest:'d4',
+         msg:'球落进最右边的谷口，成了<strong>红细胞</strong>。走到最后一步时它把细胞核和线粒体统统扔掉，从此再也读不了那本菜谱（第 1 章旁注）。'}
+  };
+  var ball = document.getElementById('ball');
+  var status = document.querySelector('#land-fig .land-status');
+  var btns = document.querySelectorAll('#land-fig .land-btn');
+  var segIds = ['sg-trunk','sg-L','sg-R','sg-LL','sg-LR','sg-RL','sg-RR'];
+  var destIds = ['d1','d2','d3','d4'];
+  var raf = 0, last = null;
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function press(key){
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].setAttribute('aria-pressed', btns[i].getAttribute('data-track') === key ? 'true' : 'false');
+    }
+  }
+  function light(track){
+    var i, on = track ? TRACKS[track] : null;
+    for (i = 0; i < segIds.length; i++) {
+      document.getElementById(segIds[i]).classList.toggle(
+        'lit', !!on && on.segs.indexOf(segIds[i]) >= 0);
+    }
+    for (i = 0; i < destIds.length; i++) {
+      document.getElementById(destIds[i]).classList.toggle('lit', !!on && on.dest === destIds[i]);
+    }
+  }
+  function move(pathEl, back){
+    if (raf) { cancelAnimationFrame(raf); raf = 0; }
+    var L = pathEl.getTotalLength();
+    if (still) { put(pathEl, back ? 0 : L); return; }
+    var t0 = null;
+    function step(ts){
+      if (t0 === null) t0 = ts;
+      var k = (ts - t0) / 1400;
+      if (k > 1) k = 1;
+      put(pathEl, back ? L * (1 - k) : L * k);
+      if (k < 1) raf = requestAnimationFrame(step); else raf = 0;
+    }
+    raf = requestAnimationFrame(step);
+  }
+  function put(pathEl, d){
+    var p = pathEl.getPointAtLength(d);
+    ball.setAttribute('cx', p.x);
+    ball.setAttribute('cy', p.y);
+  }
+  for (var b = 0; b < btns.length; b++) {
+    (function(el){
+      el.addEventListener('click', function(){
+        var key = el.getAttribute('data-track');
+        if (key === 'up') {
+          press('up');
+          light(null);
+          if (last) { move(document.getElementById(last), true); }
+          else { ball.setAttribute('cx', 400); ball.setAttribute('cy', 78); }
+          status.innerHTML = '球被推回山顶——但这在体内不会自发发生。实验里要按住四根绳子（山中因子），一万个细胞里也只有一到十个真的爬得回来。它回到的是<strong>多能</strong>，不是全能。';
+          return;
+        }
+        press(key);
+        light(key);
+        last = key;
+        move(document.getElementById(key), false);
+        status.innerHTML = TRACKS[key].msg;
+      });
+    })(btns[b]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

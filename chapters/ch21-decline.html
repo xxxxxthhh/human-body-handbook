@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第21章 · 峰值之后：衰退的时间表 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 21-1 峰值错峰表（本章专用） ---- */
+#peaks .rail{stroke:var(--ink-faint); stroke-width:1.4; opacity:.42;}
+#peaks .fall{stroke:var(--gold); stroke-width:3.4; stroke-linecap:round;}
+#peaks .rise{stroke:var(--green); stroke-width:3.4; stroke-linecap:round;}
+#peaks .dot{fill:var(--gold);}
+#peaks .dot.up{fill:var(--green);}
+#peaks .lb{fill:var(--ink); font-size:13px;}
+#peaks .num{fill:var(--gold); font-size:11.5px;}
+#peaks .num.up{fill:var(--green);}
+#peaks .axis{stroke:var(--line); stroke-width:1.6;}
+#peaks .tick{stroke:var(--line);}
+#peaks .tick-label{fill:var(--ink-faint); font-size:11.5px;}
+#peaks .note{fill:var(--ink-faint); font-size:11.5px;}
+
+/* ---- 图 21-2 多器官衰退曲线族（本章专用） ---- */
+#decline-fig .organ-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#decline-fig .organ-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#decline-fig .organ-btn:hover{border-color:var(--gold); color:var(--ink);}
+#decline-fig .organ-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#decline-fig .organ-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#decline-fig .organ-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#decline-fig .op{display:none;}
+#decline-fig .op.on{display:block;}
+#decline-fig .op-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#decline-fig .op p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+#curves .curve{fill:none; stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; transition:opacity .3s, stroke-width .3s;}
+#curves.picked .curve{opacity:.16;}
+#curves.picked .curve.on{opacity:1; stroke-width:4.4;}
+#curves.picked .c-lb{opacity:.28;}
+#curves.picked .c-lb.on{opacity:1; font-weight:700;}
+#curves .c-lb{font-size:12px; transition:opacity .3s;}
+#curves .c-mus,#curves .lb-mus{stroke:var(--oxy);}
+#curves .c-vo2,#curves .lb-vo2{stroke:var(--mixed-r);}
+#curves .c-fev,#curves .lb-fev{stroke:var(--deoxy);}
+#curves .c-gfr,#curves .lb-gfr{stroke:var(--mixed-l);}
+#curves .c-hr,#curves .lb-hr{stroke:var(--gold);}
+#curves .lb-mus{fill:var(--oxy);}
+#curves .lb-vo2{fill:var(--mixed-r);}
+#curves .lb-fev{fill:var(--deoxy);}
+#curves .lb-gfr{fill:var(--mixed-l);}
+#curves .lb-hr{fill:var(--gold);}
+#curves .axis{stroke:var(--line); stroke-width:1.6;}
+#curves .grid{stroke:var(--line); stroke-width:1; opacity:.5;}
+#curves .tick-label{fill:var(--ink-faint); font-size:11.5px;}
+#curves .need{stroke:var(--green); stroke-width:2; stroke-dasharray:7 6; fill:none;}
+#curves .need-lb{fill:var(--green); font-size:11.5px;}
+#curves .note{fill:var(--ink-faint); font-size:11.5px;}
+@media (prefers-reduced-motion: reduce){
+  #curves .curve,#curves .c-lb{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第四幕 磨损与谢幕 · 第 21 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>峰值之后：<br>衰退的时间表</h1>
+  <p class="subtitle">身体的下坡路不是一条，是几十条。它们各有各的起点、各有各的坡度，而大多数在你察觉之前，已经走了很久。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>餐厅的灯光调得很暗。菜单递到你手上，你看了两秒，不动声色地把它往外推了十几厘米——忽然就清楚了。</p>
+  <p>同桌的人没注意，你自己也差点没注意。这个小动作你已经做了半年：起初只在昏暗处，后来在药盒背面的小字上，在把屏幕亮度调到最低的深夜里。你四十三岁，身上没有一处疼，上个月的体检报告一片正常。可有一样东西已经越过了某条线——而且它不是这半年才开始走的，它走了三十多年。</p>
+  <p>值得停下来想一想：为什么先失守的，是眼睛里那颗黄豆大的透明体，而不是心，不是肺，不是任何一件听上去更劳累的器官？这一章要讲的就是这个。下坡确实开始了，但它开始的方式，和大多数人以为的很不一样。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 错峰</div>
+  <h2>一座山的秋天，不是一夜变色的</h2>
+  <p>秋天来的时候，山不是整座一起黄的。北坡的桦先动手，一周之内金得刺眼；南坡的枫还要再等半个月；谷底那几排柳，要一直绿到落第一场雪。站远了看，山在"变色"；走近了看，那是几十场各自为政的变化，只是碰巧发生在同一个季节里。</p>
+  <p>你的身体也是这样一座山。</p>
+  <p>先把类比的边界画清楚，免得顺着它推出错的结论：山上的秋天明年还会再来一次，绿了再黄，黄了再绿；你身上这一场只走一遍。相同的地方只有一处，但这一处很要紧——<strong>它不是一件事，是几十件错开时间的事。</strong></p>
+  <p>错到什么程度？你耳朵里辨认高频的能力，在你还没高中毕业时就过了顶：八千赫兹以上的那一段，从十几到二十几岁起就开始一格一格地退。反应速度和信息加工速度，峰值大约在十八到二十几岁。最大摄氧量、肌肉量、骨量，二十几到三十几岁陆续封顶——其中骨量偏早，第 11 章给的峰值年龄是约 20 到 30 岁。肾脏的滤过率大致要到三十五至四十岁以后才转头向下。而你的词汇量、常识储备、对复杂人事的判断力——心理学里管这一路叫"晶体智力"——很多人要到六七十岁才见顶。</p>
+  <p>还有一个更早的例子，早到几乎没人把它算进"衰老"里：<strong>胸腺</strong>。第 10 章讲过，这所淘汰率极高的免疫军校相对体重在出生前后就已达峰，而它从青春期一过就开始缩小，被脂肪一点点替换掉，到中年只剩薄薄一层。也就是说，你身上退化得最早的器官之一（第 10 章的原话），是在你刚学会开车的年纪就开始交班的。它退得早，却退得极稳——因为它训练出来的那批 T 细胞会在体内长期服役，军校关门并不等于军队解散。这也预告了第四幕后面要反复出现的一个道理：一条线开始下降的时间，和它开始造成后果的时间，可以差上几十年。</p>
+  <p>所以"三十岁以后开始走下坡"是个相当粗糙的说法。真相是：<strong>你身上有些本事在你考大学那年就过了峰，另一些要等到你当上祖父母才登顶。</strong>同一具身体里，此刻同时住着一个十几岁的和一个七十岁的。</p>
+
+  <figure>
+    <svg id="peaks" viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="八项身体功能的峰值年龄对照图：高频听力约 18 岁见顶，处理速度约 20 岁，最大摄氧量约 25 岁，肌量与骨量约 30 岁，肾滤过率约 38 岁，晶状体调节力自童年即下降并在 40 到 45 岁越线，词汇与常识约 65 岁见顶，情绪调节持续上行">
+      <text class="note" x="130" y="28" text-anchor="start">● = 峰值年龄　金色 = 此后缓降　绿色 = 此后仍在上行</text>
+
+      <line class="rail" x1="130" y1="68" x2="706" y2="68"/>
+      <line class="fall" x1="245" y1="68" x2="706" y2="68"/>
+      <circle class="dot" cx="245" cy="68" r="5"/>
+      <text class="lb" x="118" y="73" text-anchor="end">高频听力</text>
+      <text class="num mono" x="245" y="53" text-anchor="middle">≈18 岁</text>
+
+      <line class="rail" x1="130" y1="106" x2="706" y2="106"/>
+      <line class="fall" x1="258" y1="106" x2="706" y2="106"/>
+      <circle class="dot" cx="258" cy="106" r="5"/>
+      <text class="lb" x="118" y="111" text-anchor="end">处理速度</text>
+      <text class="num mono" x="258" y="91" text-anchor="middle">≈20 岁</text>
+
+      <line class="rail" x1="130" y1="144" x2="706" y2="144"/>
+      <line class="fall" x1="290" y1="144" x2="706" y2="144"/>
+      <circle class="dot" cx="290" cy="144" r="5"/>
+      <text class="lb" x="118" y="149" text-anchor="end">最大摄氧量</text>
+      <text class="num mono" x="290" y="129" text-anchor="middle">≈25 岁</text>
+
+      <line class="rail" x1="130" y1="182" x2="706" y2="182"/>
+      <line class="fall" x1="322" y1="182" x2="706" y2="182"/>
+      <circle class="dot" cx="322" cy="182" r="5"/>
+      <text class="lb" x="118" y="187" text-anchor="end">肌量与骨量</text>
+      <text class="num mono" x="322" y="167" text-anchor="middle">≈30 岁</text>
+
+      <line class="rail" x1="130" y1="220" x2="706" y2="220"/>
+      <line class="fall" x1="373" y1="220" x2="706" y2="220"/>
+      <circle class="dot" cx="373" cy="220" r="5"/>
+      <text class="lb" x="118" y="225" text-anchor="end">肾滤过率</text>
+      <text class="num mono" x="373" y="205" text-anchor="middle">≈38 岁</text>
+
+      <line class="rail" x1="130" y1="258" x2="181" y2="258"/>
+      <line class="fall" x1="181" y1="258" x2="706" y2="258"/>
+      <circle class="dot" cx="181" cy="258" r="5"/>
+      <line class="tick" x1="399" y1="250" x2="399" y2="266"/>
+      <text class="lb" x="118" y="263" text-anchor="end">晶状体调节力</text>
+      <text class="num mono" x="181" y="243" text-anchor="start">自童年即在降</text>
+      <text class="note" x="399" y="280" text-anchor="middle">40–45 岁越线：看不清餐桌上的字</text>
+
+      <line class="rail" x1="130" y1="316" x2="546" y2="316"/>
+      <line class="rise" x1="130" y1="316" x2="546" y2="316"/>
+      <circle class="dot up" cx="546" cy="316" r="5"/>
+      <line class="rail" x1="546" y1="316" x2="706" y2="316"/>
+      <text class="lb" x="118" y="321" text-anchor="end">词汇与常识</text>
+      <text class="num up mono" x="546" y="301" text-anchor="middle">≈65 岁</text>
+
+      <line class="rail" x1="130" y1="354" x2="706" y2="354"/>
+      <line class="rise" x1="130" y1="354" x2="700" y2="354"/>
+      <polyline class="rise" points="692,347 704,354 692,361" fill="none"/>
+      <text class="lb" x="118" y="359" text-anchor="end">情绪调节</text>
+      <text class="num up mono" x="420" y="339" text-anchor="middle">多数研究中随龄改善（第 24 章）</text>
+
+      <line class="axis" x1="130" y1="382" x2="706" y2="382"/>
+      <line class="tick" x1="130" y1="382" x2="130" y2="390"/><text class="tick-label" x="130" y="406" text-anchor="middle">0</text>
+      <line class="tick" x1="258" y1="382" x2="258" y2="390"/><text class="tick-label" x="258" y="406" text-anchor="middle">20</text>
+      <line class="tick" x1="386" y1="382" x2="386" y2="390"/><text class="tick-label" x="386" y="406" text-anchor="middle">40</text>
+      <line class="tick" x1="514" y1="382" x2="514" y2="390"/><text class="tick-label" x="514" y="406" text-anchor="middle">60</text>
+      <line class="tick" x1="642" y1="382" x2="642" y2="390"/><text class="tick-label" x="642" y="406" text-anchor="middle">80</text>
+      <text class="tick-label" x="706" y="406" text-anchor="end">年龄 →</text>
+    </svg>
+    <figcaption><b>图 21-1 · 峰值不在同一年。</b>八项功能的见顶年龄从十几岁一直散到七十岁上下。峰值年龄为常见研究结果的中位区间，个体差异很大；训练、疾病、用药都会整体抬高或压低某一条。注意最后两行是绿色的——同一具身体里，有些能力此刻仍在上行。</figcaption>
+  </figure>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>那个只有青少年听得见的铃声。</strong>2000 年代中期，英国有人把一种一万七千赫兹左右的高频音做成手机铃声，在校园里流传开：学生听得一清二楚，讲台上的老师却什么也没听见。同一段声波，在两代人耳朵里是两种现实。</p>
+    <p>它测的不是"耳朵坏没坏"，而是耳蜗最底端那一小段。耳蜗像一只卷起来的蜗壳，声波从底端进、向顶端走，高频在入口处就被读取，低频要一路走到里头。于是负责高频的那批毛细胞站在门口，一辈子承受所有进来的声音，也就先减员。它们不像皮肤细胞那样能补新的——出生时有多少，一生就是多少。这解释了为什么老年性听力下降多半从高频开始，也解释了为什么在嘈杂的餐厅里，最先听不清的是辅音（那些"丝""吃""思"的高频成分），而不是音量。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 变硬</div>
+  <h2>富兰克林的两副眼镜，和一颗一辈子在长的透明体</h2>
+  <p>1785 年 5 月，七十九岁的本杰明·富兰克林在信里向伦敦的朋友乔治·惠特利抱怨了一件麻烦事：他随身带着两副眼镜，一副看远，一副看书，出门在外常常要换来换去。于是他把两副镜片各锯成一半，把看远的装在上半圈、看近的装在下半圈，拼成一副。他写道，从此他只需要把眼睛往上或往下一转，该用的那片就在那儿了。</p>
+  <p>他还讲了个更实际的理由。在法国当公使的那些年，餐桌上他既要看清盘子里是什么，又要看清对面说话人的嘴——他的法语听力不佳，得靠看嘴唇补上耳朵漏掉的部分。他说，靠这副眼镜，他的法语都听懂得更多了。双光镜是不是他头一个想到的，史家至今有争论；但把它的来由和用处写得这么清楚的，是他。</p>
+  <p>两百多年过去，餐桌上的那个动作没变，只是今天的你不是锯镜片，而是把菜单往外推。推开的这十几厘米，量的是同一件事：<strong>晶状体的调节力</strong>。</p>
+  <h3>一颗有年轮的珠子</h3>
+  <p>先破一个常见的误解：老花不是眼球变形，也不是"眼睛老了"这种笼统说法。它有一个相当具体的机制，而且这个机制从你还是小学生的时候就在运转。</p>
+  <p>晶状体是一颗终生在长大的透明体。它的上皮细胞一辈子都在分裂，新长出的纤维细胞一层一层铺在外面，把旧的往中心挤。所以它像一棵树：新材在外，老料在里，越靠核心的部分被挤得越密、越硬。</p>
+  <p>这个类比要就地拆一下，免得推过头：树的年轮能数出年份，晶状体的"年轮"数不出来——它没有季节标记，层与层是连续的。类比只在一个方向上成立，但这个方向恰好是要紧的那个：<strong>核心最老。</strong>而且老得惊人——你晶状体正中心那一小团蛋白质，是你还在母亲子宫里的时候造的，此后一次也没换过。全书最后一章还会回到这批陪你一辈子的老分子上。</p>
+  <p>看近处时，睫状肌收缩，牵着晶状体的悬韧带放松，晶状体便靠自身的弹性鼓起来，把焦点拉近。这份"鼓起来"的本事，就是调节力。八岁孩子的调节力约十四个屈光度，近点能到七厘米——他们能把书凑到鼻尖上看，还看得清。四十岁前后剩下四五个屈光度，五十岁只剩一两个。</p>
+  <p>注意这条线的形状：它不是四十岁那年拐的弯，而是一条从童年起就在下降的斜线。变的只是它和生活的关系——当调节力降到无法在三四十厘米处对焦，也就是从眼睛到餐桌的距离，你就"老花"了。<strong>斜线是连续的，那顿晚饭是突然的。</strong>这个反差，是本章的题眼，下一节要专门讲。</p>
+  <p>同一个"越挤越硬"的过程，还有一段更远的下游。晶状体里的蛋白质要维持透明，靠的是排列得极其规整——规整到光可以笔直穿过而几乎不被散射。可这些蛋白质中有一部分终生不更新（还是那句：核心是子宫里造的），几十年的紫外线、氧化和糖分子的修饰慢慢累积，规整的队形一点点乱掉，光开始被散射。于是那颗珠子先是发黄，后是发浑——这就是白内障。它和老花共用同一颗晶状体、同一条时间线，却是两件事：老花是它<em>变硬</em>，白内障是它<em>变浑</em>。前者拿眼镜解决，后者要把这颗珠子换掉。今天全球每年数以千万计的白内障手术，做的就是这件事：取出那颗攒了一辈子年轮的透明体，换一片人造的。</p>
+  <p>顺带解释一个常听到的说法：近视的人是不是老花来得晚？裸眼时确实占点便宜——近视眼本来就把焦点落在近处，摘掉眼镜看书能多撑几年。但那只是把负数和负数相抵，调节力该丢的一点没少；一戴上看远的眼镜，同样看不清近处。这也是为什么近视的人到了这个年纪，往往需要的正是富兰克林那副拼起来的镜片。</p>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 余量</div>
+  <h2>河床比水宽：为什么衰退能瞒你三十年</h2>
+  <p>回到餐厅那一幕。既然有些下坡三十年前就开始了，为什么你直到四十三岁才第一次察觉？</p>
+  <p>因为身体在建造的时候，留了极大的余量。</p>
+  <p>一条河的河床，总比它常年的水量宽得多。九成的日子里，水只占河床中间窄窄的一条；你沿岸走，看见的是一条温顺的溪，两边是大片干爽的卵石滩。要到几十年一遇的大水，整个河床才第一次被用满。</p>
+  <p>器官就是这样的河床。这里也要拆一句，免得把它想成"身体里存着一罐备用的肾功能"：<strong>河床不是水，河床是容量。</strong>所谓储备，不是某个仓库里囤着的东西，而是"这个器官能干多少"和"日常需要它干多少"之间的那段空档。而衰退最先吃掉的，是空档，不是功能。</p>
+  <h3>空档有多宽</h3>
+  <p>把几个数字摆出来，你会明白这段空档有多奢侈：</p>
+  <p><strong>肺。</strong>你此刻静息的通气量大约每分钟 6 升。而一个健康成年人拼尽全力时，最大自主通气量能到每分钟一百多升——十几到二十几倍的余量。这份余量的物理来源，正是<strong>第 5 章</strong>那道题：氧气靠扩散只能走大约一毫米，而面积按边长的平方涨、体积按立方涨，身体想长大就只能靠折叠去买面积——几亿个肺泡把交换面摊成五十到一百三十平方米。第 5 章末尾留了一句话，说这笔账要到第 21 章来算：当年为突破尺度限制而买下的面积，顺手就成了往后几十年的余量。<br>
+  <strong>肾。</strong>两个肾加起来约两百万个肾单位。捐出一个肾的人，剩下那一个基本能维持全部日常需求——这件事每年都在活体捐肾者身上被验证。<br>
+  <strong>肝。</strong>切掉大约三分之二，剩下的部分仍足以维持生命，而且会在几周内长回大半体积（第 17 章讲过这件事和普罗米修斯的巧合）。<br>
+  <strong>心。</strong>静息心输出量每分钟 4–6 升，剧烈运动时能推到 20–25 升（第 14 章）。</p>
+  <p>所以你的曲线是平滑的，你的感受却是离散的。肾功能可以悄悄退掉相当一部分而验血单上毫无异样；晶状体的调节力从十四个屈光度掉到三个的那三十几年里，你一无所知——只有在它跌破"看清餐桌上的字"这条线的那一天，你才第一次把菜单推远。</p>
+  <p><strong>衰退是连续的，察觉是离散的。中间隔着的那一段，就是余量。</strong></p>
+  <h3>余量变薄之后</h3>
+  <p>余量还解释了老年医学里一件外行常觉得反直觉的事：同样一场社区获得性肺炎，二十五岁的人烧三天、咳一周就过去了；八十五岁的人可能就此躺下，从此再没能回到原来的活动水平。病原体是同一种，病灶也未必更大——差别在于，年轻人有整条干爽的卵石滩可以淹，老人的水已经快漫到岸了。医生说的"储备耗竭"，说的就是这件事。</p>
+  <p>大脑也有它的河床，而且这条河床的宽度并不是生下来就定死的。神经病理学里有个反复被观察到的现象：一些老人去世后，脑组织里已经堆满了通常与痴呆相伴的病理改变，可他们生前的认知测验成绩一直正常。研究者用<strong>认知储备</strong>来称呼这段空档——教育年限、复杂的工作、终身的阅读与社交，似乎能把河床拓宽一些，让同样多的水位下降不至于漫出后果。要说清楚的是，这不是"防住了病变"，病变照样在；拓宽的是病变和症状之间的那段距离。这个区分很要紧，第 24 章还会回到它。</p>
+  <p>但这里有个重要的转折，本章先埋下，第 24 章展开：<strong>余量并非只能单向减少。</strong>坡度可以改，某些空档还能重新拓宽一部分——八九十岁才开始做力量训练的人依然会长肌肉，这不是励志故事，是可重复的实验结果。第四幕的开头讲下坡，但下坡不等于滑坡。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>你每天早上比晚上高一点，每十年比十年前矮一点。</strong>第 11 章讲过，你清晨的身高比睡前高出一到两厘米——躺了一夜，椎间盘吸回水分，重新胀起来；白天站着走着，水又被压出去。这是每天都在发生的一次充放。</p>
+    <p>四十岁以后，另一条更慢的线叠了上来：椎间盘的含水量整体下降，脊柱的曲度也随之变化，身高大约每十年少一厘米，此后逐渐加快。所以你晚年量到的那个数字，是两件事的合成——一件当天可以恢复，一件不能。顺带说一句，这也是老人量身高需要固定时段的原因：早晚不同时间量，能量出一整年的"衰老"来。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 坡度</div>
+  <h2>把下坡画在同一张纸上</h2>
+  <p>知道了错峰和余量，就可以把这些坡放在同一张图里比一比了。看下图时请留意两件事：曲线的<em>起点</em>不同（那是第 1 节），曲线离虚线的<em>距离</em>不同（那是第 3 节）。</p>
+
+  <figure id="decline-fig">
+    <div class="switch-row">
+      <span class="switch-hint">点一条看清楚 →</span>
+      <div class="organ-tabs" role="group" aria-label="选择要高亮的功能曲线">
+        <button class="organ-btn" data-organ="mus" aria-pressed="false">肌力</button>
+        <button class="organ-btn" data-organ="vo2" aria-pressed="false">最大摄氧量</button>
+        <button class="organ-btn" data-organ="fev" aria-pressed="false">肺功能</button>
+        <button class="organ-btn" data-organ="gfr" aria-pressed="false">肾滤过率</button>
+        <button class="organ-btn" data-organ="hr" aria-pressed="false">最大心率</button>
+      </div>
+    </div>
+    <svg id="curves" viewBox="0 0 760 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="30 至 90 岁五项功能的衰退曲线族示意图：肌力下降最陡，其次为最大摄氧量、肾滤过率、肺功能，最大心率下降最缓；一条绿色虚线标出日常所需水平">
+      <text class="note" x="70" y="32" text-anchor="start">纵轴：占 30 岁时水平的百分比（示意曲线，人群平均趋势）</text>
+      <line class="grid" x1="70" y1="60" x2="620" y2="60"/>
+      <line class="grid" x1="70" y1="135" x2="620" y2="135"/>
+      <line class="grid" x1="70" y1="210" x2="620" y2="210"/>
+      <line class="grid" x1="70" y1="285" x2="620" y2="285"/>
+      <text class="tick-label mono" x="60" y="64" text-anchor="end">100%</text>
+      <text class="tick-label mono" x="60" y="139" text-anchor="end">75%</text>
+      <text class="tick-label mono" x="60" y="214" text-anchor="end">50%</text>
+      <text class="tick-label mono" x="60" y="289" text-anchor="end">25%</text>
+
+      <line class="need" x1="70" y1="270" x2="620" y2="270"/>
+      <text class="need-lb" x="76" y="263" text-anchor="start">日常所需的水平（示意）——曲线离它越远，余量越厚</text>
+
+      <polyline class="curve c-hr"  points="70,60 162,72 253,84 345,96 437,108 528,120 620,132"/>
+      <polyline class="curve c-fev" points="70,60 162,81 253,102 345,123 437,144 528,165 620,186"/>
+      <polyline class="curve c-gfr" points="70,60 162,68 253,95 345,122 437,149 528,176 620,203"/>
+      <polyline class="curve c-vo2" points="70,60 162,87 253,114 345,141 437,168 528,195 620,222"/>
+      <polyline class="curve c-mus" points="70,60 162,75 253,96 345,126 437,162 528,204 620,246"/>
+
+      <text class="c-lb lb-hr"  x="628" y="136" text-anchor="start">最大心率</text>
+      <text class="c-lb lb-fev" x="628" y="190" text-anchor="start">肺功能</text>
+      <text class="c-lb lb-gfr" x="628" y="208" text-anchor="start">肾滤过率</text>
+      <text class="c-lb lb-vo2" x="628" y="226" text-anchor="start">最大摄氧量</text>
+      <text class="c-lb lb-mus" x="628" y="250" text-anchor="start">肌力</text>
+
+      <line class="axis" x1="70" y1="360" x2="620" y2="360"/>
+      <text class="tick-label" x="70" y="380" text-anchor="middle">30</text>
+      <text class="tick-label" x="162" y="380" text-anchor="middle">40</text>
+      <text class="tick-label" x="253" y="380" text-anchor="middle">50</text>
+      <text class="tick-label" x="345" y="380" text-anchor="middle">60</text>
+      <text class="tick-label" x="437" y="380" text-anchor="middle">70</text>
+      <text class="tick-label" x="528" y="380" text-anchor="middle">80</text>
+      <text class="tick-label" x="620" y="380" text-anchor="middle">90 岁</text>
+      <text class="note" x="70" y="412" text-anchor="start">这是人群的平均趋势，不是任何一个人的路线。同龄人之间的散布，往往比图上任意两条曲线的差距还大。</text>
+    </svg>
+    <div class="organ-panel">
+      <div class="op on" data-op="0">
+        <div class="op-t">五条坡，五种脾气</div>
+        <p>点上方任意一项，看它的年降幅、余量和一句要紧的提醒。所有曲线以 30 岁为 100% 归一化，只为比较坡度，不代表这些量在同一把尺子上可以直接换算。</p>
+      </div>
+      <div class="op" data-op="mus">
+        <div class="op-t">肌力 · 降得最陡的一条</div>
+        <p>肌肉量自 30 岁后大致每十年流失 3–8%，60 岁后加快。但要留意：<strong>肌力降得比肌量更快</strong>，中年后可达每十年 10–15%。也就是说，老人先失去的是"发力"，然后才是"体积"——爆发力型的快肌纤维萎缩得更早。这也是它成为第 24 章主角的原因：这条坡对训练的响应，比图上任何一条都大。</p>
+      </div>
+      <div class="op" data-op="vo2">
+        <div class="op-t">最大摄氧量 · 全身的合成成绩</div>
+        <p>每十年大约降 8–10%，久坐者更陡。它不是某一个器官的指标，而是心、肺、血管、肌肉线粒体这一整条链路的合成成绩，所以常被当作"体能年龄"的总账。同一年龄的人之间可以差出两三倍，规律耐力训练的六十岁人胜过久坐的三十岁人是常事。</p>
+      </div>
+      <div class="op" data-op="fev">
+        <div class="op-t">肺功能 · 起点最高，余量最厚</div>
+        <p>一秒用力呼气量（FEV1）在 25–35 岁见顶，此后每年约降 25–30 毫升。坡度不算陡，而且这条线的起点离那条虚线本来就远——静息呼吸只用到肺最大能力的很小一部分，所以多数人一辈子都碰不到它，除非有别的东西来抢余量。吸烟正是把这条线的坡度整个压陡的那件事，这也是为什么戒烟的收益是"把坡度改回来"，而不是"把已经掉的补回来"。</p>
+      </div>
+      <div class="op" data-op="gfr">
+        <div class="op-t">肾滤过率 · 沉默的一条</div>
+        <p>约自 35–40 岁起，每年下降 0.8–1 mL/min/1.73 m²，几十年下来是很可观的一段，而全程几乎没有症状——两百万个肾单位的余量把它盖住了。真正的麻烦出现在余量变薄之后：同样一剂经肾排泄的药，在老人体内清得更慢，容易越积越多。老年用药常要按肾功能调整剂量，根子就在这条不声不响的斜线上。</p>
+      </div>
+      <div class="op" data-op="hr">
+        <div class="op-t">最大心率 · 一条被公式绑架的曲线</div>
+        <p>它是图上降得最缓的一条，却也常被误读。「220 − 年龄」不是生理定律，而是 1970 年代从十来项旧研究里目测出来的一条线；后来用更大样本重做，得到的是 208 − 0.7 × 年龄。更要紧的是：这类公式描述人群，不描述你——围绕回归线的个体标准差约 7–11 次/分。正文里还有一处关于性别的补充，别跳过。</p>
+      </div>
+    </div>
+    <figcaption><b>图 21-2 · 五条坡，五种脾气。</b>以 30 岁为 100% 归一化的示意曲线，用于比较坡度而非绝对值。绿色虚线是"日常所需"的示意位置：曲线离它越远，你越感觉不到自己在下坡；一旦贴近，同一个降幅带来的后果就完全不同。曲线为人群平均趋势，个体差异远大于曲线之间的差距。</figcaption>
+  </figure>
+
+  <h3>那个人人都会背的公式，错在哪里</h3>
+  <p>「220 减去年龄」大概是流传极广的一条身体公式：健身房的墙上、跑步手表的说明书里、体检报告的建议栏里，到处是它。它的来历却相当潦草——1970 年代，研究者把当时能找到的十来项零散数据画在纸上，眼估着穿了一条线过去。后来有人用几百项研究、上万名受试者重做，得到的线是 <strong>208 − 0.7 × 年龄</strong>。</p>
+  <p>但换个公式并不是重点。重点是：<strong>这类公式说的是人群，不是你。</strong>围绕回归线的个体离散度，标准差在每分钟 7 到 11 次之间——意思是同样六十岁的两个健康人，真实最大心率相差二十次并不稀奇。</p>
+  <p>这就像气象台给出的"本地平均初雪日"。它对整座城市成立，对你家门口那棵树不成立；拿它决定哪天穿棉衣，你有一半的年份会挨冻或捂汗。把 220 减年龄当成训练强度的硬门槛，犯的是同一个错误。</p>
+  <h3>还有一处，长期算错了一半人</h3>
+  <p>这条线本身还有个更深的偏差：最早那批数据的受试者以男性为主。2010 年，Martha Gulati 等人用五千四百多名女性的运动试验数据重做了这件事，得到一条明显不同的线：<strong>206 − 0.88 × 年龄</strong>。</p>
+  <p>差距不小。五十岁时，旧公式给出每分钟 170 次，女性专用的这条给出约 162 次。差的这八次不是小数点后的争论：按旧公式设定的目标心率，会让一部分女性在运动试验里被判成"心率反应不足"，也会让另一些人在健身房里追一个她本不该达到的数字。第 19 章讲过，医学研究长期默认男性受试者的传统，会一路影响到诊断和用药——它同样影响了你手表上那个跳动的数字。</p>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 上行</div>
+  <h2>下坡的同时，另一些线还在往上走</h2>
+  <p>这一章到此为止全是坡，该说说别的了。</p>
+  <p>先说下行的那一半，说准确些。真正随龄稳定变慢的，是<strong>处理速度</strong>：认出一个字、在一堆干扰里挑出目标、把注意力从一件事切到另一件事，这些操作在十八到二十几岁见顶，此后一路缓降。同时变窄的还有工作记忆的容量——同时端着几件事不掉的能力。中年人在嘈杂餐厅里听不清，一半是耳蜗高频那道坎，另一半就在这里：从残缺的辅音里把词猜回来，是要花速度的。</p>
+  <p>但另一批能力走的是相反方向。词汇量、常识、对复杂人际情境的判断，在很多人身上要到六七十岁才见顶，有的成分还更晚。2015 年，Hartshorne 与 Germine 用近五万人的在线测验数据做了一次横断面比较，结论很干脆：<strong>不同认知能力的峰值年龄散布在十几岁到七十岁之间，几乎没有哪两项是同时见顶的。</strong>这和本章第 1 节是同一句话，只是换到了脑子上——同一颗大脑里，此刻也同时住着一个二十岁的和一个七十岁的。</p>
+  <p>这一点值得说得更实在些。一位六十五岁的临床医生，在纯反应速度的测试上多半输给自己的住院医；但在"看一眼就知道这个病人不对劲"这件事上，往往赢得毫无悬念。后者不是速度，是几十年攒下的模式库——攒的过程本身需要时间，所以它的峰值只能来得晚。</p>
+  <p>所以第四幕开篇这一章，不妨这样收尾：下坡是真的，时间表也是真的，但"衰老"这个词把几十条各行其是的曲线压成了一条，压掉的东西比留下的多。真实的图景更像秋天——有的树在落叶，有的果实正在这个季节里才熟透。</p>
+  <p>下坡的那部分能改多少、身体又攒下了哪些别的本事，是第 24 章的题目。但在那之前，还有两件事要先讲：中年那道最陡的激素转折，和衰老在细胞层面究竟是怎么回事。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>你的"生物学年龄"能被测出来吗。</strong>既然各条曲线错峰下坡，一个自然的念头是：与其看身份证，不如直接量身体走到了哪一步。目前最受关注的一类工具叫<strong>表观遗传钟</strong>——不读 DNA 的字母，而读贴在字母上的甲基化标记。2013 年，Steve Horvath 用几百个位点的甲基化程度拟合出一个与实际年龄高度相关的估计值；此后一代代改进的版本（GrimAge、PhenoAge 等）不再只追年龄，而是转去预测更实在的东西：死亡风险、患病风险。2022 年提出的 DunedinPACE 又换了个思路，估计的不是"你现在多老"，而是"你此刻老得多快"——一年过掉几年份。</p>
+    <p>要留意它还不是什么。这类模型主要建立在<strong>相关</strong>之上：甲基化的漂移究竟是衰老的推手，还是衰老留下的痕迹，多数位点上仍未分清。不同的钟彼此并不一致——2025 年底一项横跨十余种钟、上百个疾病结局的比较发现，效应量和显著结果的数量差异很大，没有哪一个模型全面胜出。已有的验证样本也偏向欧洲与东亚人群。至于市面上寄一管唾液回来告诉你"你的生物学年龄是 34.7 岁"的商业检测：那个小数点后的一位，是这套方法目前给不出的精度。把它当作一个人群层面的研究工具，比当作一份体检报告更接近它的真实身份。</p>
+  </div>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">峰值之后 · 关键数字</div>
+    <table>
+      <tr><td class="k">肌肉量流失（30 岁后）</td><td class="v">3–8% / 十年</td><td class="n">60 岁后加快；肌力降得比肌量更快</td></tr>
+      <tr><td class="k">肌力流失（中年后）</td><td class="v">10–15% / 十年</td><td class="n">先失去发力，后失去体积</td></tr>
+      <tr><td class="k">最大摄氧量</td><td class="v">↓ 8–10% / 十年</td><td class="n">久坐者更陡；训练可显著改变坡度</td></tr>
+      <tr><td class="k">一秒用力呼气量（FEV1）</td><td class="v">−25 ~ −30 mL / 年</td><td class="n">25–35 岁见顶之后</td></tr>
+      <tr><td class="k">肾小球滤过率</td><td class="v">−0.8 ~ −1 mL/min·年</td><td class="n">约自 35–40 岁起，全程几乎无症状</td></tr>
+      <tr><td class="k">老花越线年龄</td><td class="v">40–45 岁</td><td class="n">调节力其实自童年起就在降</td></tr>
+      <tr><td class="k">晶状体调节力</td><td class="v">≈14 D → 1–2 D</td><td class="n">8 岁 → 50 岁；近点从 7 cm 退到半米外</td></tr>
+      <tr><td class="k">高频听力起点</td><td class="v">十几到二十几岁</td><td class="n">8 kHz 以上先失守；毛细胞不再补新</td></tr>
+      <tr><td class="k">最大心率回归式（男性样本）</td><td class="v">208 − 0.7 × 年龄</td><td class="n">个体标准差 ±7–11 次/分，非个体定律</td></tr>
+      <tr><td class="k">最大心率回归式（女性样本）</td><td class="v">206 − 0.88 × 年龄</td><td class="n">Gulati 等 2010，5400+ 名女性</td></tr>
+      <tr><td class="k">通气储备</td><td class="v">15–25 ×</td><td class="n">静息 ~6 L/min → 最大 100–150 L/min（第 5 章）</td></tr>
+      <tr><td class="k">晶体智力峰值</td><td class="v">60–70 岁</td><td class="n">处理速度峰值在十八九到二十出头（第 24 章）</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">为什么说"三十岁以后开始走下坡"是个粗糙的说法？</div>
+      <div class="opts">
+        <button>因为衰退其实从五十岁才真正开始</button>
+        <button data-c="1">因为各项功能的峰值年龄从十几岁一直散到七十岁，并不同步</button>
+        <button>因为下坡的速度对每个人都一样，与年龄无关</button>
+        <button>因为只有肌肉会衰退，其他器官不会</button>
+      </div>
+      <div class="explain">高频听力和处理速度在二十岁前后就过了顶，而词汇量、常识这类晶体智力常常要到六七十岁才见顶。顺带说一个容易忽略的推论：既然峰值散布这么开，任何单一指标算出的"身体年龄"都只是从一条曲线上取的一点，代表不了整座山。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">老花（看不清近处）的直接机制是什么？</div>
+      <div class="opts">
+        <button>眼球被压扁，焦点落到了视网膜后面</button>
+        <button>视网膜上负责近距离的细胞减少了</button>
+        <button data-c="1">晶状体终生添加新纤维、核心被挤得越来越硬，调节力逐年下降</button>
+        <button>角膜的曲率在四十岁前后突然改变</button>
+      </div>
+      <div class="explain">调节力从八岁的约十四个屈光度降到五十岁的一两个，是一条从童年就开始的斜线；四十到四十五岁不过是它穿过"看清餐桌"这条生活线的时刻。附带一个冷知识：晶状体正中心那团蛋白质是你在子宫里造的，一辈子没换过——它是你身上最年长的那批分子之一。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">"器官储备"最准确的含义是？</div>
+      <div class="opts">
+        <button>身体里预先囤好的一批备用组织，用完即止</button>
+        <button data-c="1">器官能力的上限与日常需求之间的空档——衰退先吃掉的是空档</button>
+        <button>年轻时锻炼存下的、可以随时提取的体能</button>
+        <button>血液里储存的氧气和葡萄糖总量</button>
+      </div>
+      <div class="explain">储备是容量而非存货，所以它解释了"曲线平滑、感受突然"这个反差。它也解释了老年医学里的一件事：同一场肺炎在年轻人身上是一周的插曲，在余量已薄的老人身上可能就此改变活动能力——病没有更重，是可淹的滩地没有了。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">关于「220 − 年龄」这个最大心率公式，下面哪一条最要紧？</div>
+      <div class="opts">
+        <button>它算出来的数字偏低，应该改用 230 减年龄</button>
+        <button>它只适用于运动员，普通人不必参考</button>
+        <button data-c="1">它是人群回归线而非个体定律，个体标准差约 7–11 次/分，且早期数据以男性受试者为主</button>
+        <button>它是从大规模随机对照试验中得出的严谨结论</button>
+      </div>
+      <div class="explain">用更大样本重做得到的是 208 − 0.7 × 年龄；而 2010 年 Gulati 等人用五千四百多名女性的数据得到 206 − 0.88 × 年龄，五十岁时与旧公式相差约八次/分。这个差额足以让一部分女性在运动试验里被误判为"心率反应不足"——第 19 章那条线在这里又露了一次头。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">一位六十五岁的资深医生，在哪方面通常仍胜过年轻住院医？</div>
+      <div class="opts">
+        <button>单纯的反应速度和注意力切换速度</button>
+        <button>工作记忆能同时端住的事项数量</button>
+        <button data-c="1">"看一眼就觉得不对劲"的模式判断——依赖几十年攒下的经验库</button>
+        <button>以上三项都胜出</button>
+      </div>
+      <div class="explain">处理速度和工作记忆容量确实随龄下行，这两项年轻人占优。但晶体智力走的是相反方向：模式库的积累本身需要时间，所以它的峰值只能来得晚。这正是第 24 章"代偿"的起点——老年大脑的策略不是跑得更快，而是走另一条路。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第四幕 磨损与谢幕</div>
+  <div class="title">第 22 章 · 更年期与中年转折</div>
+  <p>本章的坡大多平缓，中年却有一道例外：在女性身上，一条激素曲线会在几年之内像悬崖一样掉下去；在男性身上，同一件事拉成了几十年的缓坡。悬崖那一侧带来的不只是潮热和失眠，还有一场持续二十年的医学误读。下一章，我们去看那道坎，和虎鲸。</p>
+  <nav class="footnav">
+    <a href="ch20-reproduction.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch22-midlife.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 图 21-2：逐条曲线高亮 + 切换说明
+  var curves = document.getElementById('curves');
+  var tabs = document.querySelectorAll('#decline-fig .organ-btn');
+  var lines = document.querySelectorAll('#curves .curve');
+  var clbs = document.querySelectorAll('#curves .c-lb');
+  var panes = document.querySelectorAll('#decline-fig .op');
+  function showOrgan(key){
+    var i;
+    curves.classList.add('picked');
+    for (i = 0; i < tabs.length; i++) {
+      tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-organ') === key ? 'true' : 'false');
+    }
+    for (i = 0; i < lines.length; i++) {
+      lines[i].classList.toggle('on', lines[i].getAttribute('class').indexOf('c-' + key) > -1);
+    }
+    for (i = 0; i < clbs.length; i++) {
+      clbs[i].classList.toggle('on', clbs[i].getAttribute('class').indexOf('lb-' + key) > -1);
+    }
+    for (i = 0; i < panes.length; i++) {
+      panes[i].classList.toggle('on', panes[i].getAttribute('data-op') === key);
+    }
+  }
+  for (var t = 0; t < tabs.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){ showOrgan(el.getAttribute('data-organ')); });
+    })(tabs[t]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第15章 · 一夜睡眠 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 15-1 睡眠结构图（本章专用） ---- */
+#hypno-fig .cyc-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#hypno-fig .cyc-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#hypno-fig .cyc-btn:hover{border-color:var(--gold); color:var(--ink);}
+#hypno-fig .cyc-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#hypno-fig .cyc-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#hypno-fig .cyc-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#hypno-fig .cp{display:none;}
+#hypno-fig .cp.on{display:block;}
+#hypno-fig .cp-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#hypno-fig .cp p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+#hypno .grid{stroke:var(--line); stroke-width:1;}
+#hypno .axis{stroke:var(--line); stroke-width:2;}
+#hypno .stage-label{fill:var(--ink-dim); font-size:11.5px;}
+#hypno .tick-label{fill:var(--ink-faint); font-size:11px;}
+#hypno .trace{fill:none; stroke:var(--ink-dim); stroke-width:2.4; stroke-linejoin:round;}
+#hypno .rem-bar{fill:var(--oxy); fill-opacity:.55;}
+#hypno .deep-bar{fill:var(--deoxy); fill-opacity:.45;}
+#hypno .cyc{cursor:pointer; transition:opacity .3s;}
+#hypno.picked .cyc{opacity:.25;}
+#hypno.picked .cyc.on{opacity:1;}
+#hypno .cyc-band{fill:var(--gold); fill-opacity:.06; stroke:var(--line); stroke-dasharray:3 4;}
+#hypno .cyc.on .cyc-band{fill-opacity:.16; stroke:var(--gold);}
+#hypno .cyc-n{fill:var(--ink-faint); font-size:11px;}
+#hypno .cyc.on .cyc-n{fill:var(--gold); font-weight:700;}
+#hypno .legend{fill:var(--ink-faint); font-size:11.5px;}
+
+/* ---- 图 15-2 激素夜班表（本章专用） ---- */
+#nightshift .axis{stroke:var(--line); stroke-width:2;}
+#nightshift .grid{stroke:var(--line); stroke-width:1; stroke-dasharray:2 5;}
+#nightshift .tick-label{fill:var(--ink-faint); font-size:11px;}
+#nightshift .c-gh{fill:none; stroke:var(--gold); stroke-width:2.6;}
+#nightshift .c-cort{fill:none; stroke:var(--oxy); stroke-width:2.6;}
+#nightshift .c-mel{fill:none; stroke:var(--deoxy); stroke-width:2.6;}
+#nightshift .c-temp{fill:none; stroke:var(--green); stroke-width:2.2; stroke-dasharray:6 4;}
+#nightshift .lb{fill:var(--ink); font-size:12px; font-weight:600;}
+#nightshift .cap{fill:var(--ink-faint); font-size:11.5px;}
+@media (prefers-reduced-motion: reduce){
+  #hypno .cyc{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第三幕 满负荷运行 · 第 15 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>一夜睡眠</h1>
+  <p class="subtitle">你以为你关了机。其实是一列每九十分钟到站一次的夜车载着你上上下下，而车上的活儿，白天一样也干不了。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>晚上十一点零五分。灯关了，你躺下，把手机扣在床头柜上。</p>
+  <p>接下来的八小时是你一生中最不设防的一段时间：听不见，看不见，一段时间里连动都动不了。如果把一生的这些时段拼起来，总长约<strong>二十六年</strong>——比你上学、工作、恋爱加起来还长。演化没有理由让一种动物把三分之一的寿命花在一件毫无用处、还容易被吃掉的事情上。</p>
+  <p>所以问题不是"为什么要睡"，而是"睡着的时候在干什么，而且非得睡着才能干"。这一夜我们不睡，跟着看完。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 熄灯</div>
+  <h2>一只沙漏，一张潮汐表</h2>
+  <p>先说你为什么现在困。</p>
+  <p>困意不是一件事，是两件事叠加。它们各走各的，互不请示，只是碰巧在夜里对上了。</p>
+  <p><strong>第一件是沙漏。</strong>你醒着的每一刻，脑细胞都在消耗 ATP；ATP 用掉之后一路拆解，产物之一是<strong>腺苷</strong>。腺苷在脑内累积，作用于相应受体，压低皮层的兴奋性——醒着越久，沙子越多，困意越沉。睡眠期间腺苷被清走，沙漏翻转过来。这就是所谓的"睡眠压力"。</p>
+  <p>咖啡因干的事正是插在这条通路上：它的形状和腺苷相似，能占住腺苷的受体位置却不激活它。<strong>注意，它并没有把沙子倒掉。</strong>沙子照旧在积，只是警报被捂住了；等咖啡因代谢掉，积压的困意会一起涌上来。咖啡因在成年人体内的半衰期约 <strong>3 到 7 小时</strong>，个体差异很大（受基因型、吸烟、口服避孕药等影响）——下午三点那杯，到睡前可能还剩一小半。</p>
+  <p><strong>第二件是潮汐表。</strong>下丘脑里有一小团约两万个神经元的核团，叫视交叉上核，它是全身的节拍器，自带一个接近但不等于 24 小时的周期，每天靠清晨的光校准一次。它并不关心你累不累，只关心现在是几点：到点让核心体温开始下降，到点让松果体分泌褪黑素，到点在天亮前把皮质醇顶上去。</p>
+  <p>顺带纠正一个常见误会：<strong>褪黑素不是安眠药，是报时的钟声。</strong>它本身镇静作用很弱，真正的功能是通报"生物学意义上的夜晚开始了"。夜里开灯——尤其是短波长的蓝光——会推迟它的分泌，于是钟声晚敲，你也就晚困。</p>
+  <p>两件事凑在一起，才有了正常的入睡：沙子积够了，潮汐表也说该退潮了。<strong>沙漏管"多困"，潮汐表管"何时困"。</strong>这个区分很有用——它解释了为什么熬了个通宵之后，天亮前后反而会短暂地精神一阵：沙子满得不能再满，可潮汐表这时正在喊起床。</p>
+  <p>它也划出了补觉的边界：睡个回笼觉能倒掉一部分沙子，却改不动那张表。周末连着两天晚睡晚起，等于把自己送去了一个时区；周一早上那种钝痛，是时差，不是懒。</p>
+
+  <h3>有一段人生，整张表被往后挪了</h3>
+  <p>第 12 章留下过一条线索：进入青春期之后，褪黑素开始分泌的时点会推迟<strong>一到三小时</strong>。</p>
+  <p>这不是作息习惯，是那张潮汐表本身整体后移了。于是青少年在该睡的时候不困——生物学意义上的夜晚还没开始——第二天早上又叫不醒。"晚上不肯睡、早上起不来"看起来像两桩懒散，其实是同一条曲线被推后之后的两个端点。</p>
+  <p>问题在于，这段人生恰好撞上一个普遍很早的上学时间。美国儿科学会 2014 年据此建议中学不宜早于八点半开课；真正有意思的是随后的实测。2016 至 2017 学年，西雅图把两所公立高中的开课时间从 7:50 推迟到 8:45。研究者没有发问卷，而是给前后两届学生戴上腕式记录仪<strong>客观测量</strong>实际睡眠：改制后每人每晚多睡约 <strong>34 分钟</strong>，课堂成绩提高约 4.5%，第一节课的迟到与缺勤也减少了。</p>
+  <p>这项证据有边界：一个城市、两所学校、非随机分组。但它至少排除了最常见的那个质疑——"孩子只会把多出来的时间用来熬夜"。腕表记录显示他们的入睡时间几乎没变，多出来的睡眠全部来自早晨那一头。</p>
+  <p>顺着这条线容易推出一个错误结论：推迟上课等于纵容孩子睡懒觉。恰恰相反——<strong>被推后的是生物钟，不是意志力；改动上课时间，是把社会时间挪回去对上生物时间。</strong></p>
+  <p>23:20 前后，两条线交汇。意识断了。</p>
+  <p>说"断了"是准确的。几乎没有人能回忆起自己入睡的那一瞬间——你记得躺下，记得翻身，然后就是早晨。原因在于，把当下的经验写成可回忆的记忆需要海马参与，而海马在你真正睡着之前就已经先一步"下班"了。<strong>入睡这件事，本身就发生在记录设备关掉之后。</strong>这也是失眠的人常常低估自己睡眠时长的原因之一：浅睡时段没被记下来，主观上就等于没睡。</p>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 下潜</div>
+  <h2>第一轮：一路沉到最底</h2>
+  <p>入睡不是掉下悬崖，是走下一道缓坡。整夜的形状记录下来就是图 15-1 那张<strong>睡眠结构图</strong>，横轴是时间，纵轴是深浅——一列夜车，每 <strong>90 分钟</strong>上上下下走一个来回，一夜四到六轮。</p>
+  <p>第一轮下潜得最深。</p>
+  <p><strong>N1 期</strong>只有几分钟，浅得几乎不算睡着：这时候把你叫醒，你多半会说"我没睡"。有些人会在此刻猛地一抽——那种踩空的感觉叫入睡抽动，机制尚无定论，常见且无害。</p>
+  <p><strong>N2 期</strong>是一夜里占比最大的阶段，约<strong>四成半到五成半</strong>。脑电图上会冒出两样东西：一串持续一秒上下的快速波形，叫<em>睡眠纺锤波</em>；以及一个孤零零的大幅波动，叫<em>K 复合波</em>。目前普遍认为纺锤波与记忆的固化和"隔音"有关——纺锤波多的人，在噪音中更不容易被吵醒。</p>
+  <p><strong>N3 期</strong>是深睡，也叫慢波睡眠。脑电波变得又慢又大，成千上万的神经元开始同步地一起起落——白天它们各干各的，此刻却像一片林子里的树蛙忽然对上了拍子。这一期占成年人整夜的 <strong>13% 到 23%</strong>，而且分布得很不均匀：大半集中在前半夜，后半夜几乎见不到。</p>
+  <p>所以那句"睡前半夜最重要"并非全无道理。它准确的意思是：如果你只睡四小时，你牺牲掉的主要是 REM；如果你两点才睡，你牺牲掉的主要是深睡。<strong>少睡与晚睡，砍掉的不是同一样东西。</strong></p>
+
+  <figure id="hypno-fig">
+    <div class="switch-row">
+      <span class="switch-hint">点周期看发生了什么 →</span>
+      <div class="cyc-tabs" role="group" aria-label="选择一个睡眠周期">
+        <button class="cyc-btn" data-cyc="c1" aria-pressed="false">第 1 轮</button>
+        <button class="cyc-btn" data-cyc="c2" aria-pressed="false">第 2 轮</button>
+        <button class="cyc-btn" data-cyc="c3" aria-pressed="false">第 3 轮</button>
+        <button class="cyc-btn" data-cyc="c4" aria-pressed="false">第 4 轮</button>
+        <button class="cyc-btn" data-cyc="c5" aria-pressed="false">第 5 轮</button>
+      </div>
+    </div>
+    <svg id="hypno" viewBox="0 0 760 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="一夜睡眠结构图：五个约九十分钟的周期，前半夜深睡为主，后半夜快速眼动睡眠为主">
+      <line class="axis" x1="96" y1="250" x2="716" y2="250"/>
+      <text class="stage-label" x="88" y="56" text-anchor="end">清醒</text>
+      <text class="stage-label" x="88" y="94" text-anchor="end">REM</text>
+      <text class="stage-label" x="88" y="132" text-anchor="end">N1</text>
+      <text class="stage-label" x="88" y="170" text-anchor="end">N2</text>
+      <text class="stage-label" x="88" y="208" text-anchor="end">N3 深睡</text>
+      <line class="grid" x1="96" y1="52" x2="716" y2="52"/>
+      <line class="grid" x1="96" y1="90" x2="716" y2="90"/>
+      <line class="grid" x1="96" y1="128" x2="716" y2="128"/>
+      <line class="grid" x1="96" y1="166" x2="716" y2="166"/>
+      <line class="grid" x1="96" y1="204" x2="716" y2="204"/>
+
+      <g class="cyc" data-cyc="c1">
+        <rect class="cyc-band" x="96" y="40" width="124" height="200"/>
+        <text class="cyc-n mono" x="158" y="266" text-anchor="middle">第 1 轮</text>
+        <rect class="deep-bar" x="140" y="198" width="52" height="12" rx="3"/>
+      </g>
+      <g class="cyc" data-cyc="c2">
+        <rect class="cyc-band" x="220" y="40" width="124" height="200"/>
+        <text class="cyc-n mono" x="282" y="266" text-anchor="middle">第 2 轮</text>
+        <rect class="deep-bar" x="256" y="198" width="38" height="12" rx="3"/>
+        <rect class="rem-bar" x="316" y="84" width="24" height="12" rx="3"/>
+      </g>
+      <g class="cyc" data-cyc="c3">
+        <rect class="cyc-band" x="344" y="40" width="124" height="200"/>
+        <text class="cyc-n mono" x="406" y="266" text-anchor="middle">第 3 轮</text>
+        <rect class="deep-bar" x="374" y="198" width="18" height="12" rx="3"/>
+        <rect class="rem-bar" x="428" y="84" width="36" height="12" rx="3"/>
+      </g>
+      <g class="cyc" data-cyc="c4">
+        <rect class="cyc-band" x="468" y="40" width="124" height="200"/>
+        <text class="cyc-n mono" x="530" y="266" text-anchor="middle">第 4 轮</text>
+        <rect class="rem-bar" x="546" y="84" width="44" height="12" rx="3"/>
+      </g>
+      <g class="cyc" data-cyc="c5">
+        <rect class="cyc-band" x="592" y="40" width="124" height="200"/>
+        <text class="cyc-n mono" x="654" y="266" text-anchor="middle">第 5 轮</text>
+        <rect class="rem-bar" x="662" y="84" width="52" height="12" rx="3"/>
+      </g>
+
+      <polyline class="trace" points="96,52 112,52 118,128 130,166 140,204 176,204 192,166 206,128 214,90 220,90 232,166 256,204 288,204 300,166 312,128 316,90 340,90 348,166 374,204 392,204 404,166 416,128 428,90 464,90 472,166 486,166 496,128 508,128 520,90 590,90 598,166 612,166 622,128 634,128 646,90 714,90"/>
+
+      <line class="axis" x1="96" y1="250" x2="96" y2="256"/><text class="tick-label mono" x="96" y="290" text-anchor="middle">23:20</text>
+      <line class="axis" x1="220" y1="250" x2="220" y2="256"/><text class="tick-label mono" x="220" y="290" text-anchor="middle">00:50</text>
+      <line class="axis" x1="344" y1="250" x2="344" y2="256"/><text class="tick-label mono" x="344" y="290" text-anchor="middle">02:20</text>
+      <line class="axis" x1="468" y1="250" x2="468" y2="256"/><text class="tick-label mono" x="468" y="290" text-anchor="middle">03:50</text>
+      <line class="axis" x1="592" y1="250" x2="592" y2="256"/><text class="tick-label mono" x="592" y="290" text-anchor="middle">05:20</text>
+      <line class="axis" x1="716" y1="250" x2="716" y2="256"/><text class="tick-label mono" x="716" y="290" text-anchor="middle">06:50</text>
+
+      <rect class="deep-bar" x="96" y="308" width="16" height="11" rx="2"/>
+      <text class="legend" x="120" y="318" text-anchor="start">N3 深睡 · 集中在前半夜</text>
+      <rect class="rem-bar" x="300" y="308" width="16" height="11" rx="2"/>
+      <text class="legend" x="324" y="318" text-anchor="start">REM · 越到后半夜越长</text>
+      <text class="legend" x="716" y="318" text-anchor="end">示意图 · 个体与夜间差异很大</text>
+    </svg>
+    <div class="cyc-panel">
+      <div class="cp on" data-cp="0">
+        <div class="cp-t">一夜的形状</div>
+        <p>点上方任意一轮，看那九十分钟里在发生什么。留意整夜的不对称：深睡挤在前半夜，REM 越靠后越长——所以"少睡两小时"和"晚睡两小时"砍掉的不是同一样东西。</p>
+      </div>
+      <div class="cp" data-cp="c1">
+        <div class="cp-t">第 1 轮 · 23:20–00:50 · 深睡最长的一轮</div>
+        <p>下潜最深、停留最久的一轮，几乎没有 REM。生长激素在这一段出现全天最大的一次脉冲；脑脊液的流动也在此时明显增强。被人此刻叫醒最难受——那种懵上好几分钟的状态叫睡眠惯性。</p>
+      </div>
+      <div class="cp" data-cp="c2">
+        <div class="cp-t">第 2 轮 · 00:50–02:20 · 深睡仍占主导</div>
+        <p>深睡时长开始缩短，第一段像样的 REM 出现在尾部。梦游、夜惊、说梦话这类"从深睡里被半唤醒"的现象基本发生在前两轮，所以多在上半夜。</p>
+      </div>
+      <div class="cp" data-cp="c3">
+        <div class="cp-t">第 3 轮 · 02:20–03:50 · 天平开始倾斜</div>
+        <p>深睡只剩薄薄一层，REM 明显变长。核心体温正滑向全天最低点（约凌晨 4–5 点，比日间低 0.5–1℃）——这也是人在凌晨最容易觉得冷的原因。</p>
+      </div>
+      <div class="cp" data-cp="c4">
+        <div class="cp-t">第 4 轮 · 03:50–05:20 · REM 的主场</div>
+        <p>几乎不再有深睡。REM 段落变长，眼球在眼睑下快速扫动，脑代谢接近清醒水平，而颈部以下的骨骼肌被主动锁住。绝大多数能被回忆起来的梦来自这一段。</p>
+      </div>
+      <div class="cp" data-cp="c5">
+        <div class="cp-t">第 5 轮 · 05:20–06:50 · 收尾与交班</div>
+        <p>最长的一段 REM 常在此出现——所以你记住的梦往往是天亮前那个。皮质醇正被节律推高，体温回升，身体在为醒来做准备。此时自然醒最不难受。</p>
+      </div>
+    </div>
+    <figcaption><b>图 15-1 · 一夜的形状。</b>五个约九十分钟的周期，深浅交替。整夜结构是不对称的：N3 深睡（蓝）密集在前两轮，REM（红）越靠后越长，最后一轮的 REM 可达三四十分钟。时间轴按 23:20 入睡绘制；周期长度在 70 到 110 分钟之间浮动，个体与夜间差异都很大。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 冲洗</div>
+  <h2>深睡时，脑子里涨了一次潮</h2>
+  <p>00:10。你在第一轮深睡的底部。脑电波又慢又大，全身放松，心率和体温都降到低位。</p>
+  <p>此时脑子里发生了一件二十一世纪才被看清的事。</p>
+  <p>先交代一个背景：身体各处都有淋巴管负责把组织间隙里的废物运走——唯独大脑没有传统意义上的淋巴管。那么神经元代谢产生的废料去哪儿了？这个问题悬了很久。</p>
+  <p>2012 年前后，Maiken Nedergaard 团队在小鼠身上给出了一个答案：脑脊液沿血管外围的间隙进入脑组织，与组织液交换后再从静脉周围流出，把可溶性废物带走；由于高度依赖胶质细胞上的水通道，他们称之为<strong>类淋巴系统</strong>。次年，同一实验室报告了更引人注目的一步：睡眠中小鼠脑内的间隙体积明显增大，脑脊液流入随之增强，若干代谢产物（包括与阿尔茨海默病相关的 β-淀粉样蛋白）的清除也更快。</p>
+  <p>这个画面很容易被讲成"大脑的下水道夜里开闸冲洗"。它抓住了要点，但顺着这个说法往下推会推出两个错误结论，值得就地拆掉。<strong>其一，它不是一套管道。</strong>没有专门的水管和阀门，那是围绕血管的间隙，靠的是压力波动与浓度差驱动的对流与扩散，"冲洗"的力道远不如自来水。<strong>其二，它不是夜里才开工。</strong>清除全天都在进行，睡眠改变的是效率，而不是开关。</p>
+  <p>更要紧的是，这个方向本身仍在激烈争论中。2024 年有研究报告了相反的观察：在他们的实验条件下，清醒时的清除反而更强。争论的焦点包括麻醉与自然睡眠是否可比、示踪剂的测量方式、以及不同物种间能否外推。与此同时，人类这边的直接证据一直难做——你没法把示踪剂随便注进健康人的脑子里。</p>
+  <p>所以本章的稳妥表述是：<strong>睡眠与脑内废物清除之间存在联系，这一点证据越来越多；但"睡眠是清除的主要时段"这一强版本，尚未定论。</strong>这一节的前沿窗口会交代最新一轮进展。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>有些动物能只睡半个脑子。</strong>海豚不能像你这样彻底断线——它必须主动上浮换气，睡死就淹死了。它的解法是让左右两个半球轮流睡：一侧脑电呈现慢波，另一侧保持清醒，对侧那只眼睛还睁着。轮完一班再换边。</p>
+    <p>许多鸟类也被认为会这一手，但证据分量差别很大：目前唯一在<em>飞行途中</em>实测到脑电的是<strong>军舰鸟</strong>——2016 年有研究把微型记录仪装上它们，发现连续飞行数日期间每天睡眠总量不足一小时，且确有单半球慢波；信天翁与雨燕长期被推测具备同样本事，却尚无同一量级的飞行中脑电证据。这些例子说明两件事：睡眠可以被压缩、拆分、局部化，形式相当灵活；但没有哪种鸟兽把它彻底取消，可见它并非可有可无。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 放映</div>
+  <h2>凌晨四点，你被绑在床上做梦</h2>
+  <p>04:30。第四轮。你的眼球正在眼睑底下快速地左右扫动，呼吸和心率变得不规则，脑的耗氧量接近清醒水平——而从脖子往下，几乎所有骨骼肌都被主动切断了指令，动弹不得。</p>
+  <p>这是<strong>快速眼动睡眠（REM）</strong>：一个大脑接近清醒、身体却被上了锁的阶段。有人形象地把它叫作"矛盾睡眠"。</p>
+
+  <h3>1953 年，一个用儿子做被试的研究生</h3>
+  <p>发现它的过程带着一点手工时代的味道。</p>
+  <p>1951 年的芝加哥大学，一位叫 <strong>Eugene Aserinsky</strong> 的研究生正陷在窘境里：经费近乎没有，导师 Nathaniel Kleitman 给他的课题是观察婴儿眨眼，前景暗淡，他甚至一度带着家人住在实验楼里。他从库房翻出一台旧的脑电记录仪，修好后决定通宵记录睡眠。</p>
+  <p>第一个愿意被整夜接上电极的被试，是他八岁的儿子 <strong>Armond</strong>。</p>
+  <p>纸带走了几个小时之后，记录笔忽然在眼动通道上画出一串剧烈的摆动。Aserinsky 的第一反应是仪器坏了——孩子明明睡着，眼睛怎么会动得像醒着一样？他跑进房间确认，孩子睡得很沉。这样的爆发一夜之间反复出现了好几次，而且间隔得相当规整。</p>
+  <p>1953 年，他和 Kleitman 把结果发表在《科学》上，只有短短两页。他们还做了一件关键的事：在这种眼动爆发期间把被试叫醒，大多数人报告自己正在做一个有情节的梦；在其他阶段叫醒，则很少如此。<strong>睡眠从此不再是一段均匀的空白，而成了一个有结构、有节目单的过程。</strong>这两页纸开启了现代睡眠科学。</p>
+
+  <h3>锁住身体，是为了别把梦演出来</h3>
+  <p>REM 期的肌肉麻痹由脑干的一组神经元主动施加，是保护措施：如果梦里在跑，而腿真的跟着跑，后果不难想象。</p>
+  <p>这不是假想。当这套锁失灵，就成了一种真实存在的疾病——REM 睡眠行为障碍，患者会把梦中的动作实打实做出来，踢打、喊叫、跌下床。反过来，锁在你醒来时没及时解开，就是所谓"鬼压床"：意识回来了，身体还锁着，几十秒到几分钟——听着吓人，其实只是两边没同步。</p>
+  <p>REM 期还有一件事值得一提：与警觉、应激密切相关的去甲肾上腺素在这一阶段降到全天最低。有研究者据此提出，REM 提供了一个"没有应激化学背景的环境"，让白天带情绪的记忆得以被重新处理：事还记得，那股劲儿淡了。这个说法颇有影响力，但请注意它仍属假说，人类证据以相关性研究为主。</p>
+  <p>至于记忆，目前证据较为一致的图景是分工的：<strong>深睡更多与事实和事件类记忆的固化有关</strong>（海马把白天的记录反复回放给皮层，像把当天散落的乐谱按声部归档），<strong>REM 更多与技能、模式和情绪素材的整合有关</strong>。这也解释了一个学生们都验证过的现象：临考前熬通宵背下来的东西，忘得格外快——你跳过了归档的那一晚。</p>
+  <h3>第 9 章欠下的那一笔</h3>
+  <p>第 9 章讲大脑"建了又拆"时留过一句话：修剪与巩固有相当一部分是在睡觉时进行的。现在把它补上。</p>
+  <p>一个颇有影响力的解释叫<strong>突触稳态假说</strong>。出发点很朴素：你清醒的每一刻都在学习，而学习几乎总是在<em>增强</em>突触连接。一整天下来全脑的连接强度只升不降，代价是能量与空间都逼近上限，更麻烦的是——什么都变强了就等于什么都没变强，有用的东西再也无法从背景里分辨出来。</p>
+  <p>按这个假说，深睡的慢波干的正是相反的事：把全脑的突触<strong>按比例普遍调弱</strong>，而白天被反复激活过的那些相对保留下来。结果不是删掉记忆，而是<em>提高对比度</em>——重要的之所以凸显，不是因为它被加高了，是因为周围的都降下去了。积雪化尽的山野就是这个样子：白茫茫的一层褪下去，原本被雪填平的沟壑与石棱，形状才第一次显出来；融雪并没有把石头垫高。</p>
+  <p>要留有余地：这一假说的直接证据主要来自动物模型和人类的间接指标，调弱的幅度与普适性仍在争论。</p>
+  <p>第 9 章还留了另一笔：海马的一小片区域（齿状回）终生可能仍在添新的神经元。它与睡眠确实有关——啮齿类实验中，持续的睡眠剥夺会明显压低这批新生细胞的存活率。但人类这一条至今没有定论：2018 年两篇几乎同时发表的论文给出了相反结果，一篇在成年人脑组织里几乎找不到新生神经元，另一篇报告直到七十多岁仍能找到，分歧很大程度上落在组织如何固定、用什么标记这类技术细节上。这条线第 23 章还会再碰一次。</p>
+  <p>最后说说梦为什么留不住。你一夜大约有一个半到两小时在做梦，可醒来记得的通常只有一个片段，还在几分钟内褪色。一个被广泛讨论的解释与前面那条线索有关：把短期经验固定成长期记忆需要去甲肾上腺素这类递质参与，而它在 REM 期几乎归零——于是梦被体验了，却没被写进去。这也解释了为什么半夜醒过一次的人更容易记住梦：你在放映中途开了灯。</p>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 夜班</div>
+  <h2>你睡着的时候，内分泌在上班</h2>
+  <p>整夜还有另一条并行的时间表：激素的夜班（图 15-2）。</p>
+  <p><strong>生长激素</strong>是最典型的一个。它全天呈脉冲式分泌，而最大的一次脉冲紧跟着第一轮深睡出现，一夜的分泌量有相当大的比例集中在这段时间。第 11 章讲骨骼变长时说过，生长激素在深夜脉冲式发放——所谓"睡觉长个子"不是哄小孩的说法，更准确的版本是"深睡长个子"。成年之后这条通路依然在，只是转而服务于组织修复：昨晚那次跑步造成的微小损伤，主要在今夜被处理。</p>
+  <p><strong>皮质醇</strong>的曲线正好相反。它在后半夜开始爬升，在你醒来前后半小时到一小时冲到全天最高——不是因为你醒了才升，而是它在为你醒来做准备：动员血糖、抬升血压、提高警觉。所谓"起床气"里有一部分是这条曲线的物理后果。</p>
+  <p><strong>褪黑素</strong>通常在睡前一两个小时开始分泌，午夜前后达峰，天亮前退场。它是那口报时的钟，不是安眠药。</p>
+  <p>还有两个和食欲相关的：<strong>瘦素</strong>（报告"存货充足"）与<strong>胃饥饿素</strong>（报告"该吃了"）。多项睡眠限制实验发现，把睡眠压到四五个小时连续数日，瘦素下降、胃饥饿素上升，主观食欲增加且偏好高糖高脂食物。这类研究样本量普遍不大、周期也短，但方向相当一致：<strong>缺觉不只让你困，还会改变你觉得自己需要吃多少。</strong></p>
+
+  <figure>
+    <svg id="nightshift" viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="一夜之中生长激素、皮质醇、褪黑素与核心体温的变化曲线">
+      <line class="axis" x1="80" y1="240" x2="716" y2="240"/>
+      <line class="grid" x1="80" y1="60" x2="716" y2="60"/>
+      <line class="grid" x1="80" y1="120" x2="716" y2="120"/>
+      <line class="grid" x1="80" y1="180" x2="716" y2="180"/>
+
+      <path class="c-gh" d="M80 232 L120 230 L138 96 L156 150 L186 214 L230 226 L250 176 L268 220 L330 232 L352 206 L370 230 L470 234 L500 224 L520 234 L700 236"/>
+      <path class="c-cort" d="M80 236 L200 234 L320 224 L420 198 L500 150 L570 96 L630 64 L680 74 L716 92"/>
+      <path class="c-mel" d="M80 216 L120 152 L200 104 L300 86 L400 92 L500 122 L580 176 L650 214 L716 232"/>
+      <path class="c-temp" d="M80 130 L160 152 L260 176 L360 194 L440 196 L520 180 L610 150 L716 118"/>
+
+      <text class="lb" x="150" y="86" text-anchor="start" fill="var(--gold)">生长激素 · 深睡时的大脉冲</text>
+      <text class="lb" x="636" y="54" text-anchor="end" fill="var(--oxy)">皮质醇 · 醒来前冲顶</text>
+      <text class="lb" x="300" y="74" text-anchor="middle" fill="var(--deoxy)">褪黑素 · 午夜前后达峰</text>
+      <text class="lb" x="420" y="216" text-anchor="middle" fill="var(--green)">核心体温 · 凌晨 4–5 点最低</text>
+
+      <text class="tick-label mono" x="80" y="260" text-anchor="middle">23:00</text>
+      <text class="tick-label mono" x="240" y="260" text-anchor="middle">01:00</text>
+      <text class="tick-label mono" x="400" y="260" text-anchor="middle">03:00</text>
+      <text class="tick-label mono" x="560" y="260" text-anchor="middle">05:00</text>
+      <text class="tick-label mono" x="716" y="260" text-anchor="middle">07:00</text>
+      <text class="cap" x="80" y="286" text-anchor="start">纵轴为各自的相对水平（不同激素之间不可比）；曲线为典型形状示意，个体与作息差异很大。</text>
+    </svg>
+    <figcaption><b>图 15-2 · 激素的夜班表。</b>四条线各走各的班：生长激素跟着深睡走（所以它的大脉冲挤在前半夜），皮质醇在醒来前冲顶，褪黑素在午夜前后达峰，核心体温在凌晨四五点探底。值得注意的是它们的<em>触发方式</em>不同——生长激素跟的是睡眠阶段，皮质醇与褪黑素跟的是生物钟。熬夜时前者被推迟，后者照常，两者由此错位。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 6 节 ==================== -->
+<section id="s6">
+  <div class="eyebrow">06 · 欠账</div>
+  <h2>不睡会怎样：一个十七岁少年的十一天</h2>
+  <p>1963 年冬天，圣地亚哥的高中生 <strong>Randy Gardner</strong> 和同学在琢磨科学展的题目。他们最后选了一个笨到极点也大胆到极点的方案：看一个人能多久不睡。</p>
+  <p>抽签决定由 Gardner 上。1963 年 12 月 28 日早上六点，十七岁的他最后一次醒来，此后连续 <strong>264 小时</strong>——十一天——没有睡觉。</p>
+  <p>消息传开后，斯坦福的睡眠研究者 William Dement 赶来监测，一位海军医官也参与了记录。同伴的任务是不让他睡着：打篮球、开车兜风、去街机厅玩弹球。</p>
+  <p>过程比"很困"复杂得多。第二天他就难以聚焦视线；第四天出现幻觉与妄想，坚称自己是某位橄榄球明星；再往后短期记忆开始崩解——说话说到一半会忘了自己在说什么。有意思的是，最后一天他仍能在弹球机上赢过 Dement。</p>
+  <p>破纪录之后他睡了约十四小时四十分钟，随后几天逐渐恢复，测查没有发现明显的长期损害——不过这只是一个人、一次事件，谈不上证据。他晚年受访时提到自己长期受失眠困扰并认为可能与那次实验有关；这属于本人的回顾性叙述，无法证实也不能证伪。</p>
+  <p>值得一提的是这个纪录的后续：<strong>吉尼斯世界纪录已不再受理睡眠剥夺类的挑战</strong>，理由是其固有的健康风险。上一章里那位在牛津念出"三分……"的广播员 Norris McWhirter，正是这本书的创办者之一；一本记录人类极限的书，最终亲手划掉了其中一项——有些极限，不值得去碰。</p>
+
+  <h3>补觉能补回什么</h3>
+  <p>好消息是，急性欠账确实能还上一部分，而且身体还账时很有策略：剥夺之后的第一夜，深睡会优先大幅反弹，REM 则在随后的夜里补齐。它先补的是它认为最要紧的那一样。</p>
+  <p>但两件事要说清楚。第一，补的是量，不是时点——周末补觉倒掉了沙子，却把潮汐表越推越晚。第二，慢性的少睡与偶尔的通宵不是一回事：多项研究发现，连续多日每晚只睡五六小时的人，客观表现持续下滑，主观困倦感却会逐渐"适应"，也就是说<strong>你会越来越不知道自己状态有多差</strong>。这大概是缺觉最阴险的一点。</p>
+  <p>顺带补一句性别差异：多项流行病学调查一致发现，女性报告失眠症状的比例约为男性的 1.4 倍，且这一差距在青春期后出现、在更年期前后进一步拉大——提示激素周期参与其中。要注意的是这类数据多基于自我报告，而客观睡眠监测下的差异要小得多；两者的落差本身就是一个尚未讲清楚的问题。第 22 章会回到这条线上。</p>
+
+  <h3>一个把因果关系做实了的实验</h3>
+  <p>缺觉与生病的关联，人人都有体感，但体感证明不了因果——也许是先病了才睡不好。要拆开这个结，得反过来做：先控制睡眠，再<em>主动</em>让人接触病原。</p>
+  <p>2015 年，加州大学旧金山分校的 Aric Prather 团队就做了这件事。他们招募一百六十多名健康成年人，先用腕部活动记录仪客观测量一周的实际睡眠（不是问卷，是实测），再把人请进旅馆隔离，往每人鼻腔里滴入含<strong>鼻病毒</strong>的液体，观察五天，逐日采样并称量用掉的纸巾以判定是否真的发病。</p>
+  <p>结果相当干脆：那一周平均睡眠不足 6 小时的人，发展成感冒的几率约为睡足 7 小时以上者的 <strong>四倍</strong>，且在调整年龄、季节、体重指数、吸烟、压力等因素后仍然存在。</p>
+  <p>这个设计的好处在于顺序是被安排好的——睡眠在前，接触病毒在后，"先睡不好再生病"的解释就排除掉了。边界也清楚：一次实验、一种病毒、样本不大，说明的是关联的方向，不是任何个体的必然结局。</p>
+  <p>而它恰好接上了下一章：那一小群病毒，此刻正好在你的鼻腔后部。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>清洗假说的天平，正在来回摆。</strong>自 2012 年类淋巴系统被提出以来，"睡眠帮助大脑清除废物、从而与痴呆风险相关"一直是这一领域最受关注也最有争议的命题。2024 年一项小鼠研究给出了相反方向的结果，报告清醒时的清除效率反而更高，一度让整个假说被重新审视。2026 年天平又往回摆了一些：一项发表于《自然·通讯》的人类随机交叉试验（约 39 人，比较正常睡眠与睡眠剥夺）报告，正常睡眠后次日清晨血浆中的 β-淀粉样蛋白与 tau 相关标志物水平更高，作者解读为这些蛋白确实在睡眠中被清出脑外、进入外周循环。</p>
+    <p>该怎么看待这种来回？它是正常的：这是一个测量本身极难做到位的问题（示踪、麻醉、物种差异各有陷阱），摇摆恰恰说明还没有哪一方拿到决定性证据。即便清除这条机制最终被下修，"长期睡眠不足与认知衰退风险相关"这一流行病学关联依然立得住——只是相关不等于因果，也可能是早期病理反过来先破坏了睡眠。最后要提醒：目前<strong>没有任何药物被证明能通过"促进清洗"来预防痴呆</strong>，市面上以此为卖点的产品跑在了证据前面。</p>
+  </div>
+
+  <p>06:50。最后一段 REM 结束，皮质醇已经推到高位，体温回升。你睁开眼，对刚过去的八小时几乎没有任何记忆——只除了天亮前那个奇怪的梦。</p>
+  <p>清点一下这一夜的账：记忆归了档，情绪降了温，激素跑完了各自的班，微小的损伤被修补，脑内的间隙被冲刷过一遍。这些活儿没有一样能在你醒着的时候顺带做完。</p>
+  <p>你起身，觉得嗓子有点干，有点痒。你没在意。</p>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">一夜睡眠 · 关键数字</div>
+    <table>
+      <tr><td class="k">一个睡眠周期</td><td class="v">70–110 min</td><td class="n">常说的"90 分钟"是中位数</td></tr>
+      <tr><td class="k">一夜周期数</td><td class="v">4–6 轮</td><td class="n">前深后浅，结构不对称</td></tr>
+      <tr><td class="k">正常入睡潜伏期</td><td class="v">10–20 min</td><td class="n">长期 &lt;5 分钟提示睡眠不足</td></tr>
+      <tr><td class="k">N2 期占比</td><td class="v">45–55%</td><td class="n">纺锤波与 K 复合波出现于此</td></tr>
+      <tr><td class="k">N3 深睡占比</td><td class="v">13–23%</td><td class="n">成年人；大半集中在前两轮</td></tr>
+      <tr><td class="k">REM 占比</td><td class="v">20–25%</td><td class="n">新生儿约 50%，随年龄下降</td></tr>
+      <tr><td class="k">首次 REM 出现</td><td class="v">入睡后 70–100 min</td><td class="n">显著提前是嗜睡症的线索之一</td></tr>
+      <tr><td class="k">咖啡因半衰期</td><td class="v">3–7 h</td><td class="n">个体差异大；它挡警报，不倒沙子</td></tr>
+      <tr><td class="k">核心体温夜间低谷</td><td class="v">凌晨 4–5 点</td><td class="n">比日间低 0.5–1 ℃</td></tr>
+      <tr><td class="k">生长激素</td><td class="v">深睡时最大脉冲</td><td class="n">全天分泌相当大比例集中于此</td></tr>
+      <tr><td class="k">已记录的清醒剥夺</td><td class="v">264 h</td><td class="n">1963–64 年；吉尼斯 1997 年起停止受理此类纪录</td></tr>
+      <tr><td class="k">一生睡眠总量</td><td class="v">~26 年</td><td class="n">按每日 8 小时、80 年计</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">咖啡因让人不困，靠的是什么机制？</div>
+      <div class="opts">
+        <button>加快腺苷的分解，直接清除睡眠压力</button>
+        <button data-c="1">形状与腺苷相似，占住受体却不激活它——警报被捂住，沙子照旧在积</button>
+        <button>提高褪黑素水平，重置生物钟</button>
+        <button>直接增加大脑的能量供应</button>
+      </div>
+      <div class="explain">所以咖啡因代谢掉之后，积压的困意会一起涌上来。它的半衰期在成人约 3–7 小时且个体差异极大——下午三点那杯到睡前可能还剩一小半。要区分两套系统：腺苷是沙漏（管"多困"），视交叉上核的节律是潮汐表（管"何时困"）；咖啡因只作用在沙漏那一侧。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">"少睡两小时"和"晚睡两小时"，被牺牲掉的主要是什么？</div>
+      <div class="opts">
+        <button>两者一样，都是等比例减少各阶段</button>
+        <button data-c="1">少睡主要砍掉后半夜的 REM，晚睡主要砍掉前半夜的深睡</button>
+        <button>两者砍掉的都是 N1 浅睡，影响不大</button>
+        <button>晚睡不影响结构，只是整体后移</button>
+      </div>
+      <div class="explain">整夜结构是不对称的：N3 深睡大半挤在前两轮，REM 越靠后越长，最后一轮可达三四十分钟。这个不对称也解释了别的事——梦游、夜惊这类"从深睡里被半唤醒"的现象基本发生在上半夜，而你能回忆起来的梦多半来自天亮前那一段。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">关于类淋巴系统与睡眠清除废物，下面哪个说法最符合当前的证据状况？</div>
+      <div class="opts">
+        <button>已经证实大脑有一套专用管道，仅在夜间开闸冲洗</button>
+        <button>该假说已被 2024 年的研究彻底推翻</button>
+        <button data-c="1">睡眠与脑内废物清除存在联系的证据在增加，但"睡眠是清除的主要时段"这一强版本尚有争论</button>
+        <button>已有药物可通过促进清洗来预防痴呆</button>
+      </div>
+      <div class="explain">两个常见的外推都要拆掉：它不是管道（是血管周围的间隙，靠对流与扩散驱动），也不是夜里才开工（清除全天进行，睡眠改变的是效率）。2024 年有研究报告清醒时清除更强，2026 年一项人类随机交叉试验又给出支持睡眠清除的证据——结论摇摆恰恰说明这是个测量极难做到位的问题。目前没有任何药物被证明能靠"促进清洗"预防痴呆。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">Aserinsky 1953 年发现 REM 时，他最初的反应是什么？</div>
+      <div class="opts">
+        <button>立刻意识到这是一个全新的睡眠阶段</button>
+        <button data-c="1">以为仪器坏了——孩子明明睡着，眼动通道却画出了像醒着一样的剧烈摆动</button>
+        <button>认为被试在装睡</button>
+        <button>判断那是癫痫样放电</button>
+      </div>
+      <div class="explain">第一个被试是他八岁的儿子 Armond；那台脑电记录仪是他从库房里翻出来修好的。真正把这个发现变成科学的是随后那一步：在眼动爆发期间叫醒被试，多数人报告正在做有情节的梦，其他阶段则很少。睡眠从此不再是一段均匀的空白，而成了有结构、有节目单的过程。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">连续多日每晚只睡五六小时，最阴险的后果是什么？</div>
+      <div class="opts">
+        <button>客观表现下降，主观上也会同步感到越来越困</button>
+        <button data-c="1">客观表现持续下滑，主观困倦感却逐渐"适应"——你会越来越不知道自己状态有多差</button>
+        <button>身体会完全适应，几天后各项指标恢复正常</button>
+        <button>只影响记忆，不影响反应速度</button>
+      </div>
+      <div class="explain">这与偶尔通宵不同：急性欠账后身体还账很有策略——第一夜深睡优先大幅反弹，REM 在随后几夜补齐，它先补它认为最要紧的。但补的是量不是时点，周末补觉倒掉了沙子，却把潮汐表推得更晚，周一早上那种钝痛本质上是时差。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第三幕 满负荷运行</div>
+  <div class="title">第 16 章 · 一场感冒</div>
+  <p>早上那点嗓子干痒不是错觉。此刻已有一小群病毒在你的鼻腔后部安顿下来，而你要到两天后才会知道。接下来的十天是一场有完整时间表的战役——最反直觉的是：让你最难受的那些症状，几乎全部出自你自己的火力。</p>
+  <nav class="footnav">
+    <a href="ch14-run.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch16-cold.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 睡眠结构图：点周期高亮 + 切换说明
+  var hyp = document.getElementById('hypno');
+  var tabs = document.querySelectorAll('#hypno-fig .cyc-btn');
+  var cycs = document.querySelectorAll('#hypno .cyc');
+  var panes = document.querySelectorAll('#hypno-fig .cp');
+  function showCyc(key){
+    var i;
+    hyp.classList.add('picked');
+    for (i = 0; i < tabs.length; i++) {
+      tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-cyc') === key ? 'true' : 'false');
+    }
+    for (i = 0; i < cycs.length; i++) {
+      cycs[i].classList.toggle('on', cycs[i].getAttribute('data-cyc') === key);
+    }
+    for (i = 0; i < panes.length; i++) {
+      panes[i].classList.toggle('on', panes[i].getAttribute('data-cp') === key);
+    }
+  }
+  for (var t = 0; t < tabs.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){ showCyc(el.getAttribute('data-cyc')); });
+    })(tabs[t]);
+  }
+  for (var c = 0; c < cycs.length; c++) {
+    (function(el){
+      el.addEventListener('click', function(){ showCyc(el.getAttribute('data-cyc')); });
+    })(cycs[c]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

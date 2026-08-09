@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第24章 · 老年身体的代偿智慧 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 24-1 双清单对照（本章专用） ---- */
+#lists-fig .list-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#lists-fig .list-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.06em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 15px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#lists-fig .list-btn:hover{border-color:var(--gold); color:var(--ink);}
+#lists-fig .list-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#lists-fig .list-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#lists-fig .list-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#lists-fig .lp{display:none;}
+#lists-fig .lp.on{display:block;}
+#lists-fig .lp-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#lists-fig .lp p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+#lists .col{transition:opacity .3s;}
+#lists.only-up .col-down,#lists.only-down .col-up{opacity:.18;}
+#lists .card{fill:var(--surface2); stroke:var(--line); stroke-width:1.5;}
+#lists .col-head{font-size:14.5px; font-weight:700;}
+#lists .col-down .col-head{fill:var(--oxy);}
+#lists .col-up .col-head{fill:var(--green);}
+#lists .col-sub{fill:var(--ink-faint); font-size:11.5px;}
+#lists .it{fill:var(--ink); font-size:13.5px; font-weight:700;}
+#lists .it-s{fill:var(--ink-dim); font-size:11.5px;}
+#lists .mk-down{fill:var(--oxy);}
+#lists .mk-up{fill:var(--green);}
+#lists .rule{stroke:var(--line); stroke-width:1;}
+
+/* ---- 图 24-2 双侧募集示意（本章专用） ---- */
+#bilat .brain{fill:var(--surface2); stroke:var(--ink-faint); stroke-width:2;}
+#bilat .mid{stroke:var(--ink-faint); stroke-width:1.2; stroke-dasharray:5 5;}
+#bilat .zone{stroke:var(--gold); stroke-width:1.6;}
+#bilat .zone.lit{fill:var(--gold); fill-opacity:.42;}
+#bilat .zone.dim{fill:var(--gold); fill-opacity:.05;}
+#bilat .cap-t{fill:var(--ink); font-size:14px; font-weight:700;}
+#bilat .cap-s{fill:var(--ink-dim); font-size:11.5px;}
+#bilat .note{fill:var(--ink-faint); font-size:11.5px;}
+#bilat .tag-t{fill:var(--gold); font-size:11.5px;}
+@media (prefers-reduced-motion: reduce){
+  #lists .col{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第四幕 磨损与谢幕 · 第 24 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>老年身体的<br>代偿智慧</h1>
+  <p class="subtitle">前两章给你算的是一笔下坡的账。这一章要翻到账本的另一面——身体和大脑在下坡路上不只是挨着，它们会改打法。</p>
+  <div class="meta"><span>阅读 ≈ 16 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>你八十六岁了。</p>
+  <p>前面两章刚给你算完账：肌肉从三十几岁起一个十年一个十年地少，晶状体硬了，高频的声音先听不清了，端粒短了一截，衰老细胞赖在组织里不肯走。照这个势头，第四幕应该一路下坡到底，剩下的只是坡度问题。</p>
+  <p>1990 年，波士顿一家养老院的地下室里，十个人给这个写法添了点麻烦。他们最年轻的 86 岁，最年长的 96 岁；其中好几位从椅子上站起来还得用手撑一把，有两位平时靠拐杖走路。研究者把他们请上腿举器械，每周三次，推起接近自己极限八成重量的铁块。八周之后发生的事，让这份论文成了老年医学被引用最多的文献之一——那个数字放到第 4 节再说。这一章讲的就是账本的另一面。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 掀翻</div>
+  <h2>两张清单，你多半只被给看过一张</h2>
+  <p>关于变老，有一张清单流传得很广：反应变慢、记性变差、力气变小、觉变少、骨头变脆。这张清单没有错，第 21 章和第 23 章逐条讲过它的机制。</p>
+  <p>问题在于，它不是全部的清单。同一批测量随龄变化的研究，同一批被试，同一份数据，只要把量表换一组，就会浮出第二张清单——上面写着一些到六七十岁还在往上走的东西。这第二张清单很少被单独拿出来讲，因为它不符合故事的方向。</p>
+  <p>下面这张图把两张清单并排放在一起。你可以先只看左边，再只看右边，最后一起看。</p>
+
+  <figure id="lists-fig">
+    <div class="switch-row">
+      <span class="switch-hint">选一栏来看 →</span>
+      <div class="list-tabs" role="group" aria-label="选择要查看的清单">
+        <button class="list-btn" data-view="both" aria-pressed="true">并排看</button>
+        <button class="list-btn" data-view="down" aria-pressed="false">只看下行</button>
+        <button class="list-btn" data-view="up" aria-pressed="false">只看上行</button>
+      </div>
+    </div>
+    <svg id="lists" viewBox="0 0 760 466" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="随年龄下行的能力清单与随年龄持平或上行的能力清单并排对照">
+      <g class="col col-down">
+        <rect class="card" x="20" y="46" width="348" height="404" rx="12"/>
+        <text class="col-head" x="194" y="76" text-anchor="middle">随龄下行</text>
+        <text class="col-sub" x="194" y="96" text-anchor="middle">多数从二三十岁就已经起步</text>
+        <line class="rule" x1="44" y1="112" x2="344" y2="112"/>
+
+        <polygon class="mk-down" points="48,140 60,140 54,151"/>
+        <text class="it" x="72" y="148">处理速度</text>
+        <text class="it-s" x="72" y="167">峰值在十八九到二十出头</text>
+
+        <polygon class="mk-down" points="48,196 60,196 54,207"/>
+        <text class="it" x="72" y="204">肌肉量与握力</text>
+        <text class="it-s" x="72" y="223">30 岁后每十年约 3–8%，60 岁后加快</text>
+
+        <polygon class="mk-down" points="48,252 60,252 54,263"/>
+        <text class="it" x="72" y="260">高频听力</text>
+        <text class="it-s" x="72" y="279">从二三十岁起，由高频向低频推进</text>
+
+        <polygon class="mk-down" points="48,308 60,308 54,319"/>
+        <text class="it" x="72" y="316">工作记忆容量</text>
+        <text class="it-s" x="72" y="335">三十几岁见顶，此后缓慢下滑</text>
+
+        <polygon class="mk-down" points="48,364 60,364 54,375"/>
+        <text class="it" x="72" y="372">抗干扰与一心二用</text>
+        <text class="it-s" x="72" y="391">嘈杂环境下的差距最明显</text>
+
+        <polygon class="mk-down" points="48,420 60,420 54,431"/>
+        <text class="it" x="72" y="428">最大摄氧量</text>
+        <text class="it-s" x="72" y="447">成年后每十年约 −8~−10%，久坐者更快</text>
+      </g>
+
+      <g class="col col-up">
+        <rect class="card" x="392" y="46" width="348" height="404" rx="12"/>
+        <text class="col-head" x="566" y="76" text-anchor="middle">随龄持平或上行</text>
+        <text class="col-sub" x="566" y="96" text-anchor="middle">峰值比大多数人以为的晚得多</text>
+        <line class="rule" x1="416" y1="112" x2="716" y2="112"/>
+
+        <polygon class="mk-up" points="420,151 432,151 426,140"/>
+        <text class="it" x="444" y="148">词汇量与常识</text>
+        <text class="it-s" x="444" y="167">六十几到七十出头仍在缓慢上行</text>
+
+        <polygon class="mk-up" points="420,207 432,207 426,196"/>
+        <text class="it" x="444" y="204">专业领域的判断</text>
+        <text class="it-s" x="444" y="223">熟悉的题目里，经验抵掉速度的损失</text>
+
+        <polygon class="mk-up" points="420,263 432,263 426,252"/>
+        <text class="it" x="444" y="260">情绪稳定度</text>
+        <text class="it-s" x="444" y="279">负面情绪体验的比例随龄下降</text>
+
+        <polygon class="mk-up" points="420,319 432,319 426,308"/>
+        <text class="it" x="444" y="316">读人的本事</text>
+        <text class="it-s" x="444" y="335">情绪线索的解读四五十岁才见顶</text>
+
+        <polygon class="mk-up" points="420,375 432,375 426,364"/>
+        <text class="it" x="444" y="372">冲突处理</text>
+        <text class="it-s" x="444" y="391">更早退让、更少升级，人际摩擦更少</text>
+
+        <polygon class="mk-up" points="420,431 432,431 426,420"/>
+        <text class="it" x="444" y="428">主观幸福感</text>
+        <text class="it-s" x="444" y="447">多数人群中晚年不降，甚至回升</text>
+      </g>
+
+      <text class="col-sub" x="380" y="26" text-anchor="middle">同一具身体，同一段年岁</text>
+    </svg>
+    <div class="list-panel" id="listPanel">
+      <div class="lp on" data-lp="both">
+        <div class="lp-t">两栏并排</div>
+        <p>两栏说的是同一段年岁。把左栏单独拿出来，就得到"衰老"这个词在日常语言里的全部含义；把右栏单独拿出来，会得到一个同样片面、只是方向相反的故事。真实的老年身体是两栏同时成立——某些能力在退，另一些在涨，还有一些是<em>用退下去的零件把成绩维持住</em>。后三节分别讲这三件事。</p>
+      </div>
+      <div class="lp" data-lp="down">
+        <div class="lp-t">左栏 · 随龄下行</div>
+        <p>这一栏的共同点是"快"：处理速度、工作记忆、抗干扰、最大摄氧量，衡量的都是单位时间里能推动多少东西。它们的峰值出现得早得惊人——多数在二三十岁，此后是几十年的缓坡，而不是某个年纪的悬崖。第 21 章那张多器官曲线族画的就是这一栏。</p>
+      </div>
+      <div class="lp" data-lp="up">
+        <div class="lp-t">右栏 · 随龄持平或上行</div>
+        <p>这一栏的共同点是"存量"：词汇、常识、专业判断、对人的理解，衡量的都是几十年攒下了多少。要提醒一句：这几条曲线大多来自横断面比较——把不同年代出生的人放在一起测。教育普及这类队列差异会把上行的幅度放大一些。追踪同一批人几十年的纵向研究里，上行幅度通常更温和，但方向大体一致。</p>
+      </div>
+    </div>
+    <figcaption><b>图 24-1 · 变老的两张清单。</b>左栏按"每单位时间能推动多少"排列，右栏按"几十年攒下了多少"排列。数值为人群平均趋势，个体差异远大于组间差异；右栏多数曲线来自横断面比较，队列效应会放大上行幅度（见面板说明）。</figcaption>
+  </figure>
+
+  <p>右栏为什么存在？三条来路，恰好是这一章接下来的三节：<strong>借力</strong>——同一件事，改用别的部件去做；<strong>换目标</strong>——不再追求同一件事，而是把力气挪到别处；<strong>可逆</strong>——退下去的那部分，有一大块是能练回来的。</p>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 借力</div>
+  <h2>一只手拎不动了，就用两只手</h2>
+  <p>先看一个在扫描仪里反复出现的现象。</p>
+  <p>给二十几岁的人一道记忆题——记住一串词，过一会儿认出来——扫描他们的前额叶，活动多半明显偏向一侧。给七八十岁的人做同一道题，画面常常变了：<strong>两侧都亮</strong>。这个现象有个拗口的缩写叫 <strong>HAROLD</strong>（老年半球不对称性下降），2002 年由 Roberto Cabeza 系统提出。</p>
+  <p>问题是，两侧都亮，是好事还是坏事？直觉上像是坏事——分工乱了。</p>
+  <p>决定性的一步是把老年被试按成绩分组。结果反了过来：<strong>题做得好的那一组，两侧都亮；题做得差的那一组，反而和年轻人一样只亮一侧。</strong>如果双侧募集是老化的破绽，成绩差的人应该更明显才对。事实相反——它更像是<em>做到了</em>的标志，而不是<em>老了</em>的标志。</p>
+  <p>拎箱子可以帮着想这件事：同样一只箱子，二十岁单手就拎起来了，八十岁得两只手一起抬。这个类比很顺，但顺着它往下推，会推出两个错误结论，得就地拆掉。</p>
+  <p><strong>错误结论一：两只手＝力气更大。</strong>恰恰相反。用两只手是因为一只手已经拎不动了；产出的是同样的成绩，付出的却是更多的脑区、更多的血流、更少的余量。代偿不是免费的升级，是把家底调出来救急。你若同时再交给他一件别的事，双手抬箱子的人会先撑不住——老年人在"一心二用"这一栏下滑得格外明显，原因之一就在这里。</p>
+  <p><strong>错误结论二：凡是两边都亮，都是在代偿。</strong>另一派解释叫<strong>去分化</strong>：年轻时各区分工清楚，谁管什么泾渭分明；上了年纪，边界变模糊，本该安静的地方也跟着响，那不是帮忙，是噪声。两种解释都有证据，也都可能同时发生在同一个人身上。目前最可行的分辨办法是看它跟成绩的关系。跟成绩正相关的那部分是代偿，跟成绩无关甚至负相关的那部分，更像是分不清了。</p>
+
+  <figure>
+    <svg id="bilat" viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="同一道记忆题下，年轻人的前额叶活动偏向一侧，而成绩好的老年人两侧都被募集">
+      <text class="note" x="380" y="26" text-anchor="middle">同一道记忆题 · 俯视示意，上方为前</text>
+
+      <g>
+        <ellipse class="brain" cx="212" cy="176" rx="112" ry="118"/>
+        <line class="mid" x1="212" y1="62" x2="212" y2="290"/>
+        <ellipse class="zone lit" cx="160" cy="118" rx="40" ry="32"/>
+        <ellipse class="zone dim" cx="264" cy="118" rx="40" ry="32"/>
+        <text class="tag-t" x="160" y="123" text-anchor="middle">亮</text>
+        <text class="note" x="212" y="232" text-anchor="middle">前额叶</text>
+        <text class="cap-t" x="212" y="322" text-anchor="middle">二三十岁</text>
+        <text class="cap-s" x="212" y="342" text-anchor="middle">偏侧化：一边干活，另一边基本不响</text>
+      </g>
+
+      <g>
+        <ellipse class="brain" cx="548" cy="176" rx="112" ry="118"/>
+        <line class="mid" x1="548" y1="62" x2="548" y2="290"/>
+        <ellipse class="zone lit" cx="496" cy="118" rx="40" ry="32"/>
+        <ellipse class="zone lit" cx="600" cy="118" rx="40" ry="32"/>
+        <text class="tag-t" x="496" y="123" text-anchor="middle">亮</text>
+        <text class="tag-t" x="600" y="123" text-anchor="middle">亮</text>
+        <text class="note" x="548" y="232" text-anchor="middle">前额叶</text>
+        <text class="cap-t" x="548" y="322" text-anchor="middle">七八十岁 · 成绩好的那一组</text>
+        <text class="cap-s" x="548" y="342" text-anchor="middle">双侧募集：两边一起抬，成绩追平</text>
+      </g>
+    </svg>
+    <figcaption><b>图 24-2 · 两只手抬同一只箱子。</b>示意图只画"哪边被叫来干活"，不代表真实的脑区形状与位置。关键不在两侧是否都亮，而在它跟成绩的关系：成绩好的老年组双侧募集更明显，成绩差的老年组反而更像年轻人的单侧模式——同样的画面，另一种解释（去分化）也存在，两者需要靠成绩来区分。</figcaption>
+  </figure>
+
+  <h3>多出来的那一层</h3>
+  <p>这套现象后来被 Denise Park 与 Patricia Reuter-Lorenz 收进一个统一的说法，叫<strong>认知的脚手架理论</strong>。本书很少用工地和机器打比方，这里破一次例，因为"脚手架"是这个理论的学名：老年大脑在受损的结构旁边临时搭起辅助回路，把成绩托住。</p>
+  <p>这个说法至少点住了两件事。第一，这一层是<strong>额外</strong>的——它要占资源，所以代偿总是伴随着"余量变薄"。第二，它是<strong>可以练的</strong>——反复用到的通路会更牢，这是下面第 4 节的伏笔。</p>
+  <p>再往外一层，是<strong>认知储备</strong>这个概念：同样的脑部病理，不同的人表现出的症状可以差得很远。它解释的不是"谁不生病"，而是"病到什么程度才显出来"。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>修女们的脑子。</strong>1986 年起，流行病学家 David Snowdon 说服了 678 位美国圣母学校修女会的修女参加一项长期研究：定期做认知测验，去世后捐出大脑。这批被试有个罕见的优点——生活作息、饮食、居住条件、医疗条件高度一致，把平常最难剔除的干扰因素剔掉了一大半。</p>
+    <p>最出名的一位是玛丽修女，101 岁去世，生前的认知测验一直保持在不错的水平。解剖时，她的大脑里斑块与神经原纤维缠结相当可观——按病理标准，那是一副阿尔茨海默病的脑子。类似的不一致在这批修女中反复出现。这件事要小心读：储备推迟的是<em>症状显现的时点</em>，不是病理本身；它买到的是时间，不是免疫。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 上行</div>
+  <h2>藏书越来越多，只是找起来慢了</h2>
+  <p>2015 年，一项用网络平台收集了近五万人数据的研究做了件很朴素的事：把十几种认知能力分别画出随年龄的曲线，看各自的峰值落在哪里。结论是这些峰值<strong>散得到处都是</strong>——处理速度十八九岁见顶，工作记忆三十几岁，读懂他人情绪的能力四五十岁，而<strong>词汇量与常识，要到六十几岁至七十出头才见顶</strong>。</p>
+  <p>"认知能力在几岁达到巅峰"这个问题因此没有单一答案，就像问"一座藏书楼在哪一年最好"没有单一答案：它的藏书年年在涨，而管理员找一本书的速度年年在慢。</p>
+  <p>藏书楼这个比方能带出一个常被误解的现象——为什么词儿越多的人，反而越常"话到嘴边说不出"。因为架子上放着的相似书目更多了，检索时互相竞争，取书的那只手就更容易在半路上卡住。这不是词条丢了。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>话到嘴边。</strong>那种"我知道这个词，就是想不起来"的卡壳，心理学里叫<strong>舌尖现象</strong>。它随年龄变多，但它的性质常被误读成"记忆在丢失"。几个反证：卡住的时候，人往往能准确说出这个词有几个字、开头是什么音、甚至它的意思，唯独调不出完整的发音——这是<em>提取</em>卡壳，不是<em>存储</em>丢失。给一个音节做提示，词多半立刻就回来了。</p>
+    <p>更耐人寻味的是，在同龄人里，词汇量越大的人报告的舌尖现象往往越多。藏书多的人，在书架前站住的次数也多。</p>
+  </div>
+
+  <h3>1974 年那场车祸</h3>
+  <p>右栏里最反直觉的一条是情绪。这一条的来路，要从一个二十一岁女孩的病床说起。</p>
+  <p>1974 年，Laura Carstensen 在一次翻车事故中重伤，接下来的几个月躺在骨科病房里，动弹不得。同病房的都是年长得多的女性。她后来多次讲过那段日子：父亲送来心理学导论课程的录音带，她一盘一盘地听；而床帘另一侧，几位老太太谈论的事情和病房外那个年轻人的世界很不一样——她们不太谈以后要怎样，谈的是眼下和谁在一起、什么让人踏实。</p>
+  <p>她后来成了心理学家，问了一个当时问的人不多的问题：人老了，情绪生活是不是也跟着一起退坡？</p>
+  <p>她主持的一项研究追了十年：一百八十多位十八到九十四岁的被试，随身带着呼机，被随机呼叫时就记录此刻的情绪。结果与"退坡"相反——年纪越大，负面情绪体验占的比例越低，情绪的起伏越平缓，正面情绪大体保持。年轻人的情绪像天气，忽晴忽雨；老年人的更像气候。</p>
+  <p>她给出的解释叫<strong>社会情绪选择理论</strong>，其中最要紧的一句是：<strong>起作用的不是年龄，是你觉得自己还剩多少时间。</strong>当时间视野宽，最划算的策略是广撒网——多认识些人，多知道些事，为将来投资；当时间视野收窄，最划算的策略变成把有限的时间花在确定让自己舒服的人和事上。前者带来更多摩擦，也带来更多信息；后者带来更少摩擦。</p>
+  <p>这不是绕口的说法，它有个可检验的推论：把年轻人的时间视野人为压短——例如请他们设想不久后要搬到很远的地方去，或在真实的社会危机期间测量——他们的偏好会朝老年人那一侧移动。反过来，请老年人设想"医学突破让你多出二十年健康寿命"，差距会缩小。<strong>时钟变了，排序就变了。</strong>年龄只是最常见的那只时钟。</p>
+  <p>这条曲线上还挂着一个副产物，叫<strong>积极效应</strong>：老年人在注意与回忆时，对正面材料的偏向比年轻人更强。听起来是好事，但代价是真实的——对负面信息的警觉相应下降。诈骗话术里那些"天上掉馅饼"的部分，之所以在老年人身上更奏效，这是原因之一。同一套机制，一头是更少的内耗，一头是更薄的防线。</p>
+  <p>还有一句必须说清楚：以上都是<strong>人群的平均趋势，不是个人的处方</strong>。晚年抑郁是真实存在的，而且是可以治疗的；丧偶、慢性疼痛、贫困与孤独，任何一项都足以把这条曲线整个压下去。"老了情绪会变好"这句话，只在统计的意义上成立。</p>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 可逆</div>
+  <h2>波士顿地下室里的那八周</h2>
+  <p>回到引子里那十个人。</p>
+  <p>1990 年，Maria Fiatarone 和同事在《美国医学会杂志》上报告了这项试验：十位 86 至 96 岁的养老院住户入组、九位完成全程，八周渐进式高强度力量训练，每周三次，负荷设在各自单次最大力量的八成左右。这在当时近乎冒犯常识——那个年代的主流意见是，这个年纪的人应该被保护起来，训练是给年轻人的。</p>
+  <p>八周后的数字是：<strong>膝伸肌力量平均提高到训练前的约 2.7 倍</strong>（论文报告增幅 174%±31%），<strong>大腿中段肌肉横截面积增加约 9%</strong>，<strong>串联步行速度提高约五成</strong>。两位受试者不再需要拐杖；原本三位无法不用手撑就从椅子上站起来的人里，有一位做到了。</p>
+  <h3>2.7 倍与 9%：一个必须拆开看的落差</h3>
+  <p>力量涨到近三倍，肌肉只粗了 9%——这个落差太大，不解释清楚，读者很容易以为八周长出了近两倍的肌肉。</p>
+  <p>真正的原因在神经这一侧。力量训练最初几周的增益，主要来自<strong>指挥系统的改善</strong>：被叫上场的运动单位更多了，它们发力更同步了，平时压着不让你使全力的那层保护性抑制松开了一些。肌肉纤维变粗是随后的事，也慢得多。这个顺序在任何年龄都成立，只是在长年不活动的高龄者身上，第一段的余量格外大——他们的肌肉里本就有一批很久没被叫醒过的部队。</p>
+  <p>荒废多年的小路被重新走出来，是个贴切的画面：路基一直在，只是被草盖住了；先通行的是脚印，路面加宽是后来的事。但顺着这个画面也别推过头——<strong>重新走通的是这条路的通行能力，不是把年龄倒回去。</strong>训练改变的是曲线的斜率，不是曲线的起点。八周后的九旬老人，力量可能回到他自己十几年前的水平，而不是二十岁的水平。</p>
+  <h3>不是营养，是负荷</h3>
+  <p>四年后，同一支团队把规模放大：一百位养老院住户，平均年龄 87 岁（72 至 98 岁），十周训练，力量平均提高约一倍。这项试验还多设了两组——单独补充营养的，以及既训练又补营养的。结论很干脆：<strong>力量的增益来自训练；单独补营养的那一组没有出现这个效果。</strong>（这是该试验在那批人群中的结论，不是一句普遍的营养主张。）</p>
+  <p>可练的不止肌肉。一项针对老年人的一年期中等强度有氧训练试验报告，<strong>海马体积增加约 2%</strong>——而对照组按常规每年缩掉大约 1% 到 2%。换算过来，这一年的运动把这个部位的时间往回拨了一两年。第 2 节说"多出来的那一层也能练"，这就是一个具体注脚。</p>
+  <p>最后要说明本书的边界：以上是<strong>生理上还剩多少余地</strong>的描述，不是运动处方。上了年纪、有基础疾病的人如何开始训练、从多大负荷开始、需要哪些评估，是医生和康复治疗师的工作，这本书不越这条线。</p>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 存疑</div>
+  <h2>蓝圈里的一百岁，和代偿的尽头</h2>
+  <p>讲到"老得好"，绕不开一个词：<strong>蓝区</strong>。</p>
+  <p>它的来历很朴素。2000 年代初，比利时人口学家 Michel Poulain 与撒丁岛医生 Gianni Pes 在做百岁老人的核查，发现该岛中部几个山村的比例异常地高，就在地图上用蓝色笔把这一带圈了出来——"蓝区"这个名字来自那支笔。后来记者 Dan Buettner 把冲绳、希腊伊卡里亚、哥斯达黎加尼科亚、加州洛马林达一并纳入，写成畅销书，一份"长寿生活方式清单"从此传遍全世界。</p>
+  <p>近几年，这套说法遇到了一次相当尖锐的质疑。人口学家 Saul Newman 的分析指出：一个地区报出的百岁老人比例，与当地<strong>出生登记的完整程度</strong>、贫困程度以及养老金冒领的机会高度相关——登记越乱的地方，"百岁老人"越多。他举的例证包括：冲绳的大量户籍档案毁于战火；2010 年日本核查户籍时，发现登记在册的百岁以上者中有二十多万人下落不明。这项工作在 2024 年拿了搞笑诺贝尔奖的人口学奖——那个奖既表彰引人发笑的研究，也表彰引人思考的研究。</p>
+  <p>该怎么对待这件事？这本书的处理方式是<strong>把两件事分开</strong>。</p>
+  <p><strong>第一件事：某些地方的人特别长寿——这个统计事实确实受了重创。</strong>它完全依赖出生年份的档案，而档案质量恰恰是最容易出问题的一环。目前的争论还没有结束，其中一部分工作尚未走完同行评审，蓝区的支持者也提出了反驳；诚实的说法是"这项统计目前不可靠"，而不是"已被证伪"。</p>
+  <p><strong>第二件事：那几条生活方式的结论——日常体力活动、以植物为主的饮食、稳定的社会联系——并不只靠蓝区支撑。</strong>它们在设计完全不同的大型队列研究里反复出现过，证据链另有来路。第一件事塌了，不会把第二件事一起带走。</p>
+  <p>把两件事捆在一起接受，或者捆在一起丢弃，都是偷懒。这本书里凡遇到"结论动听但证据不齐"的地方，都按这个办法拆开算账。</p>
+  <h3>代偿也有尽头</h3>
+  <p>这一章讲了很多"还能怎样"，最后必须讲清楚"到哪为止"。</p>
+  <p>代偿的全部本钱，是<strong>还没坏的那部分</strong>：双侧募集要求另一侧的前额叶还够用，力量训练要求肌肉里还留着能被叫醒的部队，认知储备要求还有别的通路可以绕行。当损伤越过某条界线，双侧募集不再换来更好的成绩，训练也不再带来增益——这时候曲线才真正开始陡降。老年医学关心的因此常常不是"哪个器官坏了"，而是"还剩多少余量"：第 21 章那个"储备"的概念，到这里从解释工具变成了预后判断。</p>
+  <p>还有一处差异值得在这里点一句，下一章会把它讲完：同样活到八十五岁，女性的平均余寿更长，但需要照护的年数通常也更长；男性这一侧则是<em>更早离场，失能期相对更短</em>。"活得更久"和"活得更好"这两条曲线并不重合，而它们在两性之间的错位方式并不一样。第 19 章与第 22 章铺过这条线，第 25 章收尾。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>超级老人（SuperAgers）。</strong>西北大学的研究团队从 2000 年代起追踪一小群特别的人：<strong>80 岁以上，情节记忆测验的成绩不低于五六十岁人群的平均水平</strong>。他们不是"没生病的老人"，而是记忆表现根本没有按年龄下滑的老人。影像与解剖发现了几处一致的特征：与注意和动机相关的前扣带回皮层比同龄人更厚，某些个案中甚至厚过五六十岁的对照；一类叫冯·埃科诺莫神经元的大细胞密度更高；阿尔茨海默病特征性的缠结明显更少。</p>
+    <p>要泼一盆冷水的是：这批人的生活方式差异很大，有人烟酒不忌，有人几乎不运动，目前<strong>还提不出一份"照着做就能成为超级老人"的清单</strong>——遗传、早年教育与运气各占多少，仍在争论。2022 年启动、2023 年扩为全国招募的一项大型家族研究，面向 95 岁以上人群及其家属，规模以万计，目标之一正是把可遗传的部分分离出来。这一栏的内容大概率会在几年内被改写。</p>
+  </div>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">代偿与上行 · 关键数字</div>
+    <table>
+      <tr><td class="k">处理速度峰值年龄</td><td class="v">18–22 岁</td><td class="n">此后是几十年缓坡，不是某年的悬崖</td></tr>
+      <tr><td class="k">工作记忆容量峰值年龄</td><td class="v">30 多岁</td><td class="n">"快"这一栏的共同特征：见顶早</td></tr>
+      <tr><td class="k">情绪线索解读峰值年龄</td><td class="v">40–50 多岁</td><td class="n">晚于多数流体能力</td></tr>
+      <tr><td class="k">词汇量与常识峰值年龄</td><td class="v">60 后期–70 出头</td><td class="n">横断面数据，队列效应会放大幅度</td></tr>
+      <tr><td class="k">成年后肌量流失</td><td class="v">3–8% / 十年</td><td class="n">30 岁后起步，60 岁后加快</td></tr>
+      <tr><td class="k">九旬力量训练（8 周）</td><td class="v">力量 × ≈2.7</td><td class="n">86–96 岁，n=10，原文报告 +174%±31%</td></tr>
+      <tr><td class="k">同期大腿肌肉横截面积</td><td class="v">+ 约 9%</td><td class="n">与围度的落差来自神经募集的改善</td></tr>
+      <tr><td class="k">同期串联步行速度</td><td class="v">+ 约 50%</td><td class="n">两位受试者不再使用拐杖</td></tr>
+      <tr><td class="k">百人试验（10 周，平均 87 岁）</td><td class="v">力量 + 约 110%</td><td class="n">单独补营养的一组未见此效果</td></tr>
+      <tr><td class="k">一年有氧训练后海马体积</td><td class="v">+ 约 2%</td><td class="n">对照组按常规每年缩 1–2%</td></tr>
+      <tr><td class="k">超级老人（SuperAgers）判定</td><td class="v">80+ 岁 ≥ 50–60 岁均值</td><td class="n">指情节记忆测验成绩</td></tr>
+      <tr><td class="k">2010 年日本户籍核查</td><td class="v">约 23 万人</td><td class="n">登记为百岁以上却下落不明</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">老年人做记忆题时前额叶"两侧都亮"，最有力的支持"这是代偿"的证据是什么？</div>
+      <div class="opts">
+        <button>所有老年人都会出现双侧激活</button>
+        <button data-c="1">成绩好的老年组双侧激活更明显，成绩差的老年组反而更接近年轻人的单侧模式</button>
+        <button>双侧激活的强度随年龄单调上升</button>
+        <button>年轻人在难题下从不出现双侧激活</button>
+      </div>
+      <div class="explain">若双侧激活是老化的破绽，成绩差的人应当更明显，事实相反。但同一幅画面还有另一种解释——"去分化"，即分工边界变模糊导致该安静的地方也响。两种情况可以同时存在于一个人身上，区分它们主要靠看激活与成绩的相关方向。顺带一提，年轻人在负荷足够高的任务下也会出现双侧募集，这也是把它理解为"调用后备资源"的理由之一。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">八周训练后，九旬受试者的力量提高到训练前的约 2.7 倍，而大腿肌肉横截面积只增加约 9%。这个落差主要来自哪里？</div>
+      <div class="opts">
+        <button>测量误差：高龄者的肌肉影像难以准确测量</button>
+        <button>肌肉密度提高，同样体积能产生更大力量</button>
+        <button data-c="1">训练初期的增益主要来自神经募集改善，肌纤维增粗是随后的、更慢的过程</button>
+        <button>关节润滑改善使力量测试更容易发挥</button>
+      </div>
+      <div class="explain">被叫上场的运动单位更多、发力更同步、保护性抑制松开——这些改变几天到几周内就能发生，而肌纤维增粗以月计。这个先后顺序在任何年龄都成立，只是长年不活动的高龄者第一段余量格外大。它也解释了另一个常见观察：停练之后，力量掉得比围度快。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">按社会情绪选择理论，真正驱动"情绪随龄变稳"的关键变量是什么？</div>
+      <div class="opts">
+        <button>激素水平随年龄下降，情绪反应因此减弱</button>
+        <button>杏仁核随年龄萎缩，负面情绪的生理基础减少</button>
+        <button data-c="1">个体感知到的剩余时间视野——年龄只是最常见的那只时钟</button>
+        <button>老年人经历的负面事件客观上更少</button>
+      </div>
+      <div class="explain">这个理论之所以站得住，是因为它给出了可检验的推论：把年轻人的时间视野人为压短（设想即将远行，或处在真实的社会危机中），他们的社交与情绪偏好会朝老年人一侧移动；反过来请老年人设想"多出二十年健康寿命"，差距会缩小。同一套机制还带来一个副产物——积极效应，它一头是更少的内耗，一头是对负面信息更薄的防线。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">"词汇量到六七十岁还在涨"这一结论，读的时候要打的最大一个折扣是什么？</div>
+      <div class="opts">
+        <button>词汇测验本身不能反映真实语言能力</button>
+        <button data-c="1">多数数据来自横断面比较，不同年代出生者的教育差异会放大上行幅度</button>
+        <button>老年被试的作答时间更长，成绩因此虚高</button>
+        <button>词汇量与其他认知能力无关，不值得作为指标</button>
+      </div>
+      <div class="explain">横断面比较把"年龄效应"和"世代效应"混在了一起。追踪同一批人几十年的纵向研究里，上行幅度通常更温和，但方向大体一致——所以结论要打折，不必推翻。另外，词汇量大反而伴随更多的"话到嘴边"卡壳：那是提取环节的竞争加剧，不是词条丢失，给个首音提示往往立刻就取回来了。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">面对蓝区研究近年遭遇的数据质疑，本书主张的处理方式是？</div>
+      <div class="opts">
+        <button>质疑已经证伪蓝区，相关生活方式建议应一并作废</button>
+        <button>质疑尚未定论，在结论出来之前维持原有说法不变</button>
+        <button data-c="1">拆开算账：极端长寿的统计事实高度依赖档案质量而受重创，生活方式结论另有独立证据支撑</button>
+        <button>两方各执一词，说明这类问题无法用证据判断</button>
+      </div>
+      <div class="explain">被击中的是"某地百岁老人特别多"这个依赖出生登记的统计——2010 年日本核查发现二十多万名登记在册的百岁以上者下落不明，是个有力的例证。而体力活动、植物为主的饮食、稳定社会联系这几条，在设计完全不同的大型队列里反复出现，不靠蓝区背书。还要补一句：质疑方的部分工作尚未走完同行评审，诚实的表述是"这项统计目前不可靠"，而非"已被证伪"。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第四幕 磨损与谢幕</div>
+  <div class="title">第 25 章 · 死亡的生理学</div>
+  <p>代偿有尽头，储备会见底。下一章走到最后一段：心跳停下的那一刻，身体里绝大多数细胞其实还活着——死亡不是一个瞬间，而是一个有先后顺序的过程。这个顺序，决定了移植医学的每一个时间窗，也决定了人类在什么地方为"死亡"划下了那条线。</p>
+  <nav class="footnav">
+    <a href="ch23-aging.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch25-death.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 图 24-1：两张清单的筛选
+  var lb = document.querySelectorAll('#lists-fig .list-btn');
+  var lists = document.getElementById('lists');
+  var lps = document.querySelectorAll('#lists-fig .lp');
+  function showView(v){
+    var i;
+    for (i = 0; i < lb.length; i++) {
+      lb[i].setAttribute('aria-pressed', lb[i].getAttribute('data-view') === v ? 'true' : 'false');
+    }
+    lists.classList.toggle('only-down', v === 'down');
+    lists.classList.toggle('only-up', v === 'up');
+    for (i = 0; i < lps.length; i++) {
+      lps[i].classList.toggle('on', lps[i].getAttribute('data-lp') === v);
+    }
+  }
+  for (var t = 0; t < lb.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){ showView(el.getAttribute('data-view')); });
+    })(lb[t]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

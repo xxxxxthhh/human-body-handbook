@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第10章 · 免疫系统上学 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 10-1 两军团编制图（本章专用） ---- */
+#corps-fig .unit-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#corps-fig .unit-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#corps-fig .unit-btn:hover{border-color:var(--gold); color:var(--ink);}
+#corps-fig .unit-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#corps-fig .unit-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#corps-fig .unit-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#corps-fig .up{display:none;}
+#corps-fig .up.on{display:block;}
+#corps-fig .up-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#corps-fig .up p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+#corps .unit{cursor:pointer; transition:opacity .3s;}
+#corps.picked .unit{opacity:.26;}
+#corps.picked .unit.on{opacity:1;}
+#corps .bx{fill:var(--surface2); stroke:var(--line); stroke-width:1.6; rx:10;}
+#corps .unit.innate .bx{stroke:var(--oxy);}
+#corps .unit.adapt .bx{stroke:var(--deoxy);}
+#corps .unit.on .bx{stroke-width:3; fill:var(--surface);}
+#corps .u-t{fill:var(--ink); font-size:14.5px; font-weight:700;}
+#corps .u-s{fill:var(--ink-dim); font-size:11.5px;}
+#corps .hd{font-size:13px; font-weight:700; letter-spacing:.08em;}
+#corps .hd.l{fill:var(--oxy);}
+#corps .hd.r{fill:var(--deoxy);}
+#corps .divide{stroke:var(--line); stroke-width:1.4; stroke-dasharray:6 6;}
+#corps .link{stroke:var(--gold); stroke-width:2.4; fill:none;}
+#corps .link-l{fill:var(--gold); font-size:11.5px;}
+#corps .foot{fill:var(--ink-faint); font-size:11.5px;}
+
+/* ---- 图 10-2 初遇与重逢（本章专用） ---- */
+#recall .ax{stroke:var(--line); stroke-width:2;}
+#recall .grid{stroke:var(--line); stroke-width:1; stroke-dasharray:3 5;}
+#recall .c1{fill:none; stroke:var(--ink-dim); stroke-width:3; stroke-linejoin:round; stroke-linecap:round;}
+#recall .c2{fill:none; stroke:var(--gold); stroke-width:3.4; stroke-linejoin:round; stroke-linecap:round;}
+#recall .shot{stroke:var(--oxy); stroke-width:2; }
+#recall .shot-l{fill:var(--oxy); font-size:11.5px;}
+#recall .an{fill:var(--ink-dim); font-size:12px;}
+#recall .an-g{fill:var(--gold); font-size:12px; font-weight:600;}
+#recall .ax-lb{fill:var(--ink-faint); font-size:11.5px;}
+@media (prefers-reduced-motion: reduce){
+  #corps .unit{transition:none;}
+  #corps-fig .unit-btn{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第二幕 调试与扩容 · 第 10 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>免疫系统上学</h1>
+  <p class="subtitle">一支入伍时只带了通用操典的部队，要在几年里学会三件事：认出不是我，认出是哪一种不是我，以及——认出是我，然后放过。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>出生后第一分钟。你被抱起来，贴到母亲胸口。</p>
+  <p>就在这一分钟里你搬了一次家：从一个近乎无菌的地方，搬进一个挤满活物的世界。产道的、皮肤的、空气里的、母亲怀里的——几小时内，数以千万计的细菌在你身上安顿下来，几天内变成数以万亿计。这不是一场入侵，这是入学报到。</p>
+  <p>因为你身上这支部队，入伍时只带了一套通用操典，一个具体的敌人也没见过。它接下来要上的课一门比一门难：先学会认出"这不是我"；再学会认出"这是哪一种不是我"；而最难的一门，是学会认出"这是我"——然后收手。这门课要是没学好，部队会调转枪口，打向它本该守卫的东西。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 常备军</div>
+  <h2>城墙、巡逻队，和一套认制服不认脸的口令</h2>
+  <p>先看不需要上学的那一半：<strong>先天免疫</strong>。它出生就能打，反应以分钟计，代价是记不住任何事——今天打完，明天再来还得从头打起。</p>
+  <p>第一道防线是纯物理的，而这里有个数字值得停一下：皮肤展开约 <strong>1.5 到 2 平方米</strong>，听着是身体与外界接触的大头；可真正的交界面几乎全在体内——肠道黏膜在 <strong>30 到 40 平方米</strong>之间（教科书上流传多年的"两三百平方米"是高估，本世纪的重新测算把它砍掉了大半），肺的气体交换面在几十平方米量级。第 5 章讲过，尺度一大，交换就得靠折叠出巨大表面。麻烦随之而来：<em>凡是用来交换的地方，都薄，都湿，都不好守。</em></p>
+  <p>所以城墙不止一层：胃酸把多数吞入的微生物直接化掉；唾液和泪液里的溶菌酶专拆细菌外壳；气道内壁铺着一层黏液，底下的纤毛像风里的麦浪一样一波波把它连同粘住的颗粒推向喉咙；肠上皮每三到五天整层换新，连同贴在上面的麻烦一起丢弃。</p>
+  <h3>门卫认制服，不认脸</h3>
+  <p>城墙总会被翻过来。而翻过来的那一刻由谁喊出第一声警报，是整个先天免疫最漂亮的一处设计。</p>
+  <p>细菌的种类多到数不清，一支不上学的部队怎么可能认得全？答案是它<strong>根本不认脸</strong>。巡逻细胞表面装着一组受体，认的是一大类微生物共有、而人体细胞没有的东西：细菌细胞壁的特定成分、鞭毛的蛋白、病毒复制时才出现的双链 RNA。这些东西对微生物太重要，改不掉——认它们，等于认制服而不认脸。一个从没见过的新细菌走过来，制服还是那身制服。</p>
+  <p>警报一响，几支力量同时开动。<strong>中性粒细胞</strong>是先遣队，占循环白细胞的 <strong>50% 到 70%</strong>，闻到信号就挤出血管壁扑向现场，吞掉、毒杀，然后自己也死在那里——伤口里的脓，主要就是它们的遗体。<strong>巨噬细胞</strong>是常驻岗哨，长期住在组织里边吞边清理战场。<strong>补体</strong>则是一套自动展开的连锁反应：一组血浆蛋白平时互不干涉，一旦被触发就一环激活一环，一部分给目标"刷漆"（做上记号，招呼吞噬细胞来吃），一部分直接在细菌膜上打孔。你在上一章见过它的兼职身份——发育中的大脑借了这套刷漆系统去标记该撤除的突触。同一个分子，一处标记敌人，一处标记多余的连接。</p>
+  <p>顺带纠正一个常见的误解：<strong>发炎和发烧不是敌人干的，是自己下的动员令。</strong>红肿热痛来自血管扩张与通透性增加，为的是让援兵更容易挤出血管；体温升高则让多数病原体复制得慢些、免疫细胞活动得快些。退烧药的意义在于让人好受，而不是"消灭病因"。</p>
+
+  <figure id="corps-fig">
+    <div class="switch-row">
+      <span class="switch-hint">点编制看职能 →</span>
+      <div class="unit-tabs" role="group" aria-label="选择要查看的免疫编制">
+        <button class="unit-btn" data-unit="wall" aria-pressed="false">屏障与化学防线</button>
+        <button class="unit-btn" data-unit="neut" aria-pressed="false">中性粒细胞</button>
+        <button class="unit-btn" data-unit="mac" aria-pressed="false">巨噬与树突状细胞</button>
+        <button class="unit-btn" data-unit="comp" aria-pressed="false">补体</button>
+        <button class="unit-btn" data-unit="bcell" aria-pressed="false">B 细胞与抗体</button>
+        <button class="unit-btn" data-unit="tcell" aria-pressed="false">T 细胞</button>
+      </div>
+    </div>
+    <svg id="corps" viewBox="0 0 760 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="免疫两军团编制示意图：左侧先天免疫包含屏障与化学防线、中性粒细胞、巨噬与树突状细胞、补体；右侧适应性免疫包含 B 细胞与抗体、T 细胞；树突状细胞把抗原呈递给右侧，是两军团之间的传令兵">
+      <text class="hd l" x="196" y="34" text-anchor="middle">先天免疫 · 常备军</text>
+      <text class="hd r" x="562" y="34" text-anchor="middle">适应性免疫 · 特训军</text>
+      <line class="divide" x1="380" y1="48" x2="380" y2="396"/>
+
+      <g class="unit innate" data-unit="wall">
+        <rect class="bx" x="56" y="56" width="280" height="62"/>
+        <text class="u-t" x="196" y="84" text-anchor="middle">屏障与化学防线</text>
+        <text class="u-s" x="196" y="104" text-anchor="middle">皮肤 · 黏液纤毛 · 胃酸 · 溶菌酶</text>
+      </g>
+      <g class="unit innate" data-unit="neut">
+        <rect class="bx" x="56" y="134" width="280" height="62"/>
+        <text class="u-t" x="196" y="162" text-anchor="middle">中性粒细胞</text>
+        <text class="u-s" x="196" y="182" text-anchor="middle">先遣队 · 占白细胞五到七成 · 寿命极短</text>
+      </g>
+      <g class="unit innate" data-unit="mac">
+        <rect class="bx" x="56" y="212" width="280" height="62"/>
+        <text class="u-t" x="196" y="240" text-anchor="middle">巨噬与树突状细胞</text>
+        <text class="u-s" x="196" y="260" text-anchor="middle">常驻岗哨 · 兼两军团之间的传令兵</text>
+      </g>
+      <g class="unit innate" data-unit="comp">
+        <rect class="bx" x="56" y="290" width="280" height="62"/>
+        <text class="u-t" x="196" y="318" text-anchor="middle">补体</text>
+        <text class="u-s" x="196" y="338" text-anchor="middle">自动展开的级联 · 刷漆做记号 · 打孔</text>
+      </g>
+
+      <g class="unit adapt" data-unit="bcell">
+        <rect class="bx" x="424" y="110" width="280" height="76"/>
+        <text class="u-t" x="564" y="142" text-anchor="middle">B 细胞与抗体</text>
+        <text class="u-s" x="564" y="162" text-anchor="middle">远程投射 · 抗体是可溶的受体</text>
+        <text class="u-s" x="564" y="178" text-anchor="middle">生发中心里反复选拔，越选结合越牢</text>
+      </g>
+      <g class="unit adapt" data-unit="tcell">
+        <rect class="bx" x="424" y="230" width="280" height="76"/>
+        <text class="u-t" x="564" y="262" text-anchor="middle">T 细胞</text>
+        <text class="u-s" x="564" y="282" text-anchor="middle">辅助型发号施令 · 杀伤型清除感染细胞</text>
+        <text class="u-s" x="564" y="298" text-anchor="middle">全体须经胸腺结业考核</text>
+      </g>
+
+      <path class="link" d="M336 243 H 384 Q 404 243 404 214 V 152 H 418 m -10 -7 l 10 7 -10 7"/>
+      <text class="link-l" x="392" y="120" text-anchor="middle">抗原呈递</text>
+
+      <text class="foot" x="196" y="382" text-anchor="middle">起效：数分钟–数小时</text>
+      <text class="foot" x="196" y="402" text-anchor="middle">记忆：无</text>
+      <text class="foot" x="564" y="382" text-anchor="middle">起效：初次 1–2 周</text>
+      <text class="foot" x="564" y="402" text-anchor="middle">记忆：终身量级</text>
+    </svg>
+    <div class="unit-panel">
+      <div class="up on" data-up="0">
+        <div class="up-t">两支部队，一套指挥关系</div>
+        <p>点上方任一编制，看它管什么。把两边接起来的是中间那条金线：树突状细胞吞下入侵者后，带着碎片跑到淋巴结举给右边的部队看——没有这一举，特训军不知道该练什么。</p>
+      </div>
+      <div class="up" data-up="wall">
+        <div class="up-t">屏障与化学防线 · 城墙</div>
+        <p>对策不只是"挡"：黏液被纤毛一波波推向喉咙，胃酸把多数吞入的微生物直接化掉，肠上皮每 3–5 天整层换新，连同粘在上面的麻烦一起丢弃。</p>
+      </div>
+      <div class="up" data-up="neut">
+        <div class="up-t">中性粒细胞 · 先遣队</div>
+        <p>在血里待命，闻到信号就挤出血管壁扑向现场，吞噬、毒杀，然后死在那里——脓的主要成分就是它们。身体每天要补充以千亿计的新兵。</p>
+      </div>
+      <div class="up" data-up="mac">
+        <div class="up-t">巨噬与树突状细胞 · 岗哨与传令兵</div>
+        <p>巨噬细胞驻在组织里，边吞边清理战场，也管修复的收尾（第 17 章）。树突状细胞更关键：它把碎片装在自己表面举给 T 细胞看，情报由此变成作战命令。</p>
+      </div>
+      <div class="up" data-up="comp">
+        <div class="up-t">补体 · 自动展开的级联</div>
+        <p>一环激活一环，越往后放大越多：一部分给目标"刷漆"招呼吞噬细胞，一部分在细菌膜上打孔。同一套刷漆系统被发育中的大脑借去标记该撤除的突触（第 9 章）。</p>
+      </div>
+      <div class="up" data-up="bcell">
+        <div class="up-t">B 细胞与抗体 · 远程投射</div>
+        <p>每个 B 细胞带着一种随机重排出来的受体，被抗原选中后大量增殖，并把受体做成可溶版本分泌出去——那就是抗体。抗体够不着细胞内部，那一摊归 T 细胞。</p>
+      </div>
+      <div class="up" data-up="tcell">
+        <div class="up-t">T 细胞 · 指挥与清除</div>
+        <p>辅助型决定哪一种反应被启动；杀伤型专门处理已被病毒占领的自体细胞。上岗前都要过胸腺那一关，淘汰率高得惊人（第 3 节）。</p>
+      </div>
+    </div>
+    <figcaption><b>图 10-1 · 两支部队的编制。</b>左侧起效以分钟计但没有记忆，右侧慢得多却极其挑剔、记得牢。中间那条金线是全图枢纽：树突状细胞把战场碎片带进淋巴结呈递出去。图只画职能关系，方框大小与位置不代表数量或解剖位置。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 抽签</div>
+  <h2>怎么可能提前备好一把从没见过的锁的钥匙</h2>
+  <p>现在来看真正要上学的那一半，它面对的第一个问题几乎是荒谬的。</p>
+  <p>适应性免疫的本事是<strong>极端特异</strong>：抗体能分辨两个只差一个原子团的分子。可这份特异从哪来？可能出现的抗原多到无法穷举，还包括明天才突变出来的新病毒、去年才合成出来的新化学品——它们从未出现在任何演化史里。基因组只有三十亿个字母，怎么可能预先给每一种都备好一把钥匙？</p>
+  <p>答案是：<strong>不备。改成随机出钥匙。</strong></p>
+  <h3>一副被反复重洗的牌</h3>
+  <p>免疫细胞在成熟时会做一件在别处堪称违规的事：把自己基因组里的一段<strong>剪开重排</strong>。受体基因不是一整条现成的，而是分成好几组片段，每组有几十到上百个备选；细胞随机从每组抽一个拼起来，接缝处还随意增删几个字母。就像洗过牌再随手发牌——每个细胞的手牌都不一样，牌型的组合数大得惊人。</p>
+  <p>光靠组合，理论多样性可到 <strong>10<sup>11</sup></strong> 以上的量级（不同受体、不同算法的估计差异很大）。但这里要分清两个常被混用的数字：<strong>理论组合上限</strong>是一回事，<strong>你此刻真正带着的库存</strong>是另一回事——后者受限于你有多少个 B 细胞和 T 细胞，测序估算通常落在 <strong>10<sup>8</sup> 到 10<sup>9</sup></strong> 量级。上限是牌型的数目，库存是你手上真有几张牌。</p>
+  <p>1970 年代中期，日本科学家<strong>利根川进</strong>证明了一件当时听来不可思议的事：同一只动物身上，胚胎细胞和抗体产生细胞里的抗体基因<strong>排列方式不一样</strong>。教条说每个体细胞的 DNA 都是同一份拷贝，而免疫细胞是明目张胆的例外——它为了造出多样性，动了自己的说明书。1987 年他因此独得诺贝尔奖。</p>
+  <p>随机出钥匙的直接后果是绝大多数钥匙一辈子派不上用场。这不要紧：身体不需要每把都有用，只需要敌人上门时<strong>库里恰好有几把能开</strong>；被用上的那个细胞随即大量复制自己，把它印上千万份。这就是 1957 年澳大利亚免疫学家<strong>麦克法兰·伯内特</strong>提出的克隆选择学说——身体不按需定制，而是<strong>先备好一屋子随机品，让入侵者自己挑</strong>。</p>
+  <h3>选完还要复赛</h3>
+  <p>更妙的在后面。被选中的 B 细胞冲进淋巴结里一处叫<strong>生发中心</strong>的地方疯狂增殖——而且在复制受体基因时<strong>故意提高出错率</strong>。多数突变让结合变差，这些后代得不到存活信号，就地淘汰；偶尔一个让结合更牢，它就获得继续增殖的许可。一轮轮下来，结合强度可以提高几个数量级。</p>
+  <p>这不是比喻意义上的"进化"，是货真价实的达尔文过程：变异、选择、扩增，在你的淋巴结里以天为周期反复上演。打完一针疫苗后的那两周，腋下或颈侧偶尔有点酸胀——那多半就是这场选拔赛的动静。</p>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 军校</div>
+  <h2>胸骨后面那所学校，九成五以上的学员毕不了业</h2>
+  <p>随机出钥匙有个可怕的副产品：随机意味着，<strong>一定会有钥匙能开自己家的门。</strong></p>
+  <p>一支能识别一切的部队，必然也能识别你的胰岛细胞、你的甲状腺、你的髓鞘、你的关节软骨。要让它安全，就必须在它上岗前把认得自家门的那些逐个筛掉。这件事发生在一个你可能从没留意过的器官里。</p>
+  <p>胸骨后面，心脏上方，有一团在婴儿期相对硕大、成年后几乎被脂肪替换掉的组织：<strong>胸腺</strong>。常规 T 细胞都要进去上学，而淘汰率高得像个笑话——<strong>约九成五到九成八的学员活不到毕业</strong>。</p>
+  <p><em>别把这个数字读成"效率低下"。</em>它是随机出钥匙那笔交易的账单：钥匙既然是随机出的，就必然有大批要么开不了任何门、要么专开自家的门，这两类都得在上岗前销毁。<strong>淘汰率高，正是随机生成能被安全使用的前提</strong>——和上一章那颗先铺富余再削掉一半的大脑，是同一笔买卖。</p>
+  <h3>两场考试</h3>
+  <p><strong>第一场考格式。</strong>T 细胞看不见抗原本身，只能看别的细胞用一种叫 MHC 的分子"举"出来的碎片。入学第一关是：你认得出这种举法吗？完全认不出的，没有用处，任其凋亡。</p>
+  <p><strong>第二场考克制，这一场才是要害。</strong>胸腺里的上皮细胞会把身体各处的自我抗原一件件举出来给学员看：胰岛素、视网膜的蛋白、髓鞘的蛋白——这些东西本不该出现在胸腺里，可胸腺硬是把它们做了出来。凡是对自我抗原反应过于强烈的学员，当场处死或改造成维和部队。</p>
+  <p>这一步靠的是一个叫 <strong>AIRE</strong> 的基因，它像一位在开学礼堂里翻放全国居民相册的教官：<em>看清楚，这些人一个都不许碰。</em>你不必认识每一个敌人，但必须认得每一位自己人——而认自己人这门课可以穷举，因为名单有限。</p>
+  <p>这个机制有反例作证：AIRE 基因失效的人（一种罕见遗传病）会在儿童期陆续出现多个内分泌腺被自身免疫破坏——甲状旁腺、肾上腺、性腺接连失守，还伴有反复的真菌感染。相册没放全，部队就真的会打自己人。胸腺也不是唯一一道锁，漏网的少数还会在外周被<strong>调节性 T 细胞</strong>按住；免疫耐受层层设防，不是一考定终身。</p>
+  <h3>一所会自己关门的学校</h3>
+  <p>胸腺还有个奇特之处：它是身体里退化得最早的器官之一。相对于体重，它在出生前后达到峰值，青春期后被脂肪组织逐年替换，中年时功能组织已所剩不多。这说得通——认识"自己人"早年做完就够了，因为自我抗原的名单基本不变。老年人免疫力下降的一大原因也在这里：新兵输出几乎停了，剩下一支越来越老、越来越缺新面孔的部队。这条线索第 21 章和第 23 章接着展开。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>为什么自身免疫病更常落在女性身上。</strong>这不是印象，是稳定的流行病学事实：多数自身免疫病在女性中明显多见，其中系统性红斑狼疮的女男比例在成年发病人群中常报到约 <strong>9:1</strong>，桥本甲状腺炎、干燥综合征等也高度偏向女性。</p>
+    <p>原因有几条并行线索，都还没有定论。一条与性激素有关；另一条回到了第 1 章那场发生在胚胎期的抛硬币——X 染色体上恰好坐落着一批与免疫直接相关的基因，而 X 失活并不彻底，一部分基因会"逃逸"失活、在女性细胞里以双份剂量工作；近年还发现负责执行 X 失活的那条 RNA 及其结合蛋白本身就可能成为自身抗体的靶子。免疫更强与自身免疫更多，很可能是同一枚硬币的两面。这条线在第 19 章有主场。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 模拟考</div>
+  <h2>一个乡村医生，一个八岁男孩，和一个被写进单词里的"牛"</h2>
+  <p>免疫记忆是这支部队最值钱的资产：同一个敌人第二次上门，反应快一个数量级、强好几个数量级（图 10-2）。而医学史上最划算的一笔投资，就是让部队<strong>不必真的挨一次打</strong>，也能把这份记忆存下来。这件事的起点常被压缩成一句话："琴纳发明了疫苗。"这句话省略掉的部分，比它说出来的更有意思。</p>
+  <h3>史实与传说，各归各位</h3>
+  <p><strong>其一，用天花预防天花的做法早就存在。</strong>取轻症患者的痘痂或痘液接种给健康人（人痘接种），在中国、印度、奥斯曼帝国都有长期实践。1717 年，英国驻奥斯曼大使的夫人<strong>玛丽·沃特利·蒙塔古</strong>在君士坦丁堡见到了这套做法，并为随行的儿子接种；1718 年她把见闻带回英国，1721 年又在伦敦为三岁的女儿接种，此事在当时引起了轰动——她自己脸上就留着天花的疤。这法子有效，但接种者会真的得一场（通常较轻的）天花，有百分之几的死亡率。</p>
+  <p><strong>其二，用牛痘接种也不是琴纳首创。</strong>"挤奶女工不得天花"是当时流传的民间观察；1774 年，英格兰农场主<strong>本杰明·杰斯提</strong>在一次天花流行中用牛痘脓液给妻子和两个儿子接了种。他没有记录，也没有发表，还为这件"离经叛道"的事被邻里非议了很久。</p>
+  <p><strong>其三，琴纳的贡献是把它变成可复制的方法。</strong>1796 年 5 月，格洛斯特郡的乡村医生<strong>爱德华·琴纳</strong>从挤奶女工萨拉·内尔姆斯手上的牛痘疱里取材，接种给园丁八岁的儿子詹姆斯·菲普斯；几周后又给这孩子接种了真正的天花物质——孩子没有发病。拿一个孩子做攻毒试验，按今天的伦理标准完全不可接受；但正是他随后那份可被他人重复的记录，让牛痘接种从一桩乡野秘方变成了公共卫生手段。</p>
+  <p>所以准确的说法是：琴纳是<strong>让牛痘接种被系统验证并广泛接受的关键推动者</strong>，而不是"发明者"。他还留下一个至今每天被使用的词：拉丁文 <em>vacca</em> 是"牛"，由此得名 <strong>vaccine</strong>。你今天打的每一针，名字里都站着一头牛。这条线的终点在 1980 年：世界卫生组织宣布天花根除，它至今仍是<strong>唯一一种被人类彻底根除的人类传染病</strong>。</p>
+  <h3>模拟考为什么管用</h3>
+  <p>疫苗的原理就是给特训军一次没有风险的模拟考：把敌人的样貌送进来（灭活的病原体、减毒的活株、一段外壳蛋白，或让你的细胞自己照着做一段外壳蛋白的信使 RNA），让选拔、复赛、扩增照常跑一遍，然后留下记忆细胞。</p>
+  <p>有个细节容易被忽略：光有样貌还不够。免疫系统不会对一个安静漂过的分子大动干戈，它需要同时收到"危险"的信号。所以许多疫苗要加一点<strong>佐剂</strong>，人为制造一小片局部骚动把常备军叫来，从而点着整条链条——打完针胳膊酸胀发红，往往就是佐剂在做它该做的事。这也解释了为什么有的疫苗隔几周要打第二针、几年后还要加强：记忆需要复习，而每复习一次，生发中心里的选拔赛就再打一轮，亲和力再抬一级。</p>
+  <p>也有考不完的题。流感病毒的外壳每年都在小幅改写（抗原漂移），去年的记忆对今年的毒株只能部分管用，疫苗因此要按当年流行株重新配方——不是疫苗"失效"，是敌人换了题。</p>
+
+  <figure>
+    <svg id="recall" viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="初次与再次抗原暴露后的抗体应答曲线对比：初次应答潜伏一到两周、峰值较低、以 IgM 为主；再次应答潜伏两三天、峰值高出一到两个数量级、以 IgG 为主且亲和力更高">
+      <text class="ax-lb" x="90" y="28" text-anchor="start">血中抗体水平（对数刻度）</text>
+      <line class="grid" x1="90" y1="80" x2="730" y2="80"/>
+      <line class="grid" x1="90" y1="150" x2="730" y2="150"/>
+      <line class="grid" x1="90" y1="220" x2="730" y2="220"/>
+      <line class="ax" x1="90" y1="42" x2="90" y2="292"/>
+      <line class="ax" x1="90" y1="292" x2="730" y2="292"/>
+
+      <line class="shot" x1="140" y1="292" x2="140" y2="256"/>
+      <polyline class="shot" points="134,266 140,256 146,266" fill="none"/>
+      <text class="shot-l" x="140" y="316" text-anchor="middle">初遇</text>
+      <line class="shot" x1="430" y1="292" x2="430" y2="256"/>
+      <polyline class="shot" points="424,266 430,256 436,266" fill="none"/>
+      <text class="shot-l" x="430" y="316" text-anchor="middle">重逢</text>
+
+      <polyline class="c1" points="90,286 140,286 178,282 205,240 232,196 262,182 300,196 350,222 400,244 428,252"/>
+      <polyline class="c2" points="428,252 452,240 476,150 502,86 530,68 570,74 620,88 680,104 726,116"/>
+
+      <text class="an" x="196" y="152" text-anchor="start">初次应答</text>
+      <text class="an" x="196" y="172" text-anchor="start">潜伏 1–2 周 · 以 IgM 为主</text>
+      <text class="an-g" x="470" y="52" text-anchor="start">再次应答：潜伏 2–3 天</text>
+      <text class="an-g" x="470" y="72" text-anchor="start">峰值高一到两个数量级 · 以 IgG 为主</text>
+      <text class="an" x="726" y="146" text-anchor="end">亲和力也更高</text>
+      <text class="ax-lb" x="410" y="340" text-anchor="middle">时间（示意刻度，两次暴露之间可相隔数月至数十年）</text>
+    </svg>
+    <figcaption><b>图 10-2 · 初遇与重逢。</b>第一次见面要花一两周才拿出像样的应答，抗体以早期的 IgM 为主；同一抗原第二次上门，记忆细胞已在位，两三天起效，峰值高出一到两个数量级，抗体换成经生发中心反复选拔、结合更牢的 IgG。纵轴为对数示意刻度。疫苗的全部意义，就是把左边那一次的代价换成一针。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 见世面</div>
+  <h2>母亲的抗体，肠子里的老师，和一个被误读了三十年的假说</h2>
+  <p>新生的部队一门课也没上过，外面的世界却不会等它。于是有一段时间，你用的是别人的免疫力。</p>
+  <p>孕晚期，母亲血中的 IgG 抗体被主动搬运过胎盘——你出生时带的那份抗体谱，基本是母亲这些年见过的世面的抄本。出生后它逐月衰减，到 <strong>6 个月</strong>前后降至低点，而你自己的部队还在跌跌撞撞地上学。<em>这段青黄不接的空窗期，正是婴幼儿疫苗时间表排得那么密的原因。</em>母乳补的是另一路：初乳含大量分泌型 IgA，此后仍以每天数百毫克的量级供应，而且<strong>基本不进血液</strong>——它铺在肠道和呼吸道黏膜表面，像给整条内壁刷上一层不粘涂层。母亲最近接触过什么，乳汁里就多出针对什么的抗体。</p>
+  <h3>肠子里的第一批老师</h3>
+  <p>第 8 章结尾提到，出生那一刻你迎来了第一批住客。现在可以说清它们的另一重身份：<strong>它们是老师。</strong></p>
+  <p>无菌环境中饲养的动物，免疫系统发育明显异常——肠道相关淋巴组织发育不良，免疫细胞比例失衡；把正常菌群移植回去，很多缺陷可以纠正。共生微生物不是被容忍的旁观者，它们持续提供"练习题"，也教会免疫系统一件极难的事：<strong>这些东西不是我，但也不用打。</strong>认出"不是我"只是第一课；分辨"不是我但无害"，才是黏膜免疫每天在做的活儿——几万亿个细菌隔着一层单细胞厚的上皮与一支庞大的部队日夜对峙而相安无事，这份克制的成本比杀戮高得多。</p>
+  <h3>卫生假说：正确的观察，被推错的方向</h3>
+  <p>1989 年，英国流行病学家<strong>戴维·斯特罕</strong>注意到一个奇怪的相关：家里兄弟姐妹越多的孩子，长大后患花粉症的比例越低，而且哥哥姐姐比弟弟妹妹更管用。他由此提出后来被称作"卫生假说"的解释——早年接触到的感染，可能对后来的过敏有保护作用。</p>
+  <p>观察本身站得住，几十年里在多个人群中被反复看到。2016 年一项对两个宗教社群的比较尤其有说服力：遗传背景接近、生活方式相似的阿米什人与哈特派，前者沿用传统农耕、儿童常在畜舍出入，后者高度工业化、住宅与畜舍分离——阿米什儿童的哮喘率显著更低，其家中灰尘里的微生物成分甚至能在小鼠身上直接产生保护。</p>
+  <p><em>但"卫生假说"这个名字把大众引向了一个危险的外推：既然太干净不好，那就少洗手、少打疫苗、多得几场病。三条都推错了。</em>起保护作用的证据指向的是<strong>与共生及环境微生物的长期、低强度接触</strong>——畜舍的灰尘、泥土、多样的饮食——而不是"得一场病"；感染性疾病与过敏之间并没有稳定的保护关系，有些感染反而加重气道问题。而洗手、清洁饮水和疫苗针对的是致病微生物，根本不构成那套练习题的来源。所以这个假说的现代版本干脆改了名字，叫<strong>"老朋友"假说</strong>：缺的不是脏，是<strong>多样性</strong>。</p>
+  <p>说到底，免疫上学的方式和上一章那个大脑很像：起初备好过量的随机可能，再让真实世界决定留下什么、撤掉什么。区别只在于，大脑靠经验塑形，免疫靠抗原选择。<strong>两套系统都把定稿权交给了它将要生活的那个世界。</strong></p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>入园第一年一年病八回，是课表不是体质。</strong>学龄前儿童每年六到八次呼吸道感染是常见范围，刚开始集体生活那一年往往更多。家长的第一反应通常是"这孩子免疫力差"，但更贴合事实的解释是：他刚从一间只有几位家人的小教室，转学进了有三十个同学的大教室，而每个同学都带来了自己那一份从未谋面的病毒。</p>
+    <p>光是引起普通感冒的鼻病毒就有一百六十余个型别（第 16 章展开）。免疫记忆是一种一种攒起来的，所以病一场就少一场；成年人一年两到四次感冒，靠的正是童年那几年积下的一柜子记忆。这话有边界：反复出现严重的、需要住院的感染，或伴随生长发育落后，是另一回事，该看医生。</p>
+  </div>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>一次教科书级的共识反转：花生该早吃还是晚吃。</strong>2000 年前后，多国指南建议高风险婴儿推迟接触花生等易致敏食物，理由听来顺理成章：早接触会致敏。此后十几年，花生过敏的发病率不降反升。</p>
+    <p>转折点是 2015 年发表的 LEAP 试验。研究者注意到一个反常现象：以色列的犹太儿童从很小就常吃一种花生味膨化零食，花生过敏率远低于背景相近的英国犹太儿童。于是他们把 600 多名高危婴儿（已有严重湿疹或鸡蛋过敏）随机分组，一组从 4–11 月龄起定期吃花生制品，另一组严格回避，追踪到 5 岁。结果完全反向：<strong>早引入组的花生过敏发生率相对下降约七成到八成六</strong>（幅度按入组时皮试是否已阳性分层而异），停吃一年后保护依然存在。各国指南随之改写。</p>
+    <p>此后有两条方向：把结论推广到鸡蛋等其他食物（鸡蛋的支持较好，其余证据仍不足）；以及对已过敏者做口服免疫治疗——每日服用微量并逐步加量，已有获批产品，能提高误食的耐受阈值，但不等于治愈。若在 2030 年后重读此栏，请先核实推荐年龄窗口与适用食物清单——这是近十年改动最频繁的儿科建议之一。</p>
+  </div>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">免疫系统上学 · 关键数字</div>
+    <table>
+      <tr><td class="k">皮肤面积（成人）</td><td class="v">1.5–2 m²</td><td class="n">真正需要设防的界面多数在体内</td></tr>
+      <tr><td class="k">肠道黏膜面积</td><td class="v">30–40 m²</td><td class="n">教科书旧值 200–300 m² 已被修正</td></tr>
+      <tr><td class="k">中性粒细胞占比</td><td class="v">白细胞的 50–70%</td><td class="n">循环中寿命以小时–数天计</td></tr>
+      <tr><td class="k">受体理论组合上限</td><td class="v">10¹¹ 量级以上</td><td class="n">不同受体与算法给出的估计差异大</td></tr>
+      <tr><td class="k">实际携带的受体库存</td><td class="v">10⁸–10⁹ 量级</td><td class="n">测序估算；随年龄与暴露史变化</td></tr>
+      <tr><td class="k">胸腺 T 细胞淘汰率</td><td class="v">约 95–98%</td><td class="n">只有百分之几结业上岗</td></tr>
+      <tr><td class="k">胸腺退化</td><td class="v">青春期后逐年脂肪化</td><td class="n">中年时功能组织已所剩不多</td></tr>
+      <tr><td class="k">初次 → 再次应答起效</td><td class="v">1–2 周 → 2–3 天</td><td class="n">峰值高一到两个数量级</td></tr>
+      <tr><td class="k">母源 IgG 降至低点</td><td class="v">生后约 6 个月</td><td class="n">婴幼儿疫苗时间表的排布依据</td></tr>
+      <tr><td class="k">母乳分泌型 IgA</td><td class="v">每日数百 mg 量级</td><td class="n">铺在黏膜表面，基本不进入血液</td></tr>
+      <tr><td class="k">学龄前呼吸道感染</td><td class="v">6–8 次 / 年</td><td class="n">入园第一年常更多，属正常范围</td></tr>
+      <tr><td class="k">天花根除宣布</td><td class="v">1980 年</td><td class="n">迄今唯一被根除的人类传染病</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">先天免疫从未"上过学"，它凭什么能识别一个刚出现的新细菌？</div>
+      <div class="opts">
+        <button>它保存着演化史上遇到过的全部病原体名单</button>
+        <button data-c="1">它认的是一大类微生物共有、而人体细胞没有的分子特征——认制服不认脸</button>
+        <button>它靠随机试探，碰对了才起效</button>
+        <button>它必须等适应性免疫先给出识别结果</button>
+      </div>
+      <div class="explain">被识别的那些成分（细菌细胞壁组分、鞭毛蛋白、病毒复制时的双链 RNA）对微生物太重要，改不掉，所以"制服"换不了。这也解释了发炎与发烧的性质：它们不是敌人造成的破坏，而是自己下的动员令——血管通透性提高是为了让援兵更容易挤到现场。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">抗体的巨大多样性是怎么来的？</div>
+      <div class="opts">
+        <button>基因组里预存了上亿个现成的抗体基因</button>
+        <button>抗体是通用的，靠肝脏后期加工出特异性</button>
+        <button data-c="1">免疫细胞把自己的受体基因片段随机剪接重排，接缝处还随意增删字母</button>
+        <button>由胸腺按当前流行的病原体定制生产</button>
+      </div>
+      <div class="explain">利根川进用实验证明胚胎细胞与抗体产生细胞里的抗体基因排列方式不同，1987 年因此获诺贝尔奖——免疫细胞是"每个体细胞 DNA 相同"这条教条的明目张胆的例外。注意区分两个数字：理论组合上限在 10¹¹ 量级以上，而你此刻真正携带的库存受细胞总数限制，约在 10⁸–10⁹ 量级。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">胸腺里那场淘汰率高达九成五以上的考核，主要在筛什么？</div>
+      <div class="opts">
+        <button>筛出增殖速度最快的 T 细胞</button>
+        <button data-c="1">留下认得出抗原呈递格式的，并处死对自我抗原反应过强的</button>
+        <button>筛出能识别最多种病原体的"全能兵"</button>
+        <button>按血型给 T 细胞分组</button>
+      </div>
+      <div class="explain">关键在第二场考试：胸腺上皮细胞借助 AIRE 基因，把身体各处的自我抗原（胰岛素、视网膜蛋白、髓鞘蛋白等）一件件举出来给学员看。认识"自己人"这门课之所以可行，是因为自己人的名单有限、可以穷举。AIRE 失效的人会在儿童期陆续出现多个内分泌腺被自身免疫破坏——相册没放全，部队真的会打自己人。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">关于琴纳与牛痘，下面哪一句最准确？</div>
+      <div class="opts">
+        <button>他发明了人类历史上第一种接种预防传染病的方法</button>
+        <button>他首先用牛痘为人接种</button>
+        <button data-c="1">他把牛痘接种系统验证、记录并推广，使之从乡野秘方变成可复制的公共卫生手段</button>
+        <button>他分离出了天花病毒并将其减毒</button>
+      </div>
+      <div class="explain">用天花预防天花的人痘接种早已存在，蒙塔古夫人 1718 年将其从奥斯曼带回英国、1721 年在伦敦为女儿接种；用牛痘接种则至少可追溯到 1774 年农场主杰斯提为妻儿接种，只是他未加记录也未发表。琴纳 1796 年的试验按今天的伦理标准不可接受（他给八岁的菲普斯接种牛痘后又用天花物质攻毒），但正是那份可被重复的记录改变了历史。疫苗一词来自拉丁文的"牛"。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">关于卫生假说，哪一种理解是对的？</div>
+      <div class="opts">
+        <button>孩子应该少洗手、多接触病原体，才能练出免疫力</button>
+        <button>疫苗剥夺了免疫系统的锻炼机会，应当推迟接种</button>
+        <button data-c="1">起保护作用的是与共生及环境微生物的早期、多样接触，而不是"得一场病"</button>
+        <button>该假说已被推翻，过敏与环境无关</button>
+      </div>
+      <div class="explain">它的现代版本干脆改了名字，叫"老朋友假说"——缺的不是脏，是多样性。阿米什与哈特派的对照研究很能说明问题：两个遗传背景接近、生活方式相似的社群，前者儿童常在畜舍出入而哮喘率显著更低，其家中灰尘里的微生物成分甚至能在小鼠身上直接产生保护。洗手、清洁饮水与疫苗针对的是致病微生物，它们不构成那套"练习题"的来源。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第二幕 调试与扩容</div>
+  <div class="title">第 11 章 · 骨骼如何变长</div>
+  <p>你今天早上比昨天晚上高了一厘米多，而这跟"长个儿"毫无关系。真正的长高发生在骨头两端一层薄薄的软骨里，靠的不是往上堆，而是一场从中间往外顶的接力。下一章我们去看一位十八世纪的外科医生在小猪腿骨里埋下的两粒铅弹，怎么一次性解决了这个问题。</p>
+  <nav class="footnav">
+    <a href="ch09-brain.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch11-bones.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 图 10-1：点编制看职能
+  var corps = document.getElementById('corps');
+  var tabs = document.querySelectorAll('#corps-fig .unit-btn');
+  var units = document.querySelectorAll('#corps .unit');
+  var panes = document.querySelectorAll('#corps-fig .up');
+  function showUnit(key){
+    var i;
+    corps.classList.add('picked');
+    for (i = 0; i < tabs.length; i++) {
+      tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-unit') === key ? 'true' : 'false');
+    }
+    for (i = 0; i < units.length; i++) {
+      units[i].classList.toggle('on', units[i].getAttribute('data-unit') === key);
+    }
+    for (i = 0; i < panes.length; i++) {
+      panes[i].classList.toggle('on', panes[i].getAttribute('data-up') === key);
+    }
+  }
+  for (var t = 0; t < tabs.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){ showUnit(el.getAttribute('data-unit')); });
+    })(tabs[t]);
+  }
+  for (var u = 0; u < units.length; u++) {
+    (function(el){
+      el.addEventListener('click', function(){ showUnit(el.getAttribute('data-unit')); });
+    })(units[u]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第6章 · 性别分化的岔路口 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 6-1 分化决策树（本章专用） ---- */
+#tree-fig .path-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#tree-fig .path-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#tree-fig .path-btn:hover{border-color:var(--gold); color:var(--ink);}
+#tree-fig .path-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#tree-fig .path-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#tree-fig .path-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#tree-fig .pp{display:none;}
+#tree-fig .pp.on{display:block;}
+#tree-fig .pp-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#tree-fig .pp p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+
+#tree .branch{cursor:pointer; transition:opacity .35s;}
+#tree.picked .branch{opacity:.18;}
+#tree.picked .branch.on{opacity:1;}
+#tree .bx{fill:var(--surface2); stroke:var(--line); stroke-width:1.5;}
+#tree .branch.on .bx{stroke:var(--gold); stroke-width:2;}
+#tree .bx.trunk{fill:var(--surface2); stroke:var(--gold); stroke-width:2;}
+#tree .bx.fork{fill:none; stroke:var(--gold); stroke-width:2; stroke-dasharray:5 4;}
+#tree .t1{fill:var(--ink); font-size:14px; font-weight:700;}
+#tree .t2{fill:var(--ink-dim); font-size:11.5px;}
+#tree .link{stroke:var(--ink-faint); stroke-width:1.6; fill:none;}
+#tree .link.l{stroke:var(--mixed-l);}
+#tree .link.r{stroke:var(--mixed-r);}
+#tree .tagl{fill:var(--mixed-l); font-size:11.5px;}
+#tree .tagr{fill:var(--mixed-r); font-size:11.5px;}
+#tree .foot{fill:var(--ink-faint); font-size:12px;}
+
+/* ---- 图 6-2 同源器官对照（本章专用） ---- */
+#homolog .hd{fill:var(--ink-faint); font-size:12px; letter-spacing:.1em;}
+#homolog .core{fill:var(--gold); fill-opacity:.13; stroke:var(--gold); stroke-width:1.4;}
+#homolog .core-t{fill:var(--ink); font-size:13px; font-weight:600;}
+#homolog .lft{fill:var(--mixed-l); font-size:13px;}
+#homolog .rgt{fill:var(--mixed-r); font-size:13px;}
+#homolog .tie{stroke:var(--line); stroke-width:1.2;}
+#homolog .rule{stroke:var(--line); stroke-width:1; stroke-dasharray:2 5;}
+#homolog .foot{fill:var(--ink-faint); font-size:12px;}
+
+@media (prefers-reduced-motion: reduce){
+  #tree .branch{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第一幕 建造 · 第 6 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>性别分化的<br>岔路口</h1>
+  <p class="subtitle">受精后第六周，每个胚胎身上都并排备着两套管道。接下来的几周里，其中一套会被拆掉——而拆哪一套，由一个只工作几天的基因说了算。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>给你看两张照片。</p>
+  <p>都是受精后第六周的胚胎，都只有一颗蓝莓那么大。两张照片里都有一对还没打定主意的性腺，都有两组通向体外的管道并排躺着，还有一个刚刚隆起的小结节。把它们摆在同一台显微镜下，没有哪位胚胎学家能告诉你，哪一个将来是男孩，哪一个将来是女孩。</p>
+  <p>可这两个胚胎的染色体，在受精那一秒就已经不同了。序章说过，那一刻写定的只是开关的初始位置，不是结果。现在开关要被拨动——接下来的几周里，这两个看不出分别的胚胎会分头上路，其中一副身上会有一整套管道被彻底拆除。这一章，我们守在那个岔路口上。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 两可</div>
+  <h2>六周之前，两条路你都留着</h2>
+  <p>先看看岔路口之前的这副身子备了些什么。</p>
+  <p>受精后第四到六周，胚胎腹侧后壁上隆起一对小脊，叫<strong>生殖嵴</strong>。（本书的周数一律按<strong>受精后</strong>计，即胚胎学上的胚龄；产科门诊惯用的"孕龄"自末次月经起算，要再加约两周。）它此刻是一团还没表态的细胞——教科书上叫"未分化性腺"，意思是它既可以走成卵巢，也可以走成睾丸，两边的手续都还没办。</p>
+  <p>而真正要装进这对性腺里的东西，此刻还不在里面。<strong>原始生殖细胞</strong>——将来变成卵子或精子的那一批——并不在性腺里出生。它们诞生在胚胎之外，在卵黄囊的壁上，然后启程：沿着后肠的背系膜，像一小队迁徙的旅人，一路爬进正在成形的生殖嵴，大约在受精后第五到六周抵达。你这一生要交出去的那一棒，是靠这段跋涉送到位的。</p>
+  <h3>并排躺着的两组管道</h3>
+  <p>接下来是这一章最要紧的一件事，也是最容易让人意外的一件：<strong>每一个胚胎，此刻身上都同时长着两组内生殖管道。</strong></p>
+  <p>一组叫<strong>午非管</strong>（中肾管，Wolffian duct），另一组叫<strong>缪勒管</strong>（副中肾管，Müllerian duct）。它们并排铺设，从胚胎背侧一直通向下方，谁也没碍着谁。午非管若留下来，将来成为附睾、输精管和精囊；缪勒管若留下来，将来成为输卵管、子宫和阴道上段。</p>
+  <p>换句话说，这时候的你，两条路的路基都已经铺好了。分化要做的不是"新建一套"，而是<strong>留下一套、拆掉另一套</strong>。这有点像剧团在同一个舞台的两侧侧幕里各搭了一套布景，等导演一句话——用哪一套，另一套就连夜拆走。</p>
+  <p>但外面的情况不一样，值得留意这处不对称：<strong>外生殖器只备了一套原基。</strong>一个中央的<strong>生殖结节</strong>，两道<strong>尿生殖褶</strong>，两侧<strong>阴唇阴囊隆起</strong>——就这三样，男女胚胎人手一份，没有备份。里面是"备了两套拆一套"，外面是"只有一套，塑成两种"。第 4 节我们会把这份对照表整个摊开。</p>
+  <p>所有这些零件都已经就位，静静等着。等的是一个信号。</p>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 扳道工</div>
+  <h2>一个基因，和一场追了三年的错案</h2>
+  <p>这个信号被找到的过程，是二十世纪遗传学里一段少见的、有输有赢的追捕。</p>
+  <p>起点在 1947 年。法国生理学家<strong>阿尔弗雷德·若斯特</strong>（Alfred Jost）做了一组在今天看来简单、在当时相当大胆的兔子实验：他在兔胚胎还没分化之前，把它们的性腺切掉，然后让胚胎继续发育。结果是齐整的——无论这些胚胎带的是什么染色体，最后都长出了输卵管和子宫，走上了同一条路。若斯特由此断定：性腺是决定内外生殖结构走向的那个开关，而且是<strong>睾丸主动做了什么</strong>，才把发育推离了另一条轨道。</p>
+  <p>那么，是什么让一团未分化的细胞决定去当睾丸？答案必定写在 Y 染色体上某处，人们给这个还没露面的东西起了个名字：<strong>睾丸决定因子（TDF）</strong>。问题是 Y 染色体有五千多万个碱基，而当时还没有全基因组测序这回事。</p>
+  <h3>线索来自极少数人</h3>
+  <p>破局的思路很漂亮：不去大海捞针，而是找那些"针掉错了地方"的人。</p>
+  <p>临床上存在极少数染色体为 46,XX 却发育为男性的个体，也存在 46,XY 却发育为女性的个体。前者身上往往带着一小段本不属于 X 的 Y 片段——在减数分裂时错误易位过去的。把许多这样的个体排在一起，比较他们各自带着或缺着哪一段 Y，那个共同的、必不可少的区段就会一点点浮出来。这相当于让自然界替你做了几十次精细的剪切实验，你只需要读结果。</p>
+  <p>1987 年，麻省理工的 David Page 团队宣布区段已经收窄到一个基因上，他们叫它 <strong>ZFY</strong>。消息轰动，教科书开始改写。</p>
+  <p>两年之后，它塌了。有研究者找到几位 46,XX 的男性，他们身上带的 Y 片段里根本不含 ZFY——如果 ZFY 是那个开关，这些人不该存在。更不利的证据接踵而至：有袋类身上这个基因压根不在性染色体上，而 X 染色体上还蹲着一个与它高度相似的 ZFX。三条证据摆在一起，ZFY 出局。</p>
+  <h3>1990 年 7 月</h3>
+  <p>真正的答案在被排除掉的那片区域旁边。1990 年 7 月，《自然》同一期刊出两篇论文：一篇由 Sinclair 等人报告，在人的 Y 染色体上找到一个新基因，命名为 <strong>SRY</strong>（Y 染色体性别决定区）；另一篇报告了小鼠身上对应的 Sry。这项工作出自英国的两个团队——Peter Goodfellow 与 Robin Lovell-Badge 的合作。</p>
+  <p>但真正把案子钉死的是次年那个实验。1991 年，Peter Koopman 等人把一段仅含 Sry 的小鼠 DNA 注入 XX 受精卵。这样的胚胎按染色体本该发育为雌性，结果长成了雄鼠。他们给其中一只起了名字，叫 Randy。一个基因，一段 DNA，足以把整条发育路线搬到另一条轨道上。</p>
+  <p>而这个基因小得让人意外：<strong>单个外显子，编码一个只有 204 个氨基酸的蛋白</strong>，在人类性腺里的表达窗口只有短短几天。它干的活也不复杂——结合到 DNA 上，把双螺旋<em>弯折</em>一个角度，让另一个叫 SOX9 的基因得以被读取；SOX9 一旦启动，就会自我维持并召集大队人马，把未分化的性腺推成睾丸。</p>
+  <p>所以 SRY 更像一名<strong>扳道工</strong>：他不开火车，也不铺铁轨，只是在列车经过之前把道岔扳过去，然后就下班了。整趟旅程的方向由那一下决定，而他本人只在道岔旁站了几天。</p>
+  <p>不过这个比喻有个地方需要在下一节就地拆开——它会让人以为，道岔扳过去之后，一切就自动了。</p>
+
+  <figure id="tree-fig">
+    <div class="switch-row">
+      <span class="switch-hint">选一条路走 →</span>
+      <div class="path-tabs" role="group" aria-label="选择要查看的分化路径">
+        <button class="path-btn" data-path="none" aria-pressed="false">分叉之前</button>
+        <button class="path-btn" data-path="xx" aria-pressed="false">不表达 SRY</button>
+        <button class="path-btn" data-path="xy" aria-pressed="false">表达 SRY</button>
+      </div>
+    </div>
+    <svg id="tree" viewBox="0 0 760 570" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="性别分化决策树：从未分化性腺与两套并存管道出发，按是否表达 SRY 分为两条路径，分别通向卵巢与睾丸及各自的内生殖管道">
+      <!-- 主干 -->
+      <rect class="bx trunk" x="250" y="24" width="260" height="64" rx="9"/>
+      <text class="t1" x="380" y="50" text-anchor="middle">胚龄 4–6 周 · 未分化</text>
+      <text class="t2" x="380" y="72" text-anchor="middle">性腺未表态 · 两套管道并存</text>
+      <path class="link" d="M380 88 V 116"/>
+      <rect class="bx fork" x="270" y="116" width="220" height="48" rx="9"/>
+      <text class="t1" x="380" y="146" text-anchor="middle">SRY 是否表达？</text>
+      <path class="link l" d="M380 164 C 380 182, 190 178, 190 196"/>
+      <path class="link r" d="M380 164 C 380 182, 570 178, 570 196"/>
+
+      <!-- 左路径 · 不表达 SRY -->
+      <g class="branch" data-path="xx">
+        <text class="tagl mono" x="190" y="188" text-anchor="middle">不表达</text>
+        <rect class="bx" x="60" y="196" width="260" height="58" rx="9"/>
+        <text class="t1" x="190" y="220" text-anchor="middle">性腺 → 卵巢</text>
+        <text class="t2" x="190" y="240" text-anchor="middle">由 RSPO1 · WNT4 · FOXL2 主动推动</text>
+        <path class="link l" d="M190 254 V 282"/>
+        <rect class="bx" x="60" y="282" width="260" height="58" rx="9"/>
+        <text class="t1" x="190" y="306" text-anchor="middle">没有 AMH</text>
+        <text class="t2" x="190" y="326" text-anchor="middle">缪勒管留了下来</text>
+        <path class="link l" d="M190 340 V 368"/>
+        <rect class="bx" x="60" y="368" width="260" height="58" rx="9"/>
+        <text class="t1" x="190" y="392" text-anchor="middle">没有睾酮</text>
+        <text class="t2" x="190" y="412" text-anchor="middle">午非管自行退去</text>
+        <path class="link l" d="M190 426 V 454"/>
+        <rect class="bx" x="60" y="454" width="260" height="58" rx="9"/>
+        <text class="t1" x="190" y="478" text-anchor="middle">输卵管 · 子宫</text>
+        <text class="t2" x="190" y="498" text-anchor="middle">阴道上段</text>
+      </g>
+
+      <!-- 右路径 · 表达 SRY -->
+      <g class="branch" data-path="xy">
+        <text class="tagr mono" x="570" y="188" text-anchor="middle">表达</text>
+        <rect class="bx" x="440" y="196" width="260" height="58" rx="9"/>
+        <text class="t1" x="570" y="220" text-anchor="middle">性腺 → 睾丸</text>
+        <text class="t2" x="570" y="240" text-anchor="middle">SRY 扳一下，SOX9 接手</text>
+        <path class="link r" d="M570 254 V 282"/>
+        <rect class="bx" x="440" y="282" width="260" height="58" rx="9"/>
+        <text class="t1" x="570" y="306" text-anchor="middle">支持细胞分泌 AMH</text>
+        <text class="t2" x="570" y="326" text-anchor="middle">缪勒管被拆除</text>
+        <path class="link r" d="M570 340 V 368"/>
+        <rect class="bx" x="440" y="368" width="260" height="58" rx="9"/>
+        <text class="t1" x="570" y="392" text-anchor="middle">间质细胞分泌睾酮</text>
+        <text class="t2" x="570" y="412" text-anchor="middle">午非管留了下来</text>
+        <path class="link r" d="M570 426 V 454"/>
+        <rect class="bx" x="440" y="454" width="260" height="58" rx="9"/>
+        <text class="t1" x="570" y="478" text-anchor="middle">附睾 · 输精管</text>
+        <text class="t2" x="570" y="498" text-anchor="middle">精囊</text>
+      </g>
+
+      <line x1="60" y1="532" x2="700" y2="532" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 5"/>
+      <text class="foot" x="380" y="554" text-anchor="middle">外生殖器不在这棵树上分叉：两条路共用同一组原基，走向取决于是否收到 DHT。</text>
+    </svg>
+    <div class="path-panel">
+      <div class="pp on" data-pp="0">
+        <div class="pp-t">先看树，再选路</div>
+        <p>上方三个按钮分别对应岔路口之前的状态和之后的两条路。注意两条路并不对称：右边那条要<em>做两件事</em>（拆掉一套、保住另一套），而且这两件事由两种不同的细胞、两种不同的激素分头负责——第 5 节会看到，它们确实可能只成功一半。</p>
+      </div>
+      <div class="pp" data-pp="none">
+        <div class="pp-t">分叉之前 · 胚龄 4–6 周</div>
+        <p>两条路都还开着。性腺是一团尚未表态的细胞，午非管与缪勒管并排躺着，谁也没被拆。这段时间里，把两个不同染色体的胚胎摆在一起，从结构上分不出彼此。这不是过渡期的含糊，而是一种真实的、留着两种可能的状态。</p>
+      </div>
+      <div class="pp" data-pp="xx">
+        <div class="pp-t">不表达 SRY 的那条路</div>
+        <p>过去的教科书把这条路叫"默认路径"，意思是不做任何事就会走到。这个说法现在被认为严重不完整：卵巢的形成同样需要 RSPO1、WNT4、FOXL2 等一批基因主动推动，它们中若有失效，46,XX 的性腺也可能长出睾丸组织。没有 AMH，缪勒管得以留下；没有睾酮，午非管失去支撑而退去——留下和退去，都是有原因的结果，不是"什么也没发生"。</p>
+      </div>
+      <div class="pp" data-pp="xy">
+        <div class="pp-t">表达 SRY 的那条路</div>
+        <p>SRY 只在受精后第六到七周表达短短几天，把 SOX9 点着就退场。此后干活的是睾丸里两种细胞：支持细胞分泌抗缪勒管激素（AMH），几周内拆掉缪勒管；间质细胞分泌睾酮，保住午非管并把它建成附睾、输精管和精囊。睾酮还要在外周被转成活性更强的 DHT，去塑造前列腺和外生殖器。</p>
+      </div>
+    </div>
+    <figcaption><b>图 6-1 · 岔路口的形状。</b>树的主干是每个胚胎共有的起点；两条分枝分别是不表达和表达 SRY 的走向。图中把"卵巢路径"画成与"睾丸路径"同样需要主动推动的一条路，而不是一条无人管的下坡——这是近二三十年发育生物学的一处重要修订，正文第 3 节详述。示意图只画决策关系，不代表解剖位置。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 两道令</div>
+  <h2>两种细胞，两道互不通气的命令</h2>
+  <p>道岔扳过去之后，真正动手的是睾丸里两种细胞。它们各自分泌一种激素，各管各的事，而且——这是本节的要点——<strong>它们互不通气。</strong></p>
+  <p><strong>支持细胞（Sertoli 细胞）分泌抗缪勒管激素（AMH）</strong>，大约从受精后第七到八周开始。缪勒管对它极其敏感，几周之内退得干干净净。这是一道撤除令。</p>
+  <p><strong>间质细胞（Leydig 细胞）分泌睾酮</strong>，大约从受精后第八到九周开始，在第十一到十四周达到一个峰值。午非管靠它维持，并顺着它长成附睾、输精管和精囊。这是一道保留令。</p>
+  <p>睾酮走出性腺之后还有第三步：在目标组织里被一种叫 <strong>5α-还原酶</strong>的酶转换成活性更强的<strong>双氢睾酮（DHT）</strong>。真正塑造前列腺和外生殖器的是 DHT，不是睾酮本身。到受精后第十二到十四周，外生殖器的走向基本定型。</p>
+  <p>把这三步拆开来看很重要，因为它们是三个独立的环节，各自都可能单独出问题：睾丸可以正常形成而受体收不到信号，睾酮可以正常分泌而转不成 DHT。第 5 节会具体讲到这些情形——那时你会发现，正是这些"只成功了一半"的情况，反过来最有力地证明了这三步确实是分开的。</p>
+
+  <h3>关于"默认"的那个误会</h3>
+  <p>现在来拆扳道工这个比喻。</p>
+  <p>若斯特那组兔子实验有一个副产品：它太容易被读成"雌性是默认设置，不做任何事就会得到"。这个说法在教科书里躺了半个世纪，说起来也顺口——扳道岔的人不来，车不就自己走原来那条道了吗？</p>
+  <p>但它是错的，或者至少严重不完整。</p>
+  <p>卵巢的形成同样需要一批基因<strong>主动推动</strong>：RSPO1、WNT4、FOXL2 等等，它们组成另一条通路，与睾丸那条通路互相压制。当这些基因中的某一个失效时，一个 46,XX 的性腺也可能长出睾丸组织来——这在人和小鼠身上都观察到了。"什么也不做"并不会得到卵巢，只会得到一团不成形的组织。</p>
+  <p>更彻底的修正来自二十一世纪头十年的一批实验，它们把这件事从"决定"改写成了"维持"。2009 年，研究者在<strong>成年</strong>雌鼠的卵巢里关掉 FOXL2——不是胚胎期，是已经发育完成、正常排卵多年的卵巢。结果卵巢里的颗粒细胞开始向支持细胞样的细胞转变，组织朝睾丸的方向漂移。两年后的反向实验同样成立：在成年雄鼠身上关掉 DMRT1，睾丸会向卵巢的方向滑过去。</p>
+  <p>所以扳道工的比喻要补上关键的一句：<em>道岔扳过去之后，两条轨道都需要有人一直守着。</em>性腺的身份不是一次写定、此后自动保持的，它是两组基因终生互相压制、每天都在重新维持的一个平衡。松开手，车会自己往回滑。</p>
+  <p>这一处修订看起来只是措辞上的讲究，其实改变了整幅图景：分化不是一条下坡路加一条上坡路，而是两条都需要动力的路。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>男性为什么也有乳头。</strong>这个问题常被当成脑筋急转弯，答案其实就写在本章的时间表里：乳腺的原基是在性别分化<em>之前</em>就已经铺好的，那时候还没有任何激素来告诉这副身子该往哪边走。等到分化开始，这些结构已经在那里了，而它们并不像缪勒管那样收到过明确的拆除令，于是就留了下来，只是此后不再继续发育。</p>
+    <p>顺着这条线还能解释两件事：男性乳腺组织虽然不发育，却仍然是真实的乳腺组织，所以在激素环境改变时可能增生（青春期一过性的男性乳腺发育相当常见），也确实可能罹患乳腺癌，只是发病率远低于女性。"退化的残留"和"完全不存在"，是两回事。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 对照</div>
+  <h2>同一批演员，两个剧本</h2>
+  <p>把两条路的终点摆在一起看，会看到一件容易被忽略的事：<strong>那些被认为分属男女的结构，绝大多数是成对的——同一处原基的两种去处。</strong></p>
+
+  <figure>
+    <svg id="homolog" viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="同源器官对照表：中间列为共同原基，左右两列分别为卵巢路径与睾丸路径上由它发育成的结构">
+      <text class="hd" x="286" y="36" text-anchor="end">卵巢路径</text>
+      <text class="hd" x="380" y="36" text-anchor="middle">共同的原基</text>
+      <text class="hd" x="474" y="36" text-anchor="start">睾丸路径</text>
+      <line class="rule" x1="20" y1="50" x2="740" y2="50"/>
+
+      <rect class="core" x="300" y="59" width="160" height="34" rx="7"/>
+      <text class="core-t" x="380" y="81" text-anchor="middle">未分化性腺</text>
+      <line class="tie" x1="288" y1="76" x2="300" y2="76"/><line class="tie" x1="460" y1="76" x2="472" y2="76"/>
+      <text class="lft" x="286" y="81" text-anchor="end">卵巢</text>
+      <text class="rgt" x="474" y="81" text-anchor="start">睾丸</text>
+
+      <rect class="core" x="300" y="107" width="160" height="34" rx="7"/>
+      <text class="core-t" x="380" y="129" text-anchor="middle">生殖结节</text>
+      <line class="tie" x1="288" y1="124" x2="300" y2="124"/><line class="tie" x1="460" y1="124" x2="472" y2="124"/>
+      <text class="lft" x="286" y="129" text-anchor="end">阴蒂</text>
+      <text class="rgt" x="474" y="129" text-anchor="start">阴茎头</text>
+
+      <rect class="core" x="300" y="155" width="160" height="34" rx="7"/>
+      <text class="core-t" x="380" y="177" text-anchor="middle">尿生殖褶</text>
+      <line class="tie" x1="288" y1="172" x2="300" y2="172"/><line class="tie" x1="460" y1="172" x2="472" y2="172"/>
+      <text class="lft" x="286" y="177" text-anchor="end">小阴唇</text>
+      <text class="rgt" x="474" y="177" text-anchor="start">尿道海绵体部</text>
+
+      <rect class="core" x="300" y="203" width="160" height="34" rx="7"/>
+      <text class="core-t" x="380" y="225" text-anchor="middle">阴唇阴囊隆起</text>
+      <line class="tie" x1="288" y1="220" x2="300" y2="220"/><line class="tie" x1="460" y1="220" x2="472" y2="220"/>
+      <text class="lft" x="286" y="225" text-anchor="end">大阴唇</text>
+      <text class="rgt" x="474" y="225" text-anchor="start">阴囊</text>
+
+      <rect class="core" x="300" y="251" width="160" height="34" rx="7"/>
+      <text class="core-t" x="380" y="273" text-anchor="middle">缪勒管</text>
+      <line class="tie" x1="288" y1="268" x2="300" y2="268"/><line class="tie" x1="460" y1="268" x2="472" y2="268"/>
+      <text class="lft" x="286" y="273" text-anchor="end">输卵管 · 子宫 · 阴道上段</text>
+      <text class="rgt" x="474" y="273" text-anchor="start">退化，留下睾丸附件</text>
+
+      <rect class="core" x="300" y="299" width="160" height="34" rx="7"/>
+      <text class="core-t" x="380" y="321" text-anchor="middle">午非管</text>
+      <line class="tie" x1="288" y1="316" x2="300" y2="316"/><line class="tie" x1="460" y1="316" x2="472" y2="316"/>
+      <text class="lft" x="286" y="321" text-anchor="end">退化，留下卵巢冠</text>
+      <text class="rgt" x="474" y="321" text-anchor="start">附睾 · 输精管 · 精囊</text>
+
+      <rect class="core" x="300" y="347" width="160" height="34" rx="7"/>
+      <text class="core-t" x="380" y="369" text-anchor="middle">尿生殖窦</text>
+      <line class="tie" x1="288" y1="364" x2="300" y2="364"/><line class="tie" x1="460" y1="364" x2="472" y2="364"/>
+      <text class="lft" x="286" y="369" text-anchor="end">尿道 · 阴道下段</text>
+      <text class="rgt" x="474" y="369" text-anchor="start">尿道 · 前列腺</text>
+
+      <rect class="core" x="300" y="395" width="160" height="34" rx="7"/>
+      <text class="core-t" x="380" y="417" text-anchor="middle">尿生殖窦腺芽</text>
+      <line class="tie" x1="288" y1="412" x2="300" y2="412"/><line class="tie" x1="460" y1="412" x2="472" y2="412"/>
+      <text class="lft" x="286" y="417" text-anchor="end">前庭大腺</text>
+      <text class="rgt" x="474" y="417" text-anchor="start">尿道球腺</text>
+
+      <line class="rule" x1="20" y1="440" x2="740" y2="440"/>
+      <text class="foot" x="380" y="460" text-anchor="middle">第 5、6 行值得对读：两条路上，都留着对方那套管道的一小截残迹。</text>
+    </svg>
+    <figcaption><b>图 6-2 · 同一处原基的两种去处。</b>中间一列是每个胚胎共有的起点，左右两列是两条路上它各自长成的东西。这张表说明的不是"两套结构互相对应"，而是更强的一件事：它们本来就是同一批细胞，收到的指令不同而已。表中所列为主要对应关系，非全部。</figcaption>
+  </figure>
+
+  <p>几对值得多说两句。</p>
+  <p><strong>生殖结节</strong>是同一个小突起，收到 DHT 便沿一个方向长，收不到便沿另一个方向长。两条路上，它都保留着丰富的神经末梢和可充血的勃起组织——这不是巧合，是同源。</p>
+  <p><strong>阴唇阴囊隆起</strong>这一对留下了看得见的证据，见本节旁注。</p>
+  <p><strong>缪勒管与午非管</strong>这两行最耐人寻味：拆除从来不彻底。走过睾丸路径的身体上，常常留着一小截缪勒管的残迹（睾丸附件）；走过卵巢路径的身体上，也留着午非管的残迹（卵巢冠、加特纳管）。两边都揣着另一条路的存根。这些残迹平时安静无声，偶尔会形成囊肿而被超声查见——医生看到时并不惊讶，因为它们本就该在那儿。</p>
+  <p>这张表也解释了后面几章会反复遇到的一件事：为什么某些疾病和药物在两性身上的表现，常常是"对应的"而不是"无关的"。同源的组织，往往对同一种激素、同一类药物有相似的反应——而这件事不会停在胚胎期：同一批演员会在青春期接到一整套新指令（第 12 章），至于两个剧本最终各自演成了什么样，要到免疫、用药和疼痛这些地界上才看得分明（第 19 章）。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>你身上有一条缝，记着分化那几周。</strong>阴唇阴囊隆起本是左右分开的两团组织。走卵巢路径时它们各自留在原地，成为左右两片大阴唇；走睾丸路径时，DHT 让它们向中线迁移、合拢，最后在中线缝合成阴囊——那道从阴囊正中一路延伸的<strong>阴囊缝</strong>，就是两侧合拢时留下的接缝。这条线并不止于阴囊，它沿着会阴继续向后延伸，也常常沿着阴茎腹侧向前延伸。</p>
+    <p>它没有任何功能，纯粹是施工记录。此刻你身上就带着这样一处印记：受精后第十二周前后那几天里，一件事情按某个方向发生过，而痕迹留了一辈子。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 之间</div>
+  <h2>当两条路没有走完全程</h2>
+  <p>前面四节把这条路径讲成了一串环环相扣的步骤：SRY 扳道岔，SOX9 接手，AMH 拆一套，睾酮保一套，DHT 塑造外形。既然是一串独立的步骤，其中任何一环都可能单独走出不同的结果。</p>
+  <p>这一类情况统称<strong>性发育差异</strong>（differences of sex development，DSD），指染色体、性腺与解剖发育之间不完全按典型模式对应的一组情况。它涵盖的范围很广，从出生时即被发现的、到终生不被察觉的都有。发生率的估计因此差别很大：按较严格的定义（出生时外生殖器不典型、需要专科评估），常引的数字约为四五千分之一；若把所有轻微变异都算进来，某些统计会给到百分之一量级。这个区间之宽，本身反映的是定义的分歧而非测量的失准。</p>
+  <p>下面三种情形能把前面几节的机制照得很清楚。</p>
+  <h3>信号发了，收不到</h3>
+  <p><strong>雄激素不敏感</strong>（AIS）：染色体为 46,XY，SRY 正常，睾丸正常形成，睾酮也正常分泌——但接收睾酮的受体因基因变异而不响应。完全型的情况下，外生殖器沿另一条路发育，个体通常以女性身份出生和成长，往往到青春期因未来月经就诊时才被发现。完全型的发生率量级在两万到六万分之一之间。</p>
+  <p>值得留意的是这里的一处细节，它恰好印证了第 3 节的说法：这些个体<strong>没有子宫</strong>。因为 AMH 是另一套信号，由另一种细胞分泌、走另一条受体通路——它照常起了作用，把缪勒管撤掉了。撤除令送达了，保留令没送到。这两道命令确实是分开发的。</p>
+  <h3>转换少了一步</h3>
+  <p><strong>5α-还原酶缺乏</strong>：睾酮分泌正常，但转成 DHT 的那一步走不通。由于外生殖器的塑造主要依赖 DHT，出生时的外观可能不典型；而到青春期，大量上升的睾酮通过其他途径产生明显的男性化。这类情况非常少见，且不同人群中的分布并不均匀。</p>
+  <p>这条线索给医学留下了一份意外的礼物。既然 DHT 而非睾酮才是前列腺生长和头皮毛囊萎缩的主要推手，那么抑制 5α-还原酶就成了一条明确的治疗思路——今天用于良性前列腺增生和男性型脱发的那类药物，正是循着这个观察发展出来的。一群人身上一个罕见的酶缺陷，最终变成了药架上的一个品类。</p>
+  <h3>另一侧的激素多了</h3>
+  <p><strong>先天性肾上腺增生</strong>（CAH）：这一次问题不在性腺，在肾上腺。合成皮质醇的链条上某个酶（最常见的是 21-羟化酶）缺陷，原料在上游堆积，被分流去生产雄激素。46,XX 的胎儿因此在子宫里就暴露于较高的雄激素水平，外生殖器可能出现不同程度的男性化，而卵巢和子宫通常正常。经典型的发生率量级约为一万到两万分之一。</p>
+  <p>它被列入许多国家的新生儿筛查项目，原因和性别发育无关：其中一型同时导致醛固酮不足，可能在出生后头几周引发危及生命的失盐危象。筛查抢的是这条命。</p>
+  <h3>一处正在变化的共识</h3>
+  <p>关于这些情况的医学处置，过去几十年间发生了明显的转向。二十世纪中后期的通行做法是在婴儿期尽早施行手术，使外观归入典型的一类。近二十年来，这一做法受到相当强的质疑：一方面来自当事人群体的长期证词，另一方面是支持早期手术的长期随访数据始终薄弱。目前多国指南与专业组织的态度已转向——推迟非医学必需的手术，保留可逆性，让当事人本人在有能力参与时进入决策。少数国家已就此立法。这仍是一个在变化中的领域，不同地区的实践差别很大。</p>
+  <p>需要说明的是，本节讲的是发育机制，不是诊断标准，也不构成任何医疗建议。这些情况涉及具体的人和具体的处境，其中大部分与健康风险无关，只是同一套发育程序在某一环上走出了不同的结果——而这套程序有多少个环节，前面四节已经数过了。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>把名单从几十个扩到几百个。</strong>过去，性发育差异的分子诊断依赖逐个候选基因排查，能给出明确遗传学答案的比例并不高。高通量测序普及之后，做法改为一次性检测数十至上百个相关基因，或直接做全外显子测序。多项队列研究报告的诊断率大致落在<strong>两成到四成</strong>之间，随人群构成与检测方法不同而波动——比过去有明显提升，但仍有超过半数的病例找不到确切的分子解释。这本身是个有价值的信息：这条通路上参与的基因，很可能远比现有名单要多。</p>
+    <p><strong>从"决定"到"维持"。</strong>更值得关注的是观念上的位移。在成年小鼠的卵巢里关掉 FOXL2，组织会朝睾丸方向漂移；在成年小鼠的睾丸里关掉 DMRT1，则朝相反方向滑——两个方向都成立，说明性腺的身份需要终生主动维持，而不是胚胎期定下就一劳永逸。这条线索目前主要停留在小鼠模型和机制研究上，与人类临床的关系尚待厘清；但它已经改变了这个领域提问的方式，也间接支持了本章第 3 节那处修订：两条路都需要动力。</p>
+  </div>
+
+  <p>岔路口过去了。到受精后第十四周前后，两条路各自的结构大体成形，此后的整个胎儿期只是把它们做大做细。</p>
+  <p>但故事远没有完。这条线接下来会在青春期再一次剧烈分开（第 12 章），在成年期渗进免疫、心血管和药物代谢的每一个角落（第 19 章），并在中年迎来又一次转折（第 22 章）。今天这个岔路口决定的，只是一列车驶上了哪条轨道；沿途的风景，要等它开起来才看得见。</p>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">性别分化 · 关键数字（周数为胚龄，即受精后计）</div>
+    <table>
+      <tr><td class="k">性腺未分化期</td><td class="v">胚龄 4–6 周</td><td class="n">两个胚胎摆一起分不出彼此</td></tr>
+      <tr><td class="k">原始生殖细胞迁入性腺</td><td class="v">胚龄 5–6 周</td><td class="n">从卵黄囊壁一路爬进生殖嵴</td></tr>
+      <tr><td class="k">SRY 表达窗口</td><td class="v">胚龄 6–7 周</td><td class="n">只开几天，扳完就退场</td></tr>
+      <tr><td class="k">SRY 基因结构</td><td class="v">单外显子 · 204 aa</td><td class="n">结合 DNA 并使其弯折，开启 SOX9</td></tr>
+      <tr><td class="k">睾丸索出现</td><td class="v">胚龄 约 7 周</td><td class="n">性腺分化的形态学标志</td></tr>
+      <tr><td class="k">AMH 开始分泌</td><td class="v">胚龄 7–8 周</td><td class="n">缪勒管在其后数周内退净</td></tr>
+      <tr><td class="k">胎儿睾酮峰</td><td class="v">胚龄 11–14 周</td><td class="n">午非管由它维持并建成</td></tr>
+      <tr><td class="k">外生殖器分化定型</td><td class="v">胚龄 12–14 周</td><td class="n">由 DHT 而非睾酮主导</td></tr>
+      <tr><td class="k">出生后"小青春期"</td><td class="v">生后 1–6 个月</td><td class="n">激素短暂再次升高后回落</td></tr>
+      <tr><td class="k">Y 染色体编码基因数</td><td class="v">数十个</td><td class="n">X 染色体约 800–900 个</td></tr>
+      <tr><td class="k">完全型 AIS 发生率</td><td class="v">约 1/2 万–1/6 万</td><td class="n">睾丸与睾酮正常，受体不响应</td></tr>
+      <tr><td class="k">经典型 CAH 发生率</td><td class="v">约 1/1 万–1/2 万</td><td class="n">多国已纳入新生儿筛查</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">受精后第六周时，一个胚胎身上的内生殖管道是什么状况？</div>
+      <div class="opts">
+        <button>只有一套管道，将来按需要改建成两种之一</button>
+        <button data-c="1">午非管与缪勒管两套并排长着，之后拆掉其中一套</button>
+        <button>还没有任何管道，要等激素信号到达后才开始生长</button>
+        <button>男胚胎长午非管，女胚胎长缪勒管，从一开始就不同</button>
+      </div>
+      <div class="explain">两套路基都已铺好，分化做的是"留一套、拆一套"。有意思的是外面的情况正相反：外生殖器只备了一组原基（生殖结节、尿生殖褶、阴唇阴囊隆起），靠是否收到 DHT 塑成两种走向。里面是备份两套，外面是一套两用。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">SRY 基因在性别分化中扮演的角色，最准确的描述是？</div>
+      <div class="opts">
+        <button>它全程指挥男性生殖系统的建造，直到出生</button>
+        <button>它直接编码睾酮的合成酶</button>
+        <button data-c="1">它只在受精后第六到七周表达几天，开启 SOX9 后即退场</button>
+        <button>它同时抑制卵巢通路并维持睾丸身份终生</button>
+      </div>
+      <div class="explain">SRY 是单外显子基因，编码一个 204 个氨基酸的蛋白，作用是结合 DNA 并把它弯折，让 SOX9 得以被读取；SOX9 随后自我维持并召集大队人马。此后拆管道、建管道、塑外形分别由 AMH、睾酮、DHT 接手——扳道工不开火车。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">完全型雄激素不敏感的个体（46,XY，睾丸与睾酮正常但受体不响应）通常没有子宫。为什么？</div>
+      <div class="opts">
+        <button>睾酮本身就有拆除缪勒管的作用，只是效率较低</button>
+        <button>缺乏雌激素，缪勒管无法发育成子宫</button>
+        <button data-c="1">AMH 是独立的另一套信号，由另一种细胞分泌、走另一条受体通路，它照常拆掉了缪勒管</button>
+        <button>46,XY 胚胎本来就不长缪勒管</button>
+      </div>
+      <div class="explain">这正是"两道命令分开发"最有力的证据：支持细胞分泌的 AMH 送达并生效，缪勒管照常撤除；而间质细胞分泌的睾酮虽然产量正常，信号却没人接收。同一个个体身上，一道命令成功、另一道失效——如果两件事由同一条通路负责，这种组合不可能出现。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">"女性发育是默认路径，不需要任何基因主动推动"——这个流传已久的说法目前的处境是？</div>
+      <div class="opts">
+        <button>依然是共识，卵巢确实不需要特定基因参与</button>
+        <button data-c="1">已被认为严重不完整：卵巢通路同样需要 RSPO1、WNT4、FOXL2 等主动推动，且性腺身份需终生维持</button>
+        <button>已被完全推翻，现在认为睾丸才是默认路径</button>
+        <button>仅在小鼠身上不成立，人类仍适用</button>
+      </div>
+      <div class="explain">这些基因失效时，46,XX 的性腺也可能长出睾丸组织。更彻底的修正来自成年动物实验：在成年雌鼠卵巢里关掉 FOXL2，组织朝睾丸方向漂移；在成年雄鼠睾丸里关掉 DMRT1，则朝相反方向滑。所以"扳道工"这个比喻要补一句——道岔扳过去之后，两条轨道都得有人一直守着。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">阴囊正中那条纵向的缝，是什么留下的？</div>
+      <div class="opts">
+        <button>出生后包皮与阴囊分离时形成的瘢痕</button>
+        <button>睾丸从腹腔下降时经过的通道遗迹</button>
+        <button data-c="1">左右两侧阴唇阴囊隆起向中线合拢、缝合时留下的接缝</button>
+        <button>脐带附着位置在胚胎期向下迁移的痕迹</button>
+      </div>
+      <div class="explain">这对隆起在另一条路上各自留在原地，成为左右两片大阴唇——所以阴囊与大阴唇是同源结构，图 6-2 第 4 行。这条缝没有任何功能，纯粹是施工记录，还会沿会阴向后、沿阴茎腹侧向前延伸。睾丸下降走的是另一条通道（腹股沟管），与这条缝无关。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第一幕 建造</div>
+  <div class="title">第 7 章 · 胎盘：一个临时器官</div>
+  <p>你身上有一半基因来自一个免疫学意义上的外人，按理说母亲的免疫系统应该把你当作异体排掉——它没有。接下来要讲的这个器官，既是谈判桌，也是海关，还是你这辈子用完就丢的那一件。它会在你出生那天被扔进托盘，却会把自己的一部分长久地留在母亲身上。</p>
+  <nav class="footnav">
+    <a href="ch05-scaling.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch07-placenta.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 分化决策树：选路径高亮 + 切换说明
+  var tree = document.getElementById('tree');
+  var tabs = document.querySelectorAll('#tree-fig .path-btn');
+  var branches = document.querySelectorAll('#tree .branch');
+  var panes = document.querySelectorAll('#tree-fig .pp');
+  function showPath(key){
+    var i;
+    tree.classList.add('picked');
+    for (i = 0; i < tabs.length; i++) {
+      tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-path') === key ? 'true' : 'false');
+    }
+    for (i = 0; i < branches.length; i++) {
+      branches[i].classList.toggle('on', branches[i].getAttribute('data-path') === key);
+    }
+    for (i = 0; i < panes.length; i++) {
+      panes[i].classList.toggle('on', panes[i].getAttribute('data-pp') === key);
+    }
+  }
+  for (var t = 0; t < tabs.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){ showPath(el.getAttribute('data-path')); });
+    })(tabs[t]);
+  }
+  for (var b = 0; b < branches.length; b++) {
+    (function(el){
+      el.addEventListener('click', function(){ showPath(el.getAttribute('data-path')); });
+    })(branches[b]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

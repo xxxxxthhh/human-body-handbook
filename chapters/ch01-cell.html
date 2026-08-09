@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第1章 · 一个细胞的全部家当 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 1-1 细胞户型图（本章专用） ---- */
+#cellmap-fig .room-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#cellmap-fig .room-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#cellmap-fig .room-btn:hover{border-color:var(--gold); color:var(--ink);}
+#cellmap-fig .room-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#cellmap-fig .room-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#cellmap-fig .room-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#cellmap-fig .rp{display:none;}
+#cellmap-fig .rp.on{display:block;}
+#cellmap-fig .rp-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#cellmap-fig .rp p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+#cellmap .room{cursor:pointer; transition:opacity .3s;}
+#cellmap.picked .room{opacity:.28;}
+#cellmap.picked .room.on{opacity:1;}
+#cellmap .shell{fill:none; stroke:var(--ink-faint); stroke-width:2;}
+#cellmap .shell.inner{stroke-width:1.2; opacity:.7;}
+#cellmap .room.on .shell{stroke:var(--gold); stroke-width:3;}
+#cellmap .nuc{fill:var(--deoxy); fill-opacity:.10; stroke:var(--deoxy); stroke-width:2;}
+#cellmap .nucleolus{fill:var(--deoxy); fill-opacity:.3; stroke:none;}
+#cellmap .pore{stroke:var(--gold); stroke-width:3; stroke-linecap:round;}
+#cellmap .er{fill:none; stroke:var(--mixed-r); stroke-width:2.4;}
+#cellmap .ribo{fill:var(--mixed-r);}
+#cellmap .mito{fill:var(--oxy); fill-opacity:.13; stroke:var(--oxy); stroke-width:2;}
+#cellmap .crista{fill:none; stroke:var(--oxy); stroke-width:1.6;}
+#cellmap .fiber{stroke:var(--ink-faint); stroke-width:1.4; opacity:.85;}
+#cellmap .cargo{fill:var(--green);}
+#cellmap .lyso{fill:var(--green); fill-opacity:.16; stroke:var(--green); stroke-width:2;}
+#cellmap .golgi{fill:none; stroke:var(--green); stroke-width:2.4;}
+#cellmap .room.on .nuc,#cellmap .room.on .mito,#cellmap .room.on .lyso{fill-opacity:.32;}
+#cellmap .lb{fill:var(--ink); font-size:14px; font-weight:700;}
+#cellmap .lb-s{fill:var(--ink-dim); font-size:11px;}
+#cellmap .lead{stroke:var(--ink-faint); stroke-width:1;}
+
+/* ---- 图 1-2 DNA 打包尺度（本章专用） ---- */
+#packing .card{fill:var(--surface2); stroke:var(--line); stroke-width:1.5;}
+#packing .ink{fill:none; stroke:var(--gold); stroke-width:2.2; stroke-linecap:round;}
+#packing .ink2{fill:none; stroke:var(--deoxy); stroke-width:2.2; stroke-linecap:round;}
+#packing .blob{fill:var(--gold); fill-opacity:.22; stroke:var(--gold); stroke-width:1.6;}
+#packing .step-t{fill:var(--ink); font-size:13px; font-weight:700;}
+#packing .step-v{fill:var(--gold); font-size:12.5px;}
+#packing .arrow{stroke:var(--ink-faint); stroke-width:1.6; fill:none;}
+#packing .foot{fill:var(--ink-dim); font-size:12.5px;}
+@media (prefers-reduced-motion: reduce){
+  #cellmap .room{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第一幕 建造 · 第 1 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>一个细胞的<br>全部家当</h1>
+  <p class="subtitle">在得到母亲第一滴血的接济之前，这个细胞要靠上一棒交给它的家当独自过几天——摊开来看看，那都是些什么。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>受精后第三十个小时。第一次分裂刚刚完成。</p>
+  <p>你现在是两个细胞，加起来还是原来那么大——这几天的分裂只是把同一份家当劈成越来越小的份，并没有长大。你漂在输卵管里，离子宫内膜还有五六天的路，没有脐带，没有胎盘，没有一滴母亲的血送到你面前。这几天的全部开销，都得从卵子当年备下的那份家当里出。</p>
+  <p>好在这份家当相当可观。接下来我们把它摊在桌上一件一件数：一层五纳米厚的油膜，一份两米长、却要塞进直径六微米的核里的说明书，几十万座自带外壳的小火炉，还有一种存量只有几十克、一天却要周转掉与你体重同量级分量的通货。数完你多半会有个古怪的感想：这份清单和一头蓝鲸的家当，几乎是同一份。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 边界</div>
+  <h2>先有一层油膜，才有"里面"</h2>
+  <p>1665 年，伦敦，一个叫罗伯特·胡克的年轻人把一片软木塞削到极薄，架到自制的显微镜下。他看见密密麻麻的小格子，像蜂房，也像修道院走廊两侧一间挨一间的小屋。他借了拉丁文里"小房间"这个词，管它们叫 <strong>cell</strong>——中文后来译作"细胞"。</p>
+  <p>严格说，胡克那天什么活物也没看见。软木是死的，他看到的只是植物细胞死后留下的空壳，也就是细胞壁。可这个乌龙里藏着一个准确的直觉：细胞首先是一个<strong>被围起来的空间</strong>。要先有"里面"，才谈得上里面装了什么。</p>
+  <p>你身上的这道围墙，是一层油。</p>
+  <h3>五纳米，和一场自动发生的排队</h3>
+  <p>细胞膜的厚度只有 <strong>4 到 10 纳米</strong>，通常按 5 纳米记——一张普通打印纸的两万分之一。它的主料是磷脂：一个分子有一颗喜欢水的头，和两条讨厌水的尾巴。把这样的分子撒进水里，会发生一件不需要任何人张罗的事：所有的头朝外贴着水，所有的尾巴朝内互相抱团，自动排成上下两层，中间是一片不见水的油心。而且这层膜不甘心露出边缘（边缘会让尾巴见水），于是自己卷起来，闭合成一个封闭的囊。</p>
+  <p>吹肥皂泡的人对这套自动化很熟：你并没有"做"出一个球，你只是给了它一片膜，它自己变成球。细胞膜也一样——它不是被造成球形的，是被水推成球形的。同样的原因，膜上戳个小洞多半会自动愈合；你不用给它派修理工。</p>
+  <p>这层薄油膜的绝缘本事出奇地好。膜两侧的电位差通常在 <strong>20 到 90 毫伏</strong>之间（不同细胞差别很大）。数字听着微不足道，可它是落在 5 纳米上的：换算成电场强度是 10⁷ 伏／米的量级，比击穿干燥空气所需的场强还高出几倍。之所以不会"放电"，是因为击穿这件事换了介质就换了标准——脂双层这种致密的油心，恰恰是极耐高压的绝缘材料之一。你身上每一个细胞，都在这层薄油膜上稳稳地扛着这个量级的电场，一辈子。第 18 章讲神经冲动时，用的就是这份家底。</p>
+  <h3>门禁，和一笔常年在付的账</h3>
+  <p>纯粹的油膜有个麻烦：它挡得太干净了。氧气、二氧化碳这类小而不带电的分子能直接钻过去，可葡萄糖、氨基酸、钠钾离子——细胞真正要用的东西——一个也过不来。于是膜上镶满了蛋白质：有的是<strong>通道</strong>，一扇按需开合的窄门，物质顺着浓度差自己流过去，不花钱；有的是<strong>泵</strong>，逆着浓度差硬把东西搬过去，每搬一趟都要付费。</p>
+  <p>最忙的那台叫<strong>钠钾泵</strong>：它不停地把钠离子舀出去、把钾离子舀进来，像一条不断向外戽水的船。这笔开销大得惊人——静息状态下，你摄入热量的 <strong>20% 到 30%</strong> 花在这一件事上，神经组织里的占比还要更高。你此刻什么也不做，光是维持每个细胞内外的这份浓度差，就在持续烧钱。</p>
+  <p>为什么值得？因为这份浓度差本身就是储备。舀出去的钠想回来，这股回流的劲头可以被顺手借用：肠道靠它把葡萄糖拽进细胞（第 13 章），神经元靠它在千分之一秒里翻转电位（第 18 章）。堤内蓄的水，随时可以开闸做功。</p>
+
+  <figure id="cellmap-fig">
+    <div class="switch-row">
+      <span class="switch-hint">点房间看职能 →</span>
+      <div class="room-tabs" role="group" aria-label="选择细胞内的房间">
+        <button class="room-btn" data-room="mem" aria-pressed="false">细胞膜</button>
+        <button class="room-btn" data-room="nuc" aria-pressed="false">细胞核</button>
+        <button class="room-btn" data-room="er" aria-pressed="false">内质网与核糖体</button>
+        <button class="room-btn" data-room="mito" aria-pressed="false">线粒体</button>
+        <button class="room-btn" data-room="skel" aria-pressed="false">细胞骨架</button>
+        <button class="room-btn" data-room="lyso" aria-pressed="false">高尔基与溶酶体</button>
+      </div>
+    </div>
+    <svg id="cellmap" viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="细胞户型图：细胞膜、细胞核、内质网与核糖体、线粒体、细胞骨架、高尔基体与溶酶体的位置示意">
+      <g class="room" data-room="skel">
+        <line class="fiber" x1="110" y1="190" x2="690" y2="320"/>
+        <line class="fiber" x1="180" y1="400" x2="680" y2="110"/>
+        <line class="fiber" x1="390" y1="58" x2="415" y2="402"/>
+        <circle class="cargo" cx="545" cy="287" r="7"/>
+        <circle class="cargo" cx="533" cy="281" r="3"/>
+        <circle class="cargo" cx="538" cy="294" r="3"/>
+        <text class="lb" x="592" y="342" text-anchor="middle">细胞骨架</text>
+        <text class="lb-s" x="592" y="360" text-anchor="middle">轨道 · 搬运工每步 8 nm</text>
+      </g>
+
+      <g class="room" data-room="mem">
+        <ellipse class="shell" cx="380" cy="230" rx="348" ry="190"/>
+        <ellipse class="shell inner" cx="380" cy="230" rx="341" ry="183"/>
+        <line class="lead" x1="380" y1="420" x2="380" y2="436"/>
+        <text class="lb" x="360" y="452" text-anchor="end">细胞膜</text>
+        <text class="lb-s" x="368" y="452" text-anchor="start">· 5 nm 厚的油膜</text>
+      </g>
+
+      <g class="room" data-room="nuc">
+        <circle class="nuc" cx="250" cy="215" r="92"/>
+        <circle class="nucleolus" cx="300" cy="258" r="22"/>
+        <line class="pore" x1="176" y1="170" x2="184" y2="176"/>
+        <line class="pore" x1="248" y1="123" x2="248" y2="133"/>
+        <line class="pore" x1="336" y1="248" x2="327" y2="252"/>
+        <line class="pore" x1="196" y1="284" x2="203" y2="277"/>
+        <text class="lb" x="232" y="198" text-anchor="middle">细胞核</text>
+        <text class="lb-s" x="232" y="218" text-anchor="middle">说明书总馆 · 直径约 6 μm</text>
+      </g>
+
+      <g class="room" data-room="er">
+        <path class="er" d="M356 132 C 424 152, 424 190, 362 210"/>
+        <path class="er" d="M370 142 C 438 162, 438 200, 376 220"/>
+        <path class="er" d="M366 240 C 436 258, 436 300, 370 318"/>
+        <path class="er" d="M380 250 C 450 268, 450 310, 384 328"/>
+        <circle class="ribo" cx="374" cy="136" r="3.6"/><circle class="ribo" cx="398" cy="148" r="3.6"/>
+        <circle class="ribo" cx="416" cy="172" r="3.6"/><circle class="ribo" cx="408" cy="198" r="3.6"/>
+        <circle class="ribo" cx="382" cy="212" r="3.6"/><circle class="ribo" cx="386" cy="246" r="3.6"/>
+        <circle class="ribo" cx="412" cy="258" r="3.6"/><circle class="ribo" cx="430" cy="286" r="3.6"/>
+        <circle class="ribo" cx="412" cy="312" r="3.6"/><circle class="ribo" cx="388" cy="322" r="3.6"/>
+        <circle class="ribo" cx="486" cy="196" r="3.6"/><circle class="ribo" cx="470" cy="232" r="3.6"/>
+        <text class="lb" x="436" y="106" text-anchor="end">内质网 · 核糖体</text>
+        <text class="lb-s" x="436" y="124" text-anchor="end">照着分谱演奏的乐池</text>
+      </g>
+
+      <g class="room" data-room="mito">
+        <g transform="rotate(-18 585 150)">
+          <ellipse class="mito" cx="585" cy="150" rx="46" ry="26"/>
+          <path class="crista" d="M552 150 h12 l6 -12 6 24 6 -24 6 24 6 -12 h12"/>
+        </g>
+        <g transform="rotate(14 630 262)">
+          <ellipse class="mito" cx="630" cy="262" rx="46" ry="26"/>
+          <path class="crista" d="M597 262 h12 l6 -12 6 24 6 -24 6 24 6 -12 h12"/>
+        </g>
+        <g transform="rotate(-6 470 375)">
+          <ellipse class="mito" cx="470" cy="375" rx="45" ry="25"/>
+          <path class="crista" d="M438 375 h12 l6 -12 6 24 6 -24 6 24 6 -12 h11"/>
+        </g>
+        <text class="lb" x="585" y="94" text-anchor="middle">线粒体</text>
+        <text class="lb-s" x="585" y="112" text-anchor="middle">自带外壳的炉灶</text>
+      </g>
+
+      <g class="room" data-room="lyso">
+        <path class="golgi" d="M158 336 Q 205 314 252 336"/>
+        <path class="golgi" d="M161 350 Q 205 328 249 350"/>
+        <path class="golgi" d="M164 364 Q 205 342 246 364"/>
+        <circle class="lyso" cx="112" cy="286" r="19"/>
+        <circle class="lyso" cx="142" cy="330" r="12"/>
+        <text class="lb" x="205" y="390" text-anchor="middle">高尔基体</text>
+        <text class="lb" x="108" y="240" text-anchor="middle">溶酶体</text>
+        <text class="lb-s" x="108" y="258" text-anchor="middle">回收站</text>
+      </g>
+    </svg>
+    <div class="room-panel">
+      <div class="rp on" data-rp="0">
+        <div class="rp-t">一个细胞的户型</div>
+        <p>点上方任意一处，看这个房间管什么。图为示意：比例、数量、形状都做了简化，真实的细胞里内质网远比这密，线粒体也远不止三个。</p>
+      </div>
+      <div class="rp" data-rp="mem">
+        <div class="rp-t">细胞膜 · 边界与门禁</div>
+        <p>厚 4–10 纳米的磷脂双层，在水里自动排成两层并闭合成囊。小而不带电的分子直接穿过，其余的要走通道或泵。膜两侧维持着 20–90 毫伏的电位差——落在 5 纳米上，就是 10⁷ 伏／米量级的电场。</p>
+      </div>
+      <div class="rp" data-rp="nuc">
+        <div class="rp-t">细胞核 · 说明书总馆</div>
+        <p>直径约 6 微米，装着拉直有 2 米长的 DNA。总谱不外借：核膜上开着数千个核孔，抄好的信使 RNA 从这里送出去，原本留在馆内。核仁是核里的一小块忙碌区域，专门生产核糖体的零件。</p>
+      </div>
+      <div class="rp" data-rp="er">
+        <div class="rp-t">内质网与核糖体 · 乐池</div>
+        <p>核糖体照着信使 RNA 把氨基酸接成链，每秒 2–10 个。贴在内质网上的那批负责生产要出口或上膜的蛋白，游离在细胞质里的那批供内部自用。内质网层层折叠，是细胞里表面积最大的一处结构。</p>
+      </div>
+      <div class="rp" data-rp="mito">
+        <div class="rp-t">线粒体 · 炉灶</div>
+        <p>双层膜，自带一小圈环形 DNA（16,569 个碱基对、37 个基因），二十亿年前是一个住进来的细菌。它把燃料氧化的能量先换成跨膜的质子落差，再让这股"水流"推动一台每秒可转上百圈的分子磨盘，产出 ATP。</p>
+      </div>
+      <div class="rp" data-rp="skel">
+        <div class="rp-t">细胞骨架 · 轨道与物流</div>
+        <p>细胞不是一袋汤。蛋白质纤维搭起支架，既撑住形状，也充当轨道：马达蛋白拖着货囊沿微管行走，一步 8 纳米、一步一个 ATP，速度约每秒 1 微米。神经细胞里这条运输线可以长达一米。</p>
+      </div>
+      <div class="rp" data-rp="lyso">
+        <div class="rp-t">高尔基体与溶酶体 · 分装与回收</div>
+        <p>高尔基体像收发室：给新蛋白加上糖标签、按目的地分装。溶酶体是回收站，内部 pH 维持在 4.5–5.0 的酸性，把旧零件拆成可再用的原料——细胞里的大部分东西不是用坏了扔掉，是拆了重造。</p>
+      </div>
+    </div>
+    <figcaption><b>图 1-1 · 一个细胞的户型图。</b>六处主要房间的位置示意，比例与数量均做了简化。这份户型几乎通用：把它换成一头蓝鲸的细胞、一棵橡树的细胞（多一堵细胞壁和一批叶绿体），房间清单基本不变。差别不在有哪些房间，而在每种房间有多少间——心肌细胞里线粒体可占到细胞体积的三成上下。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 菜谱</div>
+  <h2>两米长的说明书，和不外借的总谱</h2>
+  <p>围墙立好了，来看馆藏。</p>
+  <p>一个细胞核直径约 6 微米，里面装着 46 条染色体。把它们全部拆开拉直，接起来约 <strong>2 米</strong>长。这个反差值得换个比例来体会：<strong>把细胞核放大成一个篮球</strong>（直径 24 厘米），那两米 DNA 就变成一根头发丝粗细、<strong>八十公里长</strong>的线——从城市这头到那头。而且不许缠死：细胞随时要翻到任意一段去读，还要在分裂时把整团线一分为二、一根不错。</p>
+  <p>解法是分级打包，一层套一层（图 1-2）。这套包装有个漂亮的性质：越常读的段落缠得越松，长期用不上的段落卷得越紧——哪几页摊开着，就决定了这个细胞将来是干什么的。这正是下一章的主题。</p>
+
+  <figure>
+    <svg id="packing" viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DNA 的五级打包：双螺旋、核小体、染色质纤维、染色体、细胞核，以及各级的尺寸">
+      <rect class="card" x="16" y="40" width="132" height="120" rx="10"/>
+      <path class="ink" d="M34 84 Q 50 62 66 84 T 98 84 T 130 84"/>
+      <path class="ink2" d="M34 84 Q 50 106 66 84 T 98 84 T 130 84"/>
+      <line class="ink" x1="50" y1="76" x2="50" y2="92"/><line class="ink" x1="82" y1="76" x2="82" y2="92"/><line class="ink" x1="114" y1="76" x2="114" y2="92"/>
+      <text class="step-t" x="82" y="128" text-anchor="middle">双螺旋</text>
+      <text class="step-v mono" x="82" y="148" text-anchor="middle">直径 2 nm</text>
+
+      <rect class="card" x="165" y="40" width="132" height="120" rx="10"/>
+      <circle class="blob" cx="197" cy="84" r="15"/><circle class="blob" cx="231" cy="84" r="15"/><circle class="blob" cx="265" cy="84" r="15"/>
+      <path class="ink" d="M179 92 Q 197 70 214 92 Q 231 70 248 92 Q 265 70 282 92"/>
+      <text class="step-t" x="231" y="128" text-anchor="middle">缠上组蛋白</text>
+      <text class="step-v mono" x="231" y="148" text-anchor="middle">核小体 · 11 nm</text>
+
+      <rect class="card" x="314" y="40" width="132" height="120" rx="10"/>
+      <path class="ink" d="M334 92 q 10 -26 20 0 q 10 26 20 0 q 10 -26 20 0 q 10 26 20 0 q 10 -26 20 0"/>
+      <path class="ink2" d="M334 76 q 10 26 20 0 q 10 -26 20 0 q 10 26 20 0 q 10 -26 20 0 q 10 26 20 0"/>
+      <text class="step-t" x="380" y="128" text-anchor="middle">盘成纤维</text>
+      <text class="step-v mono" x="380" y="148" text-anchor="middle">约 30 nm</text>
+
+      <rect class="card" x="463" y="40" width="132" height="120" rx="10"/>
+      <path class="ink" d="M508 58 C 522 76, 522 92, 508 110 M550 58 C 536 76, 536 92, 550 110 M508 110 C 522 124, 522 132, 512 142 M550 110 C 536 124, 536 132, 546 142" stroke-width="6"/>
+      <text class="step-t" x="529" y="128" text-anchor="middle">分裂期染色体</text>
+      <text class="step-v mono" x="529" y="148" text-anchor="middle">宽约 700 nm</text>
+
+      <rect class="card" x="612" y="40" width="132" height="120" rx="10"/>
+      <circle class="blob" cx="678" cy="86" r="34"/>
+      <path class="ink" d="M656 76 q 12 -12 22 2 q 12 14 22 -2 M654 92 q 14 14 24 -2 q 12 -14 22 4"/>
+      <text class="step-t" x="678" y="128" text-anchor="middle">收进细胞核</text>
+      <text class="step-v mono" x="678" y="148" text-anchor="middle">直径约 6 μm</text>
+
+      <path class="arrow" d="M152 100 h9 m-4 -4 l4 4 -4 4"/>
+      <path class="arrow" d="M301 100 h9 m-4 -4 l4 4 -4 4"/>
+      <path class="arrow" d="M450 100 h9 m-4 -4 l4 4 -4 4"/>
+      <path class="arrow" d="M599 100 h9 m-4 -4 l4 4 -4 4"/>
+
+      <line class="arrow" x1="16" y1="196" x2="744" y2="196"/>
+      <text class="foot" x="16" y="228" text-anchor="start">换个比例：把细胞核放大成一个篮球（直径 24 厘米，放大约 4 万倍），</text>
+      <text class="foot" x="16" y="252" text-anchor="start">那 2 米 DNA 就是一根头发丝粗细（约 0.08 mm）、长 80 公里的线——还要求随时翻到任意一页。</text>
+    </svg>
+    <figcaption><b>图 1-2 · 两米如何塞进六微米。</b>逐级打包：双螺旋 → 缠上组蛋白成核小体 → 盘成纤维 → 分裂时进一步压成染色体。需要说明的是，"30 纳米纤维"是经典教科书模型，主要在体外实验中观察到；活细胞里的染色质更可能是不规则的团簇，这一层的真实形态学界仍有争论。压缩比在分裂期可达一万倍以上。</figcaption>
+  </figure>
+
+  <h3>总谱不外借</h3>
+  <p>这份说明书有 <strong>30.5 亿</strong>个字母，其中编码蛋白质的基因约 <strong>1.9 万到 2 万个</strong>，占全部字母的百分之一二。剩下的不是废纸——很大一部分是批注、书签和调控开关，标明哪一段在什么时候该读。</p>
+  <p>读法很像乐团的规矩。总谱锁在图书馆里，不外借；要演奏某一段，先誊一份分谱送出去。细胞的做法一模一样：DNA 留在核内，要用哪一段，就地转录成一条<strong>信使 RNA</strong>，从核膜上的孔送到细胞质里，交给核糖体去"演奏"。分谱是一次性的，读完就降解；总谱一个字母也不会被带出馆。</p>
+  <p>核糖体照着分谱，把氨基酸一个一个接成长链，速度是<strong>每秒 2 到 10 个</strong>。一条三百个氨基酸的中等蛋白，一分钟左右接完。同一条信使 RNA 上常常同时挂着好几台核糖体，前后跟着读，像一队人抄同一份谱子。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>抗生素为什么杀细菌不杀你。</strong>核糖体是所有已知细胞都有的部件，但细菌那台和你那台在尺寸与形状上有明确差别。四环素、大环内酯类这些抗生素正是卡在这个差别上：它们塞进细菌核糖体的关键位置让它读不下去，对你的核糖体却几乎不搭理。抗生素能做到"只打对方"，靠的往往就是这种零件级的差异。</p>
+    <p>不过有个意味深长的例外。你的线粒体里另有一套自己的核糖体，而它长得更像细菌的那台——这正是下一节那个二十亿年前的故事留下的痕迹。所以氯霉素、氨基糖苷类这类药会误伤线粒体，它们的一部分副作用（例如氨基糖苷类的听力损伤，且与线粒体基因的某些位点相关）就出自这里。祖先的旧身份，会在药物副作用里现形。</p>
+  </div>
+
+  <h3>两条 X，一场抛硬币</h3>
+  <p>顺带说一件只发生在女性细胞里的事。X 染色体上有八九百个基因，Y 上只有几十个；如果女性的两条 X 都全力工作，剂量就会翻倍。身体的解法是在胚胎早期让每个细胞<strong>随机关掉其中一条</strong>——关成一个卷得死紧的小团，此后这个细胞的所有后代都跟着关同一条。</p>
+  <p>结果是：每一位女性的身体，都是两种细胞的镶嵌拼图——一片区域用着来自父亲的那条 X，另一片用着来自母亲的那条。这不是抽象的说法，它能被眼睛看见：三花猫身上那些橙黑相间的斑块，正是毛色基因所在的 X 被随机关掉的结果；也正因为需要两条 X，三花猫几乎都是母猫。这场发生在胚胎期的抛硬币，会一路影响到 X 连锁遗传病在女性身上为何常表现得更轻更花斑——第 19 章还会回到这条线上。</p>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 成形</div>
+  <h2>一条链，怎么知道自己该长什么样</h2>
+  <p>核糖体交出来的东西，还只是一条软趴趴的链子。蛋白质要干活，得先折成一个特定的形状——酶的凹槽要正好卡住底物，通道的孔径要正好放行钾而挡住钠。差之毫厘，整个分子就是废品。</p>
+  <p>那么，是谁告诉这条链该怎么折的？</p>
+  <p>1950 到 60 年代，美国生化学家<strong>克里斯蒂安·安芬森</strong>做了一个漂亮到近乎粗暴的实验。他取来一种已经折好的酶，用试剂把它彻底摊平，活性归零；然后把试剂缓缓透析掉。那条链自己重新卷了起来，卷回了原来的形状，活性也回来了——试管里没有任何帮手。结论很硬：<strong>折叠所需的全部信息，就写在氨基酸的排列顺序里。</strong>这项工作让他拿到了 1972 年的诺贝尔化学奖。</p>
+  <p>推动折叠的力量说穿了很朴素，还是那对老冤家：水和油。链子上有的氨基酸亲水，有的怕水。整条链扔进水里，怕水的那些会拼命往中间躲，亲水的留在外面——一次"疏水塌缩"就把大致形状定了下来，剩下的靠氢键和其他弱作用微调。你把一把有的沾油、有的沾水的珠子串起来丢进水盆，它也会自己团成一个特定的团，而不是随便一个团。</p>
+  <h3>为什么它不用把所有姿势试一遍</h3>
+  <p>1969 年，赛勒斯·莱文塔尔指出一个矛盾：一条一百个氨基酸的链，可能的构象数量大得离谱，如果靠一个一个试，试遍所需的时间会超过宇宙的年龄。可现实中，蛋白质折好只要千分之几秒到几秒。</p>
+  <p>矛盾出在"试"这个字上。折叠不是搜索，是滚落。想想一条溪流从山上下来：它并没有比较过所有可能的路线，只是每一步都往低处走，最后落进同一条河道。蛋白质的能量地形也是这样一个漏斗形的斜坡，链子从哪个位置开始，都会顺着坡滑向同一个谷底。</p>
+  <p>细胞还是给它备了帮手。<strong>伴侣蛋白</strong>把新生的链子请进一个安静的桶状空腔里，隔开外面拥挤的环境，让它折完再出来——不然半成品之间容易互相粘住。细胞内的蛋白质浓度高得惊人，每升胞内液里溶着一两百到三百克蛋白质，稠得像浓汤，这份保护并不多余。细胞受热时会大量增产其中一类，它们因此得名"热休克蛋白"：温度一高，散架的蛋白变多，帮手就得加班。</p>
+  <p>折错了也不全是小事。第 23 章会讲到，某些神经退行性疾病的共同特征，正是折错的蛋白质堆成了清不掉的团块。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>从序列到结构，预测追上了实测。</strong>安芬森说信息全在序列里，但"全在里面"不等于"读得出来"。此后半个世纪，从序列推断结构一直是生物学最顽固的难题之一，实测一个结构往往要花上数年。2020 年底，DeepMind 的 AlphaFold2 在两年一度的结构预测盲测（CASP14）上给出的成绩接近实验精度；2021 年起，预测得到的结构被批量公开，数量很快扩展到两亿以上，覆盖了几乎所有已知蛋白的序列。2024 年，这一方向的工作被授予诺贝尔化学奖（与蛋白质设计的成果共同分享）。</p>
+    <p>但要留意它还没解决什么。这类方法给出的多是<strong>静态的一张照片</strong>，而蛋白质在细胞里是不停晃动、会换构象的；折叠的<strong>过程</strong>——链子沿着那个漏斗怎么滑下去——预测得远不如终点准；天生就不折叠的"无序区"（人类蛋白里有相当比例）、突变造成的细微移位、以及蛋白与药物分子结合后的姿态，也都还是难点。2024 年发布的新一代模型开始处理蛋白与核酸、配体形成的复合物，这一块正在快速变化。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 炉灶</div>
+  <h2>住在你身体里的那个细菌</h2>
+  <p>回到户型图上那几只椭圆。</p>
+  <p>线粒体在细胞里显得很不合群。别的房间都由一层膜围成，它有两层；别的房间都从细胞核领取说明书，它自己藏着一小圈 DNA——<strong>16,569 个碱基对、37 个基因</strong>，而且是环形的，跟细菌的染色体一个样式；它自己的核糖体也更像细菌那台（上一节旁注里的那个例外）；它不由细胞新造，只能由已有的线粒体一分为二而来。</p>
+  <p>1967 年，美国生物学家<strong>林恩·马古利斯</strong>把这些线索串成一个当时听来相当离谱的说法：大约二十亿年前，一个细菌被另一个细胞吞了进去，却没有被消化，反而住了下来，从此按份分成，一直传到今天。她的论文据说被十几家期刊退过稿。几十年后，分子证据陆续到齐，内共生学说进了教科书。</p>
+  <p>顺带把序章那条线接上：精子入卵后带进来的那几十个线粒体会被清除掉，你身上这批住客几乎全部来自母亲。你继承的不只是母亲的基因，还有她那一系寄宿了二十亿年的房客。</p>
+  <h3>康沃尔的那座老宅</h3>
+  <p>这些炉灶怎么生火？答案曾是二十世纪生物化学里吵得最凶的题目之一。</p>
+  <p>1961 年，英国生化学家<strong>彼得·米切尔</strong>提出一个当时几乎没人接受的想法。同行都在找一种传说中的高能中间产物——某个把氧化和产能直接串起来的分子；米切尔说没有那个分子，能量根本不是以化学键的形式传递的，而是<strong>先被换成一道水位差</strong>：燃料氧化释放的能量被用来把质子从膜的一侧泵到另一侧，在膜两边攒出一个浓度差和电位差；随后质子顺着这道落差往回流，推动一台嵌在膜上的分子磨盘转动，磨盘每转一圈就产出几个 ATP。</p>
+  <p>这就是水磨的原理，一字不差：先筑坝蓄水，再放水推轮。米切尔后来因健康原因离开大学，在康沃尔郡修复了一座老宅，自筹经费在里面办了个小研究所，带着少数几位同事继续做这件几乎无人相信的事。十几年后，证据一件件到齐。1978 年，他拿到诺贝尔化学奖。</p>
+  <p>那台磨盘叫 <strong>ATP 合酶</strong>：它真的在转，转速可达<strong>每秒上百圈</strong>，是已知最小的旋转分子机器之一。此刻你身上每一个细胞里，都有成千上万台这样的磨盘在质子流的推动下嗡嗡地转着。</p>
+  <p>顺便说清一件常被误解的事：氧气在这条链条上的角色，不是"被烧掉"，而是站在末端<strong>接住电子</strong>。它是收尾的那一位，也正因为这个位置无可替代，缺氧才那么致命——队伍末尾一空，整条链立刻堵死，前面的水坝再也蓄不上水。第 25 章会讲到，脑细胞对这件事的耐受只有几分钟。</p>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 周转</div>
+  <h2>一天花掉一个自己：细胞里的现金流</h2>
+  <p>磨盘产出的 ATP，是细胞里通行最广的那种零钱。肌肉收缩、离子泵舀水、马达蛋白迈步——绝大多数活儿都用它付账（少数环节收的是它的近亲 GTP，比如核糖体接氨基酸时那几步）。</p>
+  <p>它的账目有个古怪之处：<strong>存量极小，流量极大。</strong>你体内任何时刻的 ATP 存量只有几十克，可一天里被合成又被拆掉的总量，与你的体重同一个量级（常见估算在五十到七十五公斤之间）。平均下来，每个 ATP 分子一天要在"充"与"放"之间往返数百到上千次。</p>
+  <p>这不是设计得抠门，而是它本来就不是存钱的工具。ATP 是零钱，不是存款；存款另有其人——脂肪和糖原。身体宁可把仓库设在别处，也不肯多屯零钱，因为零钱的用途是<strong>周转速度</strong>：从需要到到账，必须以秒计。真要囤够一天的量，你得多背几十公斤。这也是为什么剧烈运动开头几秒会那么依赖别的救急手段（第 14 章）——零钱抽屉里那点存货，够用不了几秒。</p>
+  <h3>拆了重造，一直在拆</h3>
+  <p>钱都花到哪儿去了？很大一部分花在"重造"上。</p>
+  <p>细胞里的蛋白质并不是造好就一直用。它们不断被拆掉、不断被重造，大多数蛋白的寿命在几十分钟到几天之间。看上去浪费，其实是三笔划算的买卖：折错的、氧化损伤的能被及时清走；细胞要改变身份或应对变化时，换掉一批蛋白比改造它们快得多；而回收下来的氨基酸可以直接再用。溶酶体和另一套专门的降解装置，一刻不停地做着这件事。</p>
+  <p>物流也在同时运转。货囊被马达蛋白拖着沿细胞骨架的轨道走，一步 <strong>8 纳米</strong>，一步一个 ATP，速度约每秒 1 微米——真的是两条"腿"交替向前迈。在神经细胞里，这条运输线可以从脊髓一直铺到脚趾，长达一米；沿线的补给要是断了，末端的部分就先出问题。</p>
+  <p>所以你眼中那个静止的细胞，其实是一道稳住了形状的水流。两千五百年前赫拉克利特说人不能两次踏进同一条河：河还是那条河，水已经不是那些水。细胞正是这样一条河——形状恒定，材料一直在换。这本书的最后一章会把这个念头推到底：那么你呢？</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>把家当扔掉一大半的那种细胞。</strong>成熟的红细胞是个异类：在进入血液之前，它把细胞核和线粒体统统扔了。腾出来的地方全部让给血红蛋白——一个红细胞里塞着两亿多个。</p>
+    <p>代价随之而来。没有线粒体，它只能靠不耗氧的糖酵解过活，结果是这个专职运氧的细胞自己几乎不消耗所运的氧；没有细胞核，它无法再合成任何新蛋白，零件磨损了修不了，于是服役约 120 天后就被脾脏拆解回收（拆下来的血红素变成胆红素——你在第 8 章的新生儿黄疸里已经见过它）。把说明书扔掉换装载量，是一笔算得很清的买卖。</p>
+  </div>
+
+  <h3>每一个细胞，都来自另一个细胞</h3>
+  <p>最后回到胡克。</p>
+  <p>他 1665 年看见的那些小格子，在此后一百七十年里一直只是个有趣的观察。要到 1838 至 1839 年，施莱登和施旺才把它抬成一条通则：植物和动物都由细胞构成，细胞是生命的基本单位。可他们对细胞的来历猜错了——以为细胞能从某种无定形的物质里"结晶"出来。</p>
+  <p>补上最后一句的是 1855 年菲尔绍那句拉丁格言：<em>Omnis cellula e cellula</em>——每一个细胞都来自另一个细胞。这句话本身有段公案：更早的观察和论证出自罗伯特·雷马克，他在几年前就报告了细胞由分裂而来，菲尔绍在引用上并不慷慨，为此留下过争议。但这句话说的事没错，而且分量极重：它意味着眼下这个正在输卵管里漂着的细胞，不是被组装出来的，是从上一个细胞裂出来的；而那一个又裂自另一个——一路回溯，中间没有断点。</p>
+  <p>序章说你是一场接力，讲的是配子的交接。到细胞这一层，同一句话有了更硬的版本：<strong>细胞只能来自细胞。</strong>这条规则从没有被打破过，你手上这一份家当，就是沿着这条不断的线传下来的。</p>
+  <p>清点完毕。现在这个细胞要开始做一件此前不必做的事：分裂之后，两个女儿细胞将不再一模一样。</p>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">一个细胞 · 关键数字</div>
+    <table>
+      <tr><td class="k">受精卵直径</td><td class="v">0.10–0.12 mm</td><td class="n">头几轮分裂总体积基本不变</td></tr>
+      <tr><td class="k">人体细胞总数</td><td class="v">~37 万亿</td><td class="n">量级估算；另有数量相当的常驻细菌</td></tr>
+      <tr><td class="k">单个细胞 DNA 拉直</td><td class="v">~2 m</td><td class="n">装进直径约 6 μm 的细胞核</td></tr>
+      <tr><td class="k">人类基因组</td><td class="v">~30.5 亿碱基对</td><td class="n">编码蛋白的基因约 1.9–2.0 万个</td></tr>
+      <tr><td class="k">细胞膜厚度</td><td class="v">4–10 nm</td><td class="n">跨膜电场可达 10⁷ V/m 量级</td></tr>
+      <tr><td class="k">线粒体 DNA</td><td class="v">16,569 bp · 37 基因</td><td class="n">环形，细菌式；几乎只随母系</td></tr>
+      <tr><td class="k">典型细胞线粒体数</td><td class="v">数百–数千个</td><td class="n">心肌细胞中可占体积约三成</td></tr>
+      <tr><td class="k">ATP 合酶转速</td><td class="v">每秒可达上百圈</td><td class="n">由跨膜质子流推动</td></tr>
+      <tr><td class="k">每日 ATP 周转量</td><td class="v">50–75 kg</td><td class="n">与体重同量级；存量仅几十克</td></tr>
+      <tr><td class="k">核糖体接肽速度</td><td class="v">2–10 个氨基酸/秒</td><td class="n">300 肽的蛋白约一分钟接完</td></tr>
+      <tr><td class="k">钠钾泵能耗占比</td><td class="v">静息代谢的 20–30%</td><td class="n">神经组织中占比更高</td></tr>
+      <tr><td class="k">马达蛋白步长</td><td class="v">8 nm / 步</td><td class="n">一步一个 ATP，约 1 μm/秒</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">1665 年胡克在软木塞里看到并命名为 cell 的，究竟是什么？</div>
+      <div class="opts">
+        <button>正在分裂的活细胞</button>
+        <button data-c="1">植物细胞死后留下的空壳，也就是细胞壁围出的小格子</button>
+        <button>细菌的菌落</button>
+        <button>细胞核</button>
+      </div>
+      <div class="explain">cell 这个词来自拉丁文的"小房间"，他觉得那些格子像修道院一间挨一间的斗室。活的细胞和单细胞生物是十几年后由列文虎克先看到的（序章里的同一位磨镜片的人）；而"一切生物都由细胞构成"这条通则，还要再等一百七十多年。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">细胞膜为什么会自己形成一个封闭的囊，破了小口还常常自动愈合？</div>
+      <div class="opts">
+        <button>有专门的蛋白质持续把它缝成球形</button>
+        <button>细胞骨架从内部把它撑成球</button>
+        <button data-c="1">磷脂分子一头亲水一头疏水，在水里自发排成双层并闭合，避免让疏水的一端见水</button>
+        <button>细胞内的压强把它顶成球形</button>
+      </div>
+      <div class="explain">这层膜不是被造成球的，是被水推成球的——吹肥皂泡也是同一回事。顺带一提，正因为它只有 4–10 纳米厚，20–90 毫伏的电位差落在上面就是 10⁷ 伏／米量级的电场；脂双层耐得住，是因为它本身就是极好的绝缘材料。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">线粒体里的 ATP 合酶，是靠什么驱动的？</div>
+      <div class="opts">
+        <button>一种把氧化与产能直接连起来的高能中间分子</button>
+        <button data-c="1">跨膜的质子落差——先把质子泵到膜的一侧，再让它回流推动磨盘旋转</button>
+        <button>氧气分子直接与它结合放出的能量</button>
+        <button>细胞核发出的化学信号</button>
+      </div>
+      <div class="explain">这就是米切尔 1961 年的化学渗透说：先筑坝，再放水推轮。当时同行几乎都在找那个并不存在的"高能中间产物"；米切尔后来在康沃尔一座自己修复的老宅里办研究所继续做，1978 年拿到诺贝尔奖。氧气在这条链上的角色是站在末端接住电子，不是被点着烧掉。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">安芬森把一种酶彻底摊平、再把变性剂透析掉，结果它自己折了回去。这说明了什么？</div>
+      <div class="opts">
+        <button>蛋白质折叠必须有伴侣蛋白帮忙才能完成</button>
+        <button>蛋白质的形状由细胞核实时指挥</button>
+        <button data-c="1">折叠所需的信息就写在氨基酸的排列顺序里</button>
+        <button>蛋白质的形状可以随环境任意改变</button>
+      </div>
+      <div class="explain">莱文塔尔随后指出一个矛盾：一百个氨基酸的链若把所有构象试一遍，耗时会超过宇宙年龄，而实际折叠只要千分之几秒到几秒。解法是折叠不是"搜索"而是"滚落"——像溪流下山，每步往低处走就落进同一条河道。伴侣蛋白并非必需，但在稠得像浓汤的细胞里能防止半成品互相粘住。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">成熟红细胞扔掉了细胞核和线粒体，由此带来的直接后果是？</div>
+      <div class="opts">
+        <button>它能携带更多氧气，且寿命比其他细胞更长</button>
+        <button data-c="1">它靠不耗氧的糖酵解过活，且无法再合成新蛋白，服役约 120 天后被拆解回收</button>
+        <button>它失去了变形能力，只能走大血管</button>
+        <button>它不再需要能量，可以完全不消耗 ATP</button>
+      </div>
+      <div class="explain">腾出的空间用来装血红蛋白，一个红细胞里塞了两亿多个；代价是零件磨损后修不了。拆解下来的血红素会变成胆红素——新生儿黄疸里那点淡黄，正是这条回收线在出生后集中处理旧红细胞的结果（第 8 章）。它仍然需要 ATP，只是改由糖酵解供给。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第一幕 建造</div>
+  <div class="title">第 2 章 · 分裂与分化：细胞如何决定自己是谁</div>
+  <p>同一本说明书，发到每个细胞手里都是一模一样的一份。可有的细胞成了神经元，有的成了肝细胞，有的成了指甲。它们翻开的不是同一页——而更奇怪的是，一旦翻定，这个选择还会被后代记住。下一章，我们看一颗小球怎么滚下山谷。</p>
+  <nav class="footnav">
+    <a href="ch00-relay.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch02-differentiation.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 户型图：点房间高亮 + 切换说明
+  var map = document.getElementById('cellmap');
+  var tabs = document.querySelectorAll('#cellmap-fig .room-btn');
+  var rooms = document.querySelectorAll('#cellmap .room');
+  var panes = document.querySelectorAll('#cellmap-fig .rp');
+  function showRoom(key){
+    var i;
+    map.classList.add('picked');
+    for (i = 0; i < tabs.length; i++) {
+      tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-room') === key ? 'true' : 'false');
+    }
+    for (i = 0; i < rooms.length; i++) {
+      rooms[i].classList.toggle('on', rooms[i].getAttribute('data-room') === key);
+    }
+    for (i = 0; i < panes.length; i++) {
+      panes[i].classList.toggle('on', panes[i].getAttribute('data-rp') === key);
+    }
+  }
+  for (var t = 0; t < tabs.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){ showRoom(el.getAttribute('data-room')); });
+    })(tabs[t]);
+  }
+  for (var r = 0; r < rooms.length; r++) {
+    (function(el){
+      el.addEventListener('click', function(){ showRoom(el.getAttribute('data-room')); });
+    })(rooms[r]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

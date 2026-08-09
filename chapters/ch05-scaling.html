@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第5章 · 尺度的物理学：为什么需要肺和血管 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 5-1 尺度阶梯（本章专用） ---- */
+#ladder-fig .step-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#ladder-fig .step-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#ladder-fig .step-btn:hover{border-color:var(--gold); color:var(--ink);}
+#ladder-fig .step-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#ladder-fig .step-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#ladder-fig .step-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#ladder-fig .sp{display:none;}
+#ladder-fig .sp.on{display:block;}
+#ladder-fig .sp-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#ladder-fig .sp p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+
+#ladder .stepg{cursor:pointer; transition:opacity .3s;}
+#ladder.picked .stepg{opacity:.3;}
+#ladder.picked .stepg.on{opacity:1;}
+#ladder .bar{stroke:var(--line); stroke-width:1.5;}
+#ladder .bar.ok{fill:var(--green); fill-opacity:.20;}
+#ladder .bar.no{fill:var(--oxy); fill-opacity:.20;}
+#ladder .stepg.on .bar{stroke:var(--gold); stroke-width:2.5;}
+#ladder .stepg.on .bar.ok{fill-opacity:.42;}
+#ladder .stepg.on .bar.no{fill-opacity:.42;}
+#ladder .axis{stroke:var(--line); stroke-width:2;}
+#ladder .grid{stroke:var(--line); stroke-width:1; stroke-dasharray:3 5;}
+#ladder .grid-t{fill:var(--ink-faint); font-size:11px;}
+#ladder .t-val{fill:var(--gold); font-size:11.5px;}
+#ladder .d-val{fill:var(--ink); font-size:12px; font-weight:600;}
+#ladder .d-sub{fill:var(--ink-dim); font-size:10.5px;}
+#ladder .foot{fill:var(--ink-faint); font-size:11.5px;}
+
+/* ---- 图 5-2 三处交换面（本章专用） ---- */
+#surfaces .col-t{fill:var(--ink); font-size:15px; font-weight:700;}
+#surfaces .col-s{fill:var(--ink-dim); font-size:11.5px;}
+#surfaces .tube{fill:none; stroke:var(--deoxy); stroke-width:3; stroke-linecap:round;}
+#surfaces .sac{fill:var(--oxy); fill-opacity:.16; stroke:var(--oxy); stroke-width:1.6;}
+#surfaces .wall{fill:none; stroke:var(--ink-faint); stroke-width:2;}
+#surfaces .villus{fill:var(--green); fill-opacity:.18; stroke:var(--green); stroke-width:1.6;}
+#surfaces .micro{stroke:var(--green); stroke-width:1.6; stroke-linecap:round;}
+#surfaces .zoom{stroke:var(--ink-faint); stroke-width:1; stroke-dasharray:3 4;}
+#surfaces .mag{fill:var(--gold); font-size:11.5px;}
+#surfaces .cap{fill:none; stroke:var(--oxy); stroke-width:1.3;}
+#surfaces .art{fill:none; stroke:var(--oxy); stroke-width:3; stroke-linecap:round;}
+#surfaces .ven{fill:none; stroke:var(--deoxy); stroke-width:3; stroke-linecap:round;}
+#surfaces .rbc{fill:var(--oxy); fill-opacity:.55;}
+#surfaces .num{fill:var(--gold); font-size:12.5px;}
+#surfaces .note{fill:var(--ink-dim); font-size:11.5px;}
+#surfaces .foot{fill:var(--ink-faint); font-size:12.5px;}
+#surfaces .divider{stroke:var(--line); stroke-width:1;}
+
+@media (prefers-reduced-motion: reduce){
+  #ladder .stepg{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第一幕 建造 · 第 5 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>尺度的物理学：<br>为什么需要肺和血管</h1>
+  <p class="subtitle">氧气自己走路，只能走大约一毫米。你身体一半的形状，都是在跟这一毫米讨价还价。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>第 22 天，你的心脏开始跳了。而你此刻只有两毫米长——半粒芝麻。</p>
+  <p>这就有点奇怪。养一条会搏动的管子并不便宜，何况你还没有血可泵。池塘里的草履虫一辈子没有心脏，活得好好的；此刻你身上每一个细胞，其实都能从紧挨着自己的那一点液体里直接拿到氧气，用不着谁送。既然如此，何必这么早就动工挖河道？</p>
+  <p>因为你正在逼近一条线。这条线不由基因决定，也不由物种决定——它由物理决定：氧分子靠自己走路，走得动的距离大约只有一毫米。再长大一点，身体中央的细胞就要开始挨饿。接下来几周你要造的一切——肺、血管、肠壁上密密的绒毛——说穿了都是同一件事的不同做法：跟这一毫米讨价还价。这一章是全书的物理课，只讲一条规律；但这条规律解释了你身体一半的形状，往后我们还要一次次回到它。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 一毫米</div>
+  <h2>氧气自己走路，能走多远</h2>
+  <p>先说清楚"扩散"到底是什么。它常被想象成一种流动——氧气从多的地方"流"向少的地方。这个说法方便，却把机制说反了：扩散里没有任何东西在流，也没有谁在推。</p>
+  <p>一滴墨落进一杯静水，几个小时后整杯水都淡淡地黑了。墨分子并没有朝任何方向前进过。它们被水分子撞来撞去，每一下的方向都是随机的，走三步退两步。之所以最终摊得满杯都是，只因为墨多的那一侧往外撞出去的分子，总比往回撞进来的多——净流量来自数量差，不来自方向感。</p>
+  <p>这个区别不是咬文嚼字，它直接决定了扩散的能耐。一个方向明确的运动，走十倍的路花十倍的时间；而随机游走走十倍的路，要花<strong>一百倍</strong>的时间。距离每翻十倍，时间翻一百倍——扩散所需的时间，随距离的<strong>平方</strong>增长。</p>
+  <p>把数字排出来，这条平方律的凶狠就藏不住了。</p>
+
+  <figure id="ladder-fig">
+    <div class="switch-row">
+      <span class="switch-hint">点一级台阶 →</span>
+      <div class="step-tabs" role="group" aria-label="选择一个尺度台阶查看说明">
+        <button class="step-btn" data-step="s1" aria-pressed="false">1 μm</button>
+        <button class="step-btn" data-step="s2" aria-pressed="false">10 μm</button>
+        <button class="step-btn" data-step="s3" aria-pressed="false">0.1 mm</button>
+        <button class="step-btn" data-step="s4" aria-pressed="false">1 mm</button>
+        <button class="step-btn" data-step="s5" aria-pressed="false">1 cm</button>
+        <button class="step-btn" data-step="s6" aria-pressed="false">10 cm</button>
+        <button class="step-btn" data-step="s7" aria-pressed="false">1 m</button>
+      </div>
+    </div>
+    <svg id="ladder" viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="尺度阶梯图：氧分子扩散过 1 微米到 1 米各段距离所需时间，横轴为距离、纵轴为时间，均为对数刻度；距离每增十倍，时间增百倍">
+      <!-- 时间参考线 -->
+      <line class="grid" x1="66" y1="252" x2="712" y2="252"/><text class="grid-t" x="62" y="256" text-anchor="end">1 秒</text>
+      <line class="grid" x1="66" y1="213" x2="712" y2="213"/><text class="grid-t" x="62" y="217" text-anchor="end">1 分</text>
+      <line class="grid" x1="66" y1="174" x2="712" y2="174"/><text class="grid-t" x="62" y="178" text-anchor="end">1 小时</text>
+      <line class="grid" x1="66" y1="143" x2="712" y2="143"/><text class="grid-t" x="62" y="147" text-anchor="end">1 天</text>
+      <line class="grid" x1="66" y1="87" x2="712" y2="87"/><text class="grid-t" x="62" y="91" text-anchor="end">1 年</text>
+
+      <!-- 台阶 -->
+      <g class="stepg" data-step="s1">
+        <rect class="bar ok" x="76" y="331" width="90" height="9" rx="2"/>
+        <text class="t-val mono" x="121" y="325" text-anchor="middle">0.25 毫秒</text>
+        <text class="d-val mono" x="121" y="362" text-anchor="middle">1 μm</text>
+        <text class="d-sub" x="121" y="378" text-anchor="middle">一个细菌</text>
+      </g>
+      <g class="stepg" data-step="s2">
+        <rect class="bar ok" x="166" y="287" width="90" height="53" rx="2"/>
+        <text class="t-val mono" x="211" y="281" text-anchor="middle">25 毫秒</text>
+        <text class="d-val mono" x="211" y="362" text-anchor="middle">10 μm</text>
+        <text class="d-sub" x="211" y="378" text-anchor="middle">你的一个细胞</text>
+      </g>
+      <g class="stepg" data-step="s3">
+        <rect class="bar ok" x="256" y="243" width="90" height="97" rx="2"/>
+        <text class="t-val mono" x="301" y="237" text-anchor="middle">2.5 秒</text>
+        <text class="d-val mono" x="301" y="362" text-anchor="middle">0.1 mm</text>
+        <text class="d-sub" x="301" y="378" text-anchor="middle">涡虫的厚度</text>
+      </g>
+      <g class="stepg" data-step="s4">
+        <rect class="bar ok" x="346" y="199" width="90" height="141" rx="2"/>
+        <text class="t-val mono" x="391" y="193" text-anchor="middle">约 4 分钟</text>
+        <text class="d-val mono" x="391" y="362" text-anchor="middle">1 mm</text>
+        <text class="d-sub" x="391" y="378" text-anchor="middle">角膜 · 软骨</text>
+      </g>
+      <g class="stepg" data-step="s5">
+        <rect class="bar no" x="436" y="155" width="90" height="185" rx="2"/>
+        <text class="t-val mono" x="481" y="149" text-anchor="middle">约 7 小时</text>
+        <text class="d-val mono" x="481" y="362" text-anchor="middle">1 cm</text>
+        <text class="d-sub" x="481" y="378" text-anchor="middle">一块肌肉</text>
+      </g>
+      <g class="stepg" data-step="s6">
+        <rect class="bar no" x="526" y="111" width="90" height="229" rx="2"/>
+        <text class="t-val mono" x="571" y="105" text-anchor="middle">约 29 天</text>
+        <text class="d-val mono" x="571" y="362" text-anchor="middle">10 cm</text>
+        <text class="d-sub" x="571" y="378" text-anchor="middle">你的躯干</text>
+      </g>
+      <g class="stepg" data-step="s7">
+        <rect class="bar no" x="616" y="67" width="90" height="273" rx="2"/>
+        <text class="t-val mono" x="661" y="61" text-anchor="middle">约 8 年</text>
+        <text class="d-val mono" x="661" y="362" text-anchor="middle">1 m</text>
+        <text class="d-sub" x="661" y="378" text-anchor="middle">从心脏到脚趾</text>
+      </g>
+
+      <line class="axis" x1="66" y1="340" x2="712" y2="340"/>
+      <!-- 图例 -->
+      <rect class="bar ok" x="66" y="24" width="18" height="12" rx="2"/>
+      <text class="foot" x="92" y="34" text-anchor="start">扩散够用</text>
+      <rect class="bar no" x="176" y="24" width="18" height="12" rx="2"/>
+      <text class="foot" x="202" y="34" text-anchor="start">扩散不够用，必须有泵和管</text>
+      <text class="foot" x="712" y="34" text-anchor="end">纵轴：氧分子走完这段距离所需时间（对数刻度）</text>
+    </svg>
+    <div class="step-panel">
+      <div class="sp on" data-sp="0">
+        <div class="sp-t">距离每涨十倍，时间涨一百倍</div>
+        <p>点上方任意一级台阶，看这个尺度上发生什么。两根轴都是对数刻度：横轴每格是十倍距离，纵轴每格是十倍时间——所以一条平方律画出来，恰好是一道每级等高的楼梯。数值按氧在水中的扩散系数估算，取的是量级，不是精确值。</p>
+      </div>
+      <div class="sp" data-sp="s1">
+        <div class="sp-t">1 微米 · 一个细菌</div>
+        <p>氧气横穿一个细菌，用时不到千分之一秒——比任何泵都快，而且不花一分钱。在这个尺度上，主动运输是纯粹的浪费，所以没有哪种细菌需要长出心脏。地球上绝大多数生命，三十多亿年里就一直待在这一格里。</p>
+      </div>
+      <div class="sp" data-sp="s2">
+        <div class="sp-t">10 微米 · 你的一个细胞</div>
+        <p>你身上一个典型细胞的直径。氧气横穿它约二十几毫秒，比你眨一次眼快十倍。所以细胞内部的气体调度可以完全交给扩散，不必操心——大件货物另有安排，第 1 章里那条一步 8 纳米的轨道运输线管的就是那些。</p>
+      </div>
+      <div class="sp" data-sp="s3">
+        <div class="sp-t">0.1 毫米 · 涡虫的厚度</div>
+        <p>池塘石头底下的涡虫（一种扁形动物）身体最厚处就在这个量级。它没有血液，也没有鳃，全身靠体表直接换气。代价写在它的名字里：它必须扁。把自己压成一张薄纸，每个细胞才都离表面足够近——这是一笔用形状换生理的交易。</p>
+      </div>
+      <div class="sp" data-sp="s4">
+        <div class="sp-t">1 毫米 · 角膜与软骨</div>
+        <p>扩散能供养的实际上限。你身上少数几处没有血管的活组织——角膜、关节软骨——厚度恰好都落在这个量级，这不是巧合。氧气走完 1 毫米要几分钟；再厚一点，中心就撑不住了。</p>
+      </div>
+      <div class="sp" data-sp="s5">
+        <div class="sp-t">1 厘米 · 一块肌肉</div>
+        <p>七小时。任何一块肌肉若只靠扩散供氧，中心的细胞在你迈出第一步之前就已经缺氧。所以肌肉组织里毛细血管密得像草根，几乎每一根肌纤维都紧贴着好几条。</p>
+      </div>
+      <div class="sp" data-sp="s6">
+        <div class="sp-t">10 厘米 · 你的躯干</div>
+        <p>二十九天。这个数字的意义不在于"慢"，而在于它已经越过了可行与不可行的分界：一次呼吸的氧气若要靠扩散抵达你的腹腔深处，你等不到那一天。</p>
+      </div>
+      <div class="sp" data-sp="s7">
+        <div class="sp-t">1 米 · 从心脏到脚趾</div>
+        <p>八年。在人体尺度上，扩散已经根本不算一种运输方式了。它只在最后那一小截——从毛细血管到细胞的几十微米——才重新变得好用，而这一小截，恰恰是整套循环系统存在的全部理由：把血送到离每个细胞足够近的地方，剩下的交还给物理。</p>
+      </div>
+    </div>
+    <figcaption><b>图 5-1 · 一道每级等高的楼梯。</b>横轴是距离，纵轴是氧分子扩散过这段距离所需的时间，两轴都取对数。因为时间随距离的平方增长，这道楼梯每上一级（距离 ×10）就长高整整两格（时间 ×100）。绿色是扩散仍然够用的尺度，红色是必须另想办法的尺度——分界线落在 1 毫米附近。数值为量级估算。</figcaption>
+  </figure>
+
+  <p>看懂这道楼梯，本章余下的内容就都是它的推论。草履虫和细菌住在最下面两级，扩散又快又免费——那不是"低等"，是尺度合适；而你住在楼梯顶上，一具身体只要超过一两毫米厚，中心就必然缺氧。</p>
+  <p>循环系统干的正是这件事，而它的目标可能和你想的不一样：<strong>它并不负责把氧气送到细胞里，它只负责把氧气送到离细胞足够近的地方。</strong>最后那几十微米，仍然由扩散完成，也只能由扩散完成——没有任何管道细到能插进每一个细胞。所以毛细血管必须铺得极密：你身上大部分细胞与最近的一条毛细血管之间，距离在 <strong>20 到 200 微米</strong>之间，也就是几个到几十个细胞的厚度。血管网真正要满足的条件不是流量，是"没有一个细胞被落在两百微米之外"。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>角膜为什么是透明的，也为什么没有血管。</strong>眼球正前方那片圆形的窗，厚度只有半毫米上下，是全身少有的既活着又完全没有血管的组织。原因很直白：血管不透明。要让光干干净净地进来，这块地方就不能有一根血管穿过，而它之所以敢这么做，正是因为它薄得刚好落在扩散够用的那一格里——氧气从空气和泪液这一侧渗进来，营养从眼球内部的房水那一侧渗过去，两头够着，中间不缺。</p>
+    <p>代价是这份余量薄得很。戴着不透气的隐形眼镜过夜，等于给这扇窗蒙上一层塑料布，把外侧的氧路截断；角膜缺氧会水肿发雾，长期如此还会诱使血管往里长——一旦长进来，透明就没了。眼科医生反复叮嘱的那句"别戴着隐形眼镜睡觉"，讲的其实是这一章的物理。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 立方</div>
+  <h2>长大一倍，皮就不够用了</h2>
+  <p>扩散的一毫米是第一条约束。第二条更普遍，也更麻烦，而且它只用小学算术就能讲明白。</p>
+  <p>拿一个边长 1 厘米的方糖。它有六个面，每面 1 平方厘米，总表面积 6 平方厘米；体积 1 立方厘米。现在把边长翻倍，做一个 2 厘米的方糖：表面积变成 24 平方厘米，涨了 <strong>4 倍</strong>；体积变成 8 立方厘米，涨了 <strong>8 倍</strong>。</p>
+  <p>面积按边长的平方涨，体积按立方涨。于是每单位体积能分到的表面积——<strong>表面积／体积比</strong>——被稀释了一半。再翻一倍，再稀释一半。东西越大，它的"皮"相对于它的"肉"就越少。</p>
+  <p>这条比值是本书接下来要反复回来的一条线，值得先在几件日常事物上验一验它：</p>
+  <p><strong>碎冰化得快。</strong>一整块冰和敲碎后的同样重量的冰，泡在同样的水里，碎冰先化——重量没变，暴露在水里的面积却大了好几倍。<br>
+  <strong>切开的苹果很快发褐。</strong>整个苹果放三天没事，切成片十分钟就变色，因为氧化只发生在面上，而切一刀就凭空多出两个面。<br>
+  <strong>细的柴好点着。</strong>同样的木头，劈成细条容易起火，整根难烧——燃烧同样是一件只发生在表面的事。</p>
+  <p>这三件事说的是同一句话：<strong>凡是发生在"面"上的事，都会被"体"的增长拖后腿。</strong>而对一具身体来说，几乎所有和外界打交道的事——吸氧、吐二氧化碳、吸收养分、散热、排废物——统统发生在面上，而消耗它们的细胞统统住在体里。</p>
+  <p>于是长大这件事本身，就带着一个内在的麻烦：<em>你需要的量随体积涨，你能供上的量随面积涨，两者涨得不一样快。</em>一个球形的、光溜溜的生物，长到一两毫米就顶了天。</p>
+  <p>解法只有两条路。第一条是别长大——地球上绝大多数物种至今走的就是这条路。第二条是<strong>长大，但不让表面积跟着掉队</strong>：既然球形的皮不够用，那就把皮揉皱、叠起来、抽成丝、分成叉。</p>
+  <p>第二条路，就是你。</p>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 摊开</div>
+  <h2>大自然反复用的同一招</h2>
+  <p>这一招不是人体的发明，甚至不是动物的发明。在你之前，它已经被独立想出来过很多次了。</p>
+  <p><strong>鱼鳃</strong>是薄片摞薄片：一排鳃弓，每个鳃弓上长着一列鳃丝，每根鳃丝两侧再排开几十片细薄的鳃小片。水从缝里流过，两侧只隔一层极薄的壁。一条鱼的鳃摊平了，面积远大于它自己的体表。</p>
+  <p><strong>树的根</strong>走的是另一个方向：主根分侧根，侧根分细根，细根表面再长出海量根毛——每一根都只有几十微米粗。一株黑麦的根系曾被人耐着性子清洗、测量、加总，得到的总长度以百公里计。树没有心脏，它靠的是把吸收面本身铺满整片土壤。</p>
+  <p><strong>苔藓</strong>提供了反面的证据。它没有维管束，水和气体全靠细胞间的扩散，于是它这一生都被摁在几毫米的高度上——你在树干上见到的那层绿绒毯，厚度正是上一节那道楼梯的第三、第四级。它长不高，不是不想，是不能。</p>
+  <p><strong>大象的耳朵</strong>则是同一条规律在散热这一侧的用法：一头大象的表面积／体积比小得可怜，热量产得多、散得慢，于是它长出两片薄薄的、布满血管的巨大扇面，专门用来把血摊开吹凉。同一片草原上的非洲象耳朵大过亚洲象，与它面对的热负荷相称。</p>
+  <p>看过这三四个例子，你身上那几处结构就不再显得稀奇了——它们是同一道题的第五、第六、第七个答案。</p>
+
+  <figure>
+    <svg id="surfaces" viewBox="0 0 760 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="人体三处交换面对比图：肺泡的葡萄串结构、小肠的三级褶皱、毛细血管网，以及各自的面积与尺寸数据">
+      <!-- ============ 列 1 · 肺泡 ============ -->
+      <text class="col-t" x="127" y="26" text-anchor="middle">肺泡</text>
+      <text class="col-s" x="127" y="44" text-anchor="middle">把气道末端长成葡萄串</text>
+      <path class="tube" d="M127 58 V 82"/>
+      <path class="tube" d="M127 82 L 85 108 M127 82 L 169 108"/>
+      <path class="tube" d="M85 108 L 64 132 M85 108 L 106 132 M169 108 L 148 132 M169 108 L 190 132"/>
+      <g class="sac">
+        <circle cx="55" cy="143" r="8"/><circle cx="73" cy="143" r="8"/><circle cx="64" cy="158" r="8"/>
+        <circle cx="52" cy="170" r="8"/><circle cx="76" cy="170" r="8"/>
+        <circle cx="97" cy="143" r="8"/><circle cx="115" cy="143" r="8"/><circle cx="106" cy="158" r="8"/>
+        <circle cx="94" cy="170" r="8"/><circle cx="118" cy="170" r="8"/>
+        <circle cx="139" cy="143" r="8"/><circle cx="157" cy="143" r="8"/><circle cx="148" cy="158" r="8"/>
+        <circle cx="136" cy="170" r="8"/><circle cx="160" cy="170" r="8"/>
+        <circle cx="181" cy="143" r="8"/><circle cx="199" cy="143" r="8"/><circle cx="190" cy="158" r="8"/>
+        <circle cx="178" cy="170" r="8"/><circle cx="202" cy="170" r="8"/>
+      </g>
+      <path class="cap" d="M40 186 Q 127 202 214 186"/>
+      <text class="note" x="127" y="216" text-anchor="middle">外面裹着一层毛细血管网</text>
+
+      <!-- ============ 列 2 · 小肠 ============ -->
+      <text class="col-t" x="380" y="26" text-anchor="middle">小肠内壁</text>
+      <text class="col-s" x="380" y="44" text-anchor="middle">皱上有绒，绒上有毛</text>
+      <path class="wall" d="M290 74 Q 312 56 334 74 Q 356 56 378 74 Q 400 56 422 74 Q 444 56 466 74"/>
+      <text class="mag mono" x="478" y="72" text-anchor="start">×1.6</text>
+      <text class="note" x="286" y="72" text-anchor="end">环形皱襞</text>
+      <line class="zoom" x1="334" y1="78" x2="308" y2="104"/>
+      <line class="zoom" x1="378" y1="78" x2="452" y2="104"/>
+      <path class="wall" d="M300 150 H 460"/>
+      <g class="villus">
+        <path d="M306 150 V 122 a7 7 0 0 1 14 0 V 150 Z"/>
+        <path d="M330 150 V 116 a7 7 0 0 1 14 0 V 150 Z"/>
+        <path d="M354 150 V 124 a7 7 0 0 1 14 0 V 150 Z"/>
+        <path d="M378 150 V 114 a7 7 0 0 1 14 0 V 150 Z"/>
+        <path d="M402 150 V 122 a7 7 0 0 1 14 0 V 150 Z"/>
+        <path d="M426 150 V 118 a7 7 0 0 1 14 0 V 150 Z"/>
+      </g>
+      <text class="mag mono" x="478" y="140" text-anchor="start">绒毛与微绒毛</text>
+      <text class="note" x="296" y="140" text-anchor="end">绒毛</text>
+      <line class="zoom" x1="385" y1="112" x2="352" y2="176"/>
+      <line class="zoom" x1="392" y1="112" x2="424" y2="176"/>
+      <path class="wall" d="M348 206 H 428"/>
+      <g class="micro">
+        <line x1="352" y1="206" x2="352" y2="180"/><line x1="360" y1="206" x2="360" y2="180"/>
+        <line x1="368" y1="206" x2="368" y2="180"/><line x1="376" y1="206" x2="376" y2="180"/>
+        <line x1="384" y1="206" x2="384" y2="180"/><line x1="392" y1="206" x2="392" y2="180"/>
+        <line x1="400" y1="206" x2="400" y2="180"/><line x1="408" y1="206" x2="408" y2="180"/>
+        <line x1="416" y1="206" x2="416" y2="180"/><line x1="424" y1="206" x2="424" y2="180"/>
+      </g>
+      <text class="mag mono" x="478" y="196" text-anchor="start">合计 ×60–120</text>
+      <text class="note" x="344" y="196" text-anchor="end">微绒毛</text>
+      <text class="mag mono" x="380" y="228" text-anchor="middle">总放大 ≈ ×100–190</text>
+
+      <!-- ============ 列 3 · 毛细血管 ============ -->
+      <text class="col-t" x="633" y="26" text-anchor="middle">毛细血管网</text>
+      <text class="col-s" x="633" y="44" text-anchor="middle">把一根管子分成一片网</text>
+      <path class="art" d="M633 56 V 74"/>
+      <path class="art" d="M633 74 L 585 96 M633 74 L 681 96"/>
+      <path class="art" d="M585 96 L 561 118 M585 96 L 609 118 M681 96 L 657 118 M681 96 L 705 118"/>
+      <path class="cap" d="M561 118 L 549 130 M561 118 L 573 130 M609 118 L 597 130 M609 118 L 621 130 M657 118 L 645 130 M657 118 L 669 130 M705 118 L 693 130 M705 118 L 717 130"/>
+      <path class="cap" d="M549 130 V 158 M573 130 V 158 M597 130 V 158 M621 130 V 158 M645 130 V 158 M669 130 V 158 M693 130 V 158 M717 130 V 158"/>
+      <path class="cap" d="M549 138 H 573 M597 138 H 621 M645 138 H 669 M693 138 H 717 M573 148 H 597 M621 148 H 645 M669 148 H 693"/>
+      <path class="ven" d="M549 158 L 561 172 M573 158 L 561 172 M597 158 L 609 172 M621 158 L 609 172 M645 158 L 657 172 M669 158 L 657 172 M693 158 L 705 172 M717 158 L 705 172"/>
+      <path class="ven" d="M561 172 L 585 194 M609 172 L 585 194 M657 172 L 681 194 M705 172 L 681 194"/>
+      <path class="ven" d="M585 194 L 633 216 M681 194 L 633 216"/>
+      <path class="ven" d="M633 216 V 234"/>
+      <line class="divider" x1="556" y1="252" x2="710" y2="252"/>
+      <path class="wall" d="M566 274 H 700 M566 292 H 700"/>
+      <ellipse class="rbc" cx="600" cy="283" rx="10" ry="7"/>
+      <ellipse class="rbc" cx="640" cy="283" rx="10" ry="7"/>
+      <ellipse class="rbc" cx="680" cy="283" rx="10" ry="7"/>
+      <text class="note" x="633" y="312" text-anchor="middle">管腔 5–10 μm：红细胞要侧过身子排队通过</text>
+
+      <!-- ============ 数字栏 ============ -->
+      <text class="num mono" x="127" y="252" text-anchor="middle">约 4.8 亿个</text>
+      <text class="num mono" x="127" y="272" text-anchor="middle">展开 50–130 m²</text>
+      <text class="note" x="127" y="292" text-anchor="middle">气血之间最薄处 0.2–0.3 μm</text>
+      <text class="note" x="127" y="310" text-anchor="middle">不到一张纸厚度的百分之一</text>
+
+      <text class="num mono" x="380" y="252" text-anchor="middle">30–40 m²</text>
+      <text class="note" x="380" y="272" text-anchor="middle">2014 年重测（活体长 3–5 m）</text>
+      <text class="note" x="380" y="290" text-anchor="middle">旧教科书常引 200 m²，不再作为事实引用</text>
+      <text class="note" x="380" y="308" text-anchor="middle">连放大倍数本身也一并改了</text>
+
+      <text class="num mono" x="633" y="252" text-anchor="middle">总长数万公里量级</text>
+
+      <line class="divider" x1="30" y1="334" x2="730" y2="334"/>
+      <text class="foot" x="380" y="358" text-anchor="middle">同一道题的三个答案：把"体积"摊成"面"。</text>
+      <text class="foot" x="380" y="378" text-anchor="middle">三幅图各自简化，比例、数量均非写实。</text>
+    </svg>
+    <figcaption><b>图 5-2 · 你身上的三处交换面。</b>肺泡把一根气道的末端长成近五亿个小囊；小肠内壁靠皱襞、绒毛、微绒毛三级相乘，把一根光管子的内壁放大一两百倍；毛细血管把一条粗管分成极密的细网，让任何一个细胞都不至于被落在两百微米之外。三处的做法不同，解的是同一道题。小肠面积一栏保留了新旧两个数字，见正文。</figcaption>
+  </figure>
+
+  <h3>三处交换面，三种摊法</h3>
+  <p><strong>肺</strong>用的是分叉加末端起泡。气管一路二分再二分，到最末端挂上一串串小囊，成人肺里这样的小囊约有 <strong>4.8 亿个</strong>（2004 年定量测算给出的均值；个体实测从 2.7 亿到 7.9 亿，跨度近三倍）。摊开来的面积在 <strong>50 到 130 平方米</strong>之间（不同测算方法差得相当远，低端来自生理学教材，高端来自形态计量学实测）——一对塞在胸腔里、总体积不过几升的器官，摊平了能铺满十几到三十张乒乓球台。</p>
+  <p>更要紧的其实是薄。气体要穿过的那层壁——肺泡上皮加上毛细血管内皮，中间夹着一层薄基膜——最薄处只有 <strong>0.2 到 0.3 微米</strong>，整片屏障的调和平均厚度约 0.6 微米。回头看第一节那道楼梯，这个厚度在最底下一级都排不上号：氧气穿过它，用时以微秒计。肺真正的本事，是把"又大又薄"这两件互相打架的事同时做到。</p>
+  <p><strong>小肠</strong>用的是逐级相乘。先是内壁绕成一圈圈横向的环形皱襞，皱襞表面竖起密密的指状绒毛，每根绒毛的细胞顶端再排开一层刷子似的微绒毛。一根光溜溜的管子，就这样被放大了两个数量级。</p>
+  <p>这里要插一段关于数字的诚实话，因为这一处恰好是个好例子。"小肠展开有一个网球场那么大（约 200 平方米）"流传极广，也进过很多教科书。它是这么算出来的：皱襞放大 3 倍，绒毛 10 倍，微绒毛 20 倍，三级相乘约 600 倍，乘上光管子的内壁面积，正好得出两百平方米上下。</p>
+  <p>但 2014 年，两位瑞典学者用定量显微方法重新量了一遍，结论是<strong>这条乘法的每一个因子都偏大</strong>——连乘之前的那个底数也偏大：活着的小肠长 <strong>3 到 5 米</strong>，而不是尸检标本失去张力后松弛开的六七米。逐项修正之后：环形皱襞实际只放大约 <strong>1.6 倍</strong>，绒毛与微绒毛合起来约 <strong>60 到 120 倍</strong>，总放大落在<strong>一百到两百倍</strong>之间，而非六百倍；小肠的吸收面积约 <strong>30 到 40 平方米</strong>——大约一间大卧室的地板，不是网球场。</p>
+  <p>要紧的是被改掉的究竟是什么：不只是那个流传的总数，<em>连推出总数的三个倍数也一并被改了</em>——那个漂亮的"600 倍"本身就是同一次高估的产物，而不是一条独立成立、只是被用错了的事实。一个数被反复转引之后，看上去就像被反复验证过，这正是它最危险的地方。机制没有变，小肠仍靠三级褶皱把面积放大两个数量级；变的是每一级放大多少。本书遇到这类情形的做法是：给区间，注来源年代，宁可让数字不那么漂亮。这套结构的运作细节，第 13 章跟着一顿饭走一遍时再细说。</p>
+  <p><strong>毛细血管</strong>用的是分成细网。它们的管腔直径只有 <strong>5 到 10 微米</strong>——比红细胞自己还窄一点，红细胞得侧过身子、变成子弹形才挤得过去。这不是设计失误，反而是要点：挤扁了的红细胞几乎贴着管壁走，中间不隔一层不流动的血浆，交换效率因此更高。</p>
+  <p>至于全身毛细血管加起来有多长，你会看到"十万公里，可绕地球两圈半"这样的说法。这个数字的源头是很早以前的估算，后来被一转再转，精度其实经不起细究。稳妥的说法是<strong>数万公里量级</strong>——量级本身已经够震撼，不必再往上添一位数。</p>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 体型</div>
+  <h2>一篇 1926 年的小文章</h2>
+  <p>1926 年，一位英国人写了一篇几页纸的随笔，题目朴素得像一道数学题：《论合适的体型》（On Being the Right Size）。它至今仍是把这条规律讲得最痛快的一篇文字。</p>
+  <p>作者叫 <strong>J. B. S. 霍尔丹</strong>（J. B. S. Haldane），遗传学家，也是二十世纪最热衷于拿自己做实验的科学家之一：为搞清楚潜艇艇员在事故中会经历什么，他把自己关进减压舱反复试各种气体配比，弄穿过耳膜、诱发过抽搐，事后还轻描淡写地说，耳膜留个洞也挺好，能吹着烟从耳朵里冒出来。就是这样一个人，写下了那段被引用了一百年的话：</p>
+  <p>把一只老鼠丢进一口千码深的矿井，它落到底，受一点惊，爬起来走了。一只大鼠会摔死。一个人会摔断骨头。一匹马落地则是溅开的一摊。</p>
+  <p>差别不在骨头的强度，而在体型。落体在空气里最终会达到一个匀速——空气阻力大致随<strong>表面积</strong>增长，而重量随<strong>体积</strong>增长；动物越小，表面积／体积比越大，阻力相对重量就越大，终末速度越低。一只老鼠落地时的速度，慢得像一片叶子。</p>
+  <p>体型再小一个量级，这条规律就近乎荒谬了：<strong>蚂蚁从多高摔下来都摔不坏</strong>。它的终末速度低到落地时那点动能根本不够伤到自己，何况撑住它的外壳截面积相对体重也大得多。"蚂蚁从高楼掉下去没事"不是传说，只是没什么可惊讶的——同一条账，换了个体型算而已。</p>
+  <p>这里要就地拆一句，免得顺着这个故事推错方向：老鼠摔不死，靠的是<em>表面积／重量</em>决定终末速度，也就是同一条平方立方律作用在空气阻力上——它和这一章前面讲的换气、散热是同一条数学规律，但落在完全不同的力上。<strong>并不是"表面积大所以什么都占便宜"。</strong>事实上下一段就会看到，同样是表面积大，在散热这件事上它是个不折不扣的麻烦。</p>
+  <h3>体重涨十六倍，饭量涨八倍</h3>
+  <p>体型对代谢的影响，是这条规律最漂亮的一处推论。</p>
+  <p>朴素的猜想有两个。一是代谢率跟体重成正比（越重烧得越多）；二是跟表面积成正比，也就是体重的三分之二次方（散热受限）。1932 年，瑞士裔美国生理学家马克斯·克莱伯把从鸽子到公牛的一堆测量摆在一起，发现真实答案落在两者之间：代谢率大致正比于<strong>体重的 0.75 次方</strong>。这条关系后来被叫作克莱伯定律，跨越好几个数量级都大致成立，为什么恰好是 0.75 至今仍有争论。</p>
+  <p>不管指数是多少，方向是清楚的：<strong>体型越大，每公斤组织烧得越少。</strong>反过来，小动物每一克身体都得拼命产热，才补得上从相对巨大的体表流失的那些。这就是为什么鼩鼱几乎一刻不停地吃，一天要吃下接近自己体重的食物，几个小时不进食就可能撑不住；也是为什么蜂鸟夜里干脆放弃维持体温，进入一种类似冬眠的蛰伏状态——那笔账它白天算得过来，夜里算不过来。</p>
+  <h3>而你出生那天，正站在这条曲线不利的一头</h3>
+  <p>把这条规律套到你自己身上，最鲜明的一刻是出生。</p>
+  <p>一个新生儿的体重约为成人的二十分之一，体表面积却远不止成人的二十分之一——按体重折算，<strong>新生儿的体表面积／体重比大约是成人的 2.5 到 3 倍</strong>。同一件事的另一个说法：他每公斤身体的静息耗氧量约为成人的两倍，产热多，散热更多。</p>
+  <p>后果很实在。刚出生的婴儿浑身湿透地暴露在室温里，散热的速度远快于成人，偏偏他还不会有效地打寒战。这正是为什么产房要把温度调到让大人觉得闷、为什么第一件事是擦干和包裹、为什么新生儿身上预先囤着一层专门用来烧的棕色脂肪。这些安排全都源自本章这条比值——第 8 章讲出生时会回到这里，把这只"暖炉"的原理说完。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>巨人为什么站不起来。</strong>霍尔丹在同一篇文章里算过一笔账。《天路历程》里有两个十倍于常人高的巨人。把一个人各个方向都放大十倍，他的体重会涨到一千倍（长宽高各十倍），而支撑他的腿骨横截面积只涨到一百倍——于是骨头每平方厘米承受的压力变成原来的十倍，超过了骨组织能扛的限度。霍尔丹的结论是：他们每走一步，大腿骨就会断一次。</p>
+    <p>这条约束在大型动物身上留下了看得见的痕迹：大象的腿又直又粗，站姿近乎柱子式，而不像羚羊那样纤细带弯——不是它笨，是它别无选择。反过来，蚂蚁能举起自己体重几十倍的东西，也不靠什么特殊材质：肌肉出力大致随横截面积（平方）增长，自重随体积（立方）增长，体型一小，这笔账就自动变得好看。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 余量</div>
+  <h2>为什么这些面积都造得太大了</h2>
+  <p>还有几处地方，这条规律划下的界线格外清楚。</p>
+  <p><strong>昆虫为什么长不大。</strong>昆虫不用血液运氧：体壁上开一排小孔，孔后接着一套越分越细的气管，气体直接扩散到细胞旁边。这套办法在小尺度上效率极高，不必养一颗心脏；可它的射程仍受制于第一节那道楼梯，身体一厚，深处就送不到——这被认为是昆虫体型上限的主要物理约束之一。至于石炭纪那些翼展半米的巨蜻蜓，一个流行的解释是当时大气含氧量明显高于今天，把界线暂时推远了；这个假说证据不弱，但并非定论。</p>
+  <p><strong>神经元为什么可以长到一米。</strong>这看起来像个反例：既然扩散过一米要八年，一条从脊髓通到脚趾的神经纤维怎么活得下去？答案在于这条规律限制的是<em>半径</em>，不是长度。神经纤维再长也只有几微米粗，横向上任何一点到表面的距离都在楼梯最底下那一格里，氧和养分从侧面随时补进来。至于沿着长度方向的物流，它压根没交给扩散——第 1 章说过的那条马达蛋白轨道运输线，正是为此而存在。</p>
+  <h3>造得太大的那部分，就是你的家底</h3>
+  <p>现在回头看那些数字，会发现一件容易被忽略的事：<strong>这些交换面，全都造得比日常所需大得多。</strong></p>
+  <p>你安静坐着时只用得上肺泡总面积的一小部分，即使全力奔跑，健康的肺也很少是限制成绩的那一环；一个肾足以维持正常生活，所以捐肾可行；肝脏切掉相当大一部分后，剩下的能在几周里长回接近原来的体量；小肠切除相当长的一段，多数人仍能吸收到足够的养分。</p>
+  <p>这就是<strong>器官储备</strong>——工程上叫安全系数（本章主要一次借用工程的说法，因为它确实贴切）：结构照着峰值负荷造，而峰值一年也遇不上几次。</p>
+  <p>这份余量带来一个意味深长的后果，它会在本书后半程一次次浮现：<em>因为余量厚，衰退在很长时间里是无声的。</em>肺、肾、肝的功能可以慢慢滑掉相当一部分而你毫无察觉，因为剩下的仍然够用；等到症状终于出现，往往已经走了很远。第 21 章会专门算这笔账——为什么衰老的曲线是平缓的，而察觉它的过程却是突然的。答案就藏在本章这条被造大了的表面积里。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>把一毫米搬进芯片。</strong>研究人体组织有个老麻烦：培养皿里的细胞铺成一层薄膜，泡在静止的液体里，既没有血流也没有那层薄得只有零点几微米的交换面——它离真实的身体太远。器官芯片（organ-on-a-chip）想解决的正是这件事：在一块指甲盖大小的透明片子上刻出微米级的通道，把两种细胞隔着一层多孔薄膜贴在两侧，一侧通"血"，一侧通气，尺度恰好压回到扩散够用的那一格里。2010 年，哈佛 Wyss 研究所的团队报告了第一块这样的"肺芯片"：薄膜两侧分别是肺泡上皮和血管内皮，还能被真空周期性拉伸，模拟呼吸时的牵张。</p>
+    <p>此后十几年，肠、肝、肾、血脑屏障乃至多器官串联的芯片陆续出现。监管这一侧的变化更值得注意：美国 2022 年 12 月签署的《FDA 现代化法案 2.0》取消了新药审批必须做动物实验的法定要求，把器官芯片、类器官、计算模型正式列入可选路径；2024 年 9 月，一块用于预测药物性肝损伤的肝芯片被 FDA 相关评估程序受理；2025 年 4 月，FDA 发布了逐步减少动物实验的路线图，先从单克隆抗体类药物入手。需要说清楚的是，这些系统目前复现的多是单一器官的局部功能，全身性的药物代谢、免疫应答尚难模拟，"替代动物实验"仍是方向而非现状。</p>
+  </div>
+
+  <p>这一章只讲了一条规律，但它会在后面反复回来。第 8 章讲出生，新生儿为什么怕冷，用的是本章的比值；第 13 章跟着一顿饭走过小肠，那三级相乘的褶皱是本章的老熟人；第 21 章算器官储备的账，起点就是这些被造得过大的面积。</p>
+  <p>顺带说一句：你的血液已经在流了，管网也在铺，可血里现在装的是什么、由谁做主，还没有定。接下来那件事，要从一个此刻还看不出男女的胚胎说起。</p>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">尺度与交换面 · 关键数字</div>
+    <table>
+      <tr><td class="k">氧扩散跨 1 微米</td><td class="v">&lt; 1 毫秒</td><td class="n">细胞内部完全够用</td></tr>
+      <tr><td class="k">氧扩散跨 1 毫米</td><td class="v">约 4 分钟</td><td class="n">扩散能撑住的实际上限</td></tr>
+      <tr><td class="k">氧扩散跨 10 厘米</td><td class="v">约 29 天</td><td class="n">时间随距离的平方增长</td></tr>
+      <tr><td class="k">细胞到最近毛细血管</td><td class="v">20–200 μm</td><td class="n">血管网真正要满足的条件</td></tr>
+      <tr><td class="k">肺泡数量</td><td class="v">2.7–7.9 亿</td><td class="n">2004 年定量测算，均值约 4.8 亿</td></tr>
+      <tr><td class="k">肺泡总展开面积</td><td class="v">50–130 m²</td><td class="n">全书统一口径；测算方法不同跨度大</td></tr>
+      <tr><td class="k">气与血之间的屏障</td><td class="v">0.2–0.3 μm</td><td class="n">最薄处；全屏障调和平均约 0.6 μm</td></tr>
+      <tr><td class="k">小肠三级褶皱总放大</td><td class="v">约 100–190 倍</td><td class="n">皱襞 ×1.6 · 绒毛与微绒毛 ×60–120</td></tr>
+      <tr><td class="k">小肠吸收面积</td><td class="v">30–40 m²</td><td class="n">2014 年重测，活体长 3–5 m；旧值 200 m² 已废</td></tr>
+      <tr><td class="k">毛细血管总长</td><td class="v">数万公里量级</td><td class="n">管腔 5–10 μm；常引数字精度存疑</td></tr>
+      <tr><td class="k">代谢率与体重的关系</td><td class="v">∝ 体重的 0.75 次方</td><td class="n">克莱伯定律，1932</td></tr>
+      <tr><td class="k">新生儿体表面积/体重比</td><td class="v">成人的 2.5–3 倍</td><td class="n">每公斤耗氧约为成人 2 倍</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">草履虫不需要心脏，而你需要。最根本的原因是什么？</div>
+      <div class="opts">
+        <button>草履虫的细胞比人的细胞更省氧</button>
+        <button data-c="1">扩散所需时间随距离的平方增长——够用一微米，就不够用一米</button>
+        <button>草履虫生活在水里，可以直接吸收溶解氧</button>
+        <button>单细胞生物的代谢方式不需要氧气</button>
+      </div>
+      <div class="explain">扩散是随机游走，不是流动：距离涨十倍，时间涨一百倍。氧气穿过一个细菌不到一毫秒，穿过一米要八年上下。注意循环系统的职责也因此被限定了——它不负责把氧送进细胞，只负责送到离细胞几十微米的地方，最后那一小截仍然只能交给扩散。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">把一个立方体的边长翻倍，它的表面积和体积各变成几倍？</div>
+      <div class="opts">
+        <button>都是 2 倍</button>
+        <button>表面积 2 倍，体积 4 倍</button>
+        <button data-c="1">表面积 4 倍，体积 8 倍——每单位体积分到的表面积减半</button>
+        <button>表面积 8 倍，体积 4 倍</button>
+      </div>
+      <div class="explain">面积按平方涨，体积按立方涨，所以表面积／体积比随尺寸增大而下降。麻烦在于：换气、吸收、散热这些事全发生在面上，而消耗它们的细胞全住在体里。碎冰比整块冰化得快、切开的苹果比整个苹果先发褐，说的都是这同一句话。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">角膜和关节软骨是全身少有的没有血管的活组织。这与本章哪条规律直接相关？</div>
+      <div class="opts">
+        <button>它们的细胞代谢极慢，几乎不耗氧</button>
+        <button>它们靠淋巴系统代替血液供氧</button>
+        <button data-c="1">它们的厚度恰好在 1 毫米量级，正好落在扩散还够用的那一格</button>
+        <button>它们是死组织，本来就不需要供养</button>
+      </div>
+      <div class="explain">角膜厚约半毫米，氧气从泪液一侧渗入、养分从房水一侧渗入，两头够得着。它不长血管是因为血管不透明，要保住透光就得放弃供血——而这笔交易之所以做得成，全靠它够薄。余量很窄：戴不透气的隐形眼镜过夜会截断外侧的氧路，角膜水肿发雾，长期还可能诱使血管往里长。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">霍尔丹说：老鼠掉进深井能爬起来走，人会摔断骨头，马会摔成一摊。为什么？</div>
+      <div class="opts">
+        <button>小动物的骨骼材质更有韧性，抗冲击能力更强</button>
+        <button data-c="1">空气阻力随表面积涨、重量随体积涨，体型越小终末速度越低</button>
+        <button>小动物反应快，落地时能调整姿势卸力</button>
+        <button>小动物落体时体温下降，组织更耐受冲击</button>
+      </div>
+      <div class="explain">同一条平方立方律，这次落在空气阻力上：老鼠落地时慢得像一片叶子。但别把它外推成"表面积大处处占便宜"——在散热这件事上，表面积大恰恰是个麻烦，新生儿怕冷就是同一条比值算出来的反面结果。霍尔丹在同一篇文章里还算过：十倍高的巨人体重涨一千倍而腿骨截面只涨一百倍，走一步就会把腿折断。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">"小肠展开有一个网球场那么大（约 200 平方米）"这个流传极广的说法，目前的处境是？</div>
+      <div class="opts">
+        <button>已被证实偏小，实际面积还要更大</button>
+        <button>完全是讹传，小肠内壁其实并没有明显放大</button>
+        <button data-c="1">2014 年的定量重测把它下修到 30–40 平方米，连推出这个数的三个放大倍数也一并改小了</button>
+        <button>数字正确，只是把小肠和大肠算在了一起</button>
+      </div>
+      <div class="explain">"200 平方米"是这样算出来的：皱襞 ×3、绒毛 ×10、微绒毛 ×20，三级相乘约 600 倍。两位瑞典学者用定量显微方法重测后，每个因子都偏大：皱襞约 ×1.6，绒毛与微绒毛合计约 ×60–120，总放大约一两百倍，小肠吸收面积约 30 到 40 平方米。所以那个漂亮的"600 倍"并不是一条独立成立的事实，它本身就是同一次高估的产物——一个数被反复转引之后，看上去就像被反复验证过。机制没变（仍是三级褶皱放大两个数量级），变的是每一级放大多少。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第一幕 建造</div>
+  <div class="title">第 6 章 · 性别分化的岔路口</div>
+  <p>把受精后第六周的两个胚胎摆在一起，没有人能分出哪个将来是男孩、哪个是女孩——它们的生殖结构此刻长得一模一样，而且各自都备着两套互不相干的管道。接下来的几周里，其中一套会被拆掉。下一章，我们守在那个岔路口上。</p>
+  <nav class="footnav">
+    <a href="ch04-organogenesis.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch06-sex-divergence.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 尺度阶梯：点台阶高亮 + 切换说明
+  var ladder = document.getElementById('ladder');
+  var tabs = document.querySelectorAll('#ladder-fig .step-btn');
+  var steps = document.querySelectorAll('#ladder .stepg');
+  var panes = document.querySelectorAll('#ladder-fig .sp');
+  function showStep(key){
+    var i;
+    ladder.classList.add('picked');
+    for (i = 0; i < tabs.length; i++) {
+      tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-step') === key ? 'true' : 'false');
+    }
+    for (i = 0; i < steps.length; i++) {
+      steps[i].classList.toggle('on', steps[i].getAttribute('data-step') === key);
+    }
+    for (i = 0; i < panes.length; i++) {
+      panes[i].classList.toggle('on', panes[i].getAttribute('data-sp') === key);
+    }
+  }
+  for (var t = 0; t < tabs.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){ showStep(el.getAttribute('data-step')); });
+    })(tabs[t]);
+  }
+  for (var s = 0; s < steps.length; s++) {
+    (function(el){
+      el.addEventListener('click', function(){ showStep(el.getAttribute('data-step')); });
+    })(steps[s]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

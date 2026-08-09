@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第20章 · 繁殖：接力的下一棒 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 20-1 激素合奏（本章专用） ---- */
+#cycle-fig .cy-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#cycle-fig .cy-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#cycle-fig .cy-btn:hover{border-color:var(--gold); color:var(--ink);}
+#cycle-fig .cy-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#cycle-fig .cy-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#cycle-fig .cy-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#cycle-fig .cp{display:none;}
+#cycle-fig .cp.on{display:block;}
+#cycle-fig .cp-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#cycle-fig .cp p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+#cycle .cvg{opacity:.2; transition:opacity .35s;}
+#cycle .cvg.on{opacity:1;}
+#cycle .cv{fill:none; stroke-width:2.8; stroke-linecap:round; stroke-linejoin:round;}
+#cycle .c-fsh{stroke:var(--deoxy);}
+#cycle .c-lh{stroke:var(--gold);}
+#cycle .c-e2{stroke:var(--oxy);}
+#cycle .c-p4{stroke:var(--green);}
+#cycle .c-gn{stroke:var(--mixed-l); stroke-width:2.2;}
+#cycle .t-fsh{fill:var(--deoxy); font-size:12.5px; font-weight:700;}
+#cycle .t-lh{fill:var(--gold); font-size:12.5px; font-weight:700;}
+#cycle .t-e2{fill:var(--oxy); font-size:12.5px; font-weight:700;}
+#cycle .t-p4{fill:var(--green); font-size:12.5px; font-weight:700;}
+#cycle .t-gn{fill:var(--mixed-l); font-size:12.5px; font-weight:700;}
+#cycle .axis{stroke:var(--line); stroke-width:2;}
+#cycle .tick{stroke:var(--line);}
+#cycle .tick-label{fill:var(--ink-faint); font-size:11.5px;}
+#cycle .ovu{stroke:var(--gold); stroke-width:1.4; stroke-dasharray:5 5;}
+#cycle .ovu-t{fill:var(--gold); font-size:12px;}
+#cycle .phase{fill:var(--ink-faint); font-size:12px;}
+
+/* ---- 图 20-2 卵母细胞库存曲线（本章专用） ---- */
+#stock .axis{stroke:var(--line); stroke-width:2;}
+#stock .grid{stroke:var(--line); stroke-width:1; stroke-dasharray:3 6;}
+#stock .guide{stroke:var(--line); stroke-width:1; stroke-dasharray:3 6;}
+#stock .curve{fill:none; stroke:var(--deoxy); stroke-width:3; stroke-linecap:round; stroke-linejoin:round;}
+#stock .dot{fill:var(--deoxy);}
+#stock .dot.end{fill:var(--oxy);}
+#stock .ax-l{fill:var(--ink-faint); font-size:11px;}
+#stock .lb{fill:var(--ink); font-size:12.5px; font-weight:700;}
+#stock .lb-s{fill:var(--gold); font-size:11px;}
+#stock .note{fill:var(--ink-dim); font-size:12px;}
+#stock .lead{stroke:var(--ink-faint); stroke-width:1;}
+@media (prefers-reduced-motion: reduce){
+  #cycle .cvg{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第三幕 满负荷运行 · 第 20 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>繁殖：接力的<br>下一棒</h1>
+  <p class="subtitle">序章里你是被递过来的那一棒。现在轮到你把它递出去——一眼常年出水的泉，一座只融不增的冰川，和一支每月演一遍的合奏。</p>
+  <div class="meta"><span>阅读 ≈ 17 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>这一次，你在另一头。</p>
+  <p>序章开场时你还不存在：一个卵子在输卵管里被纤毛一下一下往下推，几十厘米之外，数以亿计的另一种细胞正沿着一条黏滑的通道往上走。现在把镜头往回摇二十几年，摇到那颗卵子还没出发的时候——摇到它还泡在卵巢里，和几十万个同伴一起，什么也不做地等着。</p>
+  <p>接力这件事本来就需要两具身体，所以这一章里的"你"要换两次位置：一次站在泉水这一边，一次站在冰川那一边。先说清楚这一点，后面就不必反复交代了。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 泉与冰川</div>
+  <h2>一眼泉，和一座冰川</h2>
+  <p>序章里用过一对说法，这一章从它接着往下讲。</p>
+  <p><strong>男性这一边是一眼常年出水的泉。</strong>睾丸从青春期起日夜不停，走完一个完整的生产周期约 <strong>64 到 74 天</strong>，每天新出的精子以亿计，边出边用，用不完就代谢掉。这眼泉终生涌着——序章把这句话点到为止："只是水量和成色随年龄缓慢下滑"。现在把它展开。</p>
+  <p>随着年龄增长，精液量、精子浓度、前向运动的比例、形态正常的比例都会缓慢下降，精子 DNA 的断裂片段增多。降幅不大，年年递减，四十岁的人和二十岁的人放在一起统计才看得出来。真正值得留意的不是这些指标，而是它们背后的账：<strong>精原干细胞是靠分裂来维持这眼泉的，而每一次分裂都要把三十亿个字母抄一遍。</strong>抄的次数越多，抄错的机会越多。粗略估计，一位四十岁父亲的精子所经历的分裂轮数，是二十岁父亲的三四倍。这就是为什么在大样本研究里，父亲年龄与子代若干疾病的风险呈弱相关——新发突变的数量随父亲年龄稳定上升。要立刻补一句：这些疾病的绝对风险仍然很低，"弱相关"三个字必须跟着一起读。</p>
+  <p><strong>女性这一边是一座冰川。</strong>全部卵母细胞在她还是胎儿时就已堆积完成：孕龄 5 个月前后达到峰值（本节的孕周沿用末次月经口径，即「孕龄」；两套日历的区别见第 4 章），约六七百万个；出生时只剩一两百万；到青春期约三四十万；此后每个月放行一个，一生真正走完全程的大约<strong>四百到五百个</strong>。冰川只会消融，不会重新下雪——按目前的主流认识，这份存货只出不进。</p>
+  <p>两条衰减线的形状很不一样。泉是一道均匀的缓坡，一路缓慢下行，没有终点。冰川不是：它在很长一段时间里以稳定的速度消融，到三十七岁前后坡度明显变陡，然后在几年里走完最后一段，抵达绝经。第 22 章会专门讲这道悬崖；这里只需要看清它的形状。</p>
+
+  <figure>
+    <svg id="stock" viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="卵母细胞库存随年龄下降曲线，纵轴为对数刻度，从胎儿期约六七百万降到绝经前后不足一千">
+      <line class="grid" x1="56" y1="90" x2="716" y2="90"/>
+      <line class="grid" x1="56" y1="130" x2="716" y2="130"/>
+      <line class="grid" x1="56" y1="170" x2="716" y2="170"/>
+      <line class="grid" x1="56" y1="210" x2="716" y2="210"/>
+      <text class="ax-l mono" x="50" y="94" text-anchor="end">100 万</text>
+      <text class="ax-l mono" x="50" y="134" text-anchor="end">10 万</text>
+      <text class="ax-l mono" x="50" y="174" text-anchor="end">1 万</text>
+      <text class="ax-l mono" x="50" y="214" text-anchor="end">1000</text>
+
+      <polyline class="curve" points="80,59 200,83 320,108 440,123 560,154 690,214"/>
+
+      <line class="guide" x1="80" y1="59" x2="80" y2="236"/>
+      <line class="guide" x1="200" y1="83" x2="200" y2="236"/>
+      <line class="guide" x1="320" y1="108" x2="320" y2="236"/>
+      <line class="guide" x1="440" y1="123" x2="440" y2="236"/>
+      <line class="guide" x1="560" y1="154" x2="560" y2="236"/>
+      <line class="guide" x1="690" y1="214" x2="690" y2="236"/>
+
+      <circle class="dot" cx="80" cy="59" r="5"/>
+      <circle class="dot" cx="200" cy="83" r="5"/>
+      <circle class="dot" cx="320" cy="108" r="5"/>
+      <circle class="dot" cx="440" cy="123" r="5"/>
+      <circle class="dot" cx="560" cy="154" r="5"/>
+      <circle class="dot end" cx="690" cy="214" r="5"/>
+
+      <line class="axis" x1="56" y1="236" x2="716" y2="236"/>
+      <text class="lb" x="80" y="256" text-anchor="middle">孕龄 20 周</text>
+      <text class="lb-s mono" x="80" y="272" text-anchor="middle">600–700 万</text>
+      <text class="lb" x="200" y="256" text-anchor="middle">出生</text>
+      <text class="lb-s mono" x="200" y="272" text-anchor="middle">100–200 万</text>
+      <text class="lb" x="320" y="256" text-anchor="middle">青春期</text>
+      <text class="lb-s mono" x="320" y="272" text-anchor="middle">30–40 万</text>
+      <text class="lb" x="440" y="256" text-anchor="middle">25 岁</text>
+      <text class="lb-s mono" x="440" y="272" text-anchor="middle">十几万</text>
+      <text class="lb" x="560" y="256" text-anchor="middle">37 岁</text>
+      <text class="lb-s mono" x="560" y="272" text-anchor="middle">约 2.5 万</text>
+      <text class="lb" x="690" y="256" text-anchor="middle">绝经前后</text>
+      <text class="lb-s mono" x="690" y="272" text-anchor="middle">不足一千</text>
+
+      <line class="lead" x1="470" y1="196" x2="552" y2="160"/>
+      <text class="note" x="200" y="200">37 岁之后，同样的对数刻度上坡度明显变陡</text>
+      <text class="note mono" x="716" y="30" text-anchor="end">纵轴为对数刻度 · 每格十倍</text>
+    </svg>
+    <figcaption><b>图 20-1 · 一座只融不增的冰川。</b>纵轴是对数刻度，所以这条看似平缓的线其实一路在成十倍地掉。要注意：横轴的六个点不等距，而消融从来没有停过——不排卵的月份也在退。走完全程的那四百到五百个，只占出生库存的万分之三上下。</figcaption>
+  </figure>
+
+  <p>还有一件事常被误解。每个月被叫醒的并不是一个卵泡，而是一批——十几到二十几个一起被募集起来，一起开始长。它们中间会决出一个优势者，其余的在几天里陆续闭锁、退场。所以"每月排一个"的背后，每月消耗掉的是一批。</p>
+  <p>这也顺手回答了一个流传很广的问题：吃避孕药抑制排卵，是不是能把卵子"省下来"、把绝经推后？不能。募集与闭锁这一轮轮的消耗基本上照常进行，冰川的融化并不因为这个月没有放行而暂停。</p>
+  <p>至于精子那一边，序章已经把话说清楚了：从上亿到最后抵达受精部位的几十个，是<strong>层层设卡</strong>，不是一场赛跑——宫颈黏液挡掉绝大多数，输卵管还要二选一，而这段路多半也不是精子自己游完的。本章不重复那一段，只提醒一句：这条"设卡"的逻辑，在受精之后其实还在继续，第 3 节会看到它的下半场。</p>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 合奏</div>
+  <h2>一支五个声部的合奏</h2>
+  <p>把冰川放行一颗卵子这件事排成谱子，会发现它不是独奏，是一支五个声部的乐队，每个月把同一首曲子演一遍。</p>
+  <p>先认人。<strong>下丘脑</strong>打拍子，它释放的促性腺激素释放激素（GnRH）不是持续流出，而是一阵一阵的脉冲，快慢本身就是信息。<strong>垂体</strong>有两位吹奏者：卵泡刺激素（FSH）和黄体生成素（LH）。<strong>卵泡</strong>那边是雌激素。排卵之后，残留的卵泡改组成黄体，唱起<strong>孕酮</strong>这个新声部。</p>
+  <p>曲子这样走：月经来潮那几天，FSH 略微抬高，把那一批卵泡叫醒；长起来的卵泡开始分泌雌激素，雌激素浓度一路爬升。这里出现全曲最妙的一处转折。</p>
+  <h3>乐手夺过了拍子</h3>
+  <p>雌激素平时对垂体是<strong>负反馈</strong>：它越高，垂体越收着 FSH。这一手很要紧——正因为 FSH 被压下去，那批卵泡里只有长得最快、对 FSH 最敏感的那个能继续，其余的断了补给，闭锁退场。人类通常一次只排一个卵，靠的就是这道自我收紧的机关。</p>
+  <p>可当雌激素持续高于某个阈值达 36 到 48 小时之后，同一个信号的意义突然翻转：负反馈变成<strong>正反馈</strong>，垂体不再收着，反而被它催出一记又高又陡的 LH 峰。峰值出现后 24 到 36 小时，卵泡在卵巢表面破开一个口——排卵。</p>
+  <p>合奏这个说法到这里要拆一句，否则会推错：这支乐队<em>没有指挥</em>。下丘脑像节拍器，但它并不站在音乐之外——雌激素能反过来改写它的拍子，正反馈那一下正是乐手夺过了拍子，逼着整支队伍换段。身体里的调控几乎全是这样的环，找"谁说了算"往往找不到答案。</p>
+  <p>还值得记一笔：正反馈在人体里非常罕见。原因很直白——正反馈天然不稳定，一旦启动就会自己把自己推到底。身体只在需要"一次性、不可逆地翻页"的时刻才动用它：排卵是一次，分娩时催产素越放越多是一次，第 17 章那排会自己加倍的凝血多米诺也是一次。三件事的共同点是：中途停下来比冲到底更糟。</p>
+  <p>排卵之后进入下半场。破裂的卵泡塌陷、改组成黄体，开始大量分泌孕酮。孕酮把子宫内膜从"增厚"切换到"备餐"：腺体分泌糖原，血管盘绕成螺旋，整片内膜准备接待一位可能不会来的客人。它同时把下丘脑那个体温设定点抬高零点三到零点五摄氏度——所以排卵后基础体温会小小地上一个台阶，这个台阶正是许多人用来事后确认排卵的依据。（顺带留个伏笔：把恒温设定点调来调去的是同一处结构，第 22 章讲潮热时还会回到它。）</p>
+  <p>黄体的寿命相当固定：12 到 16 天。如果没有妊娠，它按期退场，雌激素和孕酮一起跌落，内膜失去支撑而脱落——月经。如果受精并着床成功，胚胎的滋养层会分泌一种激素（hCG）冒充 LH 去续黄体的命，把它保到胎盘接手为止；验孕棒测的就是这个冒充者。</p>
+
+  <figure id="cycle-fig">
+    <div class="switch-row">
+      <span class="switch-hint">听独奏或合奏 →</span>
+      <div class="cy-tabs" role="group" aria-label="选择要突出的激素声部">
+        <button class="cy-btn" data-cv="gn" aria-pressed="false">GnRH</button>
+        <button class="cy-btn" data-cv="fsh" aria-pressed="false">FSH</button>
+        <button class="cy-btn" data-cv="lh" aria-pressed="false">LH</button>
+        <button class="cy-btn" data-cv="e2" aria-pressed="false">雌激素</button>
+        <button class="cy-btn" data-cv="p4" aria-pressed="false">孕酮</button>
+        <button class="cy-btn" data-cv="all" aria-pressed="false">合奏</button>
+      </div>
+    </div>
+    <svg id="cycle" viewBox="0 0 760 322" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="月经周期五种激素的相对变化曲线：GnRH 脉冲、FSH、LH、雌激素、孕酮，横轴为周期第 1 到 28 天">
+      <line class="ovu" x1="373" y1="40" x2="373" y2="292"/>
+      <text class="ovu-t" x="373" y="32" text-anchor="middle">排卵</text>
+
+      <g class="cvg" data-cv="fsh">
+        <polyline class="cv c-fsh" points="60,155 108,136 156,145 205,164 253,183 301,193 349,183 373,145 397,174 446,202 518,212 614,212 662,202 710,183"/>
+        <text class="t-fsh" x="104" y="126">FSH</text>
+      </g>
+      <g class="cvg" data-cv="lh">
+        <polyline class="cv c-lh" points="60,217 156,217 253,212 301,202 325,183 349,126 373,50 397,155 421,202 470,217 710,217"/>
+        <text class="t-lh" x="392" y="60">LH 峰</text>
+      </g>
+      <g class="cvg" data-cv="e2">
+        <polyline class="cv c-e2" points="60,225 108,221 156,212 205,193 253,164 301,126 325,98 349,84 373,126 421,174 470,155 518,136 566,145 614,164 662,193 710,221"/>
+        <text class="t-e2" x="330" y="76" text-anchor="end">雌激素</text>
+      </g>
+      <g class="cvg" data-cv="p4">
+        <polyline class="cv c-p4" points="60,231 349,231 373,225 421,193 470,145 518,111 542,103 590,117 638,145 686,193 710,217"/>
+        <text class="t-p4" x="542" y="92" text-anchor="middle">孕酮</text>
+      </g>
+      <g class="cvg" data-cv="gn">
+        <line class="cv c-gn" x1="60" y1="278" x2="60" y2="292"/>
+        <line class="cv c-gn" x1="86" y1="278" x2="86" y2="292"/>
+        <line class="cv c-gn" x1="112" y1="278" x2="112" y2="292"/>
+        <line class="cv c-gn" x1="138" y1="278" x2="138" y2="292"/>
+        <line class="cv c-gn" x1="164" y1="278" x2="164" y2="292"/>
+        <line class="cv c-gn" x1="190" y1="278" x2="190" y2="292"/>
+        <line class="cv c-gn" x1="216" y1="278" x2="216" y2="292"/>
+        <line class="cv c-gn" x1="242" y1="278" x2="242" y2="292"/>
+        <line class="cv c-gn" x1="268" y1="278" x2="268" y2="292"/>
+        <line class="cv c-gn" x1="294" y1="278" x2="294" y2="292"/>
+        <line class="cv c-gn" x1="320" y1="278" x2="320" y2="292"/>
+        <line class="cv c-gn" x1="346" y1="278" x2="346" y2="292"/>
+        <line class="cv c-gn" x1="372" y1="278" x2="372" y2="292"/>
+        <line class="cv c-gn" x1="420" y1="278" x2="420" y2="292"/>
+        <line class="cv c-gn" x1="480" y1="278" x2="480" y2="292"/>
+        <line class="cv c-gn" x1="545" y1="278" x2="545" y2="292"/>
+        <line class="cv c-gn" x1="615" y1="278" x2="615" y2="292"/>
+        <line class="cv c-gn" x1="692" y1="278" x2="692" y2="292"/>
+        <text class="t-gn" x="60" y="270">GnRH 脉冲 · 卵泡期密，黄体期疏</text>
+      </g>
+
+      <line class="axis" x1="56" y1="238" x2="716" y2="238"/>
+      <line class="tick" x1="60" y1="238" x2="60" y2="244"/><text class="tick-label" x="60" y="258" text-anchor="middle">第 1 天</text>
+      <line class="tick" x1="205" y1="238" x2="205" y2="244"/><text class="tick-label" x="205" y="258" text-anchor="middle">第 7 天</text>
+      <line class="tick" x1="373" y1="238" x2="373" y2="244"/><text class="tick-label" x="373" y="258" text-anchor="middle">第 14 天</text>
+      <line class="tick" x1="542" y1="238" x2="542" y2="244"/><text class="tick-label" x="542" y="258" text-anchor="middle">第 21 天</text>
+      <line class="tick" x1="710" y1="238" x2="710" y2="244"/><text class="tick-label" x="710" y="258" text-anchor="middle">第 28 天</text>
+      <text class="phase" x="216" y="314" text-anchor="middle">卵泡期 · 长度弹性最大</text>
+      <text class="phase" x="541" y="314" text-anchor="middle">黄体期 · 12–16 天，相当固定</text>
+    </svg>
+    <div class="cy-panel" id="cyPanel">
+      <div class="cp on" data-cp="0">
+        <div class="cp-t">五个声部 · 一首曲子</div>
+        <p>点上方任一声部听它的独奏，或点"合奏"看它们叠在一起。曲线是示意性的相对高低，不是绝对浓度，也不代表任何具体的人——真实周期的长度和幅度个体差异很大。</p>
+      </div>
+      <div class="cp" data-cp="gn">
+        <div class="cp-t">GnRH · 打拍子的那一位</div>
+        <p>下丘脑释放的 GnRH 不是持续流出，而是一阵一阵的脉冲，快慢本身就是指令：卵泡期脉冲密（约每 60–90 分钟一次），黄体期在孕酮的压制下明显变疏。垂体只听脉冲的节奏——如果改成持续输注，垂体反而会闭口不应，这正是某些激素类药物用来"关掉"整条通路的原理。</p>
+      </div>
+      <div class="cp" data-cp="fsh">
+        <div class="cp-t">FSH · 叫醒一批，只留一个</div>
+        <p>月经来潮那几天 FSH 略升，把十几到二十几个卵泡一起叫醒。随着卵泡分泌的雌激素上升，FSH 被负反馈压下去——补给一收紧，只有长得最快、最敏感的那个能撑住，其余闭锁退场。人类通常一次只排一个卵，机关就在这里。</p>
+      </div>
+      <div class="cp" data-cp="lh">
+        <div class="cp-t">LH · 那记又高又陡的峰</div>
+        <p>整首曲子里最陡的一笔。雌激素持续高于阈值 36–48 小时后，反馈由负转正，垂体被催出 LH 峰；峰值之后 24 到 36 小时排卵。排卵试纸测的就是尿里的 LH，所以它报的是"快了"，不是"正在排"。</p>
+      </div>
+      <div class="cp" data-cp="e2">
+        <div class="cp-t">雌激素 · 同一个信号，两种意思</div>
+        <p>它先是压住音量的那只手（负反馈，保证只留一个卵泡），越过阈值后改成挥拍催进的那只手（正反馈，逼出 LH 峰）。同一个分子、同一个受体系统，凭浓度和持续时间改变了指令的意义——这在生理学里是很少见的一手。排卵后它先回落，黄体又把它抬起第二个较宽的坡。</p>
+      </div>
+      <div class="cp" data-cp="p4">
+        <div class="cp-t">孕酮 · 下半场的主唱</div>
+        <p>排卵之后才登场，由黄体分泌。它把内膜从"增厚"切到"备餐"，把下丘脑的体温设定点抬高 0.3–0.5℃（基础体温那个小台阶），并把 GnRH 的脉冲压疏。黄体寿命 12–16 天，相当固定——所以周期长短的差异，绝大部分来自前半段而不是后半段。</p>
+      </div>
+      <div class="cp" data-cp="all">
+        <div class="cp-t">合奏</div>
+        <p>五条线叠在一起才看得出彼此在回应对方：FSH 被雌激素压下去，雌激素越过阈值又把 LH 顶上来，LH 峰过后孕酮接手并把 GnRH 的拍子压慢。没有哪一条是原因，也没有哪一条是结果——这是一个首尾相衔的环，每个月转一圈。</p>
+      </div>
+    </div>
+    <figcaption><b>图 20-2 · 一支五个声部的合奏。</b>纵向为相对高低（各声部不同刻度，仅示意），横轴为周期第 1 至 28 天。金色虚线是排卵。注意两段的性格不同：卵泡期长度弹性很大，黄体期则相当固定——所以"周期不准"，多半指的是前半段。</figcaption>
+  </figure>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>周期不是 28 天。</strong>28 这个数字方便记，也方便印在小册子上，但人群里的正常范围通常写作 21 到 35 天，同一个人不同月份之间浮动几天也很常见。而且如上所述，变的几乎都是前半段：黄体期稳定在 12 到 16 天。</p>
+    <p>由此可推出一个实用的结论：如果周期是 35 天，排卵大概在第 21 天前后，而不是第 14 天；"第 14 天排卵"只在 28 天周期里成立。用固定日期推算排卵，是最容易出错的一步。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 五分之一</div>
+  <h2>一个周期，大约两成</h2>
+  <p>所有条件都齐备——年轻、健康、时机正确——一个月经周期怀孕的概率大约是<strong>百分之十五到二十五</strong>。人们通常记成"两成"。</p>
+  <p>这个数字第一次听到往往令人意外。毕竟一次射精有一到三亿个精子，卵子只有一个，从数量上看简直没有悬念。但这一章和序章讲的是同一件事：数量从来不是关键，关卡才是。</p>
+  <p>先看时机这一关。<strong>受孕窗口只有六天</strong>：排卵前的五天，加上排卵当天。为什么是前五天而不是后五天？因为两边的保质期不对称——精子在女性生殖道里能存活三到五天（宫颈的隐窝像沿途的客栈，让它们分批候场），而卵子排出后只有 12 到 24 小时的受精有效期。所以窗口几乎全部落在排卵<em>之前</em>。这一点与许多人的直觉相反，也是推算失手最常见的地方。</p>
+  <p>再看时机之后的那些关。受精之后，"层层设卡"并没有结束：相当一部分胚胎因为染色体数目异常而无法着床，或在极早期停止发育。这类丢失多数发生在月经推迟之前，当事人从头到尾并不知情。把这一段算进去，"两成"就不那么费解了——它不是"两成的精子失败了"，而是从相遇、受精、卵裂、着床到维持，每一关都在筛。</p>
+  <p>把周期累加起来看，图景会缓和很多：健康年轻夫妇中，约八成在半年内怀孕，八到九成在一年内。医学上把"未避孕、规律性生活满 12 个月仍未妊娠"定义为不孕并建议就诊（35 岁以上把这个门槛缩短到 6 个月），依据正是这条累计曲线——一年之后仍未成功，属于统计上明显偏离的那一小部分，值得查一查原因，而不是继续等。</p>
+  <p>年龄是这条曲线上最强的一个变量。女方三十岁以后单周期受孕率逐步下降，三十五岁后下降加快，四十岁以后陡降，同时自然流产率上升——两条线的驱动力是同一件事：冰川末段那些等了三十多年的卵母细胞，把染色体分成两份时出错的概率上去了（序章的旁注解释过其中的机制）。男方年龄的影响更缓，但同样真实：受孕所需时间随之延长。</p>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 让渡</div>
+  <h2>让渡：一具身体替另一具身体重新分配</h2>
+  <p>假设那两成里的一次成功了。接下来九个月，一具成年身体要做一件它平时绝不会做的事：把自己的资源优先权，让给一个还不存在于世的个体。</p>
+  <p>先看循环这一栏。<strong>血容量增加 40% 到 50%</strong>，而且血浆增得比红细胞多，于是血被稀释了——孕期血红蛋白浓度下降是常态，不都是缺铁。<strong>心输出量增加 30% 到 50%</strong>，静息心率抬高 10 到 20 次每分。这不是短期应急，是一整年的加班。</p>
+  <p>肾脏那边同样在扩容：肾小球滤过率上升 40% 到 50%，尿量增加，尿频从孕早期就开始——那时候子宫还没大到压迫膀胱，涨的是过滤量。呼吸这边，潮气量明显增加而呼吸频率基本不变，整体耗氧上升约两成；很多人在孕早期就觉得"气不太够用"，与其说是肺被顶住了，不如说是孕酮把呼吸中枢的设定推高了一档。</p>
+  <p>结构上的改造更直观。子宫从大约 50 克长到接近 1000 克，容积增加约一千倍——这是成年人身上少见的、器官在数月内成倍生长的例子。松弛素等激素让骨盆的韧带变软，为分娩预留余地，代价是全身关节的稳定性下降；重心前移、腰椎前凸加深，腰背酸痛由此而来。</p>
+  <p>还有几处调整方向是"反直觉的让渡"。<strong>胰岛素抵抗上升</strong>：母体细胞对胰岛素的反应故意变钝，好让血里的葡萄糖多留一会儿，优先供给胎盘那一头。这个安排一旦超出母体的代偿能力，就表现为妊娠糖尿病。<strong>凝血系统整体偏向易凝</strong>：为分娩时那次必然的出血提前布防（第 17 章那排多米诺被预先立得更密），代价是孕期与产后静脉血栓的风险明显升高。<strong>免疫系统重新调校</strong>：既要容下一个携带一半"外人"基因的个体，又不能对病原放行——第 7 章讲胎盘时详细谈过这场谈判。</p>
+  <p>"让渡"这个词选得并不轻。它不是比喻上的付出，是可以逐项计量的资源再分配：血、氧、糖、钙、铁，以及骨盆的稳定性。也正因为如此，妊娠始终是一件有医学风险的事——这也是本书在这一章保持平实的原因：把它写成纯粹的奇迹，等于把风险从叙述里删掉。顺带一提，这次让渡还留下了一点长期痕迹：胎儿的细胞会进入母体并存活数十年（微嵌合），第 7 章提过。</p>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 那一夜</div>
+  <h2>1978 年 7 月 25 日，夜里</h2>
+  <p>英格兰奥尔德姆的一家总医院，晚上十一点四十七分，一个体重约 2.6 公斤的女婴由剖宫产出生。她叫路易丝·布朗。</p>
+  <p>她的母亲莱斯利·布朗备孕九年未果，原因是输卵管阻塞——泉水和冰川都在，路却断了。她们找到的两个人，已经在这条路上失败了十年。</p>
+  <p><strong>帕特里克·斯特普托</strong>是妇科医生，腹腔镜技术在英国的先行者之一，能从卵巢里取到成熟卵子。<strong>罗伯特·爱德华兹</strong>是剑桥的生理学家，长年研究人类卵子在体外的成熟与受精。还有第三个人常被漏掉：<strong>琼·珀迪</strong>，护士出身的胚胎学家，日复一日照看培养皿里的胚胎，也是最早看到路易丝那枚胚胎分裂的人。爱德华兹后来始终坚持这是三个人的工作。</p>
+  <p>他们的十年是这样过的：一百多次胚胎移植，没有一次走到活产；1975 年有过一次宫外孕，算是最接近的一回。英国医学研究理事会拒绝为这项研究提供资助，理由包括安全性存疑与伦理争议，经费只能靠私人捐助维持。报纸上骂声不断，"科学怪人"是当时常见的标题词。斯特普托所在的医院偏居工业城镇，条件简陋，两人往返奔波了整整十年。</p>
+  <p>路易丝出生那夜，医院外挤满记者。孩子健康。此后四十多年里，全球通过体外受精及相关技术出生的人数已以千万计——在一些国家，每二三十个新生儿里就有一个来自这条路。</p>
+  <p>2010 年，诺贝尔生理学或医学奖授予罗伯特·爱德华兹一人。斯特普托 1988 年去世，珀迪 1985 年去世，而诺贝尔奖不追授。这条规则本身没有错——它避免了无止境的历史清算——但它带来一个恒久的副作用：功劳簿和获奖名单永远对不齐。读科学史时值得多问一句，那些没能活到颁奖那天的名字是谁。</p>
+  <h3>把棒递出去</h3>
+  <p>序章说过：你身上的一切——那颗跳了三十亿次的心脏、那双弹钢琴的手——都会随你一起谢幕；只有一小撮在你三周大时就被编入另册的细胞，有机会把棒递出去。第三幕走到这里，正是递棒的那几分钟。</p>
+  <p>把这一章的数字连起来看，这几分钟远比想象中不确定：一眼泉昼夜涌着，最终抵达的只有几十个；一座冰川一辈子只放行四五百次；一个周期的成功率大约两成；受孕之后还有一段没人看见的筛选。它一点也不像一条流畅的传递，倒像一支反复排练、常常演砸、偶尔演成的曲子。</p>
+  <p>但要留一句话在这儿。递棒并不是接力的全部含义。有人不递，有人递不出去，有人接过别人的棒继续跑；而那根从三十多亿年前一路传到你手上的链子，即便在你这一段停下来，也早已在别处分出了无数条支线——你与此刻读这句话的每一个人，共用着上游的同一批祖先。这件事要到终章才讲得完整，那时我们会从原子的层面再看它一遍。此处先收到这里。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>把冰川冻住。</strong>生育力保存这些年走得比预想快。卵子的玻璃化冷冻（超快速降温，避免冰晶）成熟之后，解冻存活率已接近新鲜卵子，美国生殖医学会 2012 年起不再把它列为实验性技术；但有一点常被广告略过——冻卵的成功率取决于<em>冷冻时</em>的年龄，而不是解冻时的年龄，冻得越晚，能兑现的越少。另一条路是把卵巢皮质组织切下冻存、日后再移植回体内，主要用于癌症治疗前的生育力保存，已报告逾两百例活产（这一领域没有国际登记，实际数目可能更高），部分国家和学会已不再视其为实验性技术。</p>
+    <p><strong>体外配子发生（IVG）。</strong>序章提过这件事：把普通体细胞重编程成干细胞，再在培养皿里诱导它变成卵子或精子。小鼠身上已经走通全程，2023 年还报告了用雄鼠细胞诱导出可用卵子；人类这边至今没有走完减数分裂这一关——具体卡在哪一步、几家公司 2026 年的公告该怎么看，序章的前沿窗口里有更细的交代。如果有一天走通，本章第 1 节那座"只融不增"的冰川，将不再是一条硬约束——生育年龄的边界、不孕的定义，乃至"父母"这个词，都要重新讨论。伦理与监管的争论已经先一步开始了。</p>
+  </div>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">接力的下一棒 · 关键数字</div>
+    <table>
+      <tr><td class="k">精子生产周期</td><td class="v">64–74 天</td><td class="n">自青春期起终生生产</td></tr>
+      <tr><td class="k">一生实际排卵数</td><td class="v">约 400–500 个</td><td class="n">约为出生库存的万分之三</td></tr>
+      <tr><td class="k">卵母细胞库存 · 峰值</td><td class="v">600–700 万（孕龄 5 月）</td><td class="n">出生时已降至 100–200 万</td></tr>
+      <tr><td class="k">单周期受孕率</td><td class="v">约 15–25%</td><td class="n">年轻健康人群；随年龄下降</td></tr>
+      <tr><td class="k">受孕窗口</td><td class="v">6 天</td><td class="n">排卵前 5 天 + 排卵当天</td></tr>
+      <tr><td class="k">精子在女性生殖道存活</td><td class="v">3–5 天</td><td class="n">窗口几乎全在排卵之前</td></tr>
+      <tr><td class="k">卵子受精有效期</td><td class="v">12–24 小时</td><td class="n">排卵之后</td></tr>
+      <tr><td class="k">LH 峰到排卵</td><td class="v">24–36 小时</td><td class="n">排卵试纸测的就是它</td></tr>
+      <tr><td class="k">黄体寿命</td><td class="v">12–16 天</td><td class="n">比卵泡期稳定得多</td></tr>
+      <tr><td class="k">孕期血容量增幅</td><td class="v">+40–50%</td><td class="n">血浆增幅大于红细胞</td></tr>
+      <tr><td class="k">孕期心输出量增幅</td><td class="v">+30–50%</td><td class="n">静息心率 +10–20 次每分</td></tr>
+      <tr><td class="k">子宫重量变化</td><td class="v">50 g → ~1000 g</td><td class="n">容积增加约一千倍</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">为什么服用避孕药抑制排卵，并不能把卵子"省下来"、推迟绝经？</div>
+      <div class="opts">
+        <button>因为避孕药会加速卵母细胞的消耗</button>
+        <button data-c="1">因为每个周期被募集并闭锁的是一批卵泡，这轮消耗基本照常进行，不因当月没有放行而暂停</button>
+        <button>因为卵母细胞在成年后仍会不断新生</button>
+        <button>因为绝经年龄只由激素水平决定，与库存无关</button>
+      </div>
+      <div class="explain">每个月被叫醒的是十几到二十几个卵泡，最后只有一个成为优势卵泡，其余闭锁退场——"每月排一个"的背后是每月消耗一批。冰川的消融从不停歇，不排卵的月份也在退：出生时的一两百万，到青春期只剩三四十万，一生真正走完全程的约四百到五百个。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">整个周期里，雌激素做了一件生理学上很罕见的事。是什么？</div>
+      <div class="opts">
+        <button>它同时由卵巢和垂体分泌</button>
+        <button>它在血中的浓度保持恒定不变</button>
+        <button data-c="1">同一个信号先做负反馈（压住 FSH，保证只留一个卵泡），越过阈值持续 36–48 小时后翻转为正反馈，逼出 LH 峰</button>
+        <button>它直接作用于卵泡使其破裂</button>
+      </div>
+      <div class="explain">正反馈在人体里很少见，因为它天然不稳定、一旦启动就会自己推到底。身体只在需要一次性、不可逆地翻页时才用：排卵是一次，分娩时催产素越放越多是一次，第 17 章那排会自己加倍的凝血多米诺也是一次。共同点是——中途停下比冲到底更糟。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">六天的受孕窗口，为什么几乎全部落在排卵之前？</div>
+      <div class="opts">
+        <button>卵子排出后要先在输卵管里成熟数日</button>
+        <button data-c="1">精子在女性生殖道能存活 3–5 天，而卵子排出后受精有效期只有 12–24 小时</button>
+        <button>排卵后宫颈黏液变稀，更利于精子通过</button>
+        <button>排卵后子宫内膜尚未准备好接受精子</button>
+      </div>
+      <div class="explain">两边的保质期严重不对称，所以窗口是"排卵前 5 天 + 当天"。相关的一个推论：排卵试纸测的是 LH，而 LH 峰之后还要 24–36 小时才排卵，所以它报的是"快了"而不是"正在排"。另外，"第 14 天排卵"只在 28 天周期里成立——变的几乎都是前半段，黄体期稳定在 12–16 天。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">孕期母体的胰岛素抵抗上升，这是故障还是安排？</div>
+      <div class="opts">
+        <button>是故障，说明胰腺功能受损</button>
+        <button data-c="1">是安排：母体细胞对胰岛素反应变钝，让血糖多留一会儿以优先供给胎盘那一头</button>
+        <button>是子宫压迫胰腺造成的机械后果</button>
+        <button>与妊娠无关，只出现在超重人群</button>
+      </div>
+      <div class="explain">这是"让渡"的一部分，与血容量 +40–50%、心输出量 +30–50%、肾滤过率 +40–50% 属于同一套资源再分配。安排超出母体代偿能力时，就表现为妊娠糖尿病。同样属于"预先布防"的还有孕期凝血系统偏向易凝——为分娩时那次必然的出血做准备，代价是静脉血栓风险升高。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">2010 年的诺贝尔奖只授予了罗伯特·爱德华兹一人，原因是什么？</div>
+      <div class="opts">
+        <button>斯特普托与珀迪的贡献后来被认为无关紧要</button>
+        <button>诺贝尔奖每次只授予一人</button>
+        <button data-c="1">斯特普托 1988 年、珀迪 1985 年已去世，而诺贝尔奖不追授</button>
+        <button>两人主动放弃了提名</button>
+      </div>
+      <div class="explain">这条规则避免了无止境的历史清算，副作用是功劳簿与获奖名单常常对不齐。三个人的十年是这样过的：一百多次胚胎移植未获活产，英国医学研究理事会拒绝资助，经费靠私人捐助，报纸上"科学怪人"的标题不断。路易丝·布朗 1978 年 7 月 25 日夜里出生，此后经这条路出生的人数已以千万计。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第四幕 磨损与谢幕</div>
+  <div class="title">第 21 章 · 峰值之后：衰退的时间表</div>
+  <p>满负荷运行的这一幕，到此收场。你不会记得自己是哪一天越过峰顶的——没有一声铃响，也没有哪一天特别不同。肌肉和骨从三十几岁开始悄悄下坡，晶状体在四十岁前后失去弹性，高频听力走得更早；而这些下坡彼此并不同步，你在很长一段时间里毫无察觉，因为身体的每一处都比日常所需多备了好几倍。下一幕，我们从那些多备的余量开始算账。</p>
+  <nav class="footnav">
+    <a href="ch19-sex-adult.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch21-decline.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 激素合奏：独奏 / 合奏
+  var tabs = document.querySelectorAll('#cycle-fig .cy-btn');
+  var groups = document.querySelectorAll('#cycle .cvg');
+  var panes = document.querySelectorAll('#cycle-fig .cp');
+  function showCurve(cv){
+    var i;
+    for (i = 0; i < tabs.length; i++) {
+      tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-cv') === cv ? 'true' : 'false');
+    }
+    for (i = 0; i < groups.length; i++) {
+      groups[i].classList.toggle('on', cv === 'all' || groups[i].getAttribute('data-cv') === cv);
+    }
+    for (i = 0; i < panes.length; i++) {
+      panes[i].classList.toggle('on', panes[i].getAttribute('data-cp') === cv);
+    }
+  }
+  for (var t = 0; t < tabs.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){ showCurve(el.getAttribute('data-cv')); });
+    })(tabs[t]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第11章 · 骨骼如何变长 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 11-1 生长板剖面（本章专用） ---- */
+#plate .bone{fill:var(--surface2); stroke:var(--ink-faint); stroke-width:2;}
+#plate .gp{fill:var(--gold); fill-opacity:.35; stroke:var(--gold); stroke-width:1.6;}
+#plate .zone{stroke:var(--line); stroke-width:1.2;}
+#plate .z-rest{fill:var(--surface2);}
+#plate .z-prol{fill:var(--deoxy); fill-opacity:.10;}
+#plate .z-hyp{fill:var(--gold); fill-opacity:.13;}
+#plate .z-calc{fill:var(--oxy); fill-opacity:.10;}
+#plate .z-bone{fill:var(--ink-faint); fill-opacity:.16;}
+#plate .cell{fill:var(--deoxy); fill-opacity:.55; stroke:none;}
+#plate .cell-r{fill:var(--ink-dim); fill-opacity:.5;}
+#plate .cell-h{fill:var(--gold); fill-opacity:.5;}
+#plate .spic{stroke:var(--ink-faint); stroke-width:3; stroke-linecap:round;}
+#plate .vess{stroke:var(--oxy); stroke-width:2; fill:none; stroke-linecap:round;}
+#plate .lb{fill:var(--ink); font-size:13px; font-weight:700;}
+#plate .lb-s{fill:var(--ink-dim); font-size:11px;}
+#plate .lb-b{fill:var(--ink); font-size:12.5px; font-weight:700;}
+#plate .cone{stroke:var(--line); stroke-width:1.2; stroke-dasharray:5 5;}
+#plate .up{stroke:var(--oxy); stroke-width:2.4; fill:none; stroke-linecap:round;}
+#plate .up-l{fill:var(--oxy); font-size:12px; font-weight:600;}
+
+/* ---- 图 11-2 生长速度曲线（本章专用） ---- */
+#growth .ax{stroke:var(--line); stroke-width:2;}
+#growth .grid{stroke:var(--line); stroke-width:1; stroke-dasharray:3 5;}
+#growth .f-grp,#growth .m-grp{transition:opacity .35s;}
+#growth .m-grp{opacity:.2;}
+#growth.male .m-grp{opacity:1;}
+#growth.male .f-grp{opacity:.2;}
+#growth .f-line{fill:none; stroke:var(--mixed-r); stroke-width:3.2; stroke-linejoin:round; stroke-linecap:round;}
+#growth .m-line{fill:none; stroke:var(--deoxy); stroke-width:3.2; stroke-linejoin:round; stroke-linecap:round;}
+#growth .f-dot{fill:var(--mixed-r);}
+#growth .m-dot{fill:var(--deoxy);}
+#growth .f-lb{fill:var(--mixed-r); font-size:12.5px; font-weight:600;}
+#growth .m-lb{fill:var(--deoxy); font-size:12.5px; font-weight:600;}
+#growth .ax-lb{fill:var(--ink-faint); font-size:11.5px;}
+#growth .ax-t{fill:var(--ink-dim); font-size:12px;}
+#growth .note{fill:var(--ink-dim); font-size:11.5px;}
+@media (prefers-reduced-motion: reduce){
+  #growth .f-grp,#growth .m-grp{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第二幕 调试与扩容 · 第 11 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>骨骼如何变长</h1>
+  <p class="subtitle">长高不是往骨头两端堆料，而是靠两片薄薄的软骨，用一场排队起立的接力，把身体从中间顶开。</p>
+  <div class="meta"><span>阅读 ≈ 17 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>今天早上你比昨天睡前高了一厘米多。</p>
+  <p>这不是错觉。找一面平整的墙，睡醒立刻量一次，晚上睡前再量一次，两个数字通常差着 1 到 2 厘米——而这一天里你的骨头一毫米也没长。差值来自二十几片藏在脊椎之间的软垫：白天直立行走时它们被上半身的重量一点点挤出水分，夜里躺平，水又慢慢吸了回去。你不是长高了，你是被泡开了。</p>
+  <p>门框上那些用铅笔画下的横线记的却是另一回事。真正的长高发生在别处——发生在长骨两端各一片薄得几乎看不见的软骨里，而且它的工作方式，和几乎所有人想象的都不一样。要弄清这件事，人类花了两百多年，最关键的一次实验，是往一头活猪的腿骨里埋了两粒铅弹。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 刻度</div>
+  <h2>先说清楚哪些"变高"不算长高</h2>
+  <p>身高这个数字比想象中松动。</p>
+  <p>脊椎不是一根整棍，而是三十几块椎骨叠起来的，中间垫着<strong>椎间盘</strong>——外圈是坚韧的纤维环，中心是一团含水量很高的胶状核。它像一块被压住的海绵：站立、行走、负重时缓慢渗水变薄，平躺卸载后又慢慢吸水回弹。二十几片各被压薄零点几毫米，加起来就是那 <strong>1 到 2 厘米</strong>。</p>
+  <p>把重力整个撤掉，效果更夸张。国际空间站上的航天员在轨期间身高普遍增加 <strong>3 到 5 厘米</strong>，回到地面后几周到几个月又缩回去。宇航服的尺寸必须为此留出余量，而返回后的一段时间里腰背痛相当常见——脊椎被"泡开"之后重新压实，并不是一个舒服的过程。</p>
+  <p>这些都是水的进出，不是骨的生长。真正的长高只有一个来源：<strong>骨头本身变长。</strong>从出生到成年，身高大约变成 3.5 倍——出生时约半米，成年后多数落在 1.6 到 1.8 米之间。但骨骼变化的幅度远不止于此：新生儿的头几乎占了身长的四分之一，成年后只占八分之一左右；四肢的增幅远大于躯干。<em>身体不是被等比例放大的，是被重新按比例改写的。</em></p>
+  <p>顺带说清另一个常被问到的问题：这个终点在多大程度上是写定的？在营养充足的现代人群里，身高的<strong>遗传度约在 0.8 左右</strong>——也就是说，同一人群内部身高差异的八成上下可以归因于遗传差异。但请注意这句话的边界：遗传度描述的是<em>一个人群内部的变异</em>，不是"你身高的八成由基因决定"，更不能用来比较两个营养条件不同的人群。荷兰男性一个半世纪里平均长高了将近 20 厘米，基因池并没有换过；变的是餐桌。</p>
+  <p>临床上常用一条粗糙的估算：把父母身高相加，男孩加 13 厘米、女孩减 13 厘米，再除以二，得到一个"靶身高"。它的误差带很宽（上下各 8 到 10 厘米都算正常），真正有用的从来不是这一个数字，而是孩子在生长曲线上<strong>是否一直沿着自己那条百分位线走</strong>。突然掉档或跳档，比绝对高矮重要得多。</p>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 铅弹</div>
+  <h2>两粒铅弹：一个十八世纪的问题怎么被一次性关掉</h2>
+  <p>骨头是硬的，看不见内部，长起来又慢——十八世纪的解剖学家面对的是一个极难下手的问题：<strong>一根骨头到底从哪里变长？</strong></p>
+  <p>当时最自然的猜想是"整根一起长"，就像一根被拉长的橡皮筋，每一处都均匀伸展。另一种猜想是从两端接续。争论没法靠肉眼解决，直到有人想出了做记号的办法。</p>
+  <p>1730 年代末，法国科学家<strong>杜阿梅尔·杜蒙索</strong>——他更为人熟知的身份是农学家和林学家——注意到一件事：给动物喂食茜草（一种传统红色染料的原料），新长出来的骨头会被染成粉红色。<em>骨头自己在纸上留下了时间戳。</em>他用这个办法证明了骨的<strong>加粗</strong>来自骨膜（骨表面那层薄膜）一层层往外贴，还顺手做了另一类实验：在骨干上钻孔或缠上金属丝，隔一段时间再看它们的位置。</p>
+  <p>把这条思路推到终点的是伦敦的外科医生<strong>约翰·亨特</strong>。他是那个年代最执着的解剖学怪人之一：终身收集标本，留下上万件藏品；相信一切争论都该拿实验去问，而不是拿典籍去查。1760 年代，他在一头正在生长的小猪的胫骨骨干上前后埋进两粒铅弹，量准距离，然后让这头猪继续长大。等这根骨头长成，他取出来重新测量——<strong>两粒铅弹之间的距离没有变。</strong></p>
+  <p>整根骨头明显长了，中间那一段却纹丝未动。结论只能是一个：<strong>长度的增加全部发生在两端。</strong></p>
+  <h3>你身上也有这样一粒铅弹</h3>
+  <p>这个结论其实每天都在你身边被验证，只是没人留意。</p>
+  <p>小时候膝盖上磕出的疤，现在还在原来的高度上——它没有随着你长高而向上"漂移"。骨折后打进骨干的钢板和螺钉，多年后拍片位置依旧。<em>你的骨头不是从中间被拉长的，中间那一段自始至终是同一段。</em></p>
+  <p>但这里要立刻拆掉一个顺理成章却错误的推论。"长度增加发生在两端"很容易被理解成"骨在两端一层层往上堆料"，就像砌墙加砖。<strong>不是这样。</strong>真正发生的事更奇特：两端各有一片<strong>软骨</strong>，它在不停地增厚，同时它靠近骨干的那一面又不停地被拆掉、换成真正的骨。软骨在前面开路，骨在后面跟进，两者速度相当，于是这片软骨本身的厚度几乎不变，位置却一路向外推移——骨不是被堆高的，是被<strong>从内部顶开</strong>的。</p>
+  <p>这片薄软骨就是<strong>生长板</strong>（骺板），它是这一章真正的主角。</p>
+
+  <figure>
+    <svg id="plate" viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="长骨与生长板剖面示意图：左侧为长骨轮廓，骨骺与骨干之间夹着生长板；右侧放大显示生长板的四个带——静止带、增殖带、肥大带、钙化与替换带，以及下方新形成的骨">
+      <rect class="bone" x="66" y="60" width="124" height="86" rx="34"/>
+      <rect class="gp" x="70" y="146" width="116" height="16" rx="4"/>
+      <path class="bone" d="M78 162 L102 196 V 390 H 154 V 196 L 178 162 Z"/>
+      <text class="lb-b" x="128" y="110" text-anchor="middle">骨骺</text>
+      <text class="lb-b" x="128" y="300" text-anchor="middle">骨干</text>
+      <text class="lb-s" x="60" y="158" text-anchor="end">生长板</text>
+      <path class="up" d="M212 200 V 108 m -7 12 l 7 -12 7 12"/>
+      <text class="up-l" x="222" y="200" text-anchor="start">骨在这一端变长</text>
+
+      <line class="cone" x1="186" y1="146" x2="284" y2="66"/>
+      <line class="cone" x1="186" y1="162" x2="284" y2="356"/>
+
+      <rect class="zone z-rest" x="284" y="66" width="270" height="62"/>
+      <rect class="zone z-prol" x="284" y="128" width="270" height="74"/>
+      <rect class="zone z-hyp" x="284" y="202" width="270" height="74"/>
+      <rect class="zone z-calc" x="284" y="276" width="270" height="80"/>
+      <rect class="zone z-bone" x="284" y="356" width="270" height="40"/>
+
+      <circle class="cell cell-r" cx="330" cy="92" r="7"/><circle class="cell cell-r" cx="384" cy="104" r="7"/>
+      <circle class="cell cell-r" cx="440" cy="88" r="7"/><circle class="cell cell-r" cx="496" cy="100" r="7"/>
+      <ellipse class="cell" cx="330" cy="142" rx="15" ry="5"/><ellipse class="cell" cx="330" cy="156" rx="15" ry="5"/><ellipse class="cell" cx="330" cy="170" rx="15" ry="5"/><ellipse class="cell" cx="330" cy="184" rx="15" ry="5"/>
+      <ellipse class="cell" cx="400" cy="142" rx="15" ry="5"/><ellipse class="cell" cx="400" cy="156" rx="15" ry="5"/><ellipse class="cell" cx="400" cy="170" rx="15" ry="5"/><ellipse class="cell" cx="400" cy="184" rx="15" ry="5"/>
+      <ellipse class="cell" cx="470" cy="142" rx="15" ry="5"/><ellipse class="cell" cx="470" cy="156" rx="15" ry="5"/><ellipse class="cell" cx="470" cy="170" rx="15" ry="5"/><ellipse class="cell" cx="470" cy="184" rx="15" ry="5"/>
+      <ellipse class="cell" cx="524" cy="142" rx="15" ry="5"/><ellipse class="cell" cx="524" cy="156" rx="15" ry="5"/><ellipse class="cell" cx="524" cy="170" rx="15" ry="5"/><ellipse class="cell" cx="524" cy="184" rx="15" ry="5"/>
+      <circle class="cell cell-h" cx="330" cy="224" r="15"/><circle class="cell cell-h" cx="330" cy="256" r="15"/>
+      <circle class="cell cell-h" cx="400" cy="224" r="15"/><circle class="cell cell-h" cx="400" cy="256" r="15"/>
+      <circle class="cell cell-h" cx="470" cy="224" r="15"/><circle class="cell cell-h" cx="470" cy="256" r="15"/>
+      <circle class="cell cell-h" cx="524" cy="224" r="15"/><circle class="cell cell-h" cx="524" cy="256" r="15"/>
+      <line class="spic" x1="322" y1="292" x2="322" y2="348"/><line class="spic" x1="392" y1="292" x2="392" y2="348"/>
+      <line class="spic" x1="462" y1="292" x2="462" y2="348"/><line class="spic" x1="516" y1="292" x2="516" y2="348"/>
+      <path class="vess" d="M356 350 V 300 m -6 10 l 6 -10 6 10"/>
+      <path class="vess" d="M428 350 V 300 m -6 10 l 6 -10 6 10"/>
+      <path class="vess" d="M492 350 V 300 m -6 10 l 6 -10 6 10"/>
+
+      <text class="lb" x="566" y="92" text-anchor="start">静止带</text>
+      <text class="lb-s" x="566" y="110" text-anchor="start">储备的软骨细胞</text>
+      <text class="lb" x="566" y="156" text-anchor="start">增殖带</text>
+      <text class="lb-s" x="566" y="174" text-anchor="start">分裂，排成硬币柱</text>
+      <text class="lb" x="566" y="230" text-anchor="start">肥大带</text>
+      <text class="lb-s" x="566" y="248" text-anchor="start">体积胀大 5–10 倍</text>
+      <text class="lb" x="566" y="304" text-anchor="start">钙化与替换带</text>
+      <text class="lb-s" x="566" y="322" text-anchor="start">血管侵入，软骨换成骨</text>
+      <text class="lb" x="566" y="382" text-anchor="start">新形成的骨</text>
+    </svg>
+    <figcaption><b>图 11-1 · 生长板上的四段接力。</b>从上往下：静止带保存着后备的软骨细胞；增殖带里细胞分裂并排成一摞摞整齐的柱；肥大带里细胞不再分裂而是体积暴涨，这一带贡献了长度增加的大头；最下面血管从骨干侧钻上来，把已经钙化的软骨拆掉换成骨。四段同时进行、速度匹配，所以生长板本身厚度几乎不变，位置却一路向外推移。示意图不按真实比例。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 接力</div>
+  <h2>排队起立：长度是怎么被"胀"出来的</h2>
+  <p>把生长板切开放大（图 11-1），会看到一件出乎意料整齐的事：软骨细胞不是杂乱堆着的，而是排成一列列笔直的纵队，像一摞摞立起来的硬币。从远离骨干的一端向骨干方向走，能数出四段。</p>
+  <p><strong>静止带</strong>：靠近骨骺的一层，细胞稀疏、安静，是这场接力的后备库。生长板能用多久，取决于这一带还剩多少存货。</p>
+  <p><strong>增殖带</strong>：细胞开始分裂，并且分裂后不四散，而是排进纵队。队伍越排越长。</p>
+  <p><strong>肥大带</strong>：这里发生的事最反直觉。细胞停止分裂，转而<strong>把自己胀大</strong>——体积增加到原来的 5 到 10 倍。研究长骨生长的人发现，长度增加的大头并不来自细胞分裂的数量，而来自这一步的<strong>体积膨胀</strong>。</p>
+  <p>竹子长得快，靠的也是同一件事：竹笋每一节里都有一段能伸长的组织，细胞不必增加多少，只要把自己拉长，整根竹子就往上蹿。你腿骨里的这条队伍是同样的道理——不是队伍里的人变多了，是每个人从蹲着变成了站直。</p>
+  <p><strong>钙化与替换带</strong>：胀大的细胞随后钙化、凋亡，在原地留下一格格空腔；血管从骨干一侧钻上来，破骨细胞把残余的软骨拆掉，成骨细胞跟进，在留下的支架上铺出真正的骨。</p>
+  <p>四段同时进行，速度彼此匹配：上面新增多少，下面就换掉多少。所以整片生长板的厚度基本恒定，位置却一路被推向骨的两端——<em>它像一条一边前行一边把身后铺成实地的队伍。</em></p>
+  <p>为什么中间非要隔一层软骨，不能直接由骨来长？因为骨做不到。矿化之后的骨基质是硬的，细胞被封在里面动弹不得，只能在<strong>表面</strong>一层层加厚，无法从内部撑开。软骨不同：它的细胞埋在一层富含水分、可以被撑开的基质里，能就地增殖、就地胀大——这种从内部整体膨大的长法叫间质性生长，只有软骨这类组织做得到。<em>所以骨要变长，就得先派一支软骨的先遣队去把空间占出来，自己随后跟进硬化。</em>顺带一提，胎儿期几乎整副骨架都是先照着软骨做出一个模型，再逐步换成骨的（第 4 章），生长板不过是这套老流程留到最后的一段收尾。</p>
+  <h3>队伍走完的那一天</h3>
+  <p>后备库不是无限的。静止带的存货用尽后，整片生长板被骨完全替换，两侧的骨融为一体——这叫<strong>骨骺闭合</strong>。闭合之后，这根骨头的长度就是终身的定数：任何营养、锻炼、药物都不会再让它变长一毫米。</p>
+  <p>闭合的时点由性激素掌控，而这正是下一章的核心情节之一——雌激素是关闭生长板的主要信号，男女双方都是。这句话往下还会推出一个乍看矛盾的结论（为什么男性通常更高），我们留到第 12 章讲。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>孩子的骨折，和成年人不是一回事。</strong>儿童的骨含胶原比例更高、更有韧性，加上骨膜厚而结实，常常出现"青枝骨折"——像掰一根新鲜树枝，弯折甚至部分断裂，却没有整根断开。愈合速度也惊人：同样一处骨折，幼儿几周，成年人要几个月。而且孩子还有一项成年人没有的本事——骨在生长过程中会持续重塑，一定角度以内的残余成角能被自行矫正，所以儿科骨折的复位标准可以比成人宽松。</p>
+    <p>但有一处例外必须严肃对待：<strong>骨折线穿过生长板</strong>。生长板是软骨，在 X 光片上本来就是一道透亮的缝，损伤容易被漏看；一旦这片软骨的一部分被瘢痕封死，那一侧停止生长而另一侧继续，日后就会长出角度偏斜或两侧不等长。这类骨折有专门的分型和随访安排，也是儿童手腕、脚踝受伤后医生格外谨慎的原因。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 翻新</div>
+  <h2>十年换一副：你摸到的骨头不是当年那些</h2>
+  <p>长度定案之后，骨头就此不动了吗？恰恰相反。</p>
+  <p>骨骼看着像一件死物，实际上是全身翻新最勤的组织之一。它内部有两支常年对着干的工种：<strong>破骨细胞</strong>体形硕大、有好几个细胞核，贴在骨面上分泌酸和酶，把骨基质溶出一个个小坑；<strong>成骨细胞</strong>随后进场，往坑里铺胶原、再让矿物质沉积进去。</p>
+  <p>两者不是各干各的，而是成组配合、按顺序作业：先挖后填，一个循环大约 <strong>3 到 6 个月</strong>。全身各处成千上万处这样的小翻修同时进行，日夜不停。粗略地说，<strong>骨骼大约每十年换过一副</strong>——不过这句流传很广的话需要加个注解：翻新速度在不同部位差得很远，椎体、骨盆那类内部呈海绵状的松质骨换得快得多，而四肢骨那种致密的皮质骨慢得多，"十年"是一个把两者拉平之后的粗略平均。</p>
+  <p>第 1 章里那条赫拉克利特的河到这里又出现了一次，而且是最硬的一次：<strong>你摸到的锁骨，材料几乎没有一处是十几年前的那些；形状还在，物质早已换过。</strong></p>
+  <p><em>但"能换新"很容易被读成"能自己补回来"，这一步推错了。</em>翻新是<strong>等量替换</strong>，不是净增：挖多少、填多少，取决于两支工种的平衡。一旦挖的一方持续快过填的一方，翻新越勤，骨反而丢得越快——骨质疏松正是这个平衡长期偏向一侧的结果，而不是"翻新停了"。</p>
+  <h3>为什么要这么费事</h3>
+  <p>翻新至少买来三样东西。</p>
+  <p><strong>第一，修补微裂。</strong>骨每天承受千万次微小的形变，会积累细如发丝的裂纹。不清理，裂纹会连成一片——运动员的疲劳性骨折正是修补赶不上损伤时发生的事。</p>
+  <p><strong>第二，按受力改形。</strong>这条规律的起点是一段流传很广的往事。1866 年，苏黎世的解剖学家迈耶展示了一幅股骨上端剖面的手绘图：那些细密的骨小梁并非杂乱交错，而是排成两组优美的弧线。在场的工程学教授库尔曼看了一眼，说这跟他计算一台起重机吊臂时画出的应力线几乎一模一样。这个跨行当的比方之所以站得住，是因为两边面对的本就是同一道力学题——股骨上端和吊臂一样，都要把一个偏心的载荷稳稳传下去。几年后，解剖学家<strong>朱利叶斯·沃尔夫</strong>把它写成一条规律：骨会顺着它实际承受的力去调整自己的结构。</p>
+  <p>这条规律在生活里到处可见——网球运动员持拍那条手臂的骨量明显高于另一条；而反过来，长期卧床或处在失重环境中的人，承重骨（髋部、腰椎）每月丢失 <strong>1% 到 2%</strong> 的骨量，比正常衰老快出一个数量级。这也解释了为什么预防骨质疏松强调的是负重运动而不是游泳：<strong>要让骨长，得先让它承重。</strong><em>骨的密度不是先天注定的数值，是它对"你每天怎么用它"给出的答复。</em></p>
+  <p><strong>第三，也是最容易被忽略的：骨是一座钙的银行。</strong>全身约 <strong>99%</strong> 的钙存在骨里。血液里的钙浓度必须被死死钉住——心跳、神经放电、肌肉收缩、凝血全都依赖它，浮动一点点就会出大事。所以当摄入不足时，身体的选择毫不犹豫：<strong>拆骨，保血。</strong>甲状旁腺激素一发话，破骨细胞就加班，把钙从骨里取出来兑进血里。骨骼在这套账里是储户，不是股东——需要的时候先被支取。</p>
+  <p>这三笔账加起来，也说明了骨量为什么有一个峰值年龄：<strong>约 20 到 30 岁</strong>之间，存进去的多于取出来的；此后天平缓慢向另一侧倾斜。青春期结束前后那几年存下多少，很大程度上决定了几十年后账户里还剩多少——第 21 章和第 22 章会回到这笔账上。</p>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 读骨</div>
+  <h2>深夜的那几次脉冲，和一张能读出年龄的手掌片子</h2>
+  <p>生长板要动起来，得有人下令。下令的方式相当特别：<strong>不是持续供给，而是一天十几次的脉冲，且大多集中在夜里。</strong></p>
+  <p>垂体分泌生长激素的方式像间歇泉：白天基础水平很低，入睡之后、尤其是进入第一段深沉的慢波睡眠时，会喷出一天中幅度最大的那次脉冲。所以"睡觉长个儿"这句老话，机制上确有其事。</p>
+  <p>不过要就地拆开这个说法，免得推歪。第一，生长激素<strong>不直接</strong>命令生长板干活——它主要促使肝脏（以及生长板附近的组织）产生一种叫 <strong>IGF-1</strong> 的因子，由后者去推动软骨细胞增殖和肥大。中间隔着一道转发，这也是为什么少数人生长激素不缺、却因为下游环节失灵而长不高。第二，"睡得越多长得越高"不成立：这是一条有平台的关系，睡眠充足时再加码并不会额外增高；只有当睡眠严重不足或长期紊乱到病理程度时，才会拖累生长。慢性营养不良、甲状腺功能低下、长期炎症性疾病也都会从别的路径压住这条曲线。</p>
+
+  <figure>
+    <div class="switch-row">
+      <span class="switch-hint">拨动开关 →</span>
+      <div class="rocker" id="sexRocker" role="group" aria-label="切换男女生长速度曲线">
+        <div class="thumb" aria-hidden="true"></div>
+        <button id="btnF" aria-pressed="true">女</button>
+        <button id="btnM" aria-pressed="false">男</button>
+      </div>
+    </div>
+    <svg id="growth" viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="出生到二十岁的身高增长速度曲线，男女对照：出生后第一年最快，四五岁进入童年低速区、八九岁前后触底，女性在十一二岁出现峰速约每年八到九厘米，男性在十三四岁出现峰速约每年九到十厘米">
+      <text class="ax-t" x="90" y="30" text-anchor="start">身高增长速度（厘米 / 年）</text>
+      <line class="grid" x1="90" y1="70" x2="730" y2="70"/>
+      <line class="grid" x1="90" y1="122" x2="730" y2="122"/>
+      <line class="grid" x1="90" y1="174" x2="730" y2="174"/>
+      <line class="grid" x1="90" y1="226" x2="730" y2="226"/>
+      <line class="grid" x1="90" y1="278" x2="730" y2="278"/>
+      <text class="ax-lb" x="82" y="74" text-anchor="end">25</text>
+      <text class="ax-lb" x="82" y="126" text-anchor="end">20</text>
+      <text class="ax-lb" x="82" y="178" text-anchor="end">15</text>
+      <text class="ax-lb" x="82" y="230" text-anchor="end">10</text>
+      <text class="ax-lb" x="82" y="282" text-anchor="end">5</text>
+      <text class="ax-lb" x="82" y="334" text-anchor="end">0</text>
+      <line class="ax" x1="90" y1="50" x2="90" y2="330"/>
+      <line class="ax" x1="90" y1="330" x2="730" y2="330"/>
+      <text class="ax-lb" x="90" y="352" text-anchor="middle">出生</text>
+      <text class="ax-lb" x="154" y="352" text-anchor="middle">2</text>
+      <text class="ax-lb" x="218" y="352" text-anchor="middle">4</text>
+      <text class="ax-lb" x="282" y="352" text-anchor="middle">6</text>
+      <text class="ax-lb" x="346" y="352" text-anchor="middle">8</text>
+      <text class="ax-lb" x="410" y="352" text-anchor="middle">10</text>
+      <text class="ax-lb" x="474" y="352" text-anchor="middle">12</text>
+      <text class="ax-lb" x="538" y="352" text-anchor="middle">14</text>
+      <text class="ax-lb" x="602" y="352" text-anchor="middle">16</text>
+      <text class="ax-lb" x="666" y="352" text-anchor="middle">18</text>
+      <text class="ax-lb" x="730" y="352" text-anchor="middle">20</text>
+      <text class="ax-lb" x="730" y="374" text-anchor="end">年龄（岁）→</text>
+
+      <g class="f-grp">
+        <polyline class="f-line" points="90,70 106,143 122,205 154,242 186,252 218,262 250,268 282,270 314,272 346,274 378,272 410,257 442,244 458,242 474,247 506,273 538,299 570,314 602,324 634,328 666,330 730,330"/>
+        <circle class="f-dot" cx="458" cy="242" r="5.5"/>
+        <text class="f-lb" x="424" y="104" text-anchor="start">女 · 峰速约 8–9 cm/年（11–12 岁）</text>
+      </g>
+      <g class="m-grp">
+        <polyline class="m-line" points="90,70 106,143 122,200 154,242 186,252 218,259 250,266 282,268 314,270 346,273 378,276 410,278 442,276 474,262 506,238 522,231 538,236 570,262 602,294 634,314 666,323 698,327 730,330"/>
+        <circle class="m-dot" cx="522" cy="231" r="5.5"/>
+        <text class="m-lb" x="424" y="132" text-anchor="start">男 · 峰速约 9–10 cm/年（13–14 岁）</text>
+      </g>
+      <text class="note" x="300" y="306" text-anchor="start">童年低速区 · 八九岁前后触底</text>
+    </svg>
+    <figcaption><b>图 11-2 · 一生中长得最快的两段。</b>拨动开关切换男女。两条曲线的形状一致：出生后第一年冲到约每年 25 厘米，随后一路减速，四五岁进入童年低速区（约 5–6 cm/年），到八九岁的青春期前夜触底，此后回升，青春期再冲一次。差别在于第二次冲刺的<strong>时点与幅度</strong>——女性早约两年、峰值略低，男性晚而更高。曲线为群体平均示意，个体在时点上的差异可达两三年；实际评估须使用当地现行的生长曲线表。</figcaption>
+  </figure>
+
+  <h3>把年龄读在手掌上</h3>
+  <p>既然生长板会随年龄推进并最终闭合，那么反过来——<strong>看一眼骨头，就能读出这个孩子在生长这条路上走到了哪儿。</strong></p>
+  <p>做法出奇地简单：拍一张左手连同手腕的 X 光片。手掌上有二十几块小骨，它们各自的骨化中心按一个相当固定的顺序先后出现、逐渐长大、最后与骨干融合。把片子和标准图谱比对，就能给出一个"<strong>骨龄</strong>"——它和实际年龄常常不一致，而这种不一致恰恰是信息：骨龄明显落后于实际年龄，意味着这个孩子的生长板还有较多余量；明显超前，则意味着窗口正在提前关闭。</p>
+  <p>今天全世界通用的那本图谱由<strong>格罗伊利希</strong>与<strong>派尔</strong>在 1950 年整理出版，材料来自 1930 年代美国克利夫兰一项针对儿童的长期追踪研究。它的局限相当明确：入组儿童在种族与社会经济背景上都相当单一，用在今天不同族群、不同营养条件的孩子身上会有系统偏差——这是这本图谱被使用了七十多年、也被批评了七十多年的地方。</p>
+  <p>顺带说一段 X 光刚普及时的往事。二十世纪二十年代起，欧美的鞋店里流行过一种叫"试鞋透视机"的机器：孩子把脚伸进箱子，从上方的窥孔往下看，能亲眼看到自己脚骨在新鞋里的样子。这被当作一项现代化的服务卖了三十年，直到辐射剂量的问题被认真对待，才在五六十年代陆续被禁。<em>同一种技术，一头是能读出孩子生长余量的严肃工具，另一头是鞋店里的一个卖点——决定它是哪一头的，从来不是技术本身。</em></p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>软骨这门难修的手艺。</strong>骨的自我修复能力很强，软骨恰恰相反——它没有血管、没有神经、细胞密度低，损伤后几乎不能自行复原，这也是关节软骨磨损难以逆转的根本原因（第 21 章）。目前的临床手段包括自体软骨细胞移植、微骨折术、以及各种可降解支架，能缓解症状，但长出来的多是力学性能较差的纤维软骨，与天生的透明软骨仍有差距。以干细胞和支架材料构建更接近原生结构的软骨，是这些年最活跃的方向之一。</p>
+    <p><strong>直接调节生长板的药物已经进入临床。</strong>软骨发育不全（achondroplasia）是最常见的一种骨骼发育障碍，病因是一个受体的持续过度活跃，把生长板的增殖死死按住。2021 年，一种模拟内源性信号、从下游对抗这条通路的药物在美欧获批用于生长板尚未闭合的患儿，试验中每年可多长约一厘米半的量级；2023 年 10 月，美国监管方取消了原先 5 岁的年龄下限，欧洲同期把适用年龄下探到 4 月龄——适用人群正在向更早的年龄段扩展，而越早用药、可争取的生长窗口越长。这是第一类针对生长板机制本身而非笼统"补激素"的药物，此后同类候选药与口服剂型仍在推进，长期获益与身高之外的意义（如颅底与呼吸道并发症）仍在积累证据。此外，用干细胞修补受损生长板、避免儿童骨折后长成角度偏斜，目前仍停留在动物实验阶段。若在 2030 年后重读此栏，请先核实获批适应证与年龄范围是否已经改写。</p>
+  </div>
+
+  <p>骨头的长度有一个终点，而按下终止键的是一场从下丘脑开始的风暴。它会在几年之内改写身高、嗓音、体型、情绪，以及这具身体和别人之间的关系——它同时也是全书那条性别差异线的主场。</p>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">骨骼的生长与翻新 · 关键数字</div>
+    <table>
+      <tr><td class="k">早晚身高差</td><td class="v">1–2 cm</td><td class="n">椎间盘白天失水、夜间吸水</td></tr>
+      <tr><td class="k">在轨航天员身高增加</td><td class="v">3–5 cm</td><td class="n">返回地面后数周至数月缩回</td></tr>
+      <tr><td class="k">出生 → 成年身高</td><td class="v">约 3.5 倍</td><td class="n">头身比从 1/4 变到约 1/8</td></tr>
+      <tr><td class="k">出生后第一年长高</td><td class="v">约 25 cm</td><td class="n">产后生长速度最快的一年</td></tr>
+      <tr><td class="k">童年身高低速区</td><td class="v">约 5–6 cm/年</td><td class="n">四五岁进入，八九岁前后触底</td></tr>
+      <tr><td class="k">青春期峰速 · 女</td><td class="v">约 8–9 cm/年</td><td class="n">多在 11–12 岁，出现在青春期早段</td></tr>
+      <tr><td class="k">青春期峰速 · 男</td><td class="v">约 9–10 cm/年</td><td class="n">多在 13–14 岁，出现在青春期晚段</td></tr>
+      <tr><td class="k">肥大带细胞体积增幅</td><td class="v">5–10 倍</td><td class="n">长度增加的主要来源，非细胞分裂</td></tr>
+      <tr><td class="k">骨重塑一个循环</td><td class="v">3–6 个月</td><td class="n">先挖后填，破骨在前成骨在后</td></tr>
+      <tr><td class="k">骨骼整体更新</td><td class="v">约 10 年一副</td><td class="n">松质骨快得多，皮质骨慢，为粗略平均</td></tr>
+      <tr><td class="k">骨内钙占全身钙</td><td class="v">约 99%</td><td class="n">血钙不足时拆骨保血</td></tr>
+      <tr><td class="k">卧床或失重的骨量丢失</td><td class="v">约 1–2% / 月</td><td class="n">髋部、腰椎等承重骨最明显</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">早上量出来的身高比睡前高一厘米多，原因是？</div>
+      <div class="opts">
+        <button>骨头在夜间生长激素作用下真的长长了</button>
+        <button data-c="1">椎间盘白天被压出水分变薄，夜里平躺卸载后又吸水回弹</button>
+        <button>清晨肌肉张力更高，把身体拉直了</button>
+        <button>体温较低使身体收缩程度不同</button>
+      </div>
+      <div class="explain">二十几片椎间盘各被压薄零点几毫米，加起来就是那 1–2 厘米。把重力整个撤掉效果更夸张：国际空间站上的航天员在轨期间身高普遍增加 3–5 厘米，返回后数周到数月缩回——顺带带来相当常见的腰背痛，因为脊椎被"泡开"后重新压实并不舒服。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">亨特在小猪胫骨骨干里埋进两粒铅弹，骨长成后两粒的距离没变。这证明了什么？</div>
+      <div class="opts">
+        <button>骨的生长非常缓慢，实验时间不够长</button>
+        <button>铅弹随骨的生长一起被推向两端</button>
+        <button data-c="1">长度的增加全部发生在骨的两端，骨干中间那一段自始至终是同一段</button>
+        <button>骨只在受力方向上生长</button>
+      </div>
+      <div class="explain">这个结论每天都在你身边被验证：小时候磕在膝盖上的疤没有随长高向上漂移，骨折时打进骨干的钢板多年后位置依旧。做记号这条思路来自更早的杜阿梅尔——他发现喂食茜草能把新长的骨染成粉红，等于让骨自己留下时间戳，并由此证明了骨的加粗来自骨膜。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">生长板里，骨长度增加的主要来源是哪一步？</div>
+      <div class="opts">
+        <button>静止带不断补充新的软骨细胞</button>
+        <button>增殖带里软骨细胞的分裂</button>
+        <button data-c="1">肥大带里细胞停止分裂、把自己的体积胀大 5–10 倍</button>
+        <button>成骨细胞在骨干末端一层层往上铺骨</button>
+      </div>
+      <div class="explain">竹子长得快靠的是同一件事：每节里有一段能伸长的组织，细胞不必增加多少，只要把自己拉长，整根竹子就往上蹿。也正因如此，"骨在两端一层层堆料"是个错误图像——软骨在前面开路、骨在后面跟进，骨是被从内部顶开的，不是被砌高的。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">关于生长激素与长高，下面哪一条是对的？</div>
+      <div class="opts">
+        <button>它持续稳定地分泌，白天夜里没有区别</button>
+        <button>它直接作用于生长板软骨细胞</button>
+        <button data-c="1">它以脉冲方式分泌、最大脉冲多在入睡后的深睡期，且主要通过 IGF-1 起作用</button>
+        <button>睡得越多长得越高，两者成正比</button>
+      </div>
+      <div class="explain">中间隔着一道转发：生长激素主要促使肝脏和生长板附近的组织产生 IGF-1，由后者去推动软骨细胞增殖和肥大——这也是为什么少数人生长激素并不缺，却因下游环节失灵而长不高。"睡得越多越高"同样不成立：这是一条有平台的关系，只有睡眠严重不足到病理程度时才会拖累生长。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">长期卧床或身处失重环境的人，承重骨每月丢失约 1%–2% 的骨量。最贴切的解释是？</div>
+      <div class="opts">
+        <button>缺乏日照导致维生素 D 不足</button>
+        <button data-c="1">骨会按实际承受的力调整结构，负荷消失后原有骨量就成了多余的</button>
+        <button>失重使钙无法沉积到骨里</button>
+        <button>卧床时血液循环变慢，营养送不到骨骼</button>
+      </div>
+      <div class="explain">这是沃尔夫在十九世纪提出的规律，正反两个方向都成立：网球运动员持拍那条手臂的骨量明显高于另一条。骨的密度不是先天注定的数值，而是它对"你每天怎么用它"给出的答复。顺带一提，骨还是一座钙的银行——全身约 99% 的钙存在骨里，血钙不足时身体会毫不犹豫地拆骨保血。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第二幕 调试与扩容</div>
+  <div class="title">第 12 章 · 青春期：激素系统重启</div>
+  <p>一组在你出生后不久就自行沉寂的神经元，在睡了十年之后重新起搏。接下来几年里，它会改写身高、嗓音、体型、气味和情绪，并亲手合上上一章那两片软骨。而这场重启在男女身上走的是两条错开两年的时间线——这一章是全书性别差异线的主场，走完它，第三幕的壮年身体就正式登场了。</p>
+  <nav class="footnav">
+    <a href="ch10-immune.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch12-puberty.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 图 11-2：男女生长速度曲线切换
+  var growth = document.getElementById('growth');
+  var rocker = document.getElementById('sexRocker');
+  var bF = document.getElementById('btnF');
+  var bM = document.getElementById('btnM');
+  function setSex(male){
+    growth.classList.toggle('male', male);
+    rocker.classList.toggle('after', male);
+    bF.setAttribute('aria-pressed', male ? 'false' : 'true');
+    bM.setAttribute('aria-pressed', male ? 'true' : 'false');
+  }
+  bF.addEventListener('click', function(){ setSex(false); });
+  bM.addEventListener('click', function(){ setSex(true); });
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

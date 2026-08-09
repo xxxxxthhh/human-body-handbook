@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第13章 · 一顿饭的旅程 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 13-1 消化道行程图（本章专用） ---- */
+#gimap-fig .stop-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#gimap-fig .stop-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#gimap-fig .stop-btn:hover{border-color:var(--gold); color:var(--ink);}
+#gimap-fig .stop-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#gimap-fig .stop-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#gimap-fig .stop-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#gimap-fig .sp{display:none;}
+#gimap-fig .sp.on{display:block;}
+#gimap-fig .sp-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#gimap-fig .sp p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+#gimap .route{stroke:var(--mixed-r); stroke-width:5; stroke-linecap:round; fill:none;}
+#gimap .route-arrow{stroke:var(--mixed-r); stroke-width:3.4; fill:none; stroke-linecap:round; stroke-linejoin:round;}
+#gimap .stop{cursor:pointer; transition:opacity .3s;}
+#gimap.picked .stop{opacity:.3;}
+#gimap.picked .stop.on{opacity:1;}
+#gimap .dot{fill:var(--gold);}
+#gimap .stop.on .dot{fill:var(--oxy); r:9;}
+#gimap .stem{stroke:var(--line); stroke-width:1.3;}
+#gimap .st-n{fill:var(--ink); font-size:13px; font-weight:700;}
+#gimap .st-t{fill:var(--ink-dim); font-size:11.5px;}
+#gimap .stop.on .st-t{fill:var(--gold);}
+#gimap .clock-k{fill:var(--ink-faint); font-size:11.5px; letter-spacing:.18em;}
+#gimap .clock-v{fill:var(--gold); font-size:20px; font-weight:700;}
+#gimap .foot{fill:var(--ink-faint); font-size:11.5px;}
+
+/* ---- 图 13-2 表面积三级放大（本章专用） ---- */
+#amplify .card{fill:var(--surface2); stroke:var(--line); stroke-width:1.5;}
+#amplify .wall{fill:none; stroke:var(--ink-faint); stroke-width:2.2; stroke-linecap:round;}
+#amplify .villi{fill:none; stroke:var(--green); stroke-width:2; stroke-linecap:round;}
+#amplify .brush{stroke:var(--oxy); stroke-width:1.4; stroke-linecap:round;}
+#amplify .step-t{fill:var(--ink); font-size:13px; font-weight:700;}
+#amplify .step-v{fill:var(--gold); font-size:12.5px;}
+#amplify .arrow{stroke:var(--ink-faint); stroke-width:1.6; fill:none;}
+#amplify .axis{stroke:var(--line); stroke-width:2;}
+#amplify .tick{stroke:var(--line);}
+#amplify .tick-label{fill:var(--ink-faint); font-size:11.5px;}
+#amplify .mk{fill:var(--gold);}
+#amplify .mk.dim{fill:var(--ink-faint);}
+#amplify .mk-label{fill:var(--ink); font-size:12.5px; font-weight:600;}
+#amplify .mk-label.dim{fill:var(--ink-faint); font-weight:400;}
+#amplify .mk-sub{fill:var(--ink-dim); font-size:11px;}
+
+@media (prefers-reduced-motion: reduce){
+  #gimap .stop{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第三幕 满负荷运行 · 第 13 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>一顿饭的<br>旅程</h1>
+  <p class="subtitle">全程六七米，走一天一夜。最危险的一段不到一秒，最漫长的一段占掉全程的大半时间——而你自始至终不会感觉到任何一步。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>晚上七点十二分。你夹起一口米饭，送进嘴里。</p>
+  <p>从这一秒起，它上路了。接下来的一天一夜，这口饭要走完六米多长的通道，穿过五六道各自把关的闸门，被十几种酶轮番拆开，最后押进一条你从不知道其存在的"海关"接受查验。</p>
+  <p>整趟旅程你几乎察觉不到：有意识的部分只有开头那几十秒和末尾的那一下，中间的十几个小时全在幕后完成，安静得像什么也没发生。这一章我们跟着它走完全程，并且一路给它计时。发车时间：19:12:00。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 入口</div>
+  <h2>最初的四十秒，和一道每天落一千次的防火幕</h2>
+  <p>先说一句可能让你意外的话：这口饭在嘴里待的二三十秒，是它整趟旅程中<strong>你唯一全程操控</strong>的一段。此后所有的推送、分泌、开闸、放行都不听你指挥——直到最末尾，控制权才短暂地还给你一次。</p>
+  <p>你在做两件事。一是磨碎：磨牙区能咬出三百到七百牛顿的力。二是拌湿：唾液腺一天出产<strong>一到一升半</strong>的唾液，里面有润滑的黏蛋白、杀菌的溶菌酶，还有一种唾液淀粉酶，专把淀粉的长链剪成短的甜段——米饭嚼久了发甜，那股甜味不是米饭本来的味道，是你自己加工出来的。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>你以为在尝味道，其实大半在闻。</strong>舌头能分辨的只有甜、咸、酸、苦、鲜几类基本味；让一道菜"好吃"的全部细节——香、醇、果味、焦香——来自挥发分子从口腔后方绕上鼻腔的那条通路，研究者估计嗅觉在"风味"里的贡献占七到八成。所以感冒鼻塞时饭菜"没味道"，问题不在舌头，在那条被堵住的后门——你还尝得出咸和甜，只是分不清吃的是苹果还是洋葱。</p>
+  </div>
+
+  <h3>0.7 秒</h3>
+  <p>磨得差不多了，你把这团东西推向咽部——整条消化道上最凶险的一步。咽喉是个岔路口，通气管和通食管的两个入口只隔着几毫米；走错一步，食物落进气管，轻则呛咳，重则堵住呼吸，吸入性肺炎至今仍是高龄老人的主要死因之一。</p>
+  <p>对策是一套排练了千百万年的连锁动作，全程约 <strong>0.7 到 1 秒</strong>，牵动三十组以上的肌肉、五对脑神经：软腭抬起封住鼻腔后口，喉头整体上提，一片叫<strong>会厌</strong>的软骨随之翻下盖住气管口，同时呼吸<em>暂停</em>；食团滑过，一切复位。</p>
+  <p>剧场里有一道装置与它同名同姓：<strong>防火幕</strong>——挂在舞台与观众席之间的厚重帘幕，火警时落下隔开两边。区别在于，剧院那道幕多半一辈子用不上一次，而你气管口上这道幕光是清醒时吞口水就要落上五六百次，没有一次失手。</p>
+  <p>19:12:30。食团进入食管。</p>
+
+  <h3>倒立也能吃饭</h3>
+  <p>食管长约 25 厘米，没有任何消化功能，只负责把东西送下去。食团上方的环形肌松开、下方的收紧，一圈圈依次交替，形成一道<strong>蠕动波</strong>，以每秒 2 到 4 厘米推着食团走完六到十秒的路。这一招和蚯蚓在土里前进是同一套动作——前段撑开、后段收缩；区别是用途正好相反：蚯蚓用它推动<em>自己</em>，食管用它推动<em>内容物</em>，管子留在原地。</p>
+  <p>正因为不靠重力，你倒立着也咽得下去，失重中的宇航员照样吃得上饭。"水往下流"的感觉是错觉，它是被一波波挤下去的。食管下端还有一圈平时收紧的肌肉，叫下食管括约肌，那是酸池的门；它关不严的时候，烧心就是酸跑到了不该去的地方。</p>
+
+  <figure id="gimap-fig">
+    <div class="switch-row">
+      <span class="switch-hint">点站名看计时 →</span>
+      <div class="stop-tabs" role="group" aria-label="选择消化道上的一站">
+        <button class="stop-btn" data-stop="mouth" aria-pressed="false">口腔</button>
+        <button class="stop-btn" data-stop="esoph" aria-pressed="false">食管</button>
+        <button class="stop-btn" data-stop="stom" aria-pressed="false">胃</button>
+        <button class="stop-btn" data-stop="duod" aria-pressed="false">十二指肠</button>
+        <button class="stop-btn" data-stop="jeju" aria-pressed="false">空肠 · 回肠</button>
+        <button class="stop-btn" data-stop="colon" aria-pressed="false">结肠</button>
+        <button class="stop-btn" data-stop="rect" aria-pressed="false">直肠 · 出口</button>
+      </div>
+    </div>
+    <svg id="gimap" viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="一顿饭在消化道上的行程图：口腔、食管、胃、十二指肠、空肠与回肠、结肠、直肠共七站，各站标注停留时间">
+      <text class="clock-k mono" x="380" y="26" text-anchor="middle">累计时钟 · 从入口起算</text>
+      <text class="clock-v mono" x="380" y="60" text-anchor="middle">— 点一站看这里 —</text>
+
+      <line class="route" x1="70" y1="160" x2="690" y2="160"/>
+      <path class="route" d="M690 160 A 45 45 0 0 1 690 250"/>
+      <line class="route" x1="690" y1="250" x2="86" y2="250"/>
+      <polyline class="route-arrow" points="98,242 84,250 98,258"/>
+
+      <g class="stop" data-stop="mouth">
+        <circle class="dot" cx="130" cy="160" r="7"/>
+        <line class="stem" x1="130" y1="160" x2="130" y2="120"/>
+        <text class="st-n" x="130" y="98" text-anchor="middle">口腔</text>
+        <text class="st-t mono" x="130" y="114" text-anchor="middle">20–30 秒</text>
+      </g>
+      <g class="stop" data-stop="esoph">
+        <circle class="dot" cx="280" cy="160" r="7"/>
+        <line class="stem" x1="280" y1="160" x2="280" y2="120"/>
+        <text class="st-n" x="280" y="98" text-anchor="middle">食管</text>
+        <text class="st-t mono" x="280" y="114" text-anchor="middle">6–10 秒</text>
+      </g>
+      <g class="stop" data-stop="stom">
+        <circle class="dot" cx="440" cy="160" r="7"/>
+        <line class="stem" x1="440" y1="160" x2="440" y2="120"/>
+        <text class="st-n" x="440" y="98" text-anchor="middle">胃</text>
+        <text class="st-t mono" x="440" y="114" text-anchor="middle">2–5 小时</text>
+      </g>
+      <g class="stop" data-stop="duod">
+        <circle class="dot" cx="610" cy="160" r="7"/>
+        <line class="stem" x1="610" y1="160" x2="610" y2="120"/>
+        <text class="st-n" x="610" y="98" text-anchor="middle">十二指肠</text>
+        <text class="st-t mono" x="610" y="114" text-anchor="middle">几分钟</text>
+      </g>
+      <g class="stop" data-stop="jeju">
+        <circle class="dot" cx="545" cy="250" r="7"/>
+        <line class="stem" x1="545" y1="250" x2="545" y2="288"/>
+        <text class="st-n" x="545" y="306" text-anchor="middle">空肠 · 回肠</text>
+        <text class="st-t mono" x="545" y="324" text-anchor="middle">3–5 小时 · 全程最长的一段路</text>
+      </g>
+      <g class="stop" data-stop="colon">
+        <circle class="dot" cx="300" cy="250" r="7"/>
+        <line class="stem" x1="300" y1="250" x2="300" y2="288"/>
+        <text class="st-n" x="300" y="306" text-anchor="middle">结肠</text>
+        <text class="st-t mono" x="300" y="324" text-anchor="middle">10–60 小时</text>
+      </g>
+      <g class="stop" data-stop="rect">
+        <circle class="dot" cx="120" cy="250" r="7"/>
+        <line class="stem" x1="120" y1="250" x2="120" y2="288"/>
+        <text class="st-n" x="120" y="306" text-anchor="middle">直肠 · 出口</text>
+        <text class="st-t mono" x="120" y="324" text-anchor="middle">数小时–数天</text>
+      </g>
+
+      <text class="foot" x="70" y="348" text-anchor="start">站位按行程顺序排布，不按实际长度成比例</text>
+    </svg>
+    <div class="stop-panel">
+      <div class="sp on" data-sp="0">
+        <div class="sp-t">一顿饭的行程表</div>
+        <p>点任意一站，看这口饭在那里停多久、被谁接手。</p>
+      </div>
+      <div class="sp" data-sp="mouth">
+        <div class="sp-t">口腔 · 20–30 秒 · 累计 ≈ 30 秒</div>
+        <p>磨碎、拌湿、加酶。全程你唯一全程操控的一段（末尾那一下除外）。</p>
+      </div>
+      <div class="sp" data-sp="esoph">
+        <div class="sp-t">食管 · 6–10 秒 · 累计 ≈ 40 秒</div>
+        <p>蠕动波每秒 2–4 厘米，不靠重力。唯一一段"纯赶路"。</p>
+      </div>
+      <div class="sp" data-sp="stom">
+        <div class="sp-t">胃 · 2–5 小时 · 累计 2–5 小时</div>
+        <p>pH 1.5–3.5 的酸池：灭菌、把蛋白质摊开，并控制放行速度。</p>
+      </div>
+      <div class="sp" data-sp="duod">
+        <div class="sp-t">十二指肠 · 几分钟 · 累计 2–5 小时</div>
+        <p>只有 25 厘米，却是全程最热闹的路口：胰液与胆汁在此汇入。</p>
+      </div>
+      <div class="sp" data-sp="jeju">
+        <div class="sp-t">空肠 · 回肠 · 3–5 小时 · 累计 5–10 小时</div>
+        <p>最长的一段路，吸收的主场：约 30–40 平方米的吸收面。</p>
+      </div>
+      <div class="sp" data-sp="colon">
+        <div class="sp-t">结肠 · 10–60 小时 · 累计 15–70 小时</div>
+        <p>路程占四分之一，时间占大半。回收 1–2 升水，纤维交给房客发酵。</p>
+      </div>
+      <div class="sp" data-sp="rect">
+        <div class="sp-t">直肠 · 出口 · 累计 24–72 小时</div>
+        <p>旅程结束。排出物干重里，相当一部分是细菌和换下来的旧内衬。</p>
+      </div>
+    </div>
+    <figcaption><b>图 13-1 · 一顿饭的行程表。</b>七站，六米多，一天到三天。站位按顺序排布，不按实际长度成比例——这一点值得留意：结肠只占行程的四分之一左右，却吃掉了全程大半的时间；而最长的那段路（空肠与回肠）反倒走得相当快。时间为常见范围，个体差异很大。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 酸池</div>
+  <h2>一池强酸，为什么没把池壁化掉</h2>
+  <p>19:12:40。食团落进胃里。</p>
+  <p>它掉进去的是一池强酸。胃液的 pH 在 <strong>1.5 到 3.5</strong> 之间，空腹时通常落在下限那一头——比柠檬汁还要酸上几倍。造出这个数字的是胃壁上的壁细胞：它靠一台质子泵把氢离子往管腔里赶，管腔侧的浓度比细胞内部高出百万倍以上。第 1 章说过，逆着浓度差搬东西是要付费的；胃把这笔费付得相当阔绰。</p>
+  <p>那么问题来了。这池酸能把肉煮烂、能把细菌杀干净，为什么没把装着它的那口"锅"一起化掉？锅壁也是肉做的。</p>
+  <h3>不是一堵墙，是一道河口</h3>
+  <p>很多人以为胃壁上涂着一层"防酸涂层"，像锅底的不粘层。这个想象会把机制推错：真是涂层的话，划破一处就该穿一个洞，可事实是胃黏膜每天都在被划破、又每天补回来。</p>
+  <p>真实的情形更接近<strong>入海口</strong>：河水从内陆流出，海水从外面涌进，相遇处是一条不断移动的交界带。胃里也是两股相对的流——管腔一侧是酸，上皮一侧不断向外分泌黏液和碳酸氢盐。黏液把水兜住，形成厚 <strong>100 到 500 微米</strong>的凝胶，碳酸氢盐从内往外渗，在胶里一路中和：凝胶外表面 pH 接近 2，贴着细胞的那一面接近 7，半毫米内差出五个数量级。上皮细胞其实从没泡过酸。而这条交界带是<strong>被持续供养的</strong>，破一处补一处——要害不在涂层厚不厚，而在供养断没断。</p>
+  <p>另外两道防线也各有巧思。<strong>其一，刀是钝的送出来的：</strong>主细胞放出的是胃蛋白酶的钝版本"胃蛋白酶原"，掉进酸里才自己剪短、变得锋利，pH 一回到 4 以上又立刻失效——这把刀只在池子里管用。<strong>其二，整层内衬定期换新：</strong>胃和肠的表面上皮寿命只有 <strong>3 到 5 天</strong>，隐窝底部的干细胞一批批往上顶，把用旧的推到表面剥落。这不是修补，是换皮。</p>
+  <p>回头说"供养断没断"。维持黏液分泌与黏膜血流的信号里，有一类叫<strong>前列腺素</strong>的分子——第 8 章那道被它撑开的动脉导管，你大概还有印象。布洛芬、阿司匹林这类非甾体抗炎药止痛，靠的正是压住前列腺素的合成，代价是胃里那道河口同时被断了供养。不是药"腐蚀"了胃，是它让胃自己停了修补。</p>
+
+  <h3>麦基诺岛上的那扇窗</h3>
+  <p>上面这些，我们是怎么知道的？故事从 1822 年 6 月 6 日的一声枪响讲起。</p>
+  <p>密歇根湖北端的麦基诺岛，美国毛皮公司的商站。一支猎枪走火，近距离击中二十岁的法裔加拿大船夫 <strong>Alexis St. Martin</strong>：肋骨断裂，一部分胃壁被撕开。驻岛军医 <strong>William Beaumont</strong> 赶到时判断这人活不过三十六小时。</p>
+  <p>他活下来了。但伤口没有完全长好——胃壁和腹壁的破口彼此愈合到了一起，在体表留下一个直径两三厘米、直通胃腔的开口，上面垂着一片胃黏膜充当活瓣，按住才不漏。用当时的话说：这个年轻人身上，开了一扇通向自己胃里的窗。</p>
+  <p>Beaumont 从 1825 年起通过这扇窗做了两百三十八次实验。手法朴素得惊人：用丝线拴住一小块食物——熟牛肉、白面包、生卷心菜——从洞口放进胃里，每隔一小时提出来称重、描述、再放回去。他记下不同食物消化的先后，也记下运动、情绪、酒精如何改变胃液的量与胃黏膜的颜色。</p>
+  <p>最关键的一次，他把胃液抽出来装进小瓶，加进一块肉，把瓶子揣在腋下保温。肉化了。</p>
+  <p>这一下就把争论不休的两派分出了胜负：一派认为消化靠胃的机械研磨，另一派认为是化学作用。抽出来的液体在瓶子里照样把肉化掉，机械论便没了立足之地——更早的雷奥米尔和斯帕兰扎尼已用金属管、海绵做过类似尝试，但在一个活人身上连做八年，是另一个量级的证据。1833 年 Beaumont 自费出版了那本观察记录，此后一个世纪的消化生理学教科书都绕不开它。</p>
+  <p>这段医学史还有不体面的另一半。St. Martin 不识字，穷困，靠一纸他自己读不懂的契约受雇于 Beaumont：管吃管住，一年一百多美元，义务是"服从并配合实验"。他不止一次逃回加拿大，一走几年，结婚生子；Beaumont 一次次托人找他回来，信里满是失望与算计。Beaumont 1853 年因跌伤感染去世；St. Martin 带着那扇窗又活了二十七年，1880 年离世，享年七十多岁。他的家人拒绝了解剖遗体的请求，特意把下葬拖延几天、挖得格外深，不让任何人再把他当成标本。</p>
+  <p>两半都要讲。那扇窗给了医学一份无可替代的记录，也提醒着：早期人体研究里的"志愿者"，常常并没有多少可选的余地。</p>
+
+  <h3>一次只放几毫升</h3>
+  <p>胃还干着一件容易被忽略的活：<strong>限速</strong>。它空腹时只有约 50 毫升，能撑到一升半左右，所以先把一顿饭整个收下，再一点一点往下放；出口的幽门是个筛子，只让约 2 毫米以下的颗粒通过。混合固体餐一两个小时排掉一半，全部清空要 <strong>2 到 5 小时</strong>，脂肪多的走得最慢——下游一收到脂肪就会反过来喊停。</p>
+  <p>为什么要这么慢？因为下游那一段处理能力有限——而它是本章真正的主角。</p>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 铺开</div>
+  <h2>把一根管子摊成一间房</h2>
+  <p>19:45 前后。幽门第一次放行，几毫升食糜滴进十二指肠——此后它会这样一小份一小份地放上两到五个小时。</p>
+  <p>这段肠子只有 25 厘米长，却是全程最热闹的路口。胰腺送来 <strong>1 到 1.5 升</strong>胰液，既有大量碳酸氢盐（把胃酸中和到接近中性，好让下游的酶干活），也有拆糖、拆蛋白、拆脂肪的三类酶；肝脏每天分泌 <strong>0.5 到 1 升</strong>胆汁，先存进容量仅 30 到 80 毫升的胆囊里浓缩，进餐时再挤出来把油脂打散成微滴。胆盐一头亲水、一头亲油，插在油水交界上把大油滴拆小——第 8 章新生儿肺里那瓶"洗洁精"用的是同一个招数，只是一处用来把油拉进水里，一处用来让肺泡不粘死。</p>
+  <p>然后食糜进入空肠和回肠——旅程最长的一段路，也是全书那条"表面积"贯穿线再次浮出水面的地方。</p>
+
+  <h3>第 5 章那条规矩，在这里被用到了极致</h3>
+  <p>第 5 章讲过一条冷冰冰的物理约束：物质靠扩散只能走大约一毫米，所以任何需要大量交换的地方都只能把<strong>表面积</strong>做大，不能靠把体积做大。肺是这条规矩的一个答案，肠是另一个。</p>
+  <p>如果小肠只是一根内壁光滑的管子，长 3 到 5 米、周长十来厘米，内表面不过 <strong>0.3 到 0.5 平方米</strong>——一块桌布，远远不够。于是有了三级放大（图 13-2）：</p>
+  <p><strong>第一级，环状皱襞。</strong>肠壁整体折成一圈圈横褶，像风琴的褶子，把面积撑大 <strong>1.6 倍</strong>上下。<br>
+  <strong>第二级，绒毛。</strong>褶皱表面立着密密麻麻的指状突起，每根高 0.5 到 1.6 毫米，凑近看像一片天鹅绒。<br>
+  <strong>第三级，微绒毛。</strong>每个肠上皮细胞的顶面又生着一千到三千根极细的小突起，显微镜下呈现为毛茸茸的一道边，因此得名"刷状缘"。后两级太细密，实测通常合并计算，合起来把面积再放大 <strong>60 到 120 倍</strong>。</p>
+  <p>三级叠乘，<strong>约 100 到 190 倍</strong>，最终吸收面积落在 <strong>30 到 40 平方米</strong>——一根几米长的管子，摊开来相当于一间三十来平方米的房间的地板。</p>
+  <p>这里要拆掉一个流传极广的说法：很多科普（包括不少旧教科书）说小肠展开有"一个网球场那么大"，即 200 到 300 平方米。这个数字出自早期离体标本与理想几何模型的推算，2014 年一项系统实测把它大幅下修——<strong>实测值只有旧值的五分之一到十分之一</strong>。三十几平方米仍旧惊人：它是你皮肤面积（约 1.5 到 2 平方米）的十几二十倍，却整个藏在肚子里。</p>
+
+  <figure>
+    <svg id="amplify" viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="小肠表面积的三级放大示意：光滑管、环状皱襞、绒毛、微绒毛，以及最终吸收面积在对数刻度上的对比">
+      <rect class="card" x="16" y="24" width="161" height="128" rx="10"/>
+      <path class="wall" d="M36 62 H157 M36 116 H157"/>
+      <text class="step-t" x="96" y="106" text-anchor="middle">一根光滑的管</text>
+      <text class="step-v mono" x="96" y="140" text-anchor="middle">基准 × 1</text>
+
+      <rect class="card" x="205" y="24" width="161" height="128" rx="10"/>
+      <path class="wall" d="M225 62 q 12 18 24 0 q 12 18 24 0 q 12 18 24 0 q 12 18 24 0 q 12 18 24 0"/>
+      <path class="wall" d="M225 116 q 12 -18 24 0 q 12 -18 24 0 q 12 -18 24 0 q 12 -18 24 0 q 12 -18 24 0"/>
+      <text class="step-t" x="285" y="106" text-anchor="middle">环状皱襞</text>
+      <text class="step-v mono" x="285" y="140" text-anchor="middle">× 1.6</text>
+
+      <rect class="card" x="394" y="24" width="161" height="128" rx="10"/>
+      <path class="wall" d="M414 56 H535 M414 122 H535"/>
+      <path class="villi" d="M420 56 v22 M430 56 v22 M440 56 v22 M450 56 v22 M460 56 v22 M470 56 v22 M480 56 v22 M490 56 v22 M500 56 v22 M510 56 v22 M520 56 v22 M530 56 v22"/>
+      <path class="villi" d="M420 122 v-22 M430 122 v-22 M440 122 v-22 M450 122 v-22 M460 122 v-22 M470 122 v-22 M480 122 v-22 M490 122 v-22 M500 122 v-22 M510 122 v-22 M520 122 v-22 M530 122 v-22"/>
+      <text class="step-t" x="474" y="106" text-anchor="middle">绒毛</text>
+      <text class="step-v mono" x="474" y="140" text-anchor="middle">绒毛 + 微绒毛</text>
+
+      <rect class="card" x="583" y="24" width="161" height="128" rx="10"/>
+      <path class="wall" d="M603 96 H724"/>
+      <path class="brush" d="M604 96 v-26 M608 96 v-26 M612 96 v-26 M616 96 v-26 M620 96 v-26 M624 96 v-26 M628 96 v-26 M632 96 v-26 M636 96 v-26 M640 96 v-26 M644 96 v-26 M648 96 v-26 M652 96 v-26 M656 96 v-26 M660 96 v-26 M664 96 v-26 M668 96 v-26 M672 96 v-26 M676 96 v-26 M680 96 v-26 M684 96 v-26 M688 96 v-26 M692 96 v-26 M696 96 v-26 M700 96 v-26 M704 96 v-26 M708 96 v-26 M712 96 v-26 M716 96 v-26 M720 96 v-26"/>
+      <text class="step-t" x="663" y="122" text-anchor="middle">微绒毛 · 刷状缘</text>
+      <text class="step-v mono" x="663" y="140" text-anchor="middle">合计 × 60–120</text>
+
+      <text class="step-v mono" x="380" y="182" text-anchor="middle">三级叠乘 ≈ × 100–190</text>
+      <path class="arrow" d="M181 88 h11 m-5 -5 l5 5 -5 5"/>
+      <path class="arrow" d="M370 88 h11 m-5 -5 l5 5 -5 5"/>
+      <path class="arrow" d="M559 88 h11 m-5 -5 l5 5 -5 5"/>
+
+      <line class="axis" x1="60" y1="252" x2="700" y2="252"/>
+      <line class="tick" x1="60" y1="246" x2="60" y2="258"/><text class="tick-label mono" x="60" y="276" text-anchor="middle">0.1</text>
+      <line class="tick" x1="220" y1="246" x2="220" y2="258"/><text class="tick-label mono" x="220" y="276" text-anchor="middle">1</text>
+      <line class="tick" x1="380" y1="246" x2="380" y2="258"/><text class="tick-label mono" x="380" y="276" text-anchor="middle">10</text>
+      <line class="tick" x1="540" y1="246" x2="540" y2="258"/><text class="tick-label mono" x="540" y="276" text-anchor="middle">100</text>
+      <line class="tick" x1="700" y1="246" x2="700" y2="258"/><text class="tick-label mono" x="700" y="276" text-anchor="middle">1000</text>
+      <text class="tick-label" x="700" y="298" text-anchor="end">吸收面积（平方米 · 对数刻度）→</text>
+
+      <circle class="mk dim" cx="156" cy="252" r="6"/>
+      <text class="mk-label dim" x="156" y="228" text-anchor="middle">光滑的管</text>
+      <text class="mk-sub" x="156" y="212" text-anchor="middle">0.3–0.5</text>
+
+      <circle class="mk" cx="461" cy="252" r="7"/>
+      <text class="mk-label" x="461" y="228" text-anchor="middle">实测吸收面积</text>
+      <text class="mk-sub" x="461" y="212" text-anchor="middle">30–40</text>
+
+      <circle class="mk dim" cx="606" cy="252" r="6"/>
+      <text class="mk-label dim" x="640" y="322" text-anchor="middle">旧教科书「一个网球场」</text>
+      <text class="mk-sub" x="640" y="306" text-anchor="middle">200–300 · 已被实测下修</text>
+      <line class="tick" x1="606" y1="258" x2="622" y2="292"/>
+    </svg>
+    <figcaption><b>图 13-2 · 三级放大，与一个被夸大了的老数字。</b>环状皱襞（×1.6）与绒毛、微绒毛（后两级实测通常合并给出，合计 ×60–120）叠乘约 100 到 190 倍，把一根内表面不到半平方米的管子铺成三四十平方米。下方对数刻度上的灰点是旧教科书常引的"网球场"面积——它出自早期离体标本与理想几何推算，2014 年的系统实测把它大幅下修，实测值只有旧值的五分之一到十分之一。作为对照：你的皮肤总面积约 1.5–2 平方米。</figcaption>
+  </figure>
+
+  <h3>七到九升水，和一场几乎不漏的回收</h3>
+  <p>铺开这么大一片吸收面，是为了两件事：把营养收进来，也把水收回来。</p>
+  <p>后一件的规模超乎多数人想象。唾液、胃液、胰液、胆汁、肠液加在一起，再算上你喝进去的一两升，一天流经消化道的液体总量是 <strong>7 到 9 升</strong>；而最终随粪便离开身体的水只有 <strong>100 到 200 毫升</strong>——回收率约 98% 到 99%。这条回收线安静得让人忘了它的存在，直到它出故障：急性腹泻之所以致命，不在"拉肚子"本身，而在这套回收突然失灵，一天几升水从身体里流走。</p>
+  <h3>一勺糖，一撮盐，一条救过千万人的机制</h3>
+  <p>营养的收法里，有一条最朴素的规则，第 1 章已经埋下伏笔：细胞不停把钠往外舀，是为了在膜两侧攒下一道浓度差——"堤内蓄的水，随时可以开闸做功"。肠上皮就在这里开闸：它膜上有一种转运蛋白，规定钠和葡萄糖必须<strong>手拉手一起进来</strong>，钠顺浓度差往里冲的劲头顺便把葡萄糖也拽了进去。没有钠，这扇门几乎不开。</p>
+  <p>1960 年代末，这条冷门的分子机制救了无数条命。当时的标准疗法是静脉输液——要针头、无菌液体、受训的人手，疫区常常一样也没有。研究者意识到：既然霍乱毒素恰恰不破坏这条钠–葡萄糖通路，一杯配好比例的糖盐水就该能从肠子里把水补回来。1971 年孟加拉难民营的一次大规模实践，把霍乱死亡率从两三成压到百分之几。这就是<strong>口服补液盐</strong>：《柳叶刀》后来称它为二十世纪最重要的医学进展之一，而它的全部技术含量不过是一勺糖、一撮盐和一升干净水。</p>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 海关</div>
+  <h2>货物先过这一关</h2>
+  <p>穿过肠壁，这口饭就算"进了体内"吗？还不算——它面前还有一道查验。</p>
+  <p>你可能以为营养被吸收后就直接汇入血液、随心脏送往全身。绝大多数水溶性货物——葡萄糖、氨基酸、水溶性维生素，以及混在食物里的各种外来化合物——都不走这条路：收进肠壁毛细血管之后，这些血管并不并入普通的静脉回流，而是先汇成一条粗大的<strong>肝门静脉</strong>，把整批货物径直押送到肝脏。</p>
+  <p>这是一种少见的安排：全身别处的静脉血都是直奔心脏的"回程"，只有肠道这一路中途多设了一个必经关口。肝血流每分钟约 1.5 升，占心输出量的四分之一左右，其中约<strong>七成半的血量</strong>来自这条门静脉。</p>
+  <p>把它想成海关比较贴切：不是一堵墙，而是一套制度，货物入境流通之前必须在这里过一遍。<strong>征税</strong>——饭后骤增的葡萄糖被当场截留一部分，就地存成糖原，那批"活期存款"第 14 章跑起来时会全部取出；<strong>查验</strong>——肠道细菌产物、内毒素与随食物进来的有害物质多在此被拆解或标记；<strong>估价</strong>——氨基酸被清点、改造、按需分配。</p>
+  <p>这套制度有一个直接后果，叫<strong>首过效应</strong>：口服药被吸收后、抵达全身之前先要过肝这一关，往往被拆掉大半。硝酸甘油是教科书级的例子——口服能进入循环的不到一成，缓解心绞痛根本来不及；做成舌下含服片，从口腔黏膜直接进静脉，绕开海关，几十秒起效。</p>
+  <p>不过有一类货物走另一条路。长链脂肪被吸收后不进门静脉，而是在肠上皮里打包成乳糜微粒，交给平行的淋巴管道：从绒毛中央的乳糜管出发，汇入胸导管，最后在左侧锁骨附近注入大静脉，绕过了肝的第一道查验。代价是慢——吃过一顿油大的饭，血里的脂肪要三四个小时后才见峰值。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>同一片药，在不同的身体里不是同一个剂量。</strong>药物过完海关还剩多少，取决于肝里那批酶的活性，而它在人与人之间差别很大。</p>
+    <p>性别是另一个被长期忽略的变量。平均而言女性体重更轻、体脂比例更高，部分肝酶与肾清除率也与男性不同，同样一片药达到的血药浓度常常更高；而临床试验在很长一段时间里默认以男性受试者为主。2013 年，美国食品药品监督管理局下调了女性服用某种常见安眠药的推荐剂量——这类差异第一次以监管文件的形式被正式承认。这条线索留到第 19 章展开。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 调度</div>
+  <h2>血里只有一小勺糖</h2>
+  <p>19:50 上下，这口饭里最早被拆出来的葡萄糖已经进了血。</p>
+  <p>请记住一个能改变你对"血糖"直觉的数字：<strong>你全身血液里的葡萄糖，加起来只有 4 到 5 克</strong>——五升血，每升约一克，一小勺的量。而一顿普通的饭能带进来 50 到 100 克碳水化合物，是血里存量的十几到二十倍。不加调度，一顿饭就足以把血糖顶到危险的高度。</p>
+  <p>所以身体对付饭后血糖，从来不是"补充"，而是<strong>限流与分派</strong>。上游那一层你已经见过：幽门一次只放几毫升，小肠一段段慢慢吸收——糖不是一涌而入，是被摊在两三个小时里滴进来的。</p>
+  <p>下游一层是胰岛素。它常被叫作"降糖激素"，这名字容易让人误会成它把糖销毁了。更准确的说法是，胰岛素是一张<strong>入库单</strong>——命令肌肉和脂肪细胞把糖的通道搬到表面来，同时命令肝停止放糖、改为囤积。糖一克没少，只是从流通领域进了库房。它的对手胰高血糖素在两餐之间做相反的事。两只手一进一出，把血糖按在很窄的区间里：正常人餐后 30 到 60 分钟达峰，通常不超过 7.8 mmol/L，两小时内回落。</p>
+
+  <h3>肠子会提前报菜名</h3>
+  <p>这套调度里最反直觉的一环，1960 年代才被看清。</p>
+  <p>当时有人做了个干净利落的实验：给同一批人喝下一定量的葡萄糖，测胰岛素反应；改天再给他们<strong>静脉注射</strong>葡萄糖，剂量调到让血糖曲线与上次几乎重合。按"胰岛素跟着血糖走"的直觉，两次反应该差不多。结果差了两到三倍，口服那次高得多。</p>
+  <p>血糖曲线一模一样，胰岛素却不一样——可见胰腺收到的不只血糖这一条消息。多出来的那条来自肠子：食物一到肠道，肠壁上的内分泌细胞就分泌一类叫<strong>肠促胰素</strong>的激素（主要是 GIP 和 GLP-1），赶在葡萄糖大批入血之前先通知胰腺准备，贡献了餐后胰岛素反应的一半到七成。就像一家像样的馆子：客人点完单，跑堂的先冲后厨喊一嗓子，厨房不等菜单送到就起了锅。</p>
+  <p>GLP-1 还顺带让胃排空变慢、让胰高血糖素少放，并作用于下丘脑让你觉得饱。一个由肠道分泌却管着食欲的激素——这个发现后来长出了一整类药。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>把"报菜名"的那条消息一直按住。</strong>天然的 GLP-1 在血里几分钟就被降解。把它改造成扛得住降解、每周注射一次的类似物，最初只为二型糖尿病降糖；临床上很快发现受试者体重也明显下降，这类药于是走出了糖尿病科。此后十年效力一路抬升：单靶点司美格鲁肽约 15%，双靶点替尔泊肽约 21%，三靶点药在 2026 年 5 月的三期试验中 80 周减重约 25%；2023 年一项大型试验还显示它降低了超重合并心血管病人群的心血管事件。给药方式也在变：继口服肽剂型之后，小分子口服药 orforglipron 已于 2026 年 4 月 1 日获批。</p>
+    <p>没解决的问题同样明确。停药后体重多半反弹，说明它更接近一种需要长期使用的治疗，而非一次性矫正；减掉的重量里有相当一部分是肌肉，如何一边减重一边保住肌肉是 2025–2026 年最热的临床议题之一；用于减重的这一代药，十年以上的安全性数据还不存在（同类分子用于糖尿病已有更长的使用史）。价格与供应决定了谁用得上——那已经不是生理学问题了。</p>
+  </div>
+
+  <p>顺带说件小事：饭后为什么困。流行的说法"血都跑去消化了，大脑缺血"站不住——脑血流有相当严格的自我调节。目前认为更可能是餐后释放的肠道激素直接作用于中枢，以及维持清醒的一类下丘脑神经元受血糖升高抑制。机制至今没完全说清。</p>
+</section>
+
+<!-- ==================== 第 6 节 ==================== -->
+<section id="s6">
+  <div class="eyebrow">06 · 末段</div>
+  <h2>交给房客处理</h2>
+  <p>次日凌晨两三点。这口饭的残余通过回盲瓣，进入结肠。</p>
+  <p>到这里，能被你自己的酶拆开的东西基本都拆完了。剩下的主要是膳食纤维——植物细胞壁里那些结构糖，人类的酶一种也切不动。在很多草食动物身上这是主粮；对你来说，它们本该是彻底的废料。</p>
+  <p>身体的办法是：外包。</p>
+  <p>结肠里住着数以万亿计的细菌。这个数字过去常被写成"细菌是人体细胞的十倍"，2016 年的一次重新估算把它拉回了地面：常驻细菌约 <strong>3.8 万亿</strong>，人体细胞约 3.0 万亿——同一个量级，大致一比一，而非十比一。</p>
+  <p>这些房客把纤维<strong>发酵</strong>掉——和酿酒、腌菜是同一回事：无氧环境里微生物把大分子拆小，顺便产气（腹胀正是副产品）。主要产物是短链脂肪酸，其中丁酸的去向耐人寻味：它是<strong>结肠上皮细胞的主要燃料</strong>，供这些细胞六到七成的能量——你肠壁上那层细胞不怎么从血里拿糖，主要吃门口房客拉出来的东西。整场外包贡献你日常能量需求的百分之几到一成。</p>
+  <p>房客什么时候搬进来的？第 8 章末尾说过：出生那一刻。产道、母乳、怀抱送来第一批定植者，此后它们参与训练免疫系统长达数年（第 10 章）。</p>
+  <p>与此同时，结肠做着最后的回收：一到两升水和电解质被收回，内容物一点点变稠。这段路只占全程四分之一左右，却要走 <strong>10 到 60 小时</strong>——图 13-1 里那个刺眼的不对称正在这里：路最短，时间最长。</p>
+  <p>这也是整趟旅程里控制权唯一一次交还给你：肛门内括约肌不听指挥，外括约肌听——一道自动闸，一道手动闸，末尾那一下由你说了算。</p>
+  <p>最后说说被排出去的东西。粪便干重里真正来自食物的残渣只是一部分，相当大的比例是<strong>细菌</strong>，还有一部分是换下来的肠道上皮——第 2 节那批 3 到 5 天换一茬的内衬。你每天送走的，有一份是自己刚脱下的旧皮。</p>
+  <p>19:12 出发，两天后旅程结束。那口饭里被留下的部分此刻已经不再是"饭"：碳进了你的肝糖原和肌糖原，氮进了你正在合成的蛋白质，水混进了你的血。第 1 章说细胞是一条形状恒定、材料一直在换的河——这一章讲的就是那条河的进水口。至于这些原子最后去哪儿，终章会讲完。</p>
+  <p>现在，糖原已经入库。下一章，我们把它取出来花掉。</p>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">一顿饭的旅程 · 关键数字</div>
+    <table>
+      <tr><td class="k">每日唾液分泌量</td><td class="v">1–1.5 L</td><td class="n">含淀粉酶、黏蛋白、溶菌酶</td></tr>
+      <tr><td class="k">吞咽咽期耗时</td><td class="v">0.7–1 s</td><td class="n">30 组以上肌肉协同，呼吸暂停</td></tr>
+      <tr><td class="k">食管蠕动波速度</td><td class="v">2–4 cm/s</td><td class="n">全程 6–10 秒，不依赖重力</td></tr>
+      <tr><td class="k">胃液 pH</td><td class="v">1.5–3.5</td><td class="n">空腹偏下限，比柠檬汁酸几倍</td></tr>
+      <tr><td class="k">胃黏液层厚度</td><td class="v">100–500 μm</td><td class="n">内外 pH 从 ~2 过渡到 ~7</td></tr>
+      <tr><td class="k">消化道上皮更换周期</td><td class="v">3–5 天</td><td class="n">整层内衬每周换一遍</td></tr>
+      <tr><td class="k">胃排空时间</td><td class="v">2–5 h</td><td class="n">幽门只放行约 2 mm 以下颗粒</td></tr>
+      <tr><td class="k">小肠长度（活体）</td><td class="v">3–5 m</td><td class="n">离体标本因肌张力消失更长</td></tr>
+      <tr><td class="k">小肠吸收面积</td><td class="v">30–40 m²</td><td class="n">三级放大约 100–190 倍；旧值"网球场"系高估</td></tr>
+      <tr><td class="k">每日消化液总量</td><td class="v">7–9 L</td><td class="n">回收 99% 以上，随粪便仅 100–200 mL</td></tr>
+      <tr><td class="k">全身血液葡萄糖存量</td><td class="v">4–5 g</td><td class="n">一顿饭带进的碳水是它的 10–20 倍</td></tr>
+      <tr><td class="k">口至肛全程时间</td><td class="v">24–72 h</td><td class="n">结肠段占 10–60 h</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">胃里装着 pH 1.5–3.5 的强酸，为什么没把胃壁化掉？</div>
+      <div class="opts">
+        <button>胃壁上有一层永久性的防酸涂层，像不粘锅</button>
+        <button data-c="1">黏液与碳酸氢盐持续分泌，在半毫米内造出 pH 2 到 7 的梯度；加上酶以钝版本分泌、上皮 3–5 天全换</button>
+        <button>胃壁细胞本身耐酸，泡在酸里也不受损</button>
+        <button>食物进入后立刻把酸稀释到中性</button>
+      </div>
+      <div class="explain">关键在于这道屏障是被持续供养的，而不是一层静态涂层。所以真正危险的不是"涂层被划破"，而是供养被切断——布洛芬、阿司匹林这类药抑制前列腺素合成，顺带压低了黏液分泌与黏膜血流，胃因此受损。同一种前列腺素，在第 8 章里的角色是撑开新生儿的动脉导管。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">Beaumont 通过 St. Martin 腹壁上那扇窗做的实验里，哪一项最直接地终结了"消化主要靠机械研磨"的说法？</div>
+      <div class="opts">
+        <button>他观察到食物在胃里被翻搅</button>
+        <button>他发现不同食物消化的快慢不同</button>
+        <button data-c="1">他把胃液抽出来装瓶、加进一块肉、揣在腋下保温，肉照样化了</button>
+        <button>他测量了胃液的酸度</button>
+      </div>
+      <div class="explain">离开了胃、没有任何研磨的情况下消化照常发生，机械论就没有立足之地。更早的雷奥米尔和斯帕兰扎尼已用金属管、海绵做过类似尝试，Beaumont 的分量在于在活人身上连续取证八年、共 238 次。这段历史还有另一半：St. Martin 不识字，靠一纸自己读不懂的契约受雇，多次出逃；他最终比 Beaumont 多活了二十七年，家人拒绝了解剖遗体的请求。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">关于小肠的吸收面积，下面哪个说法是准确的？</div>
+      <div class="opts">
+        <button>约等于一个网球场，200–300 平方米</button>
+        <button data-c="1">约 30–40 平方米——"网球场"是早期推算的高估，实测值只有旧值的五分之一到十分之一</button>
+        <button>与皮肤面积相当，约 2 平方米</button>
+        <button>无法测量，只能定性描述</button>
+      </div>
+      <div class="explain">三级放大（环状皱襞 ×1.6，绒毛与微绒毛合计 ×60–120，共约 100–190 倍）把一根内表面 0.3–0.5 平方米的管子铺成三四十平方米。旧的"网球场"数字出自离体标本与理想几何模型的推算，2014 年的系统实测把它大幅下修，实测值只有旧值的五分之一到十分之一。这条"表面积作弊器"的思路，第 5 章已经用同一条物理约束解释过肺为什么长成那个样子。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">硝酸甘油为什么做成舌下含服而不是口服吞下？</div>
+      <div class="opts">
+        <button>吞下去会被胃酸破坏</button>
+        <button>舌下的血管比肠道的血管粗</button>
+        <button data-c="1">口服吸收后须先经肝门静脉过肝，大部分被代谢掉；舌下黏膜可绕开这一关</button>
+        <button>它在肠道里无法被吸收</button>
+      </div>
+      <div class="explain">这就是首过效应。肠道吸收的水溶性货物不直接汇入体循环，而是先由肝门静脉押送到肝——肝血流约七成半来自这条通路。硝酸甘油口服的生物利用度不到一成，等它过完关，心绞痛早就过去了。顺带一提，长链脂肪走的是另一条路：打包成乳糜微粒经淋巴管、胸导管入静脉，绕开了这道关口，代价是要慢上几小时。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">同一个人，口服葡萄糖与静脉注射葡萄糖，血糖曲线调成几乎重合，胰岛素反应却差了两三倍。这说明什么？</div>
+      <div class="opts">
+        <button>静脉注射的葡萄糖不能被胰腺识别</button>
+        <button>口服时肝脏分泌了额外的胰岛素</button>
+        <button data-c="1">胰腺收到的不只是血糖这一条消息——食物一到肠道，肠壁就先分泌肠促胰素通知胰腺</button>
+        <button>口服葡萄糖被吸收得更完全，实际入血量更大</button>
+      </div>
+      <div class="explain">这就是肠促胰素效应，贡献了餐后胰岛素反应的一半到七成，主角是 GIP 和 GLP-1。GLP-1 顺带还延缓胃排空、抑制胰高血糖素、作用于下丘脑产生饱腹感——今天那一整类减重与降糖药，正是把这条几分钟就被降解的天然信号改造成了能长时间维持的版本。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第三幕 满负荷运行</div>
+  <div class="title">第 14 章 · 一次奔跑</div>
+  <p>饭后两小时，你换上鞋出了门。刚才入库的糖原马上就要被取出来烧掉，而且是三套供能系统轮流接手：前十秒一套，两分钟一套，往后一套。心脏的出水量会翻上四五倍，内脏的血被大量抽走——身体在几分钟内完成一次彻底的资源重新分配。下一章，我们跑一次。</p>
+  <nav class="footnav">
+    <a href="ch12-puberty.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch14-run.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 行程图：点站点高亮 + 切换说明 + 更新累计时钟
+  var CLOCK = {
+    mouth: '累计 ≈ 30 秒',
+    esoph: '累计 ≈ 40 秒',
+    stom:  '累计 2–5 小时',
+    duod:  '累计 2–5 小时',
+    jeju:  '累计 5–10 小时',
+    colon: '累计 15–70 小时',
+    rect:  '累计 24–72 小时'
+  };
+  var map = document.getElementById('gimap');
+  var clock = map ? map.querySelector('.clock-v') : null;
+  var tabs = document.querySelectorAll('#gimap-fig .stop-btn');
+  var stops = document.querySelectorAll('#gimap .stop');
+  var panes = document.querySelectorAll('#gimap-fig .sp');
+  function showStop(key){
+    var i;
+    map.classList.add('picked');
+    if (clock) clock.textContent = CLOCK[key] || '';
+    for (i = 0; i < tabs.length; i++) {
+      tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-stop') === key ? 'true' : 'false');
+    }
+    for (i = 0; i < stops.length; i++) {
+      stops[i].classList.toggle('on', stops[i].getAttribute('data-stop') === key);
+    }
+    for (i = 0; i < panes.length; i++) {
+      panes[i].classList.toggle('on', panes[i].getAttribute('data-sp') === key);
+    }
+  }
+  for (var t = 0; t < tabs.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){ showStop(el.getAttribute('data-stop')); });
+    })(tabs[t]);
+  }
+  for (var s = 0; s < stops.length; s++) {
+    (function(el){
+      el.addEventListener('click', function(){ showStop(el.getAttribute('data-stop')); });
+    })(stops[s]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第9章 · 大脑的野蛮生长与修剪 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 9-1 突触密度曲线（本章专用） ---- */
+#synapse-fig .region-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#synapse-fig .region-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#synapse-fig .region-btn:hover{border-color:var(--gold); color:var(--ink);}
+#synapse-fig .region-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#synapse-fig .region-btn[aria-pressed="true"]{color:var(--ink); border-color:var(--ink-faint); font-weight:700;}
+#synapse-fig .region-btn[data-region="vis"][aria-pressed="true"]{color:var(--deoxy); border-color:var(--deoxy);}
+#synapse-fig .region-btn[data-region="aud"][aria-pressed="true"]{color:var(--green); border-color:var(--green);}
+#synapse-fig .region-btn[data-region="pfc"][aria-pressed="true"]{color:var(--gold); border-color:var(--gold);}
+#synapse .cv{transition:opacity .35s;}
+#synapse .cv.off{opacity:.09;}
+#synapse .curve{fill:none; stroke-width:3; stroke-linejoin:round; stroke-linecap:round;}
+#synapse .cv-vis .curve{stroke:var(--deoxy);}
+#synapse .cv-vis .peak{fill:var(--deoxy);}
+#synapse .cv-aud .curve{stroke:var(--green);}
+#synapse .cv-aud .peak{fill:var(--green);}
+#synapse .cv-pfc .curve{stroke:var(--gold);}
+#synapse .cv-pfc .peak{fill:var(--gold);}
+#synapse .peak{stroke:none;}
+#synapse .lead{stroke-width:1.2; fill:none; opacity:.7;}
+#synapse .cv-vis .lead{stroke:var(--deoxy);}
+#synapse .cv-aud .lead{stroke:var(--green);}
+#synapse .cv-pfc .lead{stroke:var(--gold);}
+#synapse .cv-lb{font-size:12px; font-weight:600;}
+#synapse .cv-vis .cv-lb{fill:var(--deoxy);}
+#synapse .cv-aud .cv-lb{fill:var(--green);}
+#synapse .cv-pfc .cv-lb{fill:var(--gold);}
+#synapse .ax{stroke:var(--line); stroke-width:2;}
+#synapse .grid{stroke:var(--line); stroke-width:1; stroke-dasharray:3 5;}
+#synapse .base{stroke:var(--ink-faint); stroke-width:1.4; stroke-dasharray:8 6;}
+#synapse .ax-lb{fill:var(--ink-faint); font-size:11.5px;}
+#synapse .ax-t{fill:var(--ink-dim); font-size:12px;}
+
+/* ---- 图 9-2 髓鞘化与窗口（本章专用） ---- */
+#waves .brain{fill:var(--surface2); stroke:var(--ink-faint); stroke-width:2;}
+#waves .z1{fill:var(--deoxy); fill-opacity:.30; stroke:var(--deoxy); stroke-width:1.5;}
+#waves .z2{fill:var(--green); fill-opacity:.26; stroke:var(--green); stroke-width:1.5;}
+#waves .z3{fill:var(--gold); fill-opacity:.24; stroke:var(--gold); stroke-width:1.5;}
+#waves .zl{fill:var(--ink); font-size:12.5px; font-weight:700;}
+#waves .zs{fill:var(--ink-dim); font-size:11px;}
+#waves .flow{stroke:var(--oxy); stroke-width:2.4; fill:none; stroke-linecap:round;}
+#waves .flow-l{fill:var(--oxy); font-size:11.5px;}
+#waves .ax{stroke:var(--line); stroke-width:1.6;}
+#waves .tk{fill:var(--ink-faint); font-size:11px;}
+#waves .bar-lb{fill:var(--ink); font-size:12.5px; font-weight:600;}
+#waves .bar{stroke:none;}
+#waves .b-vis{fill:var(--deoxy);}
+#waves .b-lan{fill:var(--green);}
+#waves .b-myl{fill:var(--gold);}
+#waves .note{fill:var(--ink-faint); font-size:11px;}
+@media (prefers-reduced-motion: reduce){
+  #synapse .cv{transition:none;}
+  #synapse-fig .region-btn{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第二幕 调试与扩容 · 第 9 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>大脑的野蛮生长<br>与修剪</h1>
+  <p class="subtitle">两年铺满，十几年削减。颅骨底下先长出远超所需的一整套连接，再交给经验一刀一刀削回去——为什么建了又拆。</p>
+  <div class="meta"><span>阅读 ≈ 17 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>出生后第三周的一个下午。你躺在那里，什么也不会。</p>
+  <p>抬不起头，认不出人脸，攥住一根伸过来的手指是反射而不是决定。从外面看，这具刚刚完成换景的身体里，最没长开的部分恰恰是它的主人。可颅骨底下，此刻正铺开一生中最奢侈的一场生长：神经元之间的连接以每秒十万到百万计的速度搭上，往后两年里，你会造出远远超过实际所需的一整套连接。</p>
+  <p>然后，从两岁前后开始，你要用十几年时间，亲手拆掉其中相当一部分。为什么不一次造对？这不是浪费，这是一种赌法——把决定权从那本说明书手里拿走，交给你将要落地的那个世界。这一章讲的就是这笔交易：过量到底买来了什么，又要拿什么去付。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 过剩</div>
+  <h2>该来的都已经到齐</h2>
+  <p>先纠正一个常见的想象：婴儿的大脑往后要"长出更多脑细胞"。</p>
+  <p>基本不是这样。神经元的数目在出生时就已大致就位——成年人的脑里约有 <strong>860 亿个</strong>神经元，还有数量同一量级的胶质细胞，而这些神经元的绝大多数在你出生前就已经生成、迁移到位。（可能的例外是有的：海马体的一小片区域<strong>或许</strong>终生还在添新神经元——人类身上的证据仍有争议，第 15 章和第 23 章会讲这场争论。）</p>
+  <p>可婴儿的脑重从出生时的 <strong>350 到 400 克</strong>，一年内涨到约 1000 克，成年后落在 1300 到 1400 克——三倍多。多出来的重量不是新的神经元，而是三样东西：神经元之间的<strong>突触</strong>、包裹在纤维外面的<strong>髓鞘</strong>，以及照料它们的胶质细胞。</p>
+  <p>换句话说，出生时该到场的细胞都已到场，彼此之间还没有连上。接下来两年，搭连接这件事以一种近乎失控的速度展开。</p>
+  <h3>先伸出去，再决定留哪根</h3>
+  <p>爬藤植物的做法很能说明这件事。牵牛花的茎在生长时会向四面八方甩出细长的卷须，一根一根在空气里划着圈找东西。绝大多数什么也没碰到，几天后就干枯脱落；碰到了篱笆的那几根会立刻加粗、缠紧、把整株植物的重量托上去。植物并不预先知道篱笆在哪儿——它的策略是<strong>多伸，然后按接触结算</strong>。</p>
+  <p>婴儿大脑的接线用的是同一种策略，只是尺度大得多。峰值时期的突触密度可以达到成年水平的<strong>一倍半上下</strong>，若换成树突棘计数这类更细的指标，某些脑区在童年可达成年的两三倍。粗略地说：先造出一份半到两份，最后留下一份。</p>
+  <p>而且各处并不同步。听觉皮层的突触密度在出生后头几个月就冲到顶点，视觉皮层在 <strong>4 到 12 个月</strong>之间达峰，而负责规划、克制、权衡的前额叶要拖到<strong>两三岁</strong>才见顶，此后的削减一直延续到二十岁上下（图 9-1）。这条时间差往后会反复出现——它是本章后半和第 12 章的暗线。</p>
+
+  <figure id="synapse-fig">
+    <div class="switch-row">
+      <span class="switch-hint">点脑区名，单看或叠加 →</span>
+      <div class="region-tabs" role="group" aria-label="选择要显示的脑区曲线">
+        <button class="region-btn" data-region="aud" aria-pressed="true">听觉皮层</button>
+        <button class="region-btn" data-region="vis" aria-pressed="true">视觉皮层</button>
+        <button class="region-btn" data-region="pfc" aria-pressed="true">前额叶</button>
+      </div>
+    </div>
+    <svg id="synapse" viewBox="0 0 760 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三个脑区突触密度随年龄变化的倒 U 形曲线示意：听觉皮层最早达峰，视觉皮层生后 4 到 12 个月达峰，前额叶两三岁达峰且削减延续至二十岁上下">
+      <line class="grid" x1="90" y1="40" x2="730" y2="40"/>
+      <line class="grid" x1="90" y1="113" x2="730" y2="113"/>
+      <line class="grid" x1="90" y1="258" x2="730" y2="258"/>
+      <line class="base" x1="90" y1="185" x2="730" y2="185"/>
+      <text class="ax-lb" x="82" y="44" text-anchor="end">200</text>
+      <text class="ax-lb" x="82" y="117" text-anchor="end">150</text>
+      <text class="ax-lb" x="82" y="189" text-anchor="end">100</text>
+      <text class="ax-lb" x="82" y="262" text-anchor="end">50</text>
+      <text class="ax-lb mono" x="726" y="180" text-anchor="end">成年水平</text>
+      <line class="ax" x1="90" y1="40" x2="90" y2="330"/>
+      <line class="ax" x1="90" y1="330" x2="730" y2="330"/>
+      <text class="ax-t" x="90" y="28" text-anchor="start">突触密度（成年 = 100）</text>
+      <text class="ax-lb" x="90" y="350" text-anchor="middle">出生</text>
+      <text class="ax-lb" x="150" y="350" text-anchor="middle">3 月</text>
+      <text class="ax-lb" x="240" y="350" text-anchor="middle">1 岁</text>
+      <text class="ax-lb" x="300" y="350" text-anchor="middle">2 岁</text>
+      <text class="ax-lb" x="410" y="350" text-anchor="middle">5 岁</text>
+      <text class="ax-lb" x="500" y="350" text-anchor="middle">10 岁</text>
+      <text class="ax-lb" x="640" y="350" text-anchor="middle">20 岁</text>
+      <text class="ax-lb" x="726" y="350" text-anchor="end">成年 →</text>
+
+      <g class="cv cv-aud" data-region="aud">
+        <polyline class="curve" points="90,229 120,160 150,105 190,120 240,139 300,156 345,163 410,170 500,178 570,182 640,184 715,185"/>
+        <line class="lead" x1="152" y1="84" x2="150" y2="99"/>
+        <circle class="peak" cx="150" cy="105" r="5"/>
+        <text class="cv-lb" x="100" y="78" text-anchor="start">听觉 · 生后数月达峰</text>
+      </g>
+      <g class="cv cv-vis" data-region="vis">
+        <polyline class="curve" points="90,243 150,156 190,112 240,101 300,120 345,134 410,153 500,171 570,179 640,184 715,185"/>
+        <line class="lead" x1="256" y1="84" x2="244" y2="95"/>
+        <circle class="peak" cx="240" cy="101" r="5"/>
+        <text class="cv-lb" x="250" y="78" text-anchor="start">视觉 · 4–12 月达峰</text>
+      </g>
+      <g class="cv cv-pfc" data-region="pfc">
+        <polyline class="curve" points="90,250 150,207 190,178 240,149 300,120 345,110 410,120 500,139 570,159 640,176 715,185"/>
+        <line class="lead" x1="406" y1="84" x2="351" y2="105"/>
+        <circle class="peak" cx="345" cy="110" r="5"/>
+        <text class="cv-lb" x="400" y="78" text-anchor="start">前额叶 · 2–3 岁达峰</text>
+      </g>
+
+      <text class="ax-lb" x="90" y="392" text-anchor="start">纵轴为示意刻度：曲线形状与达峰先后有据，具体高度不作定量解读。</text>
+      <text class="ax-lb" x="90" y="410" text-anchor="start">横轴为压缩刻度（前两年拉开，此后压缩）。</text>
+    </svg>
+    <figcaption><b>图 9-1 · 三个脑区的倒 U 形曲线。</b>每条曲线都是先冲高再回落，但冲高的时点相差好几年：听觉最早，视觉次之，前额叶最晚见顶、削减也拖得最久。数据来源为小样本的尸检计数（Huttenlocher 等人的经典工作），个体差异大、测量方法各异，图中曲线为趋势示意而非定量测量；纵轴刻度只用于比较形状，不宜逐点解读。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 疏枝</div>
+  <h2>把决定权交给经验：修剪是怎么算账的</h2>
+  <p>造得过量，接下来就要选。选的标准朴素得惊人：<strong>用得上的留下，一直闲着的撤走。</strong></p>
+  <p>1949 年，加拿大心理学家<strong>唐纳德·赫布</strong>把这条规则写成了一句后来被反复引用的话，大意是：两个神经元若反复一起活动，它们之间的联系就会加强。后人把它压缩成一句顺口的话——"一起放电的，连到一起。"反过来同样成立：长期各干各的，联系就松弛、退化，最后被撤除。</p>
+  <p>三角洲的形成是同一笔账。一条大河入海时先漫成几十条汊道，谁也不比谁高贵；但只要某条汊道偶然多分到一点水，它就会冲得更深，冲得越深又能分到更多水，几十年后成为主河道；分到水少的那些淤塞、干涸，最终从地图上消失。没有谁事先指定过主河道的位置，是水流自己选出来的。</p>
+  <h3>动手的是谁</h3>
+  <p>真正拿剪刀的，是一类此前被当成"填充物"的细胞：<strong>小胶质细胞</strong>。它们原本被归为脑内的清道夫，负责收拾死细胞和碎片；本世纪的研究让它们改了身份——它们会主动伸出突起，触碰突触，把活动微弱的那些整个吞掉。</p>
+  <p>更耐人寻味的是它们认领目标的方式：待撤除的突触上会被贴上一类叫<strong>补体</strong>的分子标签。补体本是免疫系统里的老部件，作用是给病原体做记号、招呼吞噬细胞过来处理。发育中的大脑把这套标记系统整个借了过来，用来标记"这根不要了"。免疫系统的标签，在颅骨里被用作园艺记号——下一章我们会正面认识补体，届时你会想起它在这里的兼职。</p>
+  <h3>类比自查：修剪不等于损失</h3>
+  <p>"疏枝"这个词很容易让人推出一个错误结论：剪掉的越多越好，或者剪掉的都是坏枝。两条都不对。</p>
+  <p>果农疏枝是为了让留下的果子长得更大——但疏过头，树就减产。大脑同理：削减的目的是提高留下的那些连接的效率与精确度，而不是追求"少"。目前有几类神经发育与精神疾病的假说，恰恰指向修剪失度的两个方向——一些证据提示某类障碍与削减不足有关，另一些提示与青春期削减过度有关。这些仍是活跃争论中的假说，不是定论。<em>准确的说法是：这道修剪有一个合适的量，多了少了都要出事。</em></p>
+  <p>还有一件顺带的事：削减的同时，脑的另一半账在做加法。灰质（细胞体与突触密集的地方）体积在童年见顶后缓慢下降，白质（包着髓鞘的纤维）体积却一路上升到成年。<strong>连接的数目在减少，连接的质量在提高。</strong>这两条曲线一降一升，构成了整个第二幕的主旋律。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>你为什么记不住三岁前的事。</strong>几乎每个人的连续记忆都始于三四岁之后，更早的那几年是一段空白——这个现象有个正式名字，叫童年遗忘。它不是因为婴儿"没在记"：一岁的孩子明显记得人脸、记得每天的固定流程、记得昨天玩过的玩具。</p>
+    <p>目前较受重视的一种解释是：负责编织情景记忆的海马体在生命最初几年里正以极高的速度添加新的神经元并重排连接，新元件不断插进旧的回路，旧的索引就被搅乱了——好比一间正在大规模改建的图书馆，书还在，架子换了三轮，编号对不上了。有意思的是，在实验动物身上人为提高或压低海马新神经元的生成速度，确实能让既有记忆更快或更慢地变得难以提取。所以那段空白很可能不是没写，而是这本册子的目录被后来的翻修覆盖掉了。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 窗口</div>
+  <h2>那扇会关上的门：两位科学家和一批小猫</h2>
+  <p>1950 年代末，两个年轻人在约翰霍普金斯大学的地下室里做一件枯燥的事：把极细的电极扎进麻醉猫的视觉皮层，记录单个神经元在看到什么时会放电。<strong>大卫·休伯尔</strong>和<strong>托斯坦·威泽尔</strong>试遍了各种亮点和暗点，那些细胞几乎无动于衷。</p>
+  <p>转机来自一次意外。他们把画着圆点的玻片推进投影仪时，玻片的<strong>边缘</strong>扫过屏幕，扬声器里的神经元突然爆豆一样噼啪作响。它要的不是点，是线；而且是特定朝向、特定方向移动的线。这一下打开了整个领域：视觉皮层的细胞不是在"看图像"，而是在检测边缘的方向。这项工作让两人分享了 1981 年的诺贝尔生理学或医学奖。</p>
+  <h3>把一只眼睛遮上几周</h3>
+  <p>随之而来的第二组实验，才是这一章真正要用的。他们发现，视觉皮层里的细胞会按"偏好左眼还是右眼"排成一条条交替的带子，像斑马身上的条纹——两只眼睛在皮层里各占一半地盘。</p>
+  <p>于是他们把幼猫的一只眼睑缝合数周（这是当年神经生理学的常规做法），再打开。结果是两种截然不同的命运：<strong>如果这几周落在出生后的头几个月里</strong>，那只眼睛在皮层里的地盘几乎被另一只眼全部夺走，此后即便眼睛完好、视网膜正常，视力也再难恢复；<strong>如果对成年猫做同样的事</strong>，睁开眼后视力基本无恙。</p>
+  <p>结论很硬：皮层的地盘划分有一段可协商的时期，过了这段时期，划分就基本定案。这段时期被称为<strong>关键期</strong>。</p>
+  <p>要点在于"竞争"二字，而不是"缺光"。若把两只眼同时遮上，损害反而比只遮一只轻得多——因为没有对手趁虚而入。地盘不是被黑暗吞掉的，是被另一只还在工作的眼睛接管的。</p>
+  <h3>人身上的同一扇门</h3>
+  <p>这不是只在猫身上成立的事。婴儿若患有先天性白内障，混浊的晶状体挡住了输入，皮层里的对应地盘就会闲置。临床上的经验是：在生后头几个月内摘除并配好矫正，视力有机会发育得相当好；拖到几岁再手术，晶状体一样能换干净，视力却上不去了。<strong>问题从来不在眼睛，在皮层里那几个月的地盘之争。</strong>斜视和屈光参差造成的弱视也是同一条道理，这就是为什么儿童视力筛查如此强调年龄——遮盖疗法在学龄前效果最好，年龄越大收益越小。</p>
+  <p>语言那边有一扇更早关上的门，而且关得温和得多。刚出生的婴儿能分辨世界上各种语言里的音位对比，包括他母语中根本不用的那些。到了<strong>生后 6 到 12 个月</strong>，这项能力急剧收窄：日语环境里长大的婴儿逐渐分不清英语的 r 与 l，英语环境里长大的婴儿逐渐听不出印地语里两个不同的 d。</p>
+  <p>注意这不是"退化"。婴儿是在把一副通用的耳朵，磨成一副专用于母语的耳朵——把不用管的差别归为一类，是听懂母语的前提，而不是它的代价。</p>
+  <p><em>类比自查：把关键期说成"门"有个危险的外推——好像时间一到咔哒上锁，此后寸步难行。</em>真实情形是斜坡而非闸门：成年人当然能学第二语言，多数人学得会语法和词汇，只是口音更难改；成年弱视也并非全无办法，只是收效小、耗时长。窗口的准确含义是"同样一份输入，在不同年龄换来的改变量不同"——早期便宜，后期昂贵，而不是早期可行、后期禁止。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>"三岁定终身"是怎么被卖出去的。</strong>关键期是一项扎实的发现，但它在大众市场上的命运有点难堪。1990 年代，"婴儿听古典音乐会变聪明"的说法风靡一时——它源自一项让大学生听十分钟莫扎特、随后在一项折纸推理测验上短暂略有提升的小型研究。研究对象不是婴儿，效果只持续十几分钟，后来的重复研究大多没能稳定复现。可到了货架上，它变成了给胎儿听的磁带。</p>
+    <p>真正被证据支持的说法要朴素得多：婴幼儿需要的是充分而有回应的日常互动——被看着、被回应、被说话——以及及时纠正视力和听力问题。这些是普通抚养里本来就有的东西。倒过来说也成立：关键期的存在意味着<strong>严重剥夺</strong>的代价格外沉重，这一点在收养自极端缺乏照料环境的儿童的追踪研究中反复得到印证。窗口的意义在于警示剥夺，而不是兜售加速。</p>
+  </div>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>那扇门能重新推开吗。</strong>关键期为什么会关上，近二十年有了一个具体的嫌疑对象：随着皮层成熟，一部分神经元的胞体外面会积起一层网状的糖蛋白外套，叫<strong>围神经网</strong>，它像给已经定好的连接罩上一层保护壳，稳固的同时也把可塑性锁住。在成年鼠身上用酶把这层外套降解掉，眼优势可塑性可以被部分重新打开；调控一类被称为 PV 中间神经元的抑制性细胞的成熟节奏，则能让关键期提前或推迟——这条线索的主要推动者之一是哈佛的 Takao Hensch 团队。某些抗抑郁药物在成年动物身上也观察到类似的可塑性恢复。</p>
+    <p>人身上的进展要克制得多。成人弱视的双眼训练与知觉学习方案在试验中能带来可测量但有限的改善；至于曾被媒体大幅报道的"服药重开绝对音感窗口"，其原始研究是一项单次给药、受试者仅二十余人的小型试点，缺乏有力的独立重复，不宜作为结论引用。还有一个常被忽略的权衡：可塑性与脆弱性是同一枚硬币——重新打开学习之窗，也就重新打开了被扰乱之窗。若在 2030 年后重读此栏，请先核实围神经网干预是否已进入人体试验阶段。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 赶路</div>
+  <h2>从后往前，走了二十多年</h2>
+  <p>接线只是第一步。一根神经纤维要把信号送到远处，还得解决一个物理问题：<strong>慢，而且不齐。</strong></p>
+  <p>裸露的细纤维传导信号的速度大约<strong>每秒一米</strong>——从脊髓传到脚趾要将近一秒钟。解决办法是给纤维套上一层由胶质细胞卷出来的鞘：<strong>髓鞘</strong>。它把纤维沿途分成一段一段，信号不再逐点爬行，而是从一个裸露的节点直接跳到下一个节点，速度可以提到<strong>每秒上百米</strong>的量级——快了两个数量级。</p>
+  <p>全章的工程比喻只用在这里，而且是拿来拆的：髓鞘常被说成"给电线包上胶皮"，这个说法会把机制推歪。绝缘胶皮的作用是防漏电、防触碰，而髓鞘真正改变的是<strong>信号传播的方式</strong>——它让信号从连续爬行变成分段跳跃。更贴切的画面是把一条泥泞的土路铺成硬面路：车还是那辆车，路线一米未变，但通行时间从一小时缩到几分钟，而且每次都差不多。</p>
+  <p>最后半句才是关键。髓鞘化不只让信号更快，还让不同来路的信号<strong>能够对齐</strong>。听一个人说话时，声音的信号和嘴唇动作的信号要在皮层里几乎同时到达，才会被判定为"同一件事"；伸手抓杯子时，视觉、本体感觉和运动指令必须彼此咬合到几十毫秒之内。协调不是靠某个中枢下令，而是靠路况整齐。</p>
+  <h3>推进的顺序：由后向前</h3>
+  <p>髓鞘化不是全脑同时铺开，它有明确的推进方向——<strong>从后往前，由感觉与运动的边缘地带向联合皮层推进</strong>（图 9-2）。</p>
+  <p>枕叶的视觉通路和脑干、脊髓里的基本通路在生命头一两年内就大体铺好，这也是婴儿最先获得的能力：看清、抓握、坐稳、迈步。语言与听觉相关的通路在幼儿期跟上。<strong>前额叶</strong>——负责抑制冲动、权衡长远、在两个选项之间踩刹车的那一片——是目前公认成熟最晚的皮层区域之一，其髓鞘化一直推进到二十岁中期，常被概括为<strong>约 25 岁</strong>。</p>
+  <p>这个"25 岁"值得加两句注解，因为它已经被引用得太随意了。它是群体平均的粗略概括，个体差异很大；成熟也不是某个生日突然翻过去的一页，而是一条渐近的曲线，二十岁出头的人与二十七八岁的人之间并没有一道门槛。真实的意思只是：这片区域要铺的路比身体其他部分长得多，而且长过了法定成年、长过了身高停止增长（第 11 章）、也长过了性成熟（第 12 章）。</p>
+  <p>把这一条和上一节的时间差放在一起，第 12 章那个让无数家长困惑的现象就有了骨架：<strong>油门先到位，刹车还在路上。</strong>这句话我们留到那一章展开，届时还要给它加上必要的限制——因为顺着它一路推下去，很容易推出一个既不准确也不厚道的结论。</p>
+
+  <figure>
+    <svg id="waves" viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="上半为脑侧面示意图，髓鞘化按从后往前三个波次推进；下半为四条发育窗口的时间条，显示双眼视觉、母语音位辨别、语法与口音、前额叶髓鞘化各自的敏感期跨度">
+      <path class="brain" d="M132 138 C 140 74, 214 40, 312 42 C 424 44, 512 62, 566 96 C 620 130, 636 172, 618 196 C 600 220, 548 224, 500 222 L 214 222 C 158 220, 124 186, 132 138 Z"/>
+      <path class="z1" d="M470 52 C 540 66, 596 96, 614 132 C 628 162, 626 196, 604 212 C 560 226, 508 222, 476 218 Z"/>
+      <path class="z2" d="M300 44 C 380 42, 440 48, 470 52 L 476 218 L 300 220 Z"/>
+      <path class="z3" d="M300 44 C 208 42, 142 76, 133 140 C 126 190, 160 219, 214 221 L 300 220 Z"/>
+      <text class="zl" x="196" y="118" text-anchor="middle">③ 前额叶</text>
+      <text class="zs" x="196" y="138" text-anchor="middle">推进到二十岁中期</text>
+      <text class="zl" x="386" y="118" text-anchor="middle">② 联合皮层</text>
+      <text class="zs" x="386" y="138" text-anchor="middle">幼儿期至学龄</text>
+      <text class="zl" x="546" y="118" text-anchor="middle">① 感觉与运动</text>
+      <text class="zs" x="546" y="138" text-anchor="middle">头一两年大体铺好</text>
+      <path class="flow" d="M600 252 H 200 m 14 -8 l -14 8 14 8"/>
+      <text class="flow-l" x="608" y="256" text-anchor="start">枕后</text>
+      <text class="flow-l" x="192" y="256" text-anchor="end">额前</text>
+      <text class="note" x="400" y="272" text-anchor="middle">髓鞘化推进方向：由后向前</text>
+
+      <line class="ax" x1="120" y1="300" x2="700" y2="300"/>
+      <text class="tk" x="120" y="292" text-anchor="middle">出生</text>
+      <text class="tk" x="240" y="292" text-anchor="middle">1 岁</text>
+      <text class="tk" x="330" y="292" text-anchor="middle">3 岁</text>
+      <text class="tk" x="420" y="292" text-anchor="middle">7 岁</text>
+      <text class="tk" x="510" y="292" text-anchor="middle">12 岁</text>
+      <text class="tk" x="600" y="292" text-anchor="middle">18 岁</text>
+      <text class="tk" x="686" y="292" text-anchor="middle">25 岁</text>
+
+      <text class="bar-lb" x="120" y="326" text-anchor="start">双眼视觉的地盘划分（弱视可治窗口）</text>
+      <rect class="bar b-vis" x="120" y="334" width="165" height="15" opacity="1"/>
+      <rect class="bar b-vis" x="285" y="334" width="70" height="15" opacity=".62"/>
+      <rect class="bar b-vis" x="355" y="334" width="75" height="15" opacity=".3"/>
+      <rect class="bar b-vis" x="430" y="334" width="55" height="15" opacity=".13"/>
+
+      <text class="bar-lb" x="120" y="374" text-anchor="start">母语音位辨别的收窄</text>
+      <rect class="bar b-lan" x="120" y="382" width="120" height="15" opacity="1"/>
+      <rect class="bar b-lan" x="240" y="382" width="50" height="15" opacity=".45"/>
+      <rect class="bar b-lan" x="290" y="382" width="40" height="15" opacity=".16"/>
+
+      <text class="bar-lb" x="120" y="414" text-anchor="start">第一语言的语法与口音</text>
+      <rect class="bar b-lan" x="120" y="422" width="300" height="15" opacity="1"/>
+      <rect class="bar b-lan" x="420" y="422" width="90" height="15" opacity=".55"/>
+      <rect class="bar b-lan" x="510" y="422" width="90" height="15" opacity=".22"/>
+
+      <text class="bar-lb" x="120" y="454" text-anchor="start">前额叶髓鞘化（持续推进，非窗口）</text>
+      <rect class="bar b-myl" x="360" y="462" width="326" height="6" opacity=".8"/>
+      <rect class="bar b-myl" x="120" y="462" width="240" height="6" opacity=".45"/>
+    </svg>
+    <figcaption><b>图 9-2 · 推进方向与几扇窗。</b>上：髓鞘化由枕后向额前推进，前额叶最晚完成。下：四条发育窗口的粗略跨度，色块由深到浅表示敏感度递减——请注意它们是<strong>斜坡而非闸门</strong>，浅色段的意思是"仍然可以，但同样的输入换来的改变更少"。跨度取自不同研究的常用区间，个体差异大；末行的髓鞘化不是窗口，而是一条一路向前推进的线。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 电费</div>
+  <h2>一台吃掉家里大半口粮的器官</h2>
+  <p>这么铺张的一场生长，账单是谁付的？</p>
+  <p>成年人的脑重只占体重的<strong>约 2%</strong>，却要花掉静息代谢的<strong>约 20%</strong>。这个比例本身已经很扎眼了——每五份底火里有一份烧在颅骨底下。</p>
+  <p>孩子的账单更惊人。把不同年龄的脑葡萄糖消耗量摊开来看，峰值不在婴儿期，也不在青春期，而落在<strong>四五岁前后</strong>：那时脑消耗的能量约相当于静息代谢的<strong>三分之二</strong>，折成每日总能量消耗约<strong>四成上下</strong>（这两个数字的分母不同，混用是常见的误引，务必分清）。一个五岁孩子在幼儿园里坐着发呆，体内近一半的燃料正被送进颅骨底下那座疯狂抽枝又疯狂疏枝的园子。</p>
+  <h3>为什么四五岁的孩子体重涨得那么慢</h3>
+  <p>这里有一个漂亮的对应。人类儿童的<strong>体重增长速度</strong>并不均匀：出生后头一年飞快，然后一路减速，在四五岁前后落到<strong>整个童年最慢的一段</strong>，此后缓慢回升，到青春期再次冲刺。</p>
+  <p>而这一段，恰好和脑耗能的峰值重合。</p>
+  <p><em>这里要说清一个容易串线的地方：</em>与脑耗能峰值对上的是<strong>体重</strong>的增速，不是身高。身高的速度曲线形状类似，但触底比体重晚好几年——要到八九岁的青春期前夜才最低（第 11 章会把它完整画出来）。两条曲线不同步，别混着引。
+  <p>一种有力的解释是：两者在抢同一份口粮。孩子摄入的能量总量有限，脑要得多，身体就只能少拿。人类漫长而缓慢的童年——在灵长类里都算突出——很可能不是发育"慢"，而是资源被优先划拨给了颅内那场生长。这条被称为能量竞争的解释，把两条本来毫不相干的曲线接到了一起：<strong>你那几年体重涨得慢，是因为你的脑长得贵。</strong></p>
+  <h3>这笔交易到底买了什么</h3>
+  <p>回到引子里的问题：为什么不一次造对？</p>
+  <p>因为那本说明书不知道你会落在哪里。基因组要在受精那一刻就写定一具身体，可它无法预知这具身体将睁开眼看到怎样的光影、听到哪一种语言的音位、要在什么样的人群里学会看脸色。把连接一次性写死，等于赌一个未知的世界；先铺出富余，再让实际到来的经验决定留哪些、撤哪些，等于把这道题的答案交给出题人。</p>
+  <p>代价是三样：漫长得离谱的童年、昂贵得离谱的电费，以及一段谁也逃不掉的脆弱期——在窗口敞开的那些年里，缺失的照料和未被纠正的感官缺陷，会以同样的效率被写进结构里。</p>
+  <p>顺带说一句本章不展开的事：修剪与巩固有相当一部分是在睡觉时进行的，而婴儿一天要睡上十四到十七个小时。第 15 章会回到这份夜里的活儿。</p>
+  <p>现在，这具身体已经有了一套正在被经验雕琢的连接。但它还欠着另一门课——它即将走出无菌的子宫，进入一个挤满了微生物的世界，而分辨"这是我"和"这不是我"，需要另一套完全不同的学习方式。</p>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">大脑的生长与修剪 · 关键数字</div>
+    <table>
+      <tr><td class="k">成人脑神经元数</td><td class="v">~860 亿</td><td class="n">胶质细胞数量与之同量级</td></tr>
+      <tr><td class="k">脑重：出生 → 1 岁 → 成人</td><td class="v">350–400 g → ~1000 g → 1300–1400 g</td><td class="n">增重来自连接、髓鞘与胶质，非新增神经元</td></tr>
+      <tr><td class="k">婴儿期突触形成速率</td><td class="v">每秒十万–百万量级</td><td class="n">量级估算，随脑区与月龄变化很大</td></tr>
+      <tr><td class="k">突触密度峰值</td><td class="v">成年的 ~1.5 倍</td><td class="n">树突棘计数可达 2–3 倍；小样本尸检数据</td></tr>
+      <tr><td class="k">视觉皮层突触达峰</td><td class="v">生后 4–12 个月</td><td class="n">听觉皮层更早，约在生后数月</td></tr>
+      <tr><td class="k">前额叶突触达峰</td><td class="v">约 2–3 岁</td><td class="n">削减延续至二十岁上下</td></tr>
+      <tr><td class="k">神经传导速度</td><td class="v">~1 → ~100 m/s</td><td class="n">无髓纤维 → 有髓纤维，快约两个数量级</td></tr>
+      <tr><td class="k">前额叶髓鞘化完成</td><td class="v">约 25 岁</td><td class="n">群体粗略概括，渐近而非一道门槛</td></tr>
+      <tr><td class="k">母语音位辨别收窄</td><td class="v">生后 6–12 个月</td><td class="n">是专门化，不是能力退化</td></tr>
+      <tr><td class="k">脑耗能峰值（幼儿）</td><td class="v">静息代谢的 ~2/3</td><td class="n">约 4–5 岁；折合每日总能耗约四成</td></tr>
+      <tr><td class="k">脑耗能（成人）</td><td class="v">静息代谢的 ~20%</td><td class="n">脑重仅占体重约 2%</td></tr>
+      <tr><td class="k">婴儿每日睡眠</td><td class="v">14–17 h</td><td class="n">修剪与巩固有相当部分在睡眠中进行</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">婴儿的脑在出生后一年里长到约两倍半，多出来的主要是什么？</div>
+      <div class="opts">
+        <button>大量新生成的神经元</button>
+        <button data-c="1">突触、髓鞘和胶质细胞——细胞在出生时已基本到位，长的是连接与包装</button>
+        <button>脑脊液与血管</button>
+        <button>颅骨内的脂肪储备</button>
+      </div>
+      <div class="explain">神经元的数目在出生前就已大致就位。一个常被讨论的可能例外是海马体的一小片区域<strong>或许</strong>终生还在添新神经元（人类证据仍有争议，见第 15 章）——若成立，它恰好能解释你为什么记不住三岁前的事：不断插入的新元件把旧记忆的索引搅乱了。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">修剪按什么标准决定留下哪些连接？</div>
+      <div class="opts">
+        <button>由基因预先指定一份保留名单</button>
+        <button>随机撤除，靠数量取胜</button>
+        <button data-c="1">反复一起活动的连接被加强，长期沉默的被撤除</button>
+        <button>离细胞体越近的越容易保留</button>
+      </div>
+      <div class="explain">这条规则常被概括成"一起放电的，连到一起"，源头是赫布 1949 年的表述。真正执行撤除的是小胶质细胞，它认领目标的方式很意外：待撤的突触会被贴上补体分子的标签——那本是免疫系统用来标记病原体的部件，在发育中的大脑里被借去当了园艺记号。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">休伯尔与威泽尔把幼猫一只眼睑缝合数周，那只眼的视力此后难以恢复。最准确的解释是？</div>
+      <div class="opts">
+        <button>黑暗直接损伤了视网膜的感光细胞</button>
+        <button data-c="1">在关键期内，皮层里的地盘被仍在工作的另一只眼接管了</button>
+        <button>眼睑长期闭合导致晶状体混浊</button>
+        <button>视神经在缺乏刺激时会退化断裂</button>
+      </div>
+      <div class="explain">关键在竞争，不在缺光：把两只眼同时遮上，损害反而轻得多，因为没有对手趁虚而入。同样的道理解释了先天性白内障为什么必须早做手术——晶状体几岁做都能换干净，皮层里那几个月的地盘之争却过期不候。两人因视觉皮层的系列工作分享了 1981 年诺贝尔奖。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">关于髓鞘化的推进顺序，下面哪一条是对的？</div>
+      <div class="opts">
+        <button>从前往后，前额叶最先完成</button>
+        <button>全脑同步进行，两岁前基本完成</button>
+        <button data-c="1">由后向前，前额叶是完成最晚的区域之一，约推进到二十岁中期</button>
+        <button>只在青春期集中进行一次</button>
+      </div>
+      <div class="explain">髓鞘让信号从连续爬行改为分段跳跃，速度提高约两个数量级。但它更重要的作用是让不同来路的信号<strong>能够对齐</strong>——说话时的声音与唇动必须几乎同时到达皮层，才会被判成同一件事。至于常被引用的"25 岁"，那是群体的粗略概括，是一条渐近的曲线，不是某个生日突然翻过去的一页。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">人类儿童的体重增长速度在四五岁前后落到整个童年最慢的一段。一种有力的解释是？</div>
+      <div class="opts">
+        <button>这个年龄段的孩子普遍食欲下降</button>
+        <button>生长激素在这几年停止分泌</button>
+        <button data-c="1">这正是脑耗能的峰值年龄，脑与身体在抢同一份口粮</button>
+        <button>骨骼的生长板在这几年暂时关闭</button>
+      </div>
+      <div class="explain">四五岁时脑消耗的能量约相当于静息代谢的三分之二，折成每日总能耗约四成上下——注意这两个数字分母不同，混用是常见的误引。人类漫长的童年很可能不是发育"慢"，而是资源被优先划给了颅内那场生长：体重涨得慢，是因为脑长得贵。注意与脑耗能峰值对上的是<strong>体重</strong>增速而非身高——身高的低点要晚好几年，在八九岁的青春期前夜。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第二幕 调试与扩容</div>
+  <div class="title">第 10 章 · 免疫系统上学</div>
+  <p>子宫里近乎无菌，出生第一秒起，你的身体被亿万个微生物同时接管。你需要一支能认出"这不是我"的部队——可它凭什么不去攻打你自己？答案是一所淘汰率超过九成五的军校，和一场从出生上到成年的漫长课程。下一章，我们去看新生的免疫系统怎么上学。</p>
+  <nav class="footnav">
+    <a href="ch08-birth.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch10-immune.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 图 9-1：脑区曲线开关（多选叠加）
+  var rbtns = document.querySelectorAll('#synapse-fig .region-btn');
+  for (var t = 0; t < rbtns.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){
+        var key = el.getAttribute('data-region');
+        var on = el.getAttribute('aria-pressed') === 'true';
+        el.setAttribute('aria-pressed', on ? 'false' : 'true');
+        var g = document.querySelector('#synapse .cv[data-region="' + key + '"]');
+        if (g) {
+          g.classList.toggle('off', on);
+          if (on) { g.setAttribute('aria-hidden', 'true'); }
+          else { g.removeAttribute('aria-hidden'); }
+        }
+      });
+    })(rbtns[t]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

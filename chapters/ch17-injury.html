@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第17章 · 一次受伤 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 17-1 修复四阶段时间轴（本章专用） ---- */
+#repair-fig .rep-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#repair-fig .rep-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.06em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 15px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#repair-fig .rep-btn:hover{border-color:var(--gold); color:var(--ink);}
+#repair-fig .rep-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#repair-fig .rep-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#repair-fig .rep-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#repair-fig .rp{display:none;}
+#repair-fig .rp.on{display:block;}
+#repair-fig .rp-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#repair-fig .rp p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+#repair .ph-block{stroke:var(--line); stroke-width:1.5; cursor:pointer; transition:fill-opacity .3s, stroke .3s;}
+#repair .ph-1{fill:var(--oxy); fill-opacity:.16;}
+#repair .ph-2{fill:var(--gold); fill-opacity:.16;}
+#repair .ph-3{fill:var(--green); fill-opacity:.16;}
+#repair .ph-4{fill:var(--deoxy); fill-opacity:.16;}
+#repair .ph-block.on{fill-opacity:.42; stroke:var(--gold); stroke-width:2.5;}
+#repair .ph-t{fill:var(--ink); font-size:12.5px; font-weight:700; pointer-events:none;}
+#repair .axis{stroke:var(--line); stroke-width:2;}
+#repair .tick{stroke:var(--line);}
+#repair .tick-label{fill:var(--ink-faint); font-size:11.5px;}
+#repair .ev-dot{fill:var(--gold);}
+#repair .ev-stem{stroke:var(--line); stroke-width:1.2;}
+#repair .ev-label{fill:var(--ink); font-size:12.5px; font-weight:600;}
+#repair .ev-sub{fill:var(--ink-dim); font-size:11px;}
+
+/* ---- 图 17-2 再生能力光谱尺（本章专用） ---- */
+#regen .axis{stroke:var(--line); stroke-width:2;}
+#regen .arrow{fill:none; stroke:var(--line); stroke-width:2;}
+#regen .stem{stroke:var(--line); stroke-width:1.2;}
+#regen .dot{stroke:none;}
+#regen .rg-hi{fill:var(--green);}
+#regen .rg-mid{fill:var(--gold);}
+#regen .rg-lo{fill:var(--oxy);}
+#regen .lb{fill:var(--ink); font-size:13px; font-weight:700;}
+#regen .lb-s{fill:var(--ink-dim); font-size:11px;}
+#regen .end-t{fill:var(--ink-faint); font-size:12px;}
+#regen .hint{fill:var(--ink-faint); font-size:12px;}
+#regen .divider{stroke:var(--ink-faint); stroke-width:1.2; stroke-dasharray:5 5;}
+#regen .zone{stroke:var(--line); stroke-width:1.2;}
+#regen .zone-hi{fill:var(--green); fill-opacity:.12;}
+#regen .zone-lo{fill:var(--oxy); fill-opacity:.12;}
+#regen .zone-t{fill:var(--ink-dim); font-size:12px;}
+@media (prefers-reduced-motion: reduce){
+  #repair .ph-block{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第三幕 满负荷运行 · 第 17 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>一次受伤</h1>
+  <p class="subtitle">一道划破指腹的口子，要动用四支先后进场的队伍，前后交接，把活儿一直干到明年——而其中有些地方，注定只能将就。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 2 · 测验 5 · 前沿窗口 1</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>刀是新磨的。</p>
+  <p>你正把一颗洋葱切成丝，左手按着它，右手往下压——刀刃打滑，斜着从食指的指腹上划过去。有那么半秒钟，什么也没发生：切口是一道干干净净的白线，不红，也不疼。然后白线红了，血珠一颗接一颗顶出来，痛感这才姗姗赶到。你"嘶"地抽了口气，把手指含进嘴里，转身去翻创可贴。</p>
+  <p>这半分钟里你什么也没做。伤口那边却已经动起来了：先头部队几秒之内到位，往后两周还有三批陆续进场，前后交接，收尾要一直做到明年。这一章跟着它们走完全程——顺便回答一个更大的问题：同样一道口子，为什么长在皮肤上会留一条白线，长在肝上几乎不留痕迹，长在心脏上却会留下一块再也不跳的地方。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 秒级</div>
+  <h2>头十分钟：堤岸自己往里收</h2>
+  <p>第一件事发生在你感到疼之前。</p>
+  <p>破口处的小血管收缩了。血管壁里那层平滑肌被割断的一刻会本能地缩紧，管腔变窄，涌出来的血流随之变小。这是纯粹的机械反应，不经过大脑，也不必等神经发话——河堤裂了口子，堤岸先自己往里收一收，把决口收窄。这一手争取到的只有几秒钟，却让后面的事好办得多。</p>
+  <p>接着登场的是血小板。</p>
+  <p>血小板不是完整的细胞，而是骨髓里一种巨型细胞（巨核细胞）掰碎了撒出来的碎片：没有细胞核，直径两三微米，寿命只有 8 到 10 天。你每微升血里漂着 15 万到 40 万个，它们从血管内壁旁边流过无数次却几乎从不停靠——因为完好的内皮一直在劝退，持续释放一氧化氮和前列环素，等于沿途挂满了"此处平整，不要停"的牌子。</p>
+  <p>割破的地方，牌子没了。血管壁里那层平时被内皮盖住的胶原纤维暴露出来，还有一种叫 <strong>vWF（血管性血友病因子）</strong>的长条分子在破口上像旗子一样展开。血小板一碰上就换了性情：抓住旗子，摊平贴住，伸出伪足，同时把颗粒里的物质倾倒出去——那是招呼同伴的信号。几秒之内后续的血小板成群赶到，靠纤维蛋白原搭桥手拉手，叠成一个塞子——像沿着决口垒起来的一排沙袋。</p>
+  <p>这一步叫<strong>一期止血</strong>，通常 3 到 5 分钟内完成。你按住伤口默数两百下，等的就是它。</p>
+  <p>不过"沙袋堵决口"这个说法到这里得小心：血小板不是被水流冲上去堆在那儿的，它们主动抓住胶原、主动变形、主动招人。更贴切的画面是一群本来漂在河里的人，看见岸塌了，自己游过去把手臂挽在一起。所以血小板不足或功能不好的人，小伤口会渗很久——不是沙袋不够重，是没人去挽手。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>按住，比涂什么都管用。</strong>家里割伤出血，最有效的一步是直接压迫：拿干净的纱布按在伤口上，持续按 5 到 10 分钟，中途别掀开看——掀开一次，刚搭起来的血小板塞子就被撕掉一层，计时重来。把伤处抬到心脏以上也有帮助。至于往伤口上撒药粉、抹牙膏，既不加快凝血，还给后面的清创添麻烦。</p>
+  </div>
+
+  <p>塞子毕竟只是权宜之计：它松、软，经不住血压一次次冲。真正结实的封口要靠下一步。往下走之前，先把这道口子的修复日程表摊开看一眼。</p>
+
+  <figure id="repair-fig">
+    <div class="switch-row">
+      <span class="switch-hint">点阶段看详情 →</span>
+      <div class="rep-tabs" role="group" aria-label="选择修复阶段">
+        <button class="rep-btn" data-ph="1" aria-pressed="false">① 止血</button>
+        <button class="rep-btn" data-ph="2" aria-pressed="false">② 炎症</button>
+        <button class="rep-btn" data-ph="3" aria-pressed="false">③ 增殖</button>
+        <button class="rep-btn" data-ph="4" aria-pressed="false">④ 重塑</button>
+      </div>
+    </div>
+    <svg id="repair" viewBox="0 0 760 285" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="伤口修复四阶段时间轴：止血、炎症、增殖、重塑，四段互相重叠，横轴按时间量级排布">
+      <rect class="ph-block ph-1" data-ph="1" x="56" y="34" width="176" height="24" rx="7"/>
+      <text class="ph-t" x="66" y="50">① 止血 · 秒–分钟</text>
+      <rect class="ph-block ph-2" data-ph="2" x="150" y="62" width="286" height="24" rx="7"/>
+      <text class="ph-t" x="160" y="78">② 炎症 · 数小时–数天</text>
+      <rect class="ph-block ph-3" data-ph="3" x="330" y="90" width="234" height="24" rx="7"/>
+      <text class="ph-t" x="340" y="106">③ 增殖 · 数天–数周</text>
+      <rect class="ph-block ph-4" data-ph="4" x="466" y="118" width="254" height="24" rx="7"/>
+      <text class="ph-t" x="476" y="134">④ 重塑 · 数周–数年</text>
+
+      <line class="axis" x1="50" y1="166" x2="722" y2="166"/>
+      <line class="tick" x1="80" y1="160" x2="80" y2="172"/><text class="tick-label" x="80" y="188" text-anchor="middle">秒</text>
+      <line class="tick" x1="180" y1="160" x2="180" y2="172"/><text class="tick-label" x="180" y="188" text-anchor="middle">分</text>
+      <line class="tick" x1="280" y1="160" x2="280" y2="172"/><text class="tick-label" x="280" y="188" text-anchor="middle">时</text>
+      <line class="tick" x1="380" y1="160" x2="380" y2="172"/><text class="tick-label" x="380" y="188" text-anchor="middle">天</text>
+      <line class="tick" x1="480" y1="160" x2="480" y2="172"/><text class="tick-label" x="480" y="188" text-anchor="middle">周</text>
+      <line class="tick" x1="580" y1="160" x2="580" y2="172"/><text class="tick-label" x="580" y="188" text-anchor="middle">月</text>
+      <line class="tick" x1="680" y1="160" x2="680" y2="172"/><text class="tick-label" x="680" y="188" text-anchor="middle">年</text>
+      <text class="tick-label mono" x="722" y="152" text-anchor="end">时间 · 量级刻度 →</text>
+
+      <line class="ev-stem" x1="205" y1="166" x2="205" y2="192"/><circle class="ev-dot" cx="205" cy="166" r="4.5"/>
+      <text class="ev-label" x="205" y="210" text-anchor="middle">血小板栓封口</text>
+      <text class="ev-sub" x="205" y="226" text-anchor="middle">3–5 分钟</text>
+
+      <line class="ev-stem" x1="455" y1="166" x2="455" y2="192"/><circle class="ev-dot" cx="455" cy="166" r="4.5"/>
+      <text class="ev-label" x="455" y="210" text-anchor="middle">上皮两侧会合</text>
+      <text class="ev-sub" x="455" y="226" text-anchor="middle">数天–2 周</text>
+
+      <line class="ev-stem" x1="362" y1="166" x2="362" y2="232"/><circle class="ev-dot" cx="362" cy="166" r="4.5"/>
+      <text class="ev-label" x="362" y="250" text-anchor="middle">中性粒细胞到达峰值</text>
+      <text class="ev-sub" x="362" y="266" text-anchor="middle">约 24 小时</text>
+
+      <line class="ev-stem" x1="636" y1="166" x2="636" y2="232"/><circle class="ev-dot" cx="636" cy="166" r="4.5"/>
+      <text class="ev-label" x="636" y="250" text-anchor="middle">强度封顶 70–80%</text>
+      <text class="ev-sub" x="636" y="266" text-anchor="middle">再往后只是微调</text>
+    </svg>
+    <div class="rep-panel" id="repPanel">
+      <div class="rp on" data-rp="0">
+        <div class="rp-t">四段 · 首尾相压</div>
+        <p>点上方任意一段，看这一段谁在场、干什么。注意四条色带是相互重叠的：前一批还没撤，后一批已经上手——伤口里同一时刻常有两三支队伍并肩干活。横轴按时间量级排布，不等距。</p>
+      </div>
+      <div class="rp" data-rp="1">
+        <div class="rp-t">① 止血 · 秒 → 分钟</div>
+        <p>血管收缩争取几秒，血小板 3–5 分钟搭起塞子，凝血级联再用五到十分钟织出纤维蛋白网加固它。凝块随后回缩，把两侧创缘往中间拽。</p>
+      </div>
+      <div class="rp" data-rp="2">
+        <div class="rp-t">② 炎症 · 数小时 → 数天</div>
+        <p>红、肿、热、痛在这一段全部到齐，每一样都是一件正在办的差事。中性粒细胞 24 小时前后到达峰值，负责粗活；48–72 小时后巨噬细胞接班，一边清运一边把伤口从"打扫"切换到"重建"。</p>
+      </div>
+      <div class="rp" data-rp="3">
+        <div class="rp-t">③ 增殖 · 数天 → 数周</div>
+        <p>上皮细胞从两侧边缘往中间爬，每天推进半毫米到一毫米，碰头即停。伤口底部同时长出鲜红的肉芽组织，先铺一层又细又乱的胶原把缺口填满。此时伤口看着已经"好了"，强度却只有正常皮肤的两成上下。</p>
+      </div>
+      <div class="rp" data-rp="4">
+        <div class="rp-t">④ 重塑 · 数周 → 数年</div>
+        <p>最长也最安静的一段。细胶原换成粗的，纤维沿受力方向重排，多余的毛细血管撤走——疤痕从鼓起发红慢慢变平变白。三个月前后强度爬到七八成即封顶；深伤口这一段会拖上一两年。</p>
+      </div>
+    </div>
+    <figcaption><b>图 17-1 · 一道口子的修复日程表。</b>四个阶段首尾相压，不是依次交班。横轴按时间量级排布（秒 → 分 → 时 → 天 → 周 → 月 → 年），不等距；轴下四个金点是几个可核对的节点。深伤口、感染或血供不足会把每一段都拉长，尤其是最后一段。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 多米诺</div>
+  <h2>一排会自己加倍的多米诺</h2>
+  <p>小时候摆多米诺骨牌，最过瘾的是推倒第一块。凝血也是这么回事——只是这排牌有个古怪的性质：每倒一块，推倒的不止一块。</p>
+  <p>血浆里常年泡着十几种凝血因子，编号从 I 排到 XIII，个个处在"待激活"状态，像一排立好却谁也不碰谁的牌。每一种被激活后都变成一把剪刀（严格说是蛋白酶），活儿就是剪开下一种，把下一种也变成剪刀。关键在于一把剪刀能剪很多次：一个分子失活之前可以激活几十上百个下游分子。于是这排牌越往后越宽——起点是几个分子的微弱信号，终点是每秒生成数以万计的纤维蛋白丝，放大倍数以百万计。</p>
+  <p>起点有两个。一个在血管外：受伤的组织把一种平时绝不与血液照面的蛋白（组织因子）暴露出来，这条路快，几秒到几十秒就出结果。另一个在血液内部，接触到本不该接触的表面时自行启动，慢一些。两条路汇进同一条共同通路，终点是<strong>凝血酶</strong>——它把血浆里溶着的纤维蛋白原剪成纤维蛋白，后者自动聚成一张不溶于水的网。</p>
+  <p>凝块的模样就此定下：一张纤维网，网住血小板塞子和大量红细胞——血凝块是红的，正因为红细胞被网在里面。随后凝块缓缓回缩，把两侧创缘往一起拽。几小时后那层暗红发硬的痂，就是这张网干掉的样子。</p>
+  <h3>按住牌的那些手</h3>
+  <p>多米诺这个比喻，顺着推会推出一个吓人的结论：既然一倒到底，那血管里随便哪儿出点小差错，凝血岂不是一路蔓延，把整条血管封死？</p>
+  <p>拆开看就明白了：每一块牌旁边，都站着一只按住它的手。血液里常年备着好几双这样的手——抗凝血酶把凝血酶直接扣住；蛋白 C 与蛋白 S 专挑级联中间放大最狠的环节剪断；组织因子途径抑制物守在最上游。而完好的血管内皮沿途都在为这几双手补给，等于沿着整条河道不停撒水。凝块因此被死死限制在破口那一小片。</p>
+  <p>还有一支拆除队，从一开始就编进了凝块本身：纤溶酶原混在纤维蛋白网里一起凝固，等伤口修好，它被激活成纤溶酶，把网一根根剪断清走。凝与溶是同时进行的两股力量，平时以极低的速度对冲；受伤不过是把凝的那一边猛推了一把。平衡一旦偏了，两个方向都麻烦：偏向凝，是血栓；偏向溶，是止不住的出血。</p>
+  <p>十几块牌，缺任何一块，这排牌就在那儿断掉。<strong>血友病</strong>缺的是第 VIII 或第 IX 块，前面的牌照倒不误，到那一步没了下文，于是初期的血小板塞子搭得起来，却等不到纤维蛋白网来加固——出血往往不是立刻汹涌，而是止住之后又慢慢渗开，尤其在关节腔里。一块蛋白质的缺席也留过历史的重痕：一种血友病随维多利亚女王的女儿们进入了欧洲几大王室。</p>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 四征</div>
+  <h2>红、肿、热、痛：四个症状，四份差事</h2>
+  <p>第二天早上，你低头看那道口子：周围红了一圈，摸上去比别处热，指腹发胀，碰一下就疼。</p>
+  <p>公元一世纪，罗马人凯尔苏斯把这四样并排写进了他的医学著作：红、肿、热、痛。将近两千年里，它们一直被当成"发炎了"的坏消息。其实每一样都是一件正在办的差事。</p>
+  <p><strong>红和热，是开闸。</strong>伤口周围的小动脉舒张，流经这一片的血量涨了好几倍，把免疫细胞、抗体、氧和养料一并送到跟前。热不是伤口在"烧"——是新到的血把身体深部的温度带了上来，你的指腹本来就比身体核心低两三度。</p>
+  <p><strong>肿，是送货。</strong>毛细血管的内皮细胞之间被组胺、缓激肽这类信号分子撑出缝隙，血浆连同溶在里面的抗体、补体和凝血蛋白一起漏进组织间隙。物资留在河道里没用，得卸到岸上，代价是你这根手指泡在多出来的液体里，胀得发紧。</p>
+  <p><strong>痛，是禁令。</strong>你伤口处生成的缓激肽和前列腺素并不直接制造疼痛，它们干的是把你那根手指上痛觉神经末梢的阈值调低——本来要用力按才觉得痛的地方，现在轻轻一碰就痛。这等于替你在这根手指上贴了一张"停用"的封条：你今天拧瓶盖会本能地换只手，切菜会绕开它，正是因为它一直在提醒你。布洛芬这类药之所以止痛，靠的是掐断前列腺素的合成、把阈值调回去——它替你撕掉的是那张封条，不是伤口。撕了封条，你会照常用这根手指，而它其实还在原样修着。</p>
+  <p>还得补一笔：同样一道口子，疼起来并不是人人一样。慢性疼痛的患病率女性普遍更高（偏头痛约为男性的二到三倍），实验室测出的痛阈平均也略低一些——但两条分布重叠得很厉害，均值预测不了任何一个具体的人。更值得记住的是 2015 年那项<strong>小鼠</strong>研究：同样的痛觉过敏，雄鼠主要依赖脊髓里的小胶质细胞，雌鼠主要依赖 T 细胞。这个结果不能直接搬到人身上，但它足够让人追问一句：几十年来主要在雄性动物身上筛出来的镇痛药，凭什么默认对谁都一样有效？第 19 章会把这条线展开。</p>
+  <h3>两班人马</h3>
+  <p>中性粒细胞先到。受伤后数小时内，它们成群贴住血管壁、挤过内皮的缝隙钻进伤口，数量以亿计。活儿粗糙而彻底：吞掉细菌和碎屑，喷出带腐蚀性的活性氧，情急之下甚至把自己的 DNA 吐成一张黏网去缠细菌。代价是寿命只有几小时到一两天，用完就死在原地。你伤口里那点黄白色的脓，主要成分就是它们的遗体。</p>
+  <p>48 到 72 小时后换班，巨噬细胞进场。它大得多也活得久，一边把碎屑连同战友的尸体一起吃掉，一边发号施令：分泌一批生长因子，把伤口从"打扫"模式切到"重建"模式。有意思的是它会中途改脾气——先到的那批偏进攻，后来的转为促修复。动物实验里若把巨噬细胞去掉，清创和重建都明显拖后。</p>
+  <p>一片烧过的林地也是这么恢复的：最先冒出来的是长得快、活不长的野草，几周就把裸露的地面盖住；随后进来的物种慢得多，却能改土、留种，把这块地往后几十年的样子定下来。不同之处在于，林地的火是意外，伤口里这场"火"却是身体自己点的，火候自己掌握——炎症不是故障，是策略。真正的麻烦是它不肯收场：慢性伤口的症结往往不是炎症不够，而是第一班人马赖着不走，第二班人马一直进不了场。</p>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 织补</div>
+  <h2>织补：为什么补丁不如原布</h2>
+  <p>第三天前后，伤口开始往回长，三件事同时进行。</p>
+  <p><strong>上皮往中间爬。</strong>切口两侧的表皮细胞松开彼此的连接，把自己摊扁，薄薄一层朝对面推进，每天走半毫米到一毫米。两边碰头就停——细胞有一种"碰到同类便不再前进"的性质，让这层新皮恰好铺满、不多不少。会合之后重新变厚分层，把伤口封成不再渗液的表面。浅表擦伤能不留痕，是因为下面的基底层没被破坏，爬行只需覆盖，不必重建。</p>
+  <p><strong>底下长出肉芽。</strong>伤口深处冒出鲜红、颗粒状的新组织，那是成纤维细胞和大量新生毛细血管的混合体，血管密度远超正常皮肤，所以颜色格外红、一碰就出血。成纤维细胞在这里赶工，先铺下一层又细又乱的胶原把缺口填实。</p>
+  <p><strong>创缘往中间拽。</strong>一部分成纤维细胞变身成带收缩能力的肌成纤维细胞，像许多只小手抓住周围组织往中央拉。缺损越大，这一手的作用越大——大面积烧伤愈合后会把周边皮肤扯变形，就是这个道理。</p>
+  <p>到第二周，伤口表面看着已经"好了"。可这时去测抗拉强度，只有正常皮肤的两成上下。真正的功夫在后头。</p>
+  <p>重塑期是一场慢工：先铺的那批细胶原（III 型）被逐步换成粗的（I 型），纤维一根根调整方向，朝着皮肤日常受力的方向排齐；多余的毛细血管撤走，疤痕于是从鼓起、发红，慢慢变平、变白。三个月前后，强度爬到未受伤皮肤的七到八成，此后基本封顶。</p>
+  <p>七到八成，就是上限了。借一个老手艺来看：母亲补袜子时，织补线走的方向和原来的织纹不一样，所以补丁那一块又厚又硬，不跟着脚弯。皮肤的疤痕正是这样——但有一点要说清楚：疤痕不是外来的材料，它用的是同一种蛋白质（胶原），差别只在排法。正常真皮里的胶原像编篮子一样纵横交错成网，四面八方都能扯；疤痕里的大致排成一束，平行、单向。此外还少了东西：毛囊、汗腺、皮脂腺不会在疤痕里重建，所以疤痕不长毛、不出汗。补丁能挡风，但它不是原布。</p>
+  <h3>断骨为什么长得更粗</h3>
+  <p>把同一场修复搬到骨头上，故事就变了。</p>
+  <p>骨折处先积起一团血肿，接着长出软的骨痂——它不老实待在断面之间，而是像个套筒把断端外面一圈都包住，直径明显超过原来的骨，随后逐步矿化成硬骨痂。这常被当作"长歪了"，其实是聪明的先手：抗弯能力对直径极其敏感，同样的材料摊到更大的直径上，能在质地还不够结实时先把稳定性顶上去。宁可先粗，再慢慢收。</p>
+  <p>收的那一步叫塑形，要花几个月到几年：骨在受力大的地方加料、受力小的地方拆料（十九世纪的解剖学家 Julius Wolff 把这条规律写成了后来以他命名的定律），多出来的套筒被一点点削回去。儿童能塑到几乎看不出，成年人往往留下一圈微微的粗。</p>
+  <p>关键是结果不同：<strong>骨愈合之后的骨，还是骨。</strong>不是疤痕组织，是真正的骨小梁。骨是身体里少数几种能真正复原的组织之一。树枝折断处长出的那个瘤结用的是同一个策略——先把粗度补上，只是树不做最后那步收尾，疤就一直留在那儿。</p>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 分野</div>
+  <h2>谁能重来，谁只能将就</h2>
+  <p>希腊人讲过一个关于肝的故事，讲得非常具体。</p>
+  <p>普罗米修斯把火从天上偷下来给了人，宙斯罚他锁在高加索的悬崖上，每天派一只鹰来啄食他的肝脏。到了夜里，被吃掉的部分重新长回去；第二天鹰再来。这刑罚的残忍不在于痛，而在于可以无限重复——因为那块被吃掉的东西，会长回来。</p>
+  <p>今天读到这一段，很难不停下来想：他们怎么知道肝能再生？</p>
+  <p>答案是：他们不知道。古希腊人没做过部分肝切除，也没随访过任何一个被切掉肝的人。他们把肝写进这场刑罚，多半是因为在当时的医学与占卜传统里，肝被看作情感与生命力的所在（罗马人用羊肝占卜）——选它受刑最痛。神话挑中的是象征，不是解剖学结论。这是一个漂亮的巧合，不是一次先知；何况神话跑得比事实快得多：真实的肝要几周到几个月才补回体积，绝不是一夜。</p>
+  <p>把这一点说破是有必要的。"古人早就知道"这类说法很容易滑过去，而它要成立，条件其实很苛刻：得有证据表明他们观察过、推理过。这里没有。类比和巧合都很动人，但它们不是证据。</p>
+  <p>肝真正被证明能补回来，要等到 1931 年。Higgins 与 Anderson 在大鼠身上切掉约三分之二的肝，一天天称重取样：剩下的部分在几周内把总体积基本补齐。这个模型至今仍是研究肝再生的标准做法。人身上的证据来自活体肝移植——捐赠者被切走的常常超过一半，几周到几个月后，肝体积回到接近原来的水平。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>肝补的是体积，不是形状。</strong>"再生"这个词容易让人想到蝾螈长腿——切掉一截，原样长回。肝不是这样：切除之后，剩下的肝叶靠细胞分裂和体积增大把总量补齐，被切走的那几叶并不会重新长出来。捐过肝的人做影像检查，看到的是一团比例古怪、总量却够用的肝。</p>
+    <p>这个区别在本章里反复出现，值得单拎出来记住：<strong>把量补上是一回事，把结构原样重建是另一回事。</strong>身体擅长前者，不太擅长后者。</p>
+  </div>
+
+  <p>肝在身体里算特例。把各种组织按"能不能重来"排一排，会得到一条相当陡的坡。</p>
+
+  <figure>
+    <svg id="regen" viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="人体各组织自我更新与修复能力光谱：从肠上皮、表皮、骨、肝，到骨骼肌、心肌、中枢神经，能力由强到弱">
+      <text class="hint" x="383" y="26" text-anchor="middle">自我更新与修复能力</text>
+      <line class="axis" x1="60" y1="120" x2="706" y2="120"/>
+      <polyline class="arrow" points="698,113 708,120 698,127"/>
+      <text class="end-t" x="42" y="125" text-anchor="middle">强</text>
+      <text class="end-t" x="730" y="125" text-anchor="middle">弱</text>
+
+      <line class="stem" x1="70" y1="112" x2="70" y2="100"/><circle class="dot rg-hi" cx="70" cy="120" r="6"/>
+      <text class="lb" x="70" y="84" text-anchor="middle">肠上皮</text>
+      <text class="lb-s" x="70" y="68" text-anchor="middle">3–5 天全层换新</text>
+
+      <line class="stem" x1="175" y1="128" x2="175" y2="140"/><circle class="dot rg-hi" cx="175" cy="120" r="6"/>
+      <text class="lb" x="175" y="158" text-anchor="middle">表皮</text>
+      <text class="lb-s" x="175" y="174" text-anchor="middle">约四周换一茬</text>
+
+      <line class="stem" x1="280" y1="112" x2="280" y2="100"/><circle class="dot rg-hi" cx="280" cy="120" r="6"/>
+      <text class="lb" x="280" y="84" text-anchor="middle">骨</text>
+      <text class="lb-s" x="280" y="68" text-anchor="middle">骨折可真正愈合</text>
+
+      <line class="stem" x1="385" y1="128" x2="385" y2="140"/><circle class="dot rg-mid" cx="385" cy="120" r="6"/>
+      <text class="lb" x="385" y="158" text-anchor="middle">肝</text>
+      <text class="lb-s" x="385" y="174" text-anchor="middle">切掉大半能补回体积</text>
+
+      <line class="stem" x1="490" y1="112" x2="490" y2="100"/><circle class="dot rg-mid" cx="490" cy="120" r="6"/>
+      <text class="lb" x="490" y="84" text-anchor="middle">骨骼肌</text>
+      <text class="lb-s" x="490" y="68" text-anchor="middle">小损伤能补</text>
+
+      <line class="stem" x1="595" y1="128" x2="595" y2="140"/><circle class="dot rg-lo" cx="595" cy="120" r="6"/>
+      <text class="lb" x="595" y="158" text-anchor="middle">心肌</text>
+      <text class="lb-s" x="595" y="174" text-anchor="middle">年更新率约 1%</text>
+
+      <line class="stem" x1="700" y1="112" x2="700" y2="100"/><circle class="dot rg-lo" cx="700" cy="120" r="6"/>
+      <text class="lb" x="740" y="84" text-anchor="end">中枢神经</text>
+      <text class="lb-s" x="740" y="68" text-anchor="end">以胶质疤痕封口</text>
+
+      <line class="divider" x1="542" y1="96" x2="542" y2="196"/>
+      <rect class="zone zone-hi" x="60" y="196" width="482" height="28" rx="7"/>
+      <text class="zone-t" x="301" y="214" text-anchor="middle">这一头：大体能长回原来的东西</text>
+      <rect class="zone zone-lo" x="542" y="196" width="164" height="28" rx="7"/>
+      <text class="zone-t" x="624" y="214" text-anchor="middle">那一头：以疤痕封口</text>
+    </svg>
+    <figcaption><b>图 17-2 · 一条很陡的坡。</b>越往右，损伤之后能长回来的越少，用疤痕将就的越多。虚线只是示意，两头之间是渐变而非分界：骨骼肌小损伤能真修，大块缺损照样长疤。位置按组织的典型表现排，个体与部位差异不小。</figcaption>
+  </figure>
+
+  <p>坡的这一头是肠上皮：不必等受伤，它自己三到五天就整层换一遍，是身体里更新最快的组织之一。表皮慢些，约四周换一茬。往右是骨：骨折能真正愈合，全身骨量大约十年翻新一遍。肝的位置有点特别——平时它的细胞几乎不分裂，静得像一潭水；一旦被切掉大半，剩下的细胞集体进入分裂，补足了又停下。它更像一眼平时不出水、需要时才涌的泉。</p>
+  <p>另一头就冷清了。骨骼肌旁边住着一小群卫星细胞，肌纤维受伤时被唤醒、融进去补上，所以拉伤能好；但大块缺损仍以疤痕收场。心肌更少：成人心肌细胞的年更新率估计在 1% 上下，并随年龄递减，这个数字来自一项巧妙的研究——冷战年代的大气核试验在全球空气里留下过一段碳-14 尖峰，科学家用人体细胞 DNA 里的碳-14 含量反推出细胞的"出生年份"，由此估出心肌换新的速度。也就是说，一次心梗死掉的那片心肌绝大部分不会长回来，取而代之的是一块不会收缩的疤——它撑得住压力，却不干活，也不导电。这块补丁不会再变回心肌：往后每一次心跳，都由剩下的那些细胞替它多担一点，一直担到最后。中枢神经系统在坡的最远端：损伤处由星形胶质细胞围出一圈胶质疤痕封口，止损优先，通路不重连。</p>
+  <p>为什么心和脑最不肯换？两类解释都不算完整。一类着眼于功能：这两处的活儿依赖长期积累的精确连接和一刻不停的运转，中途停下翻修代价太大——一颗带着疤照跳的心脏，胜过一颗边跳边改的。另一类着眼于细胞：成熟心肌细胞和多数神经元很早就退出了细胞周期，那扇门关得很紧。这仍是活跃的研究领域，没有定论。</p>
+  <p>自然界给的对照相当刺眼。蝾螈截肢后能长出一条完整的新腿，骨、肌肉、神经俱全，指头数目分毫不差；斑马鱼的心脏被剪掉五分之一，两个月后几乎看不出痕迹；鹿每年重造一整套带血管和神经的鹿角。人类只保留了很小一部分：指尖在指甲根以远的截断，儿童有时能长回带指纹的指尖。</p>
+  <p>换个角度想，疤痕其实是身体的万能补丁：凡是补不回来的地方，都用同一种东西封口——快、结实、不挑位置，代价是不还原功能。演化很早就做了这个取舍：野外受伤，几天内把口子封住活下来，远比花几个月长回一个完美的器官划算。我们今天嫌它难看，恰恰因为活得够久、够安全，久到有余裕去嫌。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>胎儿的伤口不留疤。</strong>孕早中期的胎儿（人类大致在孕龄 24 周以前——这一条文献沿用的是末次月经口径，两套日历的区别见第 4 章）皮肤受伤后能真正复原：胶原恢复交错编织，附属器重建，几乎不留痕迹。这件事是外科医生在宫内手术和动物实验中陆续注意到的，1970 年代末起进入文献。原因至今没有单一答案，但线索指向同一个方向：胎儿伤口的炎症反应很弱，成纤维细胞类型与成体不同，基质里透明质酸含量高，机械张力也小。若这条线索站得住，疤痕就不是修复的必然产物，而更像炎症的副产品——减少疤痕的思路，也就该从"修得更好"转向"闹得更轻"。</p>
+    <p><strong>顺着这条线索在试的几件事。</strong>其一是抑制特定的促纤维化信号（TGF-β 家族的某些成员是长期候选靶点）；其二是区分成纤维细胞的来源——2015 年前后有研究在小鼠皮肤里辨认出一支偏向造疤的谱系，若能只按住这一支，或许能保住修复而少留疤；其三走力学路子，用减张装置和硅酮制品降低伤口张力，已在临床使用，效果温和但真实。心脏那一头也在推进：把心脏里原有的成纤维细胞就地重编程成能跳动的心肌细胞，小鼠身上已能缩小梗死后的疤痕面积，离人还很远。需要说清楚的是：目前还没有哪种药物能让成人伤口完全无疤愈合，市面上标着"去疤"的产品，多数改善的是外观而非结构。</p>
+  </div>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">一次受伤 · 关键数字</div>
+    <table>
+      <tr><td class="k">血管收缩启动</td><td class="v">数秒</td><td class="n">平滑肌的机械反应，不经神经</td></tr>
+      <tr><td class="k">一期止血（血小板栓）</td><td class="v">3–5 分钟</td><td class="n">按住伤口等的就是它</td></tr>
+      <tr><td class="k">纤维蛋白凝块成形</td><td class="v">5–10 分钟</td><td class="n">级联放大倍数以百万计</td></tr>
+      <tr><td class="k">血小板计数</td><td class="v">15–40 万 / μL</td><td class="n">无核，巨核细胞掰下的碎片</td></tr>
+      <tr><td class="k">血小板寿命</td><td class="v">8–10 天</td><td class="n">每天约十分之一换新</td></tr>
+      <tr><td class="k">中性粒细胞抵达峰值</td><td class="v">约 24 小时</td><td class="n">脓的主要成分是它们的遗体</td></tr>
+      <tr><td class="k">巨噬细胞接班</td><td class="v">48–72 小时</td><td class="n">从"打扫"切到"重建"</td></tr>
+      <tr><td class="k">上皮爬行速度</td><td class="v">0.5–1 mm / 天</td><td class="n">两侧会合即停</td></tr>
+      <tr><td class="k">伤口强度（2 周 → 3 月）</td><td class="v">~20% → 70–80%</td><td class="n">相对未受伤皮肤，此后封顶</td></tr>
+      <tr><td class="k">重塑期持续</td><td class="v">6–12 个月起</td><td class="n">深伤口可延续一两年</td></tr>
+      <tr><td class="k">肝切除后体积恢复</td><td class="v">数周–数月</td><td class="n">补体积，不复原形状</td></tr>
+      <tr><td class="k">成人心肌年更新率</td><td class="v">约 1% / 年</td><td class="n">碳-14 测年研究估算，随龄递减</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">割破手指后，最先起作用的是什么？</div>
+      <div class="opts">
+        <button>凝血因子级联立即生成纤维蛋白网</button>
+        <button data-c="1">破口处小血管收缩，随后血小板黏附、聚集成塞子</button>
+        <button>白细胞第一时间赶到封住伤口</button>
+        <button>疼痛信号让大脑下令止血</button>
+      </div>
+      <div class="explain">血管收缩是平滑肌的机械反应，不必等神经；血小板随后主动抓住暴露的胶原和 vWF，3–5 分钟搭成塞子。平时它们不粘管壁，是因为完好的内皮持续释放一氧化氮和前列环素在"劝退"——血管内壁不是被动的管子，它一直在发言。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">用"多米诺"形容凝血级联，哪里还不够准确？</div>
+      <div class="opts">
+        <button>凝血因子其实只有三种，不成一排</button>
+        <button>倒下的顺序是随机的</button>
+        <button data-c="1">每一步都是酶促放大，一块牌能推倒几十块；而且每块牌旁边都有按住它的手</button>
+        <button>这排牌一旦推倒就无法拆除</button>
+      </div>
+      <div class="explain">放大倍数以百万计，所以几个分子的信号能在几分钟内变成一大团凝块。按住牌的那几双手同时在工作：抗凝血酶、蛋白 C 与蛋白 S、组织因子途径抑制物把凝块限制在破口一小片；凝块里还预先混着拆除工具纤溶酶原。凝与溶始终同时进行，受伤只是把凝的一边猛推了一把。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">炎症的"肿"，主要在办什么事？</div>
+      <div class="opts">
+        <button>把伤口撑开便于排出异物</button>
+        <button data-c="1">毛细血管通透性增加，把血浆连同抗体、补体、凝血蛋白送进组织间隙</button>
+        <button>积液本身能杀死细菌</button>
+        <button>压迫神经末梢以减轻疼痛</button>
+      </div>
+      <div class="explain">物资在血管里没用，得卸到岸上。代价是组织泡在多出来的液体里发胀。四征各有各的差事：红与热是血流开闸，痛则是把神经末梢的阈值调低，给这根手指贴一张"停用"的封条——所以止痛药撕掉的是封条，不是伤口。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">疤痕为什么强度只有正常皮肤的七到八成？</div>
+      <div class="opts">
+        <button>疤痕由和皮肤完全不同的外来材料构成</button>
+        <button>疤痕组织缺少血液供应</button>
+        <button data-c="1">用的是同一种胶原，但排成大致平行的一束，而不是交错成网，附属器也不重建</button>
+        <button>疤痕的胶原比正常皮肤少一半以上</button>
+      </div>
+      <div class="explain">差别在排法，不在材料。正常真皮的胶原像编篮子一样纵横交错，四面八方都能扯；疤痕里的大致单向排列，还缺了毛囊、汗腺和皮脂腺——所以疤痕不长毛、不出汗。骨头相反：骨折愈合后的骨还是真正的骨，先长出一圈偏粗的骨痂顶住稳定性，再花几个月到几年削回去。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">关于肝的"再生"，下列哪一项正确？</div>
+      <div class="opts">
+        <button>古希腊人从解剖观察中已经知道肝能再生，普罗米修斯神话是其记录</button>
+        <button data-c="1">剩余的肝靠细胞分裂与增大把体积补齐，但被切走的肝叶不会重新长出来</button>
+        <button>肝细胞终生高速分裂，与肠上皮相当</button>
+        <button>肝再生能力和心肌处在同一水平</button>
+      </div>
+      <div class="explain">补的是体积，不是形状——功能补齐，解剖没有还原。神话那条：古希腊人没做过部分肝切除，选中肝多半因为它在当时被视为生命力所在，是巧合不是先知，而且真实的肝要几周到几个月，不是一夜。肝平时几乎不分裂，需要时才整片动员，1931 年 Higgins 与 Anderson 的大鼠模型第一次把这件事量了出来。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第三幕 满负荷运行</div>
+  <div class="title">第 18 章 · 两套指挥系统</div>
+  <p>刀滑的那一瞬间，你的手在你反应过来之前就已经缩了回去——那道命令根本没上到大脑。而几秒之后心口发紧、手心出汗、腿有点软，则是另一套完全不同的口信送到的。同一件事，身体派出了两路信使：一路贴着耳朵说悄悄话，一路敲响全场都听得见的钟。下一章我们跟着这两路信使跑一趟。</p>
+  <nav class="footnav">
+    <a href="ch16-cold.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch18-signals.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 修复四阶段：点阶段高亮 + 切换说明
+  var tabs = document.querySelectorAll('#repair-fig .rep-btn');
+  var blocks = document.querySelectorAll('#repair .ph-block');
+  var panes = document.querySelectorAll('#repair-fig .rp');
+  function showPhase(ph){
+    var i;
+    for (i = 0; i < tabs.length; i++) {
+      tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-ph') === ph ? 'true' : 'false');
+    }
+    for (i = 0; i < blocks.length; i++) {
+      blocks[i].classList.toggle('on', blocks[i].getAttribute('data-ph') === ph);
+    }
+    for (i = 0; i < panes.length; i++) {
+      panes[i].classList.toggle('on', panes[i].getAttribute('data-rp') === ph);
+    }
+  }
+  for (var t = 0; t < tabs.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){ showPhase(el.getAttribute('data-ph')); });
+    })(tabs[t]);
+  }
+  for (var b = 0; b < blocks.length; b++) {
+    (function(el){
+      el.addEventListener('click', function(){ showPhase(el.getAttribute('data-ph')); });
+    })(blocks[b]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第23章 · 衰老的机制 — 人体手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ---- 图 23-1 端粒阶梯（本章专用） ---- */
+#telo .axis{stroke:var(--line); stroke-width:1.6;}
+#telo .grid{stroke:var(--line); stroke-width:1; opacity:.45;}
+#telo .stair{fill:none; stroke:var(--gold); stroke-width:2.8; stroke-linejoin:round;}
+#telo .germ{fill:none; stroke:var(--green); stroke-width:2.6;}
+#telo .tumor{fill:none; stroke:var(--oxy); stroke-width:2.6;}
+#telo .zone{fill:var(--gold); fill-opacity:.09; stroke:var(--gold); stroke-opacity:.35; stroke-dasharray:5 5;}
+#telo .stop{stroke:var(--ink-faint); stroke-width:2; stroke-dasharray:6 5;}
+#telo .lb{fill:var(--ink); font-size:12.5px;}
+#telo .lb-g{fill:var(--green); font-size:12px;}
+#telo .lb-t{fill:var(--oxy); font-size:12px;}
+#telo .tick-label{fill:var(--ink-faint); font-size:11.5px;}
+#telo .note{fill:var(--ink-faint); font-size:11.5px;}
+
+/* ---- 图 23-2 衰老标志环形图（本章专用） ---- */
+#hall-fig .mark-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+#hall-fig .mark-btn{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; color:var(--ink-dim);
+  background:var(--surface2); border:1px solid var(--line); border-radius:999px;
+  padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s;
+}
+#hall-fig .mark-btn:hover{border-color:var(--gold); color:var(--ink);}
+#hall-fig .mark-btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+#hall-fig .mark-btn[aria-pressed="true"]{color:var(--gold); border-color:var(--gold); font-weight:700;}
+#hall-fig .mark-panel{margin-top:16px; padding:16px 18px; background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:0 10px 10px 0;}
+#hall-fig .mp{display:none;}
+#hall-fig .mp.on{display:block;}
+#hall-fig .mp-t{font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--gold); margin-bottom:8px;}
+#hall-fig .mp p{font-size:14.5px; line-height:1.9; color:var(--ink-dim); margin:0;}
+#hallmarks .node{cursor:pointer; transition:opacity .3s;}
+#hallmarks.picked .node{opacity:.26;}
+#hallmarks.picked .node.on{opacity:1;}
+#hallmarks .disc{fill:var(--surface2); stroke-width:2.4;}
+#hallmarks .node.on .disc{stroke-width:4;}
+#hallmarks .n-telo .disc{stroke:var(--gold);}
+#hallmarks .n-senes .disc{stroke:var(--oxy);}
+#hallmarks .n-prot .disc{stroke:var(--green);}
+#hallmarks .n-epi .disc{stroke:var(--deoxy);}
+#hallmarks .n-mito .disc{stroke:var(--mixed-r);}
+#hallmarks .ring{fill:none; stroke:var(--line); stroke-width:1.6; stroke-dasharray:6 7;}
+#hallmarks .hub{fill:var(--surface); stroke:var(--line); stroke-width:1.6;}
+#hallmarks .hub-t{fill:var(--ink); font-size:15px; font-weight:700;}
+#hallmarks .hub-s{fill:var(--ink-faint); font-size:11px;}
+#hallmarks .nt{fill:var(--ink); font-size:13px; font-weight:700;}
+#hallmarks .ns{fill:var(--ink-dim); font-size:11px;}
+#hallmarks .note{fill:var(--ink-faint); font-size:11.5px;}
+@media (prefers-reduced-motion: reduce){
+  #hallmarks .node{transition:none;}
+}
+</style>
+</head>
+<body>
+<button id="themeBtn" aria-label="切换昼夜模式">☾ 夜间</button>
+<div class="wrap">
+
+<!-- ==================== 章头 ==================== -->
+<header class="chap">
+  <nav class="crumbs"><a href="../index.html">目录</a><span>第四幕 磨损与谢幕 · 第 23 章</span></nav>
+  <div class="series">人体手册 · THE HUMAN BODY HANDBOOK</div>
+  <h1>衰老的机制</h1>
+  <p class="subtitle">一颗据说不会死的鸡心让全世界信了三十四年。推翻它的年轻人发现：细胞其实在数数——而这只是几件同时发生的事里的一件。</p>
+  <div class="meta"><span>阅读 ≈ 18 分钟</span><span>图 2 · 测验 5 · 前沿窗口 2</span><span>规格表 12 项</span></div>
+</header>
+
+<!-- ==================== 引子 ==================== -->
+<div class="lede">
+  <p>1912 年 1 月 17 日，纽约洛克菲勒研究所。一位当年稍后将拿到诺贝尔奖的法国外科医生，把一小块鸡胚胎的心脏组织放进培养瓶。</p>
+  <p>它没有死。第二年没死，第十年没死，第二十年也没死。每年 1 月 17 日，报纸都会替这团组织过生日；护士穿着黑袍给它换液，据说还有人为它唱过歌。它活了三十四年——比放它进去的那个人还长。由此得出的结论写进了教科书，也写进了常识：<strong>细胞本身不会老。</strong>既然离体的细胞可以无限分裂下去，那么衰老必定发生在更高的层次上，是整体的事，与单个细胞无关。</p>
+  <p>这个结论错了。而拆穿它的过程，恰好是这一章要讲的全部内容的入口——因为当我们终于承认"细胞会老"之后，紧接着的问题才真正难：<em>它是怎么老的？</em>本章挑五件同时发生的事讲，其中四件讲透。你会发现它们彼此牵连，很难说谁是因、谁是果。</p>
+</div>
+
+<!-- ==================== 第 1 节 ==================== -->
+<section id="s1">
+  <div class="eyebrow">01 · 数数</div>
+  <h2>永生的鸡心，和一个被退稿的年轻人</h2>
+  <p>那位外科医生叫 Alexis Carrel，1912 年因血管缝合与器官移植获诺贝尔生理学或医学奖。他在无菌培养上确有真本事，那颗鸡心也确实被小心翼翼地传了三十四年——1944 年 Carrel 去世，1946 年他的助手结束了这项培养。</p>
+  <p>破绽藏在换液这一步。培养液是用鸡胚捣碎后制备的浸出液，若分离得不够彻底就会带进活的胚胎细胞——每一次"喂养"，都可能是在往瓶子里补充新细胞。今天多数科学史研究者认为这是这桩公案最可能的解释；是疏忽还是别的原因，至今没有定论。</p>
+  <p>但真正让这个错误屹立三十多年的，不是操作，是权威。诺贝尔奖得主的实验，加上一个符合当时期待的结论，让人们没有认真去重复它。<strong>一个漂亮的结果，如果没人愿意去推它一把，就会变成事实。</strong></p>
+  <h3>1961 年，费城</h3>
+  <p>推它一把的人叫 Leonard Hayflick，当时是费城 Wistar 研究所一位年轻研究员。他和同事 Paul Moorhead 在培养人的二倍体成纤维细胞时，反复撞上同一堵墙：细胞分裂到某个次数附近就停下来，不再增殖，可它们并没有死，还在那里代谢、还在那里活着。</p>
+  <p>换成别人多半会去检讨自己的技术——教科书上写着细胞可以无限分裂，停下来一定是条件不对。Hayflick 却做了个漂亮的对照实验：把已经分裂过很多次的男性细胞，和刚开始培养不久的女性细胞混在同一个瓶子里养。若问题出在培养环境，两批细胞该一起出事。结果是：先停下来的是那批年长的男性细胞，年轻的女性细胞照旧增殖。<strong>同一个瓶子，同一份培养液，两种命运——所以问题不在瓶子里，在细胞里。</strong>细胞自己记着已经分裂过多少次。</p>
+  <p>论文投给当时权威的《实验医学杂志》，被主编 Peyton Rous 退了回来，理由很清楚：能增殖的细胞在合适条件下会无限增殖下去，这是组织培养半个世纪里立起来的一条大事实，你的推论与它不相容。（Rous 本人也是位了不起的学者，五年后因发现致癌病毒获诺贝尔奖——被权威挡住的，往往不是庸人。）</p>
+  <p>文章改投《实验细胞研究》，1961 年发表，后来成为该领域被引用得极多的论文之一。人的二倍体细胞在体外分裂大约 <strong>40 到 60 次</strong>（常记作五十次上下）后停止增殖，这个上限此后被称为 <strong>Hayflick 极限</strong>。</p>
+  <p>于是问题从"细胞会不会老"变成了"细胞用什么在数数"。答案要再等十年。</p>
+</section>
+
+<!-- ==================== 第 2 节 ==================== -->
+<section id="s2">
+  <div class="eyebrow">02 · 绳头</div>
+  <h2>那把算盘：染色体末端的塑料箍</h2>
+  <p>1971 年前后，苏联生物学家 Alexei Olovnikov 想通了一件事——按流传的说法，念头是他在莫斯科地铁站台上冒出来的：列车驶过时，车头永远压不到轨道最起头的那一小段。几乎同时，James Watson 也从另一条路指出了同样的问题。</p>
+  <p>问题出在复制 DNA 的方式上：负责复制的酶只能朝一个方向工作，而且需要一小段引物先落脚。引物拆掉之后，末端那一小截就补不上了。<strong>于是每复制一次，染色体的末端就短一点。</strong></p>
+  <p>染色体的末端叫<strong>端粒</strong>，是一段不断重复的短序列，本身不编码任何蛋白。它就像鞋带头上那个塑料箍：箍子本身没有用处，它存在只是为了让鞋带不散开。每穿一次鞋，箍子磨掉一点点；磨到没有，鞋带就开始散。</p>
+  <p>人的端粒在新生儿的白细胞里约 <strong>10 到 15 千碱基对</strong>（不同测量方法差别不小），到老年常落在 5 到 8 千碱基对；每分裂一次损耗 <strong>50 到 200 个碱基对</strong>。把这些数字和 Hayflick 极限并排放，答案就浮出来了：细胞不是在心里记账，它只是在磨一个箍子——磨到某个长度，一套损伤应答机制就被触发，细胞停止分裂。</p>
+  <p>这个类比要就地拆两句，因为顺着它很容易推出两个错的结论。</p>
+  <p><strong>第一，箍子磨完，鞋带并不会立刻散开。</strong>端粒变短触发的不是死亡，而是一种叫<strong>细胞衰老</strong>的状态：细胞停止分裂，却继续活着、继续代谢，还开始往外分泌东西。这个"活着但不再分裂"的状态是下一节的主角，也是本章后半的枢纽。</p>
+  <p><strong>第二，端粒短不等于命短。</strong>实验室小鼠的端粒比人长得多（可达四五万碱基对），寿命却只有两三年；端粒长度与寿命的关系在物种之间几乎不成立，在个体之间也只是弱相关。它是衰老的参与者和标记物之一，不是一根倒计时的引线——市面上按端粒长度给你算"细胞年龄"的检测，卖的多半是这条被过度简化的推论。</p>
+
+  <figure>
+    <svg id="telo" viewBox="0 0 760 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="端粒随分裂次数缩短的阶梯图：普通体细胞的端粒从约 10 千碱基对逐级下降，在 40 至 60 次分裂之间触及下限并停止分裂；生殖细胞系因端粒酶在岗保持不变；约 85 至 90% 的癌细胞在中途重启端粒酶，曲线就此转为水平">
+      <rect class="zone" x="460" y="60" width="190" height="240"/>
+      <text class="tick-label" x="555" y="52" text-anchor="middle">Hayflick 极限区间 · 40–60 次</text>
+
+      <line class="grid" x1="80" y1="108" x2="650" y2="108"/>
+      <line class="grid" x1="80" y1="204" x2="650" y2="204"/>
+      <text class="tick-label mono" x="70" y="112" text-anchor="end">10 kb</text>
+      <text class="tick-label mono" x="70" y="208" text-anchor="end">5 kb</text>
+
+      <line class="germ" x1="80" y1="96" x2="650" y2="96"/>
+      <text class="lb-g" x="646" y="88" text-anchor="end">生殖细胞与部分干细胞：端粒酶在岗，箍子不磨损</text>
+
+      <path class="stair" d="M80 108 H127 V122 H175 V135 H222 V149 H270 V162 H317 V175 H365 V189 H412 V202 H460 V216 H507 V229 H555 V243"/>
+      <line class="stop" x1="555" y1="243" x2="650" y2="243"/>
+      <text class="lb" x="646" y="262" text-anchor="end">停止分裂 · 进入衰老态（还活着）</text>
+
+      <path class="tumor" d="M412 202 H650"/>
+      <text class="lb-t" x="646" y="194" text-anchor="end">约 85–90% 的癌细胞重启端粒酶：就地停住，不再变短</text>
+
+      <text class="note" x="86" y="128" text-anchor="start">每次分裂损耗 50–200 bp</text>
+
+      <line class="axis" x1="80" y1="300" x2="650" y2="300"/>
+      <text class="tick-label" x="80" y="320" text-anchor="middle">0</text>
+      <text class="tick-label" x="175" y="320" text-anchor="middle">10</text>
+      <text class="tick-label" x="270" y="320" text-anchor="middle">20</text>
+      <text class="tick-label" x="365" y="320" text-anchor="middle">30</text>
+      <text class="tick-label" x="460" y="320" text-anchor="middle">40</text>
+      <text class="tick-label" x="555" y="320" text-anchor="middle">50</text>
+      <text class="tick-label" x="650" y="320" text-anchor="middle">60 次分裂</text>
+      <text class="note" x="80" y="352" text-anchor="start">纵轴为端粒长度（千碱基对），示意值：新生儿约 10–15 kb，老年约 5–8 kb，不同测量方法差异不小。</text>
+    </svg>
+    <figcaption><b>图 23-1 · 一把只会往下走的算盘。</b>普通体细胞每分裂一次就磨掉一点端粒，累积到 40–60 次时触发停止分裂——这就是 Hayflick 极限的分子解释。两条例外各有各的走法：生殖细胞系靠端粒酶把箍子补回来，所以这条线三十多亿年没断（终章还会回到它）；而大多数癌细胞是在半路重新打开了端粒酶这个开关。</figcaption>
+  </figure>
+
+  <p>补箍子的那把工具叫<strong>端粒酶</strong>。1984 年圣诞节，Carol Greider 在 Elizabeth Blackburn 的实验室里，从一种池塘里的单细胞生物提取物中第一次测到了它的活性；这项工作与 Jack Szostak 的相关研究共同获得 2009 年诺贝尔奖。端粒酶在生殖细胞和部分干细胞里保持在岗，在绝大多数体细胞里被关掉。</p>
+  <p>顺着干细胞这一支再问一句：它们的更新能力随年岁还剩多少？多数组织的答案是"变慢，但还在"。争议最大的一处在大脑——第 9 章和第 15 章两次把海马齿状回这笔账记到本章名下。从衰老角度落笔，实情是：啮齿类的新生率确实随龄陡降，人类这一条却连"有没有"都未有定论（见第 15 章那两篇结论相反的论文），更谈不上画出随龄曲线。所以对"老年大脑还能不能添新神经元"，诚实的回答只能是：动物身上能，且随龄大减；人身上未定——把动物的降幅直接搬过来，正是本章反复劝你别做的那种搬运。</p>
+  <p>为什么身体要关掉一件能让细胞一直分裂下去的本事？因为它的另一面是癌症。约 85% 到 90% 的人类癌细胞，做的第一件事之一就是把端粒酶重新打开——它们靠这个逃出 Hayflick 极限。<strong>你的细胞会数数，是为了不让其中某一个数到失控。</strong>能分裂到底的能力，身体宁可不要。</p>
+
+  <div class="callout eng">
+    <span class="tag">旁注 · SIDE NOTE</span>
+    <p><strong>那个真正做到"永生"的例子，来自一位不知情的女性。</strong>1951 年，31 岁的 Henrietta Lacks 因宫颈癌到巴尔的摩就诊。医生取下的一小块肿瘤组织被送进实验室培养，在她本人与家属都不知情的情况下长了起来——它没有停在 Hayflick 极限上，一代接一代地传下去，成为最早持续传代的人类细胞系之一，代号 HeLa。</p>
+    <p>此后七十多年，HeLa 细胞出现在全球数以万计的实验室里：脊髓灰质炎疫苗的检定、染色体数目的厘清、病毒学与癌症生物学的无数工作都用过它，累计培养出的总量以吨计。而 Henrietta Lacks 本人在细胞被取走的同一年去世，家人直到 1970 年代才知情，2013 年才与美国国立卫生研究院就基因组数据的使用达成协议。这株细胞能一直分裂，正是因为它重启了端粒酶。不是每一次"不会老"，都是好消息。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 3 节 ==================== -->
+<section id="s3">
+  <div class="eyebrow">03 · 不下场</div>
+  <h2>拒不下场的演员</h2>
+  <p>接着上一节留下的那个状态：细胞停止分裂，但还活着。</p>
+  <p>它们叫<strong>衰老细胞</strong>。除了端粒磨短，DNA 损伤、氧化压力、癌基因被意外激活，都能把一个细胞推进这个状态。要紧的是它们并不安静——衰老细胞会持续向周围分泌一整套东西：炎性因子、蛋白酶、生长因子。这套分泌物有个专名，叫衰老相关分泌表型（SASP）。</p>
+  <p>想象一场演出。一位演员的戏份演完了，却赖在台上不走，还在高声念自己那几句台词。他一个人不至于毁掉全剧，可他在台上待得越久，别的演员越难接戏；更麻烦的是，旁边几位受他影响，也开始念错词、忘了下场——衰老细胞正是这样，它分泌的东西会把邻近的健康细胞也推向衰老。<strong>一个不下场的演员，能制造出一片不下场的演员。</strong></p>
+  <p>这个类比必须就地拆一句，否则会推出一个很流行但不准确的结论：衰老细胞不是坏演员。</p>
+  <p>细胞进入衰老态，本来是一道<strong>刹车</strong>。一个 DNA 已受损的细胞若继续分裂，就是在批量复制错误——那正是癌症的起点，停下来是两害相权取其轻。不仅如此，短暂出现的衰老细胞在伤口愈合中帮助组织重塑，在胚胎发育中也有正常角色。所以问题从来不是"它们存在"，而是"它们没被送走"：年轻时免疫系统会认出并清除它们，上了年纪清运的队伍自己也老了，于是越积越多。<strong>它们不是垃圾，是没人来接的临时工。</strong></p>
+  <p>数量上的实情要说得诚实些：不同组织、不同检测方法给出的数字差别很大，大致共识是年轻组织里占比不足百分之一，到老年可升到百分之几乃至十几个百分点。真正有说服力的不是比例，是两个方向相反的实验：把少量衰老细胞移植进年轻小鼠，会引起持续的体能下降和虚弱；反过来，用遗传手段把小鼠体内的衰老细胞定期清掉，多项研究观察到健康寿命延长、多种老年病变推迟。<strong>因果的两头都被拨动过，这在衰老研究里并不多见。</strong></p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>清除衰老细胞：从小鼠到人的那一步。</strong>既然小鼠身上两头都拨得动，自然要问人身上行不行。这类药被称为 <strong>senolytics</strong>（衰老细胞清除剂），思路是抓住衰老细胞的一个弱点——它们靠某些抗凋亡通路才不至于自毁，把这条通路挡住，它们就会自行退场，而正常细胞不受影响。目前研究最多的是一种白血病药与一种植物黄酮的组合（达沙替尼加槲皮素），以及另一种黄酮类的非瑟酮。</p>
+    <p>人体证据到哪一步了？2019 年，特发性肺纤维化患者的一项小规模试验（十余人、无对照）报告了体能改善；同年另一项糖尿病肾病试验显示，间断给药十一天后脂肪组织中衰老细胞的负荷确实下降——这是"药真的打中了靶子"的直接证据。此后的试验涉及轻度认知损害、骨关节炎等方向。<strong>但要把话说全：迄今公开的人体试验规模都很小，多以标志物或短期功能为终点，没有一项证明它能延长人的寿命或逆转衰老。</strong>把动物实验里"清掉就变好"的结论直接搬到自己身上、自行服药，是这个领域目前最实际的风险——达沙替尼是有明确毒性的处方抗癌药。若你在数年后读到这段，请先核实是否已有足够规模的随机对照结果。</p>
+  </div>
+</section>
+
+<!-- ==================== 第 4 节 ==================== -->
+<section id="s4">
+  <div class="eyebrow">04 · 走样</div>
+  <h2>落叶层，和被誊抄走样的分谱</h2>
+  <p>再看两件同时在发生的事。它们不像端粒那样有个干净的数字，却可能更贴近你对"老"的日常感受。</p>
+  <h3>落叶层越积越厚</h3>
+  <p>第 1 章讲过两件事：蛋白质折成什么形状，信息全写在氨基酸的排列里；以及细胞里的蛋白质并非造好就一直用，而是不断被拆掉、不断被重造。维持这套秩序的整摊事，叫<strong>蛋白质稳态</strong>。</p>
+  <p>随年岁增长，这摊事的三条线同时松动：帮助新链正确折叠的伴侣蛋白变少，负责定点拆解的蛋白酶体效率下降，负责整块清运的自噬（2016 年诺贝尔奖的题目）也变慢。</p>
+  <p>热带雨林的地面上常年铺着一层薄薄的落叶。落叶一直在落，可分解也一直在进行，两者速度相当，所以地面始终只有那么薄一层。一旦分解慢下来，落叶照旧，地面就开始一年年变厚。老细胞里发生的正是这件事：折错的、氧化损伤的蛋白质照旧产生，清运的速度却掉了下来。</p>
+  <p>第 1 章预告过这一节：某些神经退行性疾病的共同特征，正是折错的蛋白质堆成了清不掉的团块。阿尔茨海默病里的 β 淀粉样蛋白斑块与 tau 缠结、帕金森病里的 α-突触核蛋白、亨廷顿病里那截过长的谷氨酰胺重复——病名不同，画面相似。</p>
+  <p>类比到此为止，因为再往前推就会推错：<strong>堆起来的东西，不见得就是致病的那一份。</strong>越来越多的证据指向一个更麻烦的图景：肉眼可见的大块沉积可能相对惰性，甚至是一种把毒性物质包起来的隔离处置；真正伤害神经元的，也许是那些还没聚成块的小型可溶聚集体。这个区别不是学究式的挑剔——过去几十年里，一批以"清掉斑块"为目标的药物在临床上反复受挫，原因之一正在这里。清掉地上的落叶，不等于解决了土壤里的事。</p>
+  <h3>分谱被誊抄走样</h3>
+  <p>第 1 章还讲过总谱与分谱的规矩：DNA 留在核内不外借，要用哪一段就誊一份信使 RNA 送出去。哪些段落该被誊、哪些该锁着不动，靠的是贴在 DNA 与组蛋白上的一层批注——也就是第 2 章说的"书签"。</p>
+  <p>这层批注会随年岁<strong>漂移</strong>：本该锁死的段落松了，本该常开的段落被压紧了，细胞的身份于是变得含混——一个肝细胞仍然是肝细胞，却开始表达一些本不该由它表达的基因。像一支乐团的分谱被一代代誊抄：音符一个没错，可强弱记号移了位，反复记号抄漏了一处，休止符的长度慢慢变了样。整场演出还认得出是那首曲子，只是味道不对了。</p>
+  <p>证据里最直观的一份来自同卵双胞胎：他们年幼时的表观遗传谱几乎重合，到五十岁上下已经明显分开，而且分开得最多的是那些长期分居、生活方式差异大的双胞胎。同一份总谱，不同的批注史。</p>
+  <p>这里要拆的一句是本章最要紧的一句：<strong>漂移不是 DNA 序列出错——字一个没变，变的是批注。</strong>而批注，原则上是可以重写的。第 21 章前沿窗口里的"表观遗传钟"读的就是这层批注；第 5 节末尾那条最激进的前沿，赌的也正是这一点。</p>
+
+  <figure id="hall-fig">
+    <div class="switch-row">
+      <span class="switch-hint">点一处看机制 →</span>
+      <div class="mark-tabs" role="group" aria-label="选择要展开的衰老标志">
+        <button class="mark-btn" data-mark="telo" aria-pressed="false">端粒耗损</button>
+        <button class="mark-btn" data-mark="senes" aria-pressed="false">衰老细胞堆积</button>
+        <button class="mark-btn" data-mark="prot" aria-pressed="false">蛋白稳态失衡</button>
+        <button class="mark-btn" data-mark="epi" aria-pressed="false">表观遗传漂移</button>
+        <button class="mark-btn" data-mark="mito" aria-pressed="false">线粒体功能失常</button>
+      </div>
+    </div>
+    <svg id="hallmarks" viewBox="0 0 760 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="衰老标志环形图：端粒耗损、衰老细胞堆积、蛋白稳态失衡、表观遗传漂移、线粒体功能失常五项环绕中心，彼此相连">
+      <circle class="ring" cx="380" cy="250" r="150"/>
+      <circle class="hub" cx="380" cy="250" r="58"/>
+      <text class="hub-t" x="380" y="246" text-anchor="middle">衰老的标志</text>
+      <text class="hub-s" x="380" y="266" text-anchor="middle">十二项中的五项</text>
+
+      <g class="node n-telo" data-mark="telo">
+        <circle class="disc" cx="380" cy="100" r="52"/>
+        <text class="nt" x="380" y="96" text-anchor="middle">端粒耗损</text>
+        <text class="ns" x="380" y="114" text-anchor="middle">会数数的算盘</text>
+      </g>
+      <g class="node n-senes" data-mark="senes">
+        <circle class="disc" cx="523" cy="204" r="52"/>
+        <text class="nt" x="523" y="200" text-anchor="middle">衰老细胞</text>
+        <text class="ns" x="523" y="218" text-anchor="middle">不下场的演员</text>
+      </g>
+      <g class="node n-prot" data-mark="prot">
+        <circle class="disc" cx="468" cy="371" r="52"/>
+        <text class="nt" x="468" y="367" text-anchor="middle">蛋白稳态</text>
+        <text class="ns" x="468" y="385" text-anchor="middle">越积越厚的落叶</text>
+      </g>
+      <g class="node n-epi" data-mark="epi">
+        <circle class="disc" cx="292" cy="371" r="52"/>
+        <text class="nt" x="292" y="367" text-anchor="middle">表观遗传</text>
+        <text class="ns" x="292" y="385" text-anchor="middle">走样的分谱</text>
+      </g>
+      <g class="node n-mito" data-mark="mito">
+        <circle class="disc" cx="237" cy="204" r="52"/>
+        <text class="nt" x="237" y="200" text-anchor="middle">线粒体</text>
+        <text class="ns" x="237" y="218" text-anchor="middle">炉火渐弱</text>
+      </g>
+
+      <text class="note" x="40" y="470" text-anchor="start">五项并非并列的五个抽屉：端粒耗损会造出衰老细胞，衰老细胞的分泌物加重炎症，炎症又反过来推快漂移——</text>
+      <text class="note" x="40" y="490" text-anchor="start">这张图画的是一个互相拉扯的环，不是一条因果链。</text>
+    </svg>
+    <div class="mark-panel">
+      <div class="mp on" data-mp="0">
+        <div class="mp-t">五处，一个环</div>
+        <p>2013 年，一组研究者把当时的证据整理成九项"衰老的标志"，2023 年扩充到十二项。本章挑其中五项来讲：点上方任意一项，看它的机制与本章对应的小节。</p>
+      </div>
+      <div class="mp" data-mp="telo">
+        <div class="mp-t">端粒耗损 · 见第 2 节</div>
+        <p>每次分裂磨掉 50–200 个碱基对，累积到 40–60 次触发停止分裂。它是本章数字最干净的一项，也因此最容易被过度解读：端粒短是衰老的标记与参与者之一，不是一根倒计时的引线。端粒耗损的直接产物，就是右边那一项。</p>
+      </div>
+      <div class="mp" data-mp="senes">
+        <div class="mp-t">衰老细胞堆积 · 见第 3 节</div>
+        <p>停止分裂却继续分泌炎性物质的细胞，会把邻居也推向同一状态。它原本是一道抑癌的刹车，麻烦出在清运：年轻时免疫系统会把它们送走，年老时清运队伍自己也老了。这是目前少数几个"因果两头都被实验拨动过"的机制。</p>
+      </div>
+      <div class="mp" data-mp="prot">
+        <div class="mp-t">蛋白稳态失衡 · 见第 4 节</div>
+        <p>伴侣蛋白变少、蛋白酶体变慢、自噬效率下降，折错与氧化损伤的蛋白开始积累。多种神经退行性疾病共享这一画面，但要留神：看得见的大块沉积未必就是致病的那一份，可能反而是隔离处置的结果。</p>
+      </div>
+      <div class="mp" data-mp="epi">
+        <div class="mp-t">表观遗传漂移 · 见第 4 节</div>
+        <p>贴在 DNA 与组蛋白上的批注随年岁移位，细胞身份逐渐含混。同卵双胞胎年幼时的表观遗传谱几乎重合，五十岁时已明显分开。关键之处在于：字没变，变的是批注——而批注原则上可以重写，这是第 5 节那条最激进的前沿的立足点。</p>
+      </div>
+      <div class="mp" data-mp="mito">
+        <div class="mp-t">线粒体功能失常 · 本章未展开</div>
+        <p>第 1 章那台每秒转上百圈的分子磨盘，随龄效率下降、受损的线粒体清运变慢。经典的"自由基学说"曾把它当作衰老的总因，如今看法温和了许多：活性氧既是损伤源，也是正常的信号分子，一味抗氧化并未在人体试验中兑现预期——这是本章反复出现的那个教训的又一例。</p>
+      </div>
+    </div>
+    <figcaption><b>图 23-2 · 一个互相拉扯的环。</b>画成环而不是链，是因为这五项之间的因果方向至今没有理清：端粒耗损造出衰老细胞，衰老细胞的分泌物加重炎症，炎症又推快表观遗传漂移，而漂移反过来影响线粒体与蛋白稳态。找"第一张多米诺"这件事，目前还没有人成功。</figcaption>
+  </figure>
+</section>
+
+<!-- ==================== 第 5 节 ==================== -->
+<section id="s5">
+  <div class="eyebrow">05 · 谁的安排</div>
+  <h2>排定的谢幕，还是无人打理的磨损</h2>
+  <p>剩下一个更大的问题：这一切究竟是被安排好的，还是没人管的结果？这场争论有一百多年历史，两边都拿得出硬证据。</p>
+  <h3>看上去像被安排好的</h3>
+  <p>太平洋鲑鱼溯河产卵之后，几周之内急速衰败而死：组织崩解、免疫崩溃，来得又快又准时。这不是比喻——1961 年一项经典实验里，产卵前被去除性腺的鲑鱼没有走上那条皮质醇飙升的路，寿命成倍延长。章鱼更直白：母章鱼护卵期间停止进食，孵化后不久死去；1977 年的一项实验里，切除眼后的视腺之后，母章鱼重新开始进食，寿命明显延长。</p>
+  <p>更硬的一条来自线虫。1993 年，Cynthia Kenyon 的实验室报告：改动一个基因（daf-2），线虫寿命就翻了一倍，而且那些虫子在多出来的日子里依旧活跃。一个基因，两倍寿命——很难用"随机磨损"解释。加上物种间寿命差异巨大（蜉蝣一天，弓头鲸两百年）而种内相当稳定，看上去确实像有一份写好的时刻表。</p>
+  <h3>看上去像没人打理</h3>
+  <p>另一派从一个简单的观察出发：<strong>野外的动物很少活到老死。</strong>寒冷、饥饿、捕食者、感染，会在衰老露头之前就带走绝大多数个体。后果很深远——自然选择对"晚年"这段时间几乎是盲的。</p>
+  <p>三位学者把这个念头推成了理论。Peter Medawar 指出，只在晚年才发作的有害突变几乎不受清除，会一代代累积。George Williams 补上更狠的一刀：某个基因若在青年期有利、晚年有害，它照样会被选中保留，因为选择更看重青年期。Tom Kirkwood 则从预算角度算账：修复自己要花能量，把同样的能量投给繁殖更划算，所以身体在"修好自己"上必然投入不足。</p>
+  <p>三条推理指向同一个结论：<strong>衰老多半不是被安排的，而是没有被选择去避免的。</strong></p>
+  <p>还有一个反例值得记住。几乎所有哺乳动物的死亡风险都随年龄指数上升（1825 年就被写出来的 Gompertz 定律），裸鼹鼠却不是这样：它寿命超过三十年，是同体型啮齿类的十倍上下，而对数千只个体的分析发现，它成年后的日死亡风险并不随年龄上升。这不等于它不会死——它照样死于意外、感染和争斗。它说明的是：死亡风险随龄攀升这条看似天经地义的曲线，并不是生命的必然形状。</p>
+  <h3>今天的位置</h3>
+  <p>多数研究者已不再把这看作二选一。主流的表述大致是：整体图景更接近"无人打理的磨损"，因为并不存在一个专为杀死你而演化出来的程序；但其中某些具体机制确实是被选择保留的权衡——第 3 节的细胞衰老就是标准案例：青年期抑癌，晚年期惹祸，恰好就是 Williams 半个世纪前描述的那种基因。学界仍在用"程序性衰老"这个词，但它指的是"这条机制有其演化来由"，而不是"有人给你设了闹钟"。</p>
+  <h3>少吃一点能延寿吗</h3>
+  <p>最后说一件被谈论得极多、也被误传得极多的事：热量限制。</p>
+  <p>在酵母、线虫、果蝇、小鼠身上，把摄入热量减少两三成而不造成营养不良，可以把寿命延长 <strong>20% 到 50%</strong>，这在实验室里是被反复重复过的。相关的分子通路（营养感知的那几条）也被摸得相当清楚。</p>
+  <p>可往上走一层，证据就开始变软。两项针对恒河猴的长期研究结论并不一致：一项观察到限食组的存活优势，另一项没有；后来的联合分析把差异归到饲料成分与对照组喂养方式上——"对照组吃什么"这件事，可能决定了实验的结论。</p>
+  <p>到人这一层，目前只有一项像样的随机试验（CALERIE）：为期两年，目标是减少 25% 的热量摄入，参与者实际做到的约 12%。它的终点是代谢与炎症的标志物，不可能是寿命——要用寿命做终点，试验得做几十年。<strong>所以诚实的说法是：动物证据强而人类证据短，两者之间那段距离，目前没有任何一项研究填上过。</strong>凡是把小鼠的百分比直接说成你能多活几年的说法，跳过的正是这段距离。</p>
+  <p>这一章从一颗被误以为不死的鸡心讲起，讲到细胞会数数、临时工没人接、落叶越积越厚、分谱被誊抄走样。听上去像一份坏消息的清单。但第四幕还有一半没讲——下一章，我们去看身体在这份清单面前做了什么。</p>
+
+  <div class="callout frontier">
+    <span class="tag">前沿窗口 · FRONTIER</span>
+    <div class="stamp">本栏内容更新较快 · 截至 2026-08</div>
+    <p><strong>把批注重写一部分。</strong>第 4 节说过，表观遗传漂移改的是批注不是字。第 2 章讲过山中伸弥的四个因子能把成体细胞一路推回多能状态——但那是把批注整本擦掉，细胞会丢掉身份，在动物体内还会长出畸胎瘤。于是有人试着<strong>只擦一部分</strong>：短暂、周期性地打开其中三个因子（OSK），让批注往回走一段就停手。2016 年一项早衰模型小鼠的研究报告了寿命延长与组织改善；2020 年另一项工作报告，这一手段能让年老小鼠受损的视神经重新长出轴突、恢复部分视力。</p>
+    <p>这条路已经走到人身上。2026 年 1 月 28 日，美国 FDA 清除了一项以 OSK 为基础的眼科基因疗法的临床试验申请，用于青光眼与一种缺血性视神经病变；同年 6 月，首例受试者完成给药。据公开报道，这是部分重编程首次进入人体试验。但要说清它不是什么：这是一项<strong>眼科局部给药</strong>的一期安全性试验，目标是视神经功能，不是全身抗衰老；一期试验回答的是"安不安全"，不是"有没有效"。</p>
+    <p><strong>另一头，一项谈了十年的试验还没开张。</strong>与前一条形成对照的是 TAME：用二甲双胍这种廉价老药检验"能否推迟多种老年病同时发生"。它的设计意义重大——若监管机构接受"衰老相关疾病的复合终点"，等于承认衰老本身可作为干预对象。但它至今卡在经费上：需要约七千五百万美元，而受试药是无专利的仿制药，药企缺少投入动力；截至本栏写作时仍未招募到受试者。两条消息放在一起，恰好说明这个领域的现状——最前沿的走得比想象中快，最基础的走得比想象中慢。</p>
+  </div>
+</section>
+
+<!-- ==================== 规格表 ==================== -->
+<section id="spec">
+  <div class="eyebrow">SPEC SHEET</div>
+  <h2>本章规格表</h2>
+  <div class="spec">
+    <div class="spec-head">衰老的机制 · 关键数字</div>
+    <table>
+      <tr><td class="k">Hayflick 极限</td><td class="v">40–60 次分裂</td><td class="n">人二倍体成纤维细胞，常记作 ~50 次</td></tr>
+      <tr><td class="k">端粒每次分裂损耗</td><td class="v">50–200 bp</td><td class="n">末端复制问题的直接后果</td></tr>
+      <tr><td class="k">新生儿端粒长度</td><td class="v">≈10–15 kb</td><td class="n">白细胞；不同测量方法差异不小</td></tr>
+      <tr><td class="k">老年端粒长度</td><td class="v">≈5–8 kb</td><td class="n">短≠个体寿命短，物种间几乎不成立</td></tr>
+      <tr><td class="k">重启端粒酶的癌细胞比例</td><td class="v">≈85–90%</td><td class="n">其余多走替代性端粒延长途径</td></tr>
+      <tr><td class="k">衰老细胞占比</td><td class="v">&lt;1% → 数%–十几%</td><td class="n">青年→老年；随组织与检测法差异很大</td></tr>
+      <tr><td class="k">热量限制延寿（啮齿类）</td><td class="v">+20–50%</td><td class="n">两项恒河猴研究结论并不一致</td></tr>
+      <tr><td class="k">CALERIE 人体试验</td><td class="v">2 年 · 实际减 ≈12%</td><td class="n">目标 25%；终点为标志物，非寿命</td></tr>
+      <tr><td class="k">daf-2 突变线虫寿命</td><td class="v">× 2</td><td class="n">单基因改动，Kenyon 1993</td></tr>
+      <tr><td class="k">衰老标志清单</td><td class="v">9 项 → 12 项</td><td class="n">2013 年提出，2023 年扩充；本章讲 5 项</td></tr>
+      <tr><td class="k">有据可查的人类最长寿命</td><td class="v">122 岁 164 天</td><td class="n">Jeanne Calment，1997 年去世</td></tr>
+      <tr><td class="k">裸鼹鼠寿命</td><td class="v">&gt; 30 年</td><td class="n">同体型啮齿类的十倍；死亡率不随龄上升</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 测验 ==================== -->
+<section id="quiz">
+  <div class="eyebrow">SELF-CHECK</div>
+  <h2>本章测验</h2>
+  <div class="quiz">
+    <div class="quiz-q">
+      <div class="qt">Hayflick 与 Moorhead 用什么办法证明"细胞停止分裂"不是培养条件的问题？</div>
+      <div class="opts">
+        <button>换用更昂贵的培养液，结果细胞继续分裂</button>
+        <button data-c="1">把分裂多次的男性细胞与刚培养的女性细胞混在同一瓶里，结果先停下来的是年长的那批</button>
+        <button>把细胞移植回动物体内观察</button>
+        <button>用显微镜直接数出了端粒的长度</button>
+      </div>
+      <div class="explain">同一个瓶子、同一份培养液、两种命运——所以问题在细胞里，不在瓶子里。这篇论文当年被《实验医学杂志》主编 Peyton Rous 退稿，理由是它与"细胞在合适条件下可无限增殖"这条公认事实不符；改投后于 1961 年发表。顺带一提，Rous 本人五年后因发现致癌病毒获诺贝尔奖——被权威挡住的，往往不是庸人。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">端粒变短会直接导致什么？</div>
+      <div class="opts">
+        <button>细胞立刻死亡并被分解回收</button>
+        <button>染色体断裂成碎片</button>
+        <button data-c="1">触发一种"停止分裂但继续活着"的衰老状态，细胞还会持续向外分泌炎性物质</button>
+        <button>细胞变成癌细胞</button>
+      </div>
+      <div class="explain">鞋带头的塑料箍磨完了，鞋带并不会立刻散开。这个"活着但不再分裂"的状态是本章的枢纽：它原本是抑癌的刹车，问题出在年老后清运不及、越积越多。至于癌变，方向恰好相反——约 85–90% 的癌细胞是靠重新打开端粒酶逃出了这道限制。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">关于衰老细胞，下面哪一条说法更准确？</div>
+      <div class="opts">
+        <button>它们是纯粹的细胞垃圾，越早清光越好</button>
+        <button data-c="1">它们原本是抑癌的刹车，也参与伤口愈合；麻烦在于年老后清运队伍跟不上，导致堆积</button>
+        <button>它们只出现在肿瘤组织中</button>
+        <button>它们已经死亡，只是尚未被分解</button>
+      </div>
+      <div class="explain">一个 DNA 受损的细胞若继续分裂，就是在批量复制错误；停下来是两害相权取其轻。短暂出现的衰老细胞在伤口修复和胚胎发育里也有正常角色。所以准确的说法是"没人来接的临时工"，而不是"垃圾"——这个区别直接关系到清除类药物该怎么用、用多久。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">表观遗传漂移指的是什么？</div>
+      <div class="opts">
+        <button>DNA 序列上的字母随年龄发生突变</button>
+        <button data-c="1">贴在 DNA 与组蛋白上的"批注"随年岁移位，细胞身份逐渐含混——字没变，批注变了</button>
+        <button>染色体数目随年龄增加</button>
+        <button>线粒体 DNA 被细胞核 DNA 取代</button>
+      </div>
+      <div class="explain">同卵双胞胎年幼时的表观遗传谱几乎重合，五十岁时已明显分开，长期分居者差异更大——同一份总谱，不同的批注史。这一条之所以格外要紧，是因为批注原则上可以重写：第 21 章的表观遗传钟读的是它，本章末尾那条部分重编程的前沿赌的也是它。</div>
+    </div>
+    <div class="quiz-q">
+      <div class="qt">关于热量限制与寿命，目前证据的实情是？</div>
+      <div class="opts">
+        <button>已在大型人体试验中证明可延长人的寿命 20–50%</button>
+        <button>动物与人的结果完全一致</button>
+        <button data-c="1">啮齿类中可延寿 20–50%，灵长类两项研究结论不一致，人类目前仅有的一项随机试验只有两年且终点是标志物</button>
+        <button>动物实验也未能重复出延寿效果</button>
+      </div>
+      <div class="explain">两项恒河猴研究的差异后来被归到饲料成分与对照组喂养方式上——"对照组吃什么"竟可能决定结论。人类的 CALERIE 试验为期两年，目标减 25% 而实际约 12%，终点是代谢与炎症标志物：要用寿命做终点，试验得做几十年。凡是把小鼠的百分比直接换算成你能多活几年的说法，跳过的正是这段距离。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="next">
+  <div class="label">NEXT · 第四幕 磨损与谢幕</div>
+  <div class="title">第 24 章 · 老年身体的代偿智慧</div>
+  <p>连着三章的下坡，该翻面了。面对这份清单，身体并没有束手待毙：老年大脑会把两侧半球一起拉上来干同一件事，词汇与判断力要到七十岁前后才见顶，而八九十岁才开始举铁的人照样会长出肌肉。下一章是第四幕的反转章——衰退叙事之外，身体另有一套策略。</p>
+  <nav class="footnav">
+    <a href="ch22-midlife.html">← 上一章</a>
+    <a href="../index.html">目录</a>
+    <a href="ch24-compensation.html">下一章 →</a>
+  </nav>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  // 昼夜切换（会话内有效，不做持久化）
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var light = document.documentElement.classList.toggle('light');
+    btn.textContent = light ? '☀ 日间' : '☾ 夜间';
+  });
+
+  // 图 23-2：点标志高亮 + 展开机制
+  var ring = document.getElementById('hallmarks');
+  var tabs = document.querySelectorAll('#hall-fig .mark-btn');
+  var nodes = document.querySelectorAll('#hallmarks .node');
+  var panes = document.querySelectorAll('#hall-fig .mp');
+  function showMark(key){
+    var i;
+    ring.classList.add('picked');
+    for (i = 0; i < tabs.length; i++) {
+      tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-mark') === key ? 'true' : 'false');
+    }
+    for (i = 0; i < nodes.length; i++) {
+      nodes[i].classList.toggle('on', nodes[i].getAttribute('data-mark') === key);
+    }
+    for (i = 0; i < panes.length; i++) {
+      panes[i].classList.toggle('on', panes[i].getAttribute('data-mp') === key);
+    }
+  }
+  for (var t = 0; t < tabs.length; t++) {
+    (function(el){
+      el.addEventListener('click', function(){ showMark(el.getAttribute('data-mark')); });
+    })(tabs[t]);
+  }
+  for (var n = 0; n < nodes.length; n++) {
+    (function(el){
+      el.addEventListener('click', function(){ showMark(el.getAttribute('data-mark')); });
+    })(nodes[n]);
+  }
+
+  // 测验
+  var qs = document.querySelectorAll('.quiz-q');
+  for (var i = 0; i < qs.length; i++) {
+    (function(q){
+      var opts = q.querySelectorAll('.opts button');
+      for (var j = 0; j < opts.length; j++) {
+        (function(o){
+          o.addEventListener('click', function(){
+            if (q.classList.contains('done')) return;
+            q.classList.add('done');
+            if (!o.hasAttribute('data-c')) o.classList.add('wrong');
+            var correct = q.querySelector('.opts button[data-c]');
+            if (correct) correct.classList.add('correct');
+          });
+        })(opts[j]);
+      }
+    })(qs[i]);
+  }
+})();
+</script>
+</body>
+</html>
